@@ -1,0 +1,67 @@
+import assert from "node:assert/strict";
+import { access, readFile } from "node:fs/promises";
+import test from "node:test";
+
+const templateRoot = new URL("../", import.meta.url);
+
+async function render() {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+
+  return worker.fetch(
+    new Request("http://localhost/", {
+      headers: { accept: "text/html" },
+    }),
+    {
+      ASSETS: {
+        fetch: async () => new Response("Not found", { status: 404 }),
+      },
+    },
+    {
+      waitUntil() {},
+      passThroughOnException() {},
+    },
+  );
+}
+
+test("server-renders the One Spa page", async () => {
+  const response = await render();
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+
+  const html = await response.text();
+  assert.match(html, /<title>24-Hour Onsen Spa &amp; Sauna in Kuala Lumpur · One Spa<\/title>/i);
+  assert.match(html, /Give Yourself 12 Hours/);
+  assert.match(html, /Pick Yours, Book in Minutes/);
+  assert.match(html, /One-Stop Hot-Spring Retreat/);
+  assert.match(html, /WhatsApp \+60 12-670 2560/);
+  assert.match(html, /https:\/\/wa\.me\/60126702560/);
+  assert.match(html, /href="\/packages\/#pk-b1f1"/);
+  assert.match(html, /href="\/packages\/#pk-solo"/);
+  assert.match(html, /href="\/packages\/#pk-daytime"/);
+  assert.match(html, /href="\/packages\/#pk-scrub"/);
+  assert.match(html, /href="\/packages\/#pk-allday-sm"/);
+  assert.match(html, /href="\/packages\/#pk-daytime-duo"/);
+  assert.match(html, /href="\/facilities\/"/);
+  assert.match(html, /href="\/packages\/#treatments"/);
+  assert.match(html, /href="\/packages\/#combos"/);
+  assert.match(html, /href="\/faq\/"/);
+  assert.doesNotMatch(html, /onespadw@gmail\.com|onespaofficial|cart|react-loading-skeleton|codex-preview/i);
+});
+
+test("keeps starter preview removed", async () => {
+  const [page, layout, packageJson] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../package.json", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(page, /whatsappHref/);
+  assert.match(layout, /24-Hour Onsen Spa/);
+  assert.doesNotMatch(page, /SkeletonPreview|codex-preview/);
+  assert.doesNotMatch(layout, /Starter Project|codex-preview|_sites-preview/);
+  assert.doesNotMatch(packageJson, /react-loading-skeleton/);
+
+  await assert.rejects(access(new URL("app/_sites-preview", templateRoot)));
+});

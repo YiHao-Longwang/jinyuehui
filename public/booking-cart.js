@@ -166,7 +166,7 @@
     if (configured) return configured;
     var saved = (localStorage.getItem(API_KEY) || "").trim().replace(/\/$/, "");
     if (saved) return saved;
-    if (location.hostname === "localhost" && location.port === "3000") return "http://localhost:4000";
+    if (location.hostname === "localhost" && location.port !== "4000") return "http://localhost:4000";
     return "";
   }
 

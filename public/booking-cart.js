@@ -4,6 +4,7 @@
   var CART_KEY = "onespa_reservation_cart_v1";
   var API_KEY = "onespa_admin_api_base";
   var WA = "https://wa.me/60126702560?text=";
+  var bookingState = null;
   var holidays = {
     "2026-01-01": true,
     "2026-02-01": true,
@@ -148,6 +149,10 @@
     return locale() === "cn" ? cn : en;
   }
 
+  function tr(lang, en, cn) {
+    return lang === "cn" ? cn : en;
+  }
+
   function readCart() {
     try {
       return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
@@ -188,6 +193,10 @@
     return "RM" + Number(value || 0).toFixed(2);
   }
 
+  function baseMoney(value) {
+    return "RM" + Number(value || 0).toFixed(0);
+  }
+
   function today() {
     var d = new Date();
     d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
@@ -199,11 +208,35 @@
     return day === 5 || day === 6 || !!holidays[date];
   }
 
+  function tierFor(product, date) {
+    return product.single ? "single" : isWeekendOrHoliday(date) ? "weekend" : "weekday";
+  }
+
+  function basePrice(product, date) {
+    var tier = tierFor(product, date);
+    return product.single || product[tier];
+  }
+
+  function monthKey(date) {
+    return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0");
+  }
+
+  function dateString(year, month, day) {
+    return year + "-" + String(month + 1).padStart(2, "0") + "-" + String(day).padStart(2, "0");
+  }
+
+  function monthTitle(date, lang) {
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    if (lang === "cn") return year + " 年 " + (month + 1) + " 月";
+    return date.toLocaleString("en-US", { month: "long", year: "numeric" });
+  }
+
   function lineFor(item) {
     var product = products[item.code];
     var qty = Math.max(1, Number(item.qty || 1));
-    var tier = product.single ? "single" : isWeekendOrHoliday(item.date) ? "weekend" : "weekday";
-    var price = product.single || product[tier];
+    var tier = tierFor(product, item.date);
+    var price = basePrice(product, item.date);
     var subtotal = price * qty;
     var sc = Math.round(subtotal * product.sc * 100) / 100;
     var sst = Math.round((subtotal + sc) * product.sst * 100) / 100;
@@ -258,20 +291,154 @@
       '<div class="booking-backdrop" data-booking-close></div>' +
       '<form class="booking-panel" data-booking-form>' +
       '<button class="booking-x" type="button" data-booking-close aria-label="Close">×</button>' +
-      '<div class="k" data-booking-kicker></div>' +
       '<h3 data-booking-title></h3>' +
-      '<p data-booking-copy></p>' +
-      '<label><span data-date-label></span><input name="date" type="date" required /></label>' +
-      '<label><span data-time-label></span><select name="time" required></select></label>' +
-      '<label><span data-qty-label></span><input name="qty" type="number" min="1" max="20" value="1" required /></label>' +
+      '<div class="booking-rulecards" data-booking-rates></div>' +
+      '<p class="booking-tier-note" data-booking-tier-note></p>' +
+      '<input name="date" type="hidden" required />' +
+      '<div class="booking-calendar" aria-label="Booking calendar">' +
+      '<div class="booking-monthbar"><button type="button" data-booking-prev aria-label="Previous month">‹</button><b data-booking-month></b><button type="button" data-booking-next aria-label="Next month">›</button></div>' +
+      '<div class="booking-weekdays" data-booking-weekdays></div>' +
+      '<div class="booking-days" data-booking-days></div>' +
+      "</div>" +
+      '<div class="booking-note" data-booking-note></div>' +
+      '<div class="booking-inputs"><label><span data-time-label></span><select name="time" required></select></label><label><span data-qty-label></span><input name="qty" type="number" min="1" max="20" value="1" required /></label></div>' +
       '<div class="booking-price" data-booking-price></div>' +
-      '<div class="booking-actions"><button class="btn line" type="button" data-booking-close></button><button class="btn" type="submit"></button></div>' +
+      '<button class="btn wide" type="submit" data-booking-submit></button>' +
       "</form>";
     document.body.appendChild(el);
     el.addEventListener("click", function (event) {
-      if (event.target.closest("[data-booking-close]")) closeModal();
+      if (event.target.closest("[data-booking-close]")) {
+        closeModal();
+        return;
+      }
+
+      var prev = event.target.closest("[data-booking-prev]");
+      var next = event.target.closest("[data-booking-next]");
+      var day = event.target.closest("[data-booking-day]");
+      if (prev || next) {
+        if (!bookingState) return;
+        bookingState.month = new Date(
+          bookingState.month.getFullYear(),
+          bookingState.month.getMonth() + (prev ? -1 : 1),
+          1
+        );
+        renderBookingCalendar(el);
+        return;
+      }
+      if (day && !day.disabled) {
+        el.querySelector("[data-booking-form]").elements.date.value = day.getAttribute("data-booking-day");
+        renderBookingCalendar(el);
+        refreshBookingPrice(el);
+      }
     });
     return el;
+  }
+
+  function rateCards(product, lang) {
+    if (product.single) {
+      return (
+        '<div class="booking-rate-card"><span>' +
+        tr(lang, "Daily", "每天同价") +
+        "</span><b>" +
+        baseMoney(product.single) +
+        "<sup>++</sup></b></div>"
+      );
+    }
+
+    return (
+      '<div class="booking-rate-card"><span>' +
+      tr(lang, "Sun-Thu", "星期日-四") +
+      "</span><b>" +
+      baseMoney(product.weekday) +
+      "<sup>++</sup></b></div>" +
+      '<div class="booking-rate-card"><span>' +
+      tr(lang, "Fri, Sat & Public Holidays", "星期五六 & 公共假期") +
+      "</span><b>" +
+      baseMoney(product.weekend) +
+      "<sup>++</sup></b></div>"
+    );
+  }
+
+  function renderBookingCalendar(el) {
+    if (!bookingState) return;
+    var product = products[bookingState.code];
+    var lang = bookingState.lang;
+    var form = el.querySelector("[data-booking-form]");
+    var selected = form.elements.date.value;
+    var now = today();
+    var month = bookingState.month;
+    var year = month.getFullYear();
+    var monthIndex = month.getMonth();
+    var days = new Date(year, monthIndex + 1, 0).getDate();
+    var firstDay = new Date(year, monthIndex, 1).getDay();
+    var minMonth = monthKey(new Date(now + "T12:00:00+08:00"));
+    var html = "";
+
+    el.querySelector("[data-booking-month]").textContent = monthTitle(month, lang);
+    el.querySelector("[data-booking-prev]").disabled = monthKey(month) <= minMonth;
+    el.querySelector("[data-booking-weekdays]").innerHTML = (
+      lang === "cn" ? ["日", "一", "二", "三", "四", "五", "六"] : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    )
+      .map(function (day) {
+        return "<span>" + day + "</span>";
+      })
+      .join("");
+
+    for (var blank = 0; blank < firstDay; blank += 1) {
+      html += '<span class="booking-day blank"></span>';
+    }
+    for (var day = 1; day <= days; day += 1) {
+      var value = dateString(year, monthIndex, day);
+      var disabled = value < now;
+      var tier = tierFor(product, value);
+      var holiday = !!holidays[value];
+      var classes = "booking-day" + (selected === value ? " selected" : "") + (tier === "weekend" ? " premium" : "") + (disabled ? " disabled" : "");
+      html +=
+        '<button type="button" class="' +
+        classes +
+        '" data-booking-day="' +
+        value +
+        '"' +
+        (disabled ? " disabled" : "") +
+        ' aria-pressed="' +
+        (selected === value ? "true" : "false") +
+        '"><span class="booking-day-num">' +
+        day +
+        (holiday ? '<i aria-hidden="true"></i>' : "") +
+        '</span><span class="booking-day-price">' +
+        baseMoney(basePrice(product, value)) +
+        "</span></button>";
+    }
+    el.querySelector("[data-booking-days]").innerHTML = html;
+  }
+
+  function refreshBookingPrice(el) {
+    if (!bookingState) return;
+    var form = el.querySelector("[data-booking-form]");
+    var code = bookingState.code;
+    var lang = bookingState.lang;
+    var product = products[code];
+    var selectedDate = form.elements.date.value || today();
+    var preview = lineFor({ code: code, date: selectedDate, time: form.elements.time.value || "00:00", qty: form.elements.qty.value });
+    var tier =
+      preview.tier === "weekend"
+        ? tr(lang, "Fri, Sat & PH", "星期五、六与公假")
+        : preview.tier === "weekday"
+          ? tr(lang, "Sun-Thu", "星期日-星期四")
+          : tr(lang, "Daily", "每天同价");
+    el.querySelector("[data-booking-price]").innerHTML =
+      '<span>' +
+      tier +
+      " · " +
+      selectedDate +
+      " · " +
+      baseMoney(preview.price) +
+      "<sup>++</sup> " +
+      (lang === "cn" ? product.unitCn : product.unitEn) +
+      '</span><b>' +
+      tr(lang, "Estimated total ", "预估总额 ") +
+      money(preview.total) +
+      "</b>";
   }
 
   function closeModal() {
@@ -288,41 +455,41 @@
     var time = form.elements.time;
     var qty = form.elements.qty;
     var lang = forcedLocale || locale();
+    var todayValue = today();
 
+    bookingState = {
+      code: code,
+      lang: lang,
+      month: new Date(todayValue + "T12:00:00+08:00")
+    };
     form.dataset.code = code;
     form.dataset.locale = lang;
-    el.querySelector("[data-booking-kicker]").textContent =
-      lang === "cn" ? "选择预约时间" : "Choose reservation time";
-    el.querySelector("[data-booking-title]").textContent = lang === "cn" ? product.cn : product.en;
-    el.querySelector("[data-booking-copy]").textContent =
-      lang === "cn" ? "无需线上付款。提交预约后，到店完成护理后付款。" : "No online payment. Submit your reservation and pay after treatment.";
-    el.querySelector("[data-date-label]").textContent = lang === "cn" ? "日期" : "Date";
+    el.querySelector("[data-booking-title]").textContent = tr(lang, "Choose Visit Date", "选到店日期");
+    el.querySelector("[data-booking-rates]").innerHTML = rateCards(product, lang);
+    el.querySelector("[data-booking-tier-note]").textContent = product.single
+      ? tr(lang, "Same price daily.", "每天同价。")
+      : tr(lang, "Sunday counts as weekday price.", "星期日也是平日价");
+    el.querySelector("[data-booking-note]").innerHTML =
+      "<p>· " +
+      tr(lang, "The selected date price updates automatically; public holidays follow weekend price.", "选日期价格自动跟着跳，公共假期算周末价") +
+      "</p><p>· " +
+      tr(lang, "For two-person packages, guests enter together on the same date and time.", "两位要同一天同一时间一起进场，不能拆开用") +
+      "</p>";
     el.querySelector("[data-time-label]").textContent = lang === "cn" ? "时间" : "Time";
     el.querySelector("[data-qty-label]").textContent = lang === "cn" ? "数量" : "Qty";
-    el.querySelector("[data-booking-close]:not(.booking-x)").textContent = lang === "cn" ? "取消" : "Cancel";
-    el.querySelector('.booking-actions button[type="submit"]').textContent =
-      lang === "cn" ? "加入购物车" : "Add to Cart";
-    date.min = today();
-    date.value = date.value || today();
+    el.querySelector("[data-booking-submit]").textContent = tr(lang, "Book", "预订");
+    date.value = todayValue;
     time.innerHTML = timeOptions(product);
     qty.value = "1";
 
-    function refreshPrice() {
-      var preview = lineFor({ code: code, date: date.value || today(), time: time.value || "00:00", qty: qty.value });
-      var tier =
-        preview.tier === "weekend"
-          ? text("Fri, Sat & PH", "星期五、六与公假")
-          : preview.tier === "weekday"
-            ? text("Sun-Thu", "星期日-星期四")
-            : text("Daily", "每天同价");
-      el.querySelector("[data-booking-price]").textContent =
-        tier + " · " + money(preview.price) + " " + (lang === "cn" ? product.unitCn : product.unitEn) + " · " + text("Estimated total ", "预估总额 ") + money(preview.total);
-    }
-
-    date.onchange = refreshPrice;
-    qty.oninput = refreshPrice;
-    time.onchange = refreshPrice;
-    refreshPrice();
+    qty.oninput = function () {
+      refreshBookingPrice(el);
+    };
+    time.onchange = function () {
+      refreshBookingPrice(el);
+    };
+    renderBookingCalendar(el);
+    refreshBookingPrice(el);
     el.classList.add("on");
   }
 

@@ -89,6 +89,11 @@ test("server-renders reservation cart", async () => {
   const packages = await (await render("/packages")).text();
   assert.match(packages, /data-book="b1f1"/);
   assert.match(packages, /data-book="kids"/);
+
+  const cartScript = await readFile(new URL("../public/booking-cart.js", import.meta.url), "utf8");
+  assert.match(cartScript, /data-booking-day/);
+  assert.match(cartScript, /Fri, Sat & Public Holidays/);
+  assert.match(cartScript, /basePrice/);
 });
 
 test("keeps starter preview removed", async () => {

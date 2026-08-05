@@ -41,6 +41,8 @@ const products = {
     unit: "/ 2 adults",
     weekday: 169,
     weekend: 199,
+    kind: "spa-tiered",
+    leadHours: 1,
     fee: { sc: 0.1, sst: 0.08 },
   },
   solo: {
@@ -49,6 +51,8 @@ const products = {
     unit: "/ person",
     weekday: 169,
     weekend: 199,
+    kind: "spa-tiered",
+    leadHours: 1,
     fee: { sc: 0.1, sst: 0.08 },
   },
   daytime: {
@@ -56,6 +60,9 @@ const products = {
     cn: "日间按摩配套",
     unit: "/ person",
     single: 199,
+    kind: "spa-daily",
+    leadHours: 1,
+    hours: [9, 17],
     fee: { sc: 0.1, sst: 0.08 },
   },
   scrub: {
@@ -64,6 +71,8 @@ const products = {
     unit: "/ person",
     weekday: 199,
     weekend: 239,
+    kind: "spa-tiered",
+    leadHours: 1,
     fee: { sc: 0.1, sst: 0.08 },
   },
   "allday-sm": {
@@ -71,6 +80,8 @@ const products = {
     cn: "沐净舒养套餐",
     unit: "/ person",
     single: 379,
+    kind: "spa-daily",
+    leadHours: 1,
     fee: { sc: 0.1, sst: 0.08 },
   },
   "daytime-duo": {
@@ -78,6 +89,9 @@ const products = {
     cn: "日间双人套餐",
     unit: "/ 2 people",
     single: 379,
+    kind: "spa-daily",
+    leadHours: 1,
+    hours: [9, 17],
     fee: { sc: 0.1, sst: 0.08 },
   },
   kids: {
@@ -86,6 +100,8 @@ const products = {
     unit: "/ child",
     weekday: 58,
     weekend: 88,
+    kind: "spa-tiered",
+    leadHours: 1,
     fee: { sc: 0.1, sst: 0.08 },
   },
   "outcall-classic": {
@@ -93,6 +109,9 @@ const products = {
     cn: "经典 2 小时上门按摩",
     unit: "/ 2-hour session",
     single: 699,
+    kind: "home",
+    leadHours: 3,
+    hours: [9, 22],
     fee: { sc: 0, sst: 0.08 },
   },
   "outcall-anytime": {
@@ -100,6 +119,8 @@ const products = {
     cn: "随时 2 小时上门按摩",
     unit: "/ 2-hour session",
     single: 798,
+    kind: "home",
+    leadHours: 3,
     fee: { sc: 0, sst: 0.08 },
   },
   "outcall-fourhands": {
@@ -107,6 +128,9 @@ const products = {
     cn: "四手尊宠 · 2 小时",
     unit: "/ 2-hour session",
     single: 1699,
+    kind: "home",
+    leadHours: 3,
+    hours: [9, 22],
     fee: { sc: 0, sst: 0.08 },
   },
 } as const;
@@ -127,6 +151,33 @@ async function databaseUrl() {
 function isWeekendOrHoliday(date: string) {
   const day = new Date(`${date}T12:00:00+08:00`).getDay();
   return day === 5 || day === 6 || holidays.has(date);
+}
+
+function selectedDateTime(date: string, time: string) {
+  return new Date(`${date}T${time}:00+08:00`);
+}
+
+function tierFor(product: (typeof products)[keyof typeof products], date: string) {
+  return "single" in product ? "single" : isWeekendOrHoliday(date) ? "weekend" : "weekday";
+}
+
+function priceFor(product: (typeof products)[keyof typeof products], date: string) {
+  if ("single" in product) return product.single;
+  return product[isWeekendOrHoliday(date) ? "weekend" : "weekday"];
+}
+
+function validateSlot(product: (typeof products)[keyof typeof products], date: string, time: string) {
+  const [hour] = time.split(":").map(Number);
+  if ("hours" in product) {
+    const [start, end] = product.hours;
+    if (hour < start || hour > end) throw new Error("Selected time is outside this package's booking hours.");
+  }
+
+  const earliest = new Date();
+  earliest.setHours(earliest.getHours() + product.leadHours);
+  if (selectedDateTime(date, time) < earliest) {
+    throw new Error(`This package must be booked at least ${product.leadHours} hour(s) ahead.`);
+  }
 }
 
 function validDate(value: string) {
@@ -150,9 +201,11 @@ function calculate(items: CartItem[]) {
     if (!item.date || !validDate(item.date)) throw new Error("Visit date is required.");
     if (!item.time || !/^\d{2}:\d{2}$/.test(item.time)) throw new Error("Visit time is required.");
 
+    validateSlot(product, item.date, item.time);
+
     const qty = Math.max(1, Math.min(20, Math.floor(Number(item.qty) || 1)));
-    const tier = "single" in product ? "single" : isWeekendOrHoliday(item.date) ? "weekend" : "weekday";
-    const price = "single" in product ? product.single : product[tier];
+    const tier = tierFor(product, item.date);
+    const price = priceFor(product, item.date);
     const lineSubtotal = price * qty;
     const sc = Math.round(lineSubtotal * product.fee.sc * 100) / 100;
     const sst = Math.round((lineSubtotal + sc) * product.fee.sst * 100) / 100;
@@ -168,6 +221,8 @@ function calculate(items: CartItem[]) {
       time: item.time,
       qty,
       tier,
+      pricingKind: product.kind,
+      leadHours: product.leadHours,
       price,
       subtotal: lineSubtotal,
       serviceCharge: sc,

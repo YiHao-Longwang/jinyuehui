@@ -39,6 +39,8 @@
       weekday: 169,
       weekend: 199,
       stay: "12h",
+      kind: "spa-tiered",
+      leadHours: 1,
       sc: 0.1,
       sst: 0.08
     },
@@ -50,6 +52,8 @@
       weekday: 169,
       weekend: 199,
       stay: "12h",
+      kind: "spa-tiered",
+      leadHours: 1,
       sc: 0.1,
       sst: 0.08
     },
@@ -60,6 +64,8 @@
       unitCn: "/ 人",
       single: 199,
       stay: "daytime",
+      kind: "spa-daily",
+      leadHours: 1,
       hours: [9, 17],
       sc: 0.1,
       sst: 0.08
@@ -72,6 +78,8 @@
       weekday: 199,
       weekend: 239,
       stay: "12h",
+      kind: "spa-tiered",
+      leadHours: 1,
       sc: 0.1,
       sst: 0.08
     },
@@ -82,6 +90,8 @@
       unitCn: "/ 人",
       single: 379,
       stay: "12h",
+      kind: "spa-daily",
+      leadHours: 1,
       sc: 0.1,
       sst: 0.08
     },
@@ -92,6 +102,8 @@
       unitCn: "/ 2 人",
       single: 379,
       stay: "daytime",
+      kind: "spa-daily",
+      leadHours: 1,
       hours: [9, 17],
       sc: 0.1,
       sst: 0.08
@@ -104,6 +116,8 @@
       weekday: 58,
       weekend: 88,
       stay: "12h",
+      kind: "spa-tiered",
+      leadHours: 1,
       sc: 0.1,
       sst: 0.08
     },
@@ -114,6 +128,8 @@
       unitCn: "/ 2 小时",
       single: 699,
       stay: "outcall",
+      kind: "home",
+      leadHours: 3,
       hours: [9, 22],
       sc: 0,
       sst: 0.08
@@ -125,6 +141,8 @@
       unitCn: "/ 2 小时",
       single: 798,
       stay: "outcall",
+      kind: "home",
+      leadHours: 3,
       sc: 0,
       sst: 0.08
     },
@@ -135,6 +153,8 @@
       unitCn: "/ 2 小时",
       single: 1699,
       stay: "outcall",
+      kind: "home",
+      leadHours: 3,
       hours: [9, 22],
       sc: 0,
       sst: 0.08
@@ -203,6 +223,16 @@
     return d.toISOString().slice(0, 10);
   }
 
+  function selectedDateTime(date, time) {
+    return new Date(date + "T" + time + ":00+08:00");
+  }
+
+  function minStartTime(product) {
+    var d = new Date();
+    d.setHours(d.getHours() + Number(product.leadHours || 1));
+    return d;
+  }
+
   function isWeekendOrHoliday(date) {
     var day = new Date(date + "T12:00:00+08:00").getDay();
     return day === 5 || day === 6 || !!holidays[date];
@@ -210,6 +240,12 @@
 
   function tierFor(product, date) {
     return product.single ? "single" : isWeekendOrHoliday(date) ? "weekend" : "weekday";
+  }
+
+  function taxLabel(product, lang) {
+    return product.kind === "home"
+      ? tr(lang, "+ 8% SST only", "+ 8% SST，无服务费")
+      : tr(lang, "++ = 10% service charge + 8% SST", "++ = 10% 服务费 + 8% SST");
   }
 
   function basePrice(product, date) {
@@ -266,9 +302,10 @@
     );
   }
 
-  function timeOptions(product) {
+  function timeOptions(product, date, selected) {
     var start = 0;
     var end = 23;
+    var minStart = minStartTime(product);
     if (product.hours) {
       start = product.hours[0];
       end = product.hours[1];
@@ -276,7 +313,17 @@
     var html = "";
     for (var h = start; h <= end; h += 1) {
       var value = String(h).padStart(2, "0") + ":00";
-      html += '<option value="' + value + '">' + value + "</option>";
+      var disabled = selectedDateTime(date, value) < minStart;
+      html +=
+        '<button class="booking-time' +
+        (selected === value ? " selected" : "") +
+        '" type="button" data-booking-time="' +
+        value +
+        '"' +
+        (disabled ? " disabled" : "") +
+        ">" +
+        value +
+        "</button>";
     }
     return html;
   }
@@ -301,7 +348,9 @@
       '<div class="booking-days" data-booking-days></div>' +
       "</div>" +
       '<div class="booking-note" data-booking-note></div>' +
-      '<div class="booking-inputs"><label><span data-time-label></span><select name="time" required></select></label><label><span data-qty-label></span><input name="qty" type="number" min="1" max="20" value="1" required /></label></div>' +
+      '<input name="time" type="hidden" required />' +
+      '<input name="qty" type="hidden" value="1" required />' +
+      '<div class="booking-controls"><div><span class="booking-control-label" data-time-label></span><div class="booking-timegrid" data-booking-times></div></div><div><span class="booking-control-label" data-qty-label></span><div class="booking-stepper"><button type="button" data-booking-qty="-1">−</button><b data-booking-qty-value>1</b><button type="button" data-booking-qty="1">+</button></div></div></div>' +
       '<div class="booking-price" data-booking-price></div>' +
       '<button class="btn wide" type="submit" data-booking-submit></button>' +
       "</form>";
@@ -315,6 +364,8 @@
       var prev = event.target.closest("[data-booking-prev]");
       var next = event.target.closest("[data-booking-next]");
       var day = event.target.closest("[data-booking-day]");
+      var time = event.target.closest("[data-booking-time]");
+      var qty = event.target.closest("[data-booking-qty]");
       if (prev || next) {
         if (!bookingState) return;
         bookingState.month = new Date(
@@ -328,6 +379,19 @@
       if (day && !day.disabled) {
         el.querySelector("[data-booking-form]").elements.date.value = day.getAttribute("data-booking-day");
         renderBookingCalendar(el);
+        renderBookingTimes(el);
+        refreshBookingPrice(el);
+      }
+      if (time && !time.disabled) {
+        el.querySelector("[data-booking-form]").elements.time.value = time.getAttribute("data-booking-time");
+        renderBookingTimes(el);
+        refreshBookingPrice(el);
+      }
+      if (qty) {
+        var qtyInput = el.querySelector("[data-booking-form]").elements.qty;
+        var nextQty = Math.max(1, Math.min(20, Number(qtyInput.value || 1) + Number(qty.getAttribute("data-booking-qty"))));
+        qtyInput.value = String(nextQty);
+        el.querySelector("[data-booking-qty-value]").textContent = String(nextQty);
         refreshBookingPrice(el);
       }
     });
@@ -336,12 +400,14 @@
 
   function rateCards(product, lang) {
     if (product.single) {
+      var suffix = product.kind === "home" ? "" : "<sup>++</sup>";
       return (
         '<div class="booking-rate-card"><span>' +
-        tr(lang, "Daily", "每天同价") +
+        tr(lang, product.kind === "home" ? "Daily package price" : "Daily", product.kind === "home" ? "每天同价 · 配套价" : "每天同价") +
         "</span><b>" +
         baseMoney(product.single) +
-        "<sup>++</sup></b></div>"
+        suffix +
+        "</b></div>"
       );
     }
 
@@ -412,6 +478,32 @@
     el.querySelector("[data-booking-days]").innerHTML = html;
   }
 
+  function firstAvailableTime(product, date) {
+    var start = product.hours ? product.hours[0] : 0;
+    var end = product.hours ? product.hours[1] : 23;
+    var minStart = minStartTime(product);
+    for (var h = start; h <= end; h += 1) {
+      var value = String(h).padStart(2, "0") + ":00";
+      if (selectedDateTime(date, value) >= minStart) return value;
+    }
+    return "";
+  }
+
+  function renderBookingTimes(el) {
+    if (!bookingState) return;
+    var form = el.querySelector("[data-booking-form]");
+    var product = products[bookingState.code];
+    var date = form.elements.date.value || today();
+    var selected = form.elements.time.value;
+    if (!selected || selectedDateTime(date, selected) < minStartTime(product)) {
+      selected = firstAvailableTime(product, date);
+      form.elements.time.value = selected;
+    }
+    el.querySelector("[data-booking-times]").innerHTML = selected
+      ? timeOptions(product, date, selected)
+      : '<span class="booking-no-slots">' + tr(bookingState.lang, "No online slots left for this date.", "这个日期已没有可线上预约时间。") + "</span>";
+  }
+
   function refreshBookingPrice(el) {
     if (!bookingState) return;
     var form = el.querySelector("[data-booking-form]");
@@ -421,7 +513,9 @@
     var selectedDate = form.elements.date.value || today();
     var preview = lineFor({ code: code, date: selectedDate, time: form.elements.time.value || "00:00", qty: form.elements.qty.value });
     var tier =
-      preview.tier === "weekend"
+      product.kind === "home"
+        ? tr(lang, "Home service", "上门服务")
+        : preview.tier === "weekend"
         ? tr(lang, "Fri, Sat & PH", "星期五、六与公假")
         : preview.tier === "weekday"
           ? tr(lang, "Sun-Thu", "星期日-星期四")
@@ -435,8 +529,10 @@
       baseMoney(preview.price) +
       "<sup>++</sup> " +
       (lang === "cn" ? product.unitCn : product.unitEn) +
+      " · " +
+      taxLabel(product, lang) +
       '</span><b>' +
-      tr(lang, "Estimated total ", "预估总额 ") +
+      tr(lang, "Total ", "总额 ") +
       money(preview.total) +
       "</b>";
   }
@@ -466,29 +562,32 @@
     form.dataset.locale = lang;
     el.querySelector("[data-booking-title]").textContent = tr(lang, "Choose Visit Date", "选到店日期");
     el.querySelector("[data-booking-rates]").innerHTML = rateCards(product, lang);
-    el.querySelector("[data-booking-tier-note]").textContent = product.single
-      ? tr(lang, "Same price daily.", "每天同价。")
-      : tr(lang, "Sunday counts as weekday price.", "星期日也是平日价");
+    el.querySelector("[data-booking-tier-note]").textContent =
+      product.kind === "home"
+        ? tr(lang, "Home massage price is daily flat rate. Travel fee is paid separately on arrival.", "上门按摩每天同价；交通费到场另付。")
+        : product.single
+          ? tr(lang, "Same price daily.", "每天同价。")
+          : tr(lang, "Sunday counts as weekday price.", "星期日也是平日价");
     el.querySelector("[data-booking-note]").innerHTML =
       "<p>· " +
-      tr(lang, "The selected date price updates automatically; public holidays follow weekend price.", "选日期价格自动跟着跳，公共假期算周末价") +
+      (product.kind === "home"
+        ? tr(lang, "Home massage is subject to 8% SST only; no service charge.", "上门按摩只加 8% SST，不收服务费。")
+        : tr(lang, "The selected date price updates automatically; public holidays follow weekend price.", "选日期价格自动跟着跳，公共假期算周末价")) +
       "</p><p>· " +
-      tr(lang, "For two-person packages, guests enter together on the same date and time.", "两位要同一天同一时间一起进场，不能拆开用") +
+      (product.kind === "home"
+        ? tr(lang, "Earliest online home-service slot is 3 hours from now.", "上门服务最早只能预约 3 小时后的时间。")
+        : tr(lang, "For two-person packages, guests enter together on the same date and time.", "两位要同一天同一时间一起进场，不能拆开用")) +
       "</p>";
     el.querySelector("[data-time-label]").textContent = lang === "cn" ? "时间" : "Time";
     el.querySelector("[data-qty-label]").textContent = lang === "cn" ? "数量" : "Qty";
     el.querySelector("[data-booking-submit]").textContent = tr(lang, "Book", "预订");
     date.value = todayValue;
-    time.innerHTML = timeOptions(product);
+    time.value = "";
     qty.value = "1";
+    el.querySelector("[data-booking-qty-value]").textContent = "1";
 
-    qty.oninput = function () {
-      refreshBookingPrice(el);
-    };
-    time.onchange = function () {
-      refreshBookingPrice(el);
-    };
     renderBookingCalendar(el);
+    renderBookingTimes(el);
     refreshBookingPrice(el);
     el.classList.add("on");
   }
@@ -507,6 +606,10 @@
     var code = form.dataset.code;
     var product = products[code];
     if (!product) return;
+    if (!form.elements.time.value) {
+      alert(text("Please choose a time.", "请选择时间。"));
+      return;
+    }
     var item = {
       id: Date.now().toString(36) + Math.random().toString(36).slice(2),
       code: code,

@@ -92,7 +92,10 @@ test("server-renders reservation cart", async () => {
 
   const cartScript = await readFile(new URL("../public/booking-cart.js", import.meta.url), "utf8");
   assert.match(cartScript, /data-booking-day/);
+  assert.match(cartScript, /data-booking-time/);
+  assert.match(cartScript, /booking-stepper/);
   assert.match(cartScript, /Fri, Sat & Public Holidays/);
+  assert.match(cartScript, /Home massage is subject to 8% SST only/);
   assert.match(cartScript, /basePrice/);
 });
 

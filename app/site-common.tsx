@@ -21,6 +21,16 @@ export const footerPolicies = [
   ["Privacy Policy", "/privacy-policy/"],
 ];
 
+const footerHighlights = ["Open 24 Hours", "12-Hour Stay", "Viva Home Mall KL"];
+
+const footerExperienceLinks = [
+  ["Packages", "/packages/"],
+  ["Facilities", "/facilities/"],
+  ["Home Massage", "/home-massage/"],
+  ["Beauty Studio", "/beauty/"],
+  ["TCM Wellness", "/tcm/"],
+];
+
 export function Diamond() {
   return <span className="dia" aria-hidden="true" />;
 }
@@ -143,17 +153,40 @@ export function Footer() {
   return (
     <footer className="site" id="contact">
       <div className="container fwrap">
-        <img className="flogo" src={`${assetBase}/logo-cream.svg`} alt="One Spa" />
-        <div className="slogan">
-          Give Yourself 12 Hours
-          <br />
-          In a Warm Spring
-        </div>
-        <a className="wa" href={whatsappHref} target="_blank" rel="noopener">
-          WhatsApp +60 12-670 2560
-        </a>
+        <div className="footer-top">
+          <div className="footer-brand">
+            <img className="flogo" src={`${assetBase}/logo-cream.svg`} alt="One Spa" />
+            <div>
+              <div className="slogan">
+                Give Yourself 12 Hours
+                <br />
+                In a Warm Spring
+              </div>
+              <p className="footer-copy">
+                A warm, all-hours retreat for hot spring, massage, beauty, TCM and private
+                wellness sessions in Kuala Lumpur.
+              </p>
+            </div>
+          </div>
 
-        <div className="cols">
+          <div className="footer-cta">
+            <a className="wa footer-wa" href={whatsappHref} target="_blank" rel="noopener">
+              <WhatsAppIcon />
+              WhatsApp +60 12-670 2560
+            </a>
+            <a className="footer-secondary" href="/packages/">
+              View Packages
+            </a>
+          </div>
+        </div>
+
+        <div className="footer-highlights" aria-label="One Spa highlights">
+          {footerHighlights.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </div>
+
+        <div className="cols footer-grid">
           <div className="col">
             <h6>Explore</h6>
             {navItems.map(([label, href]) => (
@@ -163,6 +196,25 @@ export function Footer() {
             ))}
           </div>
           <div className="col">
+            <h6>Experiences</h6>
+            {footerExperienceLinks.map(([label, href]) => (
+              <a href={href} key={label}>
+                {label}
+              </a>
+            ))}
+          </div>
+          <div className="col">
+            <h6>Visit</h6>
+            <p>
+              Lot No. 2-53 & 2-56, Level 2, Viva Home Mall,
+              <br />
+              85, Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur
+            </p>
+            <a href={whatsappHref} target="_blank" rel="noopener">
+              Book on WhatsApp
+            </a>
+          </div>
+          <div className="col">
             <h6>Policies</h6>
             {footerPolicies.map(([label, href]) => (
               <a href={href} key={label}>
@@ -170,20 +222,11 @@ export function Footer() {
               </a>
             ))}
           </div>
-          <div className="col">
-            <h6>Contact</h6>
-            <p>
-              WhatsApp +60 12-670 2560
-              <br />
-              Open 24 Hours
-              <br />
-              Lot No. 2-53 & 2-56, Level 2, Viva Home Mall,
-              <br />
-              85, Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur
-            </p>
-          </div>
         </div>
-        <div className="bottom">One Spa · © 2026 One Spa. All rights reserved.</div>
+        <div className="bottom">
+          <span>One Spa · © 2026 One Spa. All rights reserved.</span>
+          <span>Bookings handled through WhatsApp</span>
+        </div>
       </div>
     </footer>
   );

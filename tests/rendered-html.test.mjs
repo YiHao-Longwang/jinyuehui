@@ -63,7 +63,9 @@ test("server-renders Chinese routes", async () => {
 
   const packages = await (await render("/cn/packages")).text();
   assert.match(packages, /img-b1f1\.jpg/);
-  assert.match(packages, /fac-treatment\.jpg/);
+  assert.match(packages, /class="cards"/);
+  assert.match(packages, /class="tlist"/);
+  assert.match(packages, /fac-golf\.jpg/);
 
   const facilities = await (await render("/cn/facilities")).text();
   assert.match(facilities, /fac-icefire\.jpg/);

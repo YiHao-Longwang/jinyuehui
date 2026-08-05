@@ -81,6 +81,11 @@ test("server-renders reservation cart", async () => {
   assert.match(cart, /data-cart-page/);
   assert.match(cart, /booking-cart\.js/);
 
+  const admin = await (await render("/admin")).text();
+  assert.match(admin, /Live Booking Dashboard/);
+  assert.match(admin, /data-admin-page/);
+  assert.match(admin, /admin-reservations\.js/);
+
   const packages = await (await render("/packages")).text();
   assert.match(packages, /data-book="b1f1"/);
   assert.match(packages, /data-book="kids"/);

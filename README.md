@@ -20,25 +20,59 @@ This starter does not use `wrangler.jsonc`.
 
 ## Reservation Backend
 
-The site now has a reservation-only cart flow. Customers pick a package, date,
-time and quantity, then submit their name and phone. No online payment is taken;
-the reservation is saved with `payment_status = pay_after_treatment`.
+The site has a reservation-only cart flow. Customers pick a package, date, time
+and quantity, then submit their name and phone. No online payment is taken; the
+reservation is saved with `payment_status = pay_after_treatment`.
 
 Set these environment variables before using live reservations:
 
 ```bash
 DATABASE_URL="postgres://USER:PASSWORD@HOST:PORT/DATABASE?sslmode=require"
 ADMIN_TOKEN="choose-a-private-token"
+BACKEND_PORT=4000
+FRONTEND_ORIGIN="https://your-domain.com"
 ```
 
+For local development, copy `.env.example` to `.env.local` and fill the values.
 The API creates the `reservations` table automatically on first use. The same
-schema is also available at `db/reservations.sql` if you prefer to run it
-manually.
+schema is also available at `db/reservations.sql` if you prefer to run it manually.
 
 Useful endpoints:
 
 - `POST /api/reservations`: create a reservation from the cart
 - `GET /api/reservations?token=ADMIN_TOKEN`: list the latest 50 reservations
+- `PATCH /api/reservations`: update reservation status with `x-admin-token`
+
+## Websocket Admin
+
+Run the frontend and websocket backend in two terminals:
+
+```bash
+npm run dev
+npm run backend
+```
+
+Open `/admin`, enter your `ADMIN_TOKEN`, and keep `API base` as
+`http://localhost:4000` for local development. New reservations are broadcast by
+Socket.IO as `reservation:created`; status changes are broadcast as
+`reservation:updated`.
+
+For production, host the Node backend somewhere that supports long-running
+websocket connections. If the backend is on another domain, set the admin page's
+API base to that backend URL and set `FRONTEND_ORIGIN` on the backend.
+
+## Optional Telegram Notification
+
+Telegram can send automatic staff notifications through a bot. Create a bot with
+BotFather, add it to your staff chat, then set:
+
+```bash
+TELEGRAM_BOT_TOKEN="123456:bot-token"
+TELEGRAM_CHAT_ID="-1001234567890"
+```
+
+When those variables are present, the backend sends a Telegram message whenever
+a new reservation is created. Leave them empty to disable Telegram.
 
 ## Included Shape
 

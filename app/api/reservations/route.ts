@@ -1,4 +1,4 @@
-import postgres from "postgres";
+import { neon } from "@neondatabase/serverless";
 
 type CartItem = {
   code?: string;
@@ -184,7 +184,13 @@ function calculate(items: CartItem[]) {
   return { items: normalized, subtotal, serviceCharge, sst, total };
 }
 
-async function ensureTable(sql: postgres.Sql) {
+function normalizeStatus(status: string) {
+  return ["pending", "confirmed", "completed", "cancelled", "no_show"].includes(status)
+    ? status
+    : "";
+}
+
+async function ensureTable(sql: ReturnType<typeof neon>) {
   await sql`
     create table if not exists reservations (
       id bigserial primary key,
@@ -203,9 +209,13 @@ async function ensureTable(sql: postgres.Sql) {
       total_cents integer not null,
       payment_status text not null default 'pay_after_treatment',
       payment_timing text not null default 'after_treatment',
+      reminder_sent_at timestamptz,
       created_at timestamptz not null default now()
     )
   `;
+  await sql`alter table reservations add column if not exists reminder_sent_at timestamptz`;
+  await sql`create index if not exists reservations_created_at_idx on reservations (created_at desc)`;
+  await sql`create index if not exists reservations_status_idx on reservations (status)`;
 }
 
 function errorResponse(message: string, status = 400) {
@@ -223,20 +233,18 @@ export async function GET(request: Request) {
   const urlValue = await databaseUrl();
   if (!urlValue) return errorResponse("DATABASE_URL is not configured.", 503);
 
-  const sql = postgres(urlValue, { max: 1 });
-  try {
-    await ensureTable(sql);
-    const rows = await sql`
-      select reservation_ref, status, customer_name, customer_phone, visit_date,
-        items, total_cents, payment_status, created_at
+  const sql = neon(urlValue);
+  await ensureTable(sql);
+  const rows = await sql`
+      select reservation_ref, status, locale, customer_name, customer_phone,
+        customer_email, customer_notes, visit_date, items, subtotal_cents,
+        service_charge_cents, sst_cents, total_cents, payment_status,
+        payment_timing, reminder_sent_at, created_at
       from reservations
       order by created_at desc
       limit 50
     `;
-    return Response.json({ reservations: rows });
-  } finally {
-    await sql.end({ timeout: 1 });
-  }
+  return Response.json({ reservations: rows });
 }
 
 export async function POST(request: Request) {
@@ -271,7 +279,7 @@ export async function POST(request: Request) {
 
   const ref = makeRef();
   const visitDate = totals.items[0].date;
-  const sql = postgres(urlValue, { max: 1 });
+  const sql = neon(urlValue);
 
   try {
     await ensureTable(sql);
@@ -283,7 +291,7 @@ export async function POST(request: Request) {
       )
       values (
         ${ref}, ${payload.locale ?? "en"}, ${name}, ${phone}, ${customer.email?.trim() || null},
-        ${customer.notes?.trim() || null}, ${visitDate}, ${sql.json(totals.items)},
+        ${customer.notes?.trim() || null}, ${visitDate}, ${JSON.stringify(totals.items)}::jsonb,
         ${cents(totals.subtotal)}, ${cents(totals.serviceCharge)}, ${cents(totals.sst)},
         ${cents(totals.total)}
       )
@@ -304,7 +312,40 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     return errorResponse(error instanceof Error ? error.message : "Could not save reservation.", 500);
-  } finally {
-    await sql.end({ timeout: 1 });
   }
+}
+
+export async function PATCH(request: Request) {
+  const cfEnv = await runtimeEnv();
+  const token = process.env.ADMIN_TOKEN || cfEnv.ADMIN_TOKEN || "";
+  if (token && request.headers.get("x-admin-token") !== token) {
+    return errorResponse("Unauthorized", 401);
+  }
+
+  const urlValue = await databaseUrl();
+  if (!urlValue) return errorResponse("DATABASE_URL is not configured.", 503);
+
+  let payload: { reservationRef?: string; status?: string };
+  try {
+    payload = (await request.json()) as typeof payload;
+  } catch {
+    return errorResponse("Invalid JSON body.");
+  }
+
+  const reservationRef = payload.reservationRef?.trim() ?? "";
+  const status = normalizeStatus(payload.status ?? "");
+  if (!reservationRef) return errorResponse("Reservation reference is required.");
+  if (!status) return errorResponse("Invalid status.");
+
+  const sql = neon(urlValue);
+  await ensureTable(sql);
+  const [reservation] = await sql`
+    update reservations
+    set status = ${status}
+    where reservation_ref = ${reservationRef}
+    returning reservation_ref, status
+  `;
+
+  if (!reservation) return errorResponse("Reservation not found.", 404);
+  return Response.json({ reservation });
 }

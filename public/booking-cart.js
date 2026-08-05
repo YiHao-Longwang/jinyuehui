@@ -2,6 +2,7 @@
   "use strict";
 
   var CART_KEY = "onespa_reservation_cart_v1";
+  var API_KEY = "onespa_admin_api_base";
   var WA = "https://wa.me/60126702560?text=";
   var holidays = {
     "2026-01-01": true,
@@ -153,6 +154,19 @@
     } catch {
       return [];
     }
+  }
+
+  function apiBase() {
+    var configured = (window.ONESPA_API_BASE || "").trim().replace(/\/$/, "");
+    if (configured) return configured;
+    var saved = (localStorage.getItem(API_KEY) || "").trim().replace(/\/$/, "");
+    if (saved) return saved;
+    if (location.hostname === "localhost" && location.port === "3000") return "http://localhost:4000";
+    return "";
+  }
+
+  function endpoint(path) {
+    return apiBase() + path;
   }
 
   function writeCart(items) {
@@ -466,7 +480,7 @@
       notes: form.elements.notes.value.trim()
     };
     status.textContent = text("Saving reservation...", "正在保存预约...");
-    fetch("/api/reservations", {
+    fetch(endpoint("/api/reservations"), {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ locale: locale(), customer: customer, items: items })

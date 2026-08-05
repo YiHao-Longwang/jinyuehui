@@ -710,6 +710,38 @@ img {
   font-weight: 400;
 }
 
+.was {
+  margin-right: 2px;
+  color: var(--taupe);
+  font-family: var(--serif);
+  font-size: 14px;
+  text-decoration: line-through;
+  text-decoration-color: rgba(180, 127, 116, 0.7);
+}
+
+.rm .cur {
+  margin-right: 0.1em;
+  font-size: 58%;
+}
+
+.rm .per {
+  margin-left: 3px;
+  color: var(--taupe);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.osw-pp {
+  margin-left: 1px;
+  font-size: 52%;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 0;
+  opacity: 0.72;
+  vertical-align: super;
+}
+
 ul.feat {
   display: flex;
   flex-direction: column;
@@ -742,6 +774,21 @@ ul.feat li::before {
   display: flex;
   width: 100%;
   margin-top: 14px;
+}
+
+.note {
+  margin: 12px 0 0;
+  border-radius: 8px;
+  background: var(--rose);
+  color: var(--deep);
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.7;
+  padding: 10px 12px;
+}
+
+.note.soft {
+  background: var(--peach);
 }
 
 .combo {
@@ -803,6 +850,37 @@ ul.feat li::before {
   padding: 14px 16px;
 }
 
+.bandwrap-t {
+  max-width: 860px;
+  margin: 18px auto 0;
+}
+
+.band {
+  display: flex;
+  height: 46px;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 6px;
+  background: var(--grad);
+  color: var(--cream);
+  padding: 0 18px;
+}
+
+.band b {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.band span {
+  font-family: var(--latin);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+
 .tlist {
   margin: 14px auto 0;
   max-width: 860px;
@@ -838,6 +916,15 @@ ul.feat li::before {
   font-size: 11.5px;
   font-weight: 400;
   white-space: nowrap;
+}
+
+.legend {
+  margin: 14px 0 0;
+  color: var(--taupe);
+  font-size: 11.5px;
+  font-weight: 300;
+  line-height: 1.7;
+  text-align: center;
 }
 
 .dots {
@@ -910,6 +997,105 @@ ul.feat li::before {
   font-weight: 300;
   line-height: 1.7;
   text-align: center;
+}
+
+.osw-detail-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 8px 0 10px;
+  color: var(--clay);
+  font-size: 12px;
+}
+
+.osw-detail-links a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.roomprice {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 14px 0 0;
+  border-radius: 12px;
+  color: var(--cream);
+}
+
+.roomprice .big {
+  color: var(--clay);
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.roomprice .big .cur {
+  margin-right: 2px;
+  font-size: 16px;
+}
+
+.roomprice .cap {
+  color: var(--taupe);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.hourly {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 13.5px;
+}
+
+.hourly .dots {
+  flex: 1;
+  border-bottom: 1px dashed var(--line);
+}
+
+.knowrules {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  color: var(--taupe);
+  font-size: 12.5px;
+  line-height: 1.8;
+}
+
+.knowrules li {
+  position: relative;
+  padding-left: 14px;
+}
+
+.knowrules li::before {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  color: var(--terra);
+  content: "◆";
+  font-size: 8px;
+}
+
+.policylinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  margin: 12px 0 0;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.policylinks a {
+  color: var(--clay);
+  padding: 12px 2px;
+}
+
+.policylinks a span {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 2px;
 }
 
 .osw-outcall .hero .hero-img {

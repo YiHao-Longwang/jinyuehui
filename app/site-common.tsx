@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export const assetBase = "https://onespa.com.my/wp-content/themes/onespa-warm/assets";
+export const assetBase = "/assets";
 export const whatsappHref =
   "https://wa.me/60126702560?text=Hi%2C%20I%20would%20like%20to%20ask%20about%20the%20packages";
 export const whatsappHrefCn =

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
       "Pools, steam, sauna, massage and dining - one ticket, a full 12-hour stay.",
     images: [
       {
-        url: "https://onespa.com.my/wp-content/themes/onespa-warm/assets/hero-onsen-warm.jpg",
+        url: "/assets/hero-onsen-warm.jpg",
         width: 1280,
         height: 853,
       },

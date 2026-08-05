@@ -60,6 +60,16 @@ test("server-renders Chinese routes", async () => {
     assert.match(html, /WhatsApp \+60 12-670 2560/);
     assert.match(html, /href="\/cn\/packages\/"/);
   }
+
+  const packages = await (await render("/cn/packages")).text();
+  assert.match(packages, /img-b1f1\.jpg/);
+  assert.match(packages, /fac-treatment\.jpg/);
+
+  const facilities = await (await render("/cn/facilities")).text();
+  assert.match(facilities, /fac-icefire\.jpg/);
+
+  const tcm = await (await render("/cn/tcm")).text();
+  assert.match(tcm, /tcm-meridian\.jpg/);
 });
 
 test("keeps starter preview removed", async () => {

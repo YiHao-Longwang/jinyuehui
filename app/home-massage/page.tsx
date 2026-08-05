@@ -18,6 +18,7 @@ const chips = [
 
 const homePlans = [
   {
+    code: "outcall-classic",
     title: "Classic 2-Hour Home Massage",
     tag: "Daytime Pick",
     image: "outcall-plan-warm.jpg?osw=0.9.23",
@@ -32,6 +33,7 @@ const homePlans = [
     ],
   },
   {
+    code: "outcall-anytime",
     title: "Anytime Hourly Home Massage (2h)",
     tag: "Your Mix",
     image: "outcall-plan-classic.jpg?osw=0.9.23",
@@ -46,6 +48,7 @@ const homePlans = [
     ],
   },
   {
+    code: "outcall-fourhands",
     title: "Four-Hands Indulgence · 2h",
     tag: "Four Hands",
     image: "outcall-plan-duo.jpg?osw=0.9.23",
@@ -183,9 +186,9 @@ export default function HomeMassagePage() {
                         </ul>
                       </div>
                       <div className="btnrow outcall-actions">
-                        <a className="btn" href={whatsappHref} target="_blank" rel="noopener">
+                        <button className="btn" type="button" data-book={plan.code}>
                           Buy Online · {plan.price}
-                        </a>
+                        </button>
                         <a className="btn line" href={whatsappHref} target="_blank" rel="noopener">
                           Ask us on WhatsApp
                         </a>

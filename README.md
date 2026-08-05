@@ -18,6 +18,28 @@ npm run build
 
 This starter does not use `wrangler.jsonc`.
 
+## Reservation Backend
+
+The site now has a reservation-only cart flow. Customers pick a package, date,
+time and quantity, then submit their name and phone. No online payment is taken;
+the reservation is saved with `payment_status = pay_after_treatment`.
+
+Set these environment variables before using live reservations:
+
+```bash
+DATABASE_URL="postgres://USER:PASSWORD@HOST:PORT/DATABASE?sslmode=require"
+ADMIN_TOKEN="choose-a-private-token"
+```
+
+The API creates the `reservations` table automatically on first use. The same
+schema is also available at `db/reservations.sql` if you prefer to run it
+manually.
+
+Useful endpoints:
+
+- `POST /api/reservations`: create a reservation from the cart
+- `GET /api/reservations?token=ADMIN_TOKEN`: list the latest 50 reservations
+
 ## Included Shape
 
 - edit site code under `app/`

@@ -176,6 +176,26 @@ export default function Home() {
             ))}
           </nav>
           <div className="top-right">
+            <a className="cart-link" href={`${siteBase}/cart/`} aria-label="Cart">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.6"
+                aria-hidden="true"
+              >
+                <circle cx="9" cy="20" r="1" />
+                <circle cx="17" cy="20" r="1" />
+                <path d="M3 4h2l2.1 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L20 8H6" />
+              </svg>
+              <span className="cart-count" data-cart-count hidden>
+                0
+              </span>
+            </a>
             <div className="lang" aria-label="Language">
               <a href={`${siteBase}/cn/`}>中文</a>
               <span className="on">EN</span>
@@ -303,7 +323,7 @@ export default function Home() {
 
         <section id="facilities">
           <div className="sec-head">
-            <div className="k">What's Inside</div>
+            <div className="k">What&apos;s Inside</div>
             <h2>One-Stop Hot-Spring Retreat</h2>
             <div className="divider">
               <Diamond />

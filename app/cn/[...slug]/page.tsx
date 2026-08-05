@@ -197,6 +197,7 @@ const facilities = [
 const homeChips = ["同一批店内技师", "床单毛巾与精油都会带到", "酒店 · 公寓 · 住家", "线上购买付款"];
 const homePlans = [
   {
+    code: "outcall-classic",
     title: "经典 2 小时上门按摩",
     tag: "日间推荐",
     image: "outcall-plan-warm.jpg?osw=0.9.23",
@@ -205,6 +206,7 @@ const homePlans = [
     features: ["60 分钟精油按摩 + 60 分钟传统泰式，顺序固定", "开始时间 9:00 AM-10:00 PM", "适合酒店或家里好好留出一段放松时间", "线上最早可预约 3 小时后的时段；更急请 WhatsApp"],
   },
   {
+    code: "outcall-anytime",
     title: "随时 2 小时上门按摩",
     tag: "自由搭配",
     image: "outcall-plan-classic.jpg?osw=0.9.23",
@@ -213,6 +215,7 @@ const homePlans = [
     features: ["固定 120 分钟，RM798", "可备注偏好的精油、推拿、泰式或足疗组合", "全天可预约，最早为下单后 3 小时", "需要更长时间请直接 WhatsApp"],
   },
   {
+    code: "outcall-fourhands",
     title: "四手尊宠 · 2 小时",
     tag: "四手护理",
     image: "outcall-plan-duo.jpg?osw=0.9.23",
@@ -444,7 +447,14 @@ function PackagesPageCn() {
                     <ul className="feat">{item.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
                     {item.notes.map((note) => <div className="note soft" key={note}>{note}</div>)}
                     <div className="grow" />
-                    <a className="btn wide" href={whatsappHrefCn} target="_blank" rel="noopener">{item.button}</a>
+                    <button
+                      className="btn wide"
+                      type="button"
+                      data-book={item.id.replace("pk-", "")}
+                      data-book-locale="cn"
+                    >
+                      {item.button}
+                    </button>
                   </div>
                 </article>
               ))}
@@ -465,7 +475,7 @@ function PackagesPageCn() {
                   <div className="osw-detail-links">
                     <a href={`${cnBase}/packages/#know`}>平日票详情</a><span aria-hidden="true">·</span><a href={`${cnBase}/packages/#know`}>周末 / 公假详情</a>
                   </div>
-                  <a className="mini" href={whatsappHrefCn} target="_blank" rel="noopener">儿童票 · 预约</a>
+                  <button className="mini" type="button" data-book="kids" data-book-locale="cn">儿童票 · 预约</button>
                 </div>
                 <div className="row"><h4>10 人以上 / 公司团</h4><p>直接联系 WhatsApp，团体价可商量。</p><a className="mini" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 我们</a></div>
               </div>
@@ -635,7 +645,7 @@ function HomeMassagePageCn() {
                       <ul className="feat">{plan.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
                     </div>
                     <div className="btnrow outcall-actions">
-                      <a className="btn" href={whatsappHrefCn} target="_blank" rel="noopener">线上购买 · {plan.price}</a>
+                      <button className="btn" type="button" data-book={plan.code} data-book-locale="cn">线上购买 · {plan.price}</button>
                       <a className="btn line" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 咨询</a>
                     </div>
                   </div>

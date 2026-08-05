@@ -315,7 +315,13 @@ export default function PackagesPage() {
                     </ul>
                     {item.notes.map((note) => <div className="note soft" key={note}>{note}</div>)}
                     <div className="grow" />
-                    <a className="btn wide" href={whatsappHref} target="_blank" rel="noopener">{item.button}</a>
+                    <button
+                      className="btn wide"
+                      type="button"
+                      data-book={item.id.replace("pk-", "")}
+                    >
+                      {item.button}
+                    </button>
                   </div>
                 </article>
               ))}
@@ -336,7 +342,7 @@ export default function PackagesPage() {
                   <div className="osw-detail-links">
                     <a href="/packages/#know">Weekday ticket details</a><span aria-hidden="true">·</span><a href="/packages/#know">Weekend / PH details</a>
                   </div>
-                  <a className="mini" href={whatsappHref} target="_blank" rel="noopener">Kids Ticket · Book</a>
+                  <button className="mini" type="button" data-book="kids">Kids Ticket · Book</button>
                 </div>
                 <div className="row"><h4>10+ / company groups</h4><p>Message us - group deals are negotiable.</p><a className="mini" href={whatsappHref} target="_blank" rel="noopener">WhatsApp Us</a></div>
               </div>

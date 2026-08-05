@@ -89,8 +89,9 @@ export function Header({ active = "Home", locale = "en" }: { active?: string; lo
   const items = isCn
     ? cnNavItems.map(([key, label, href]) => ({ key, label, href }))
     : navItems.map(([label, href]) => ({ key: label, label, href }));
-  const englishHref = navItems.find(([label]) => label === active)?.[1] ?? "/";
-  const chineseHref = cnNavItems.find(([key]) => key === active)?.[2] ?? "/cn/";
+  const englishHref = active === "Cart" ? "/cart/" : navItems.find(([label]) => label === active)?.[1] ?? "/";
+  const chineseHref = active === "Cart" ? "/cn/cart/" : cnNavItems.find(([key]) => key === active)?.[2] ?? "/cn/";
+  const cartHref = isCn ? "/cn/cart/" : "/cart/";
 
   return (
     <header className="topbar">
@@ -106,6 +107,26 @@ export function Header({ active = "Home", locale = "en" }: { active?: string; lo
           ))}
         </nav>
         <div className="top-right">
+          <a className="cart-link" href={cartHref} aria-label={isCn ? "购物车" : "Cart"}>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.6"
+              aria-hidden="true"
+            >
+              <circle cx="9" cy="20" r="1" />
+              <circle cx="17" cy="20" r="1" />
+              <path d="M3 4h2l2.1 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L20 8H6" />
+            </svg>
+            <span className="cart-count" data-cart-count hidden>
+              0
+            </span>
+          </a>
           <div className="lang" aria-label="Language">
             {isCn ? (
               <>

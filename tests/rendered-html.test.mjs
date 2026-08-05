@@ -47,11 +47,12 @@ test("server-renders the One Spa page", async () => {
   assert.match(html, /href="\/packages\/#treatments"/);
   assert.match(html, /href="\/packages\/#combos"/);
   assert.match(html, /href="\/faq\/"/);
-  assert.doesNotMatch(html, /onespadw@gmail\.com|onespaofficial|cart|react-loading-skeleton|codex-preview/i);
+  assert.match(html, /href="\/cart\/"/);
+  assert.doesNotMatch(html, /onespadw@gmail\.com|onespaofficial|react-loading-skeleton|codex-preview/i);
 });
 
 test("server-renders Chinese routes", async () => {
-  for (const path of ["/cn", "/cn/packages", "/cn/facilities", "/cn/tcm", "/cn/contact"]) {
+  for (const path of ["/cn", "/cn/packages", "/cn/facilities", "/cn/tcm", "/cn/contact", "/cn/cart"]) {
     const response = await render(path);
     assert.equal(response.status, 200, path);
 
@@ -72,6 +73,17 @@ test("server-renders Chinese routes", async () => {
 
   const tcm = await (await render("/cn/tcm")).text();
   assert.match(tcm, /tcm-meridian\.jpg/);
+});
+
+test("server-renders reservation cart", async () => {
+  const cart = await (await render("/cart")).text();
+  assert.match(cart, /Review Your Reservation/);
+  assert.match(cart, /data-cart-page/);
+  assert.match(cart, /booking-cart\.js/);
+
+  const packages = await (await render("/packages")).text();
+  assert.match(packages, /data-book="b1f1"/);
+  assert.match(packages, /data-book="kids"/);
 });
 
 test("keeps starter preview removed", async () => {

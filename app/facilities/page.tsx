@@ -8,20 +8,20 @@ import {
 } from "../site-common";
 
 const facilities = [
-  ["Fire & Ice Pools", "fac-icefire.jpg", "The icy pool sits at 13°C, the herbal pool at 43°C - alternate between them under the starlit ceiling."],
-  ["Salt-Crystal Steam Room", "fac-steam.jpg", "A salt-crystal steam room in warm light - sit back, sweat it out and circulate better."],
-  ["Massage Rooms", "fac-massage.jpg", "Private massage rooms with three beds for friends and family."],
-  ["Yangzhou Body Scrub", "fac-scrub.jpg", "A dedicated scrub room for the Yangzhou body-scrub craft."],
-  ["Movie & Rest Lounge", "fac-movie.jpg", "A screening hall joined to the rest lounge, with a headset for every seat."],
-  ["Immersive Light Walk", "fac-immersive.jpg", "A starlit light corridor for a slow walk and photos after soaking."],
-  ["Foot Bath Room", "fac-recliner.jpg", "Power recliners made for foot work, grooming and a nap after."],
-  ["Salt-Stone Sweat Room", "fac-onsen.jpg", "Warm stone, gentle heat and a slower sweat routine."],
-  ["Treatment Rooms", "fac-treatment.jpg", "Care rooms for spa rituals, massage and beauty treatments."],
-  ["Yihe Private Dining Room", "fac-vip.jpg", "A private dining room for group visits and celebrations."],
-  ["Golf Theme Room", "fac-golf.jpg", "A private room with a golf theme for small groups."],
-  ["Changing Room", "fac-locker.jpg", "Lockers, changing areas and bath preparation spaces."],
-  ["Grooming & Wash Area", "fac-grooming.jpg", "Clean-up and grooming stations before leaving."],
-  ["Dining Hall", "fac-dining.jpg", "Buffet dining included with the main 12-hour spa tickets."],
+  ["Fire & Ice Pools", "fac-icefire.jpg?osw=0.9.23", "The icy pool sits at 13°C, the herbal pool at 43°C - alternate between them under the starlit ceiling and walk out completely refreshed."],
+  ["Salt-Crystal Steam Room", "fac-steam.jpg?osw=0.9.23", "A salt-crystal steam room in warm light - sit back, sweat it out, circulate better."],
+  ["Massage Rooms", "fac-massage.jpg?osw=0.9.23", "Private massage rooms with three beds - family and friends can share a room. Tui Na, Thai, aroma oil and more: 20 treatments arranged here."],
+  ["Yangzhou Body Scrub", "fac-scrub.jpg?osw=0.9.23", "A dedicated scrub room with the Yangzhou craft written on its walls - scrub away the day, as a single treatment or a scrub-plus-entry package."],
+  ["Movie & Rest Lounge", "fac-movie.jpg?osw=0.9.23", "The screening hall joins the rest lounge, with a headset for every seat - watch your film or sleep in peace; overnight guests usually settle here."],
+  ["Immersive Light Walk", "fac-immersive.jpg?osw=0.9.23", "A starlit light corridor - drift through after your soak, and take a photo while you are at it."],
+  ["Foot Bath Room", "fac-recliner.jpg?osw=0.9.23", "A recliner room made for foot work - foot therapy and grooming happen here; power recliners tilt right back for a nap after."],
+  ["Salt-Stone Sweat Room", "fac-onsen.jpg?osw=0.9.23", "Lie back on warmed salt-stone beds ringed by glowing salt bricks, and let the heat slowly work through you - best right before or after a soak."],
+  ["Treatment Rooms", "fac-treatment.jpg?osw=0.9.23", "Deeper rituals - hot-stone detox, French indulgence, Five Elements - are arranged in these dedicated treatment rooms. See the packages page for treatments and prices."],
+  ["Yihe Private Dining Room", "fac-vip.jpg?osw=0.9.23", "Book the Yihe room for a proper gathering - order signature dishes a la carte around one big table. Reservation required."],
+  ["Golf Theme Room", "fac-golf.jpg?osw=0.9.23", "A golf-themed private room, from RM99/hour per room - bookable directly."],
+  ["Changing Room", "fac-locker.jpg?osw=0.9.23", "A lockable locker for every guest and wide benches - settle in comfortably before your soak."],
+  ["Grooming & Wash Area", "fac-grooming.jpg?osw=0.9.23", "Wash stations and vanity seating - freshen up properly after steam and soak, and step out feeling crisp."],
+  ["Dining Hall", "fac-dining.jpg?osw=0.9.23", "Dinner buffet 6-9pm, light meals at other hours; fruits and ice cream on hand."],
 ];
 
 export default function FacilitiesPage() {
@@ -31,18 +31,13 @@ export default function FacilitiesPage() {
       <main>
         <Hero
           eyebrow="One Spa · Facilities"
-          title={<>Hot Springs, Sauna & 24H Lounge</>}
-          copy="A one-stop hot-spring retreat with pools, steam, sauna, massage rooms, dining and rest lounges."
+          title={<>One-Stop Hot-Spring Retreat</>}
+          copy="One ticket covers pools, steam, sauna, lounges, the movie area and dining - a full 12-hour stay."
           image="fac-hero-immersive.jpg?osw=0.9.23"
-        >
-          <a className="btn clay" href="/packages/">
-            View Packages
-          </a>
-        </Hero>
+        />
 
         <section id="facilities">
-          <SectionHead eyebrow="What's Inside" title="One-Stop Hot-Spring Retreat" />
-          <div className="container">
+          <div className="container fac-page-grid">
             <div className="fac-grid">
               {facilities.map(([title, image, copy], index) => (
                 <article className={`fac${index === 0 ? " lead" : ""}`} key={title}>
@@ -52,28 +47,28 @@ export default function FacilitiesPage() {
                   <div className="fb">
                     <h3>{title}</h3>
                     <p>{copy}</p>
-                    {["Massage Rooms", "Yangzhou Body Scrub", "Foot Bath Room"].includes(title) ? (
+                    {["Massage Rooms", "Yangzhou Body Scrub", "Foot Bath Room", "Treatment Rooms"].includes(title) ? (
                       <a className="more" href="/packages/#treatments">
                         See Treatments & Prices &rsaquo;
+                      </a>
+                    ) : null}
+                    {title === "Golf Theme Room" ? (
+                      <a className="more" href="/packages/#room">
+                        See room rates &rsaquo;
                       </a>
                     ) : null}
                   </div>
                 </article>
               ))}
             </div>
-            <div className="center-cta">
-              <a className="btn" href="/packages/">
-                View Packages
-              </a>
-            </div>
           </div>
         </section>
 
         <section id="treatments-teaser">
           <SectionHead
-            eyebrow="Treatment Menu"
+            eyebrow="Treatments"
             title="20 Massage & Care Treatments"
-            sub="Foot therapy, ear spa, cupping, gua sha and signature rituals are listed openly on the packages page."
+            sub="Foot therapy, ear spa, cupping, gua sha and our signature rituals - every price listed openly on the packages page."
           />
           <div className="center-cta">
             <a className="btn line" href="/packages/#treatments">

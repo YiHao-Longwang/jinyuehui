@@ -6,7 +6,7 @@ export default function ContactPage() {
       <Header active="Contact" />
       <main>
         <section id="contact">
-          <SectionHead eyebrow="One Spa · Contact" title="Contact & Location" />
+          <SectionHead eyebrow="One Spa · Contact" title="Come See Us" />
           <div className="container">
             <div className="cinfo-wrap">
               <div className="cinfo">
@@ -24,7 +24,7 @@ export default function ContactPage() {
                 <span className="ck">WhatsApp</span>
                 <span className="cv">
                   <a href={whatsappHref} target="_blank" rel="noopener">
-                    +60 12-670 2560
+                    +60 12-670 2560 (tap to chat)
                   </a>
                 </span>
               </div>
@@ -48,8 +48,9 @@ export default function ContactPage() {
               </a>
             </div>
             <div className="deal contact-note">
-              <b>Our Only Outlet</b> - One Spa has just this one location: Level
-              2, Viva Home Mall, Taman Miharja, Kuala Lumpur.
+              <b>Our Only Outlet</b> - One Spa has just this one location - Level 2,
+              Viva Home Mall, Taman Miharja, Kuala Lumpur. We have no branches;
+              please navigate to the address above.
             </div>
           </div>
         </section>

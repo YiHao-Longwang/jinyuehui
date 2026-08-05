@@ -106,18 +106,11 @@ export default function PackagesPage() {
       <Header active="Packages" />
       <main>
         <Hero
-          eyebrow="One Spa · Packages"
-          title={<>Packages & Pricing</>}
-          copy="Buy 1 Free 1, solo 12-hour passes, body scrub, massage and group combinations. Open 24 hours at Viva Home KL."
+          eyebrow="One Spa · Kuala Lumpur · Open 24 Hours"
+          title={<>Sink Into a Warm Spring</>}
+          copy="One ticket, a full 12-hour stay - pools, steam, massage & dining all included."
           image="hero-packages-rain.jpg?osw=0.9.23"
-        >
-          <a className="btn clay" href="#featured">
-            View Packages
-          </a>
-          <a className="btn cream-line" href="#treatments">
-            Massage
-          </a>
-        </Hero>
+        />
 
         <nav className="subnav" aria-label="Package sections">
           <div className="row">
@@ -130,22 +123,35 @@ export default function PackagesPage() {
             <a className="pill" href="#treatments">
               Massage
             </a>
+            <a className="pill" href="#drinks">
+              Drink Barrels
+            </a>
             <a className="pill" href="#room">
               Private Room
+            </a>
+            <a className="pill" href="#know">
+              Good to Know
             </a>
           </div>
         </nav>
 
         <section className="trust">
           <div className="container">
-            <div className="t">One ticket gives up to 12 hours inside.</div>
-            <div className="t">Sunday is weekday rate.</div>
-            <div className="t">Free reschedule up to 1 day ahead.</div>
+            <div className="t"><span className="dia" />Pay and get a confirmation email - show your order at the front desk</div>
+            <div className="t"><span className="dia" />12 hours from check-in - pools, steam, lounges & dining all included</div>
+            <div className="t"><span className="dia" />Reschedule free up to 1 day ahead, unlimited times</div>
           </div>
         </section>
 
+        <div className="osw-onsen-crosslink">
+          <div className="container crosslinks">
+            <a className="osw-product-text-link" href="/onsen-kl/">24-hour onsen in KL</a>
+            <a className="osw-product-text-link" href="/facilities/">full price & facility list</a>
+          </div>
+        </div>
+
         <section id="featured">
-          <SectionHead eyebrow="Featured" title="Choose Your 12-Hour Pass" />
+          <SectionHead eyebrow="Featured Packages" title="Pick Yours, Book in Minutes" />
           <div className="container">
             <div className="cards">
               {packageCards.map((item) => (
@@ -211,7 +217,11 @@ export default function PackagesPage() {
         </section>
 
         <section id="treatments">
-          <SectionHead eyebrow="Massage & Treatments" title="20 Massage & Care Treatments" />
+          <SectionHead
+            eyebrow="Massage & Treatments"
+            title="Add a Treatment"
+            sub="Treatments need an entry ticket; spend RM499+ in one bill and entry is free."
+          />
           <div className="container">
             <div className="deal">
               Booking Buy-1-Free-1 or Solo Pass? Add same-day treatments under RM499
@@ -225,6 +235,24 @@ export default function PackagesPage() {
                   <span className="dots" />
                   <span className="rm">{price}</span>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="drinks">
+          <SectionHead eyebrow="Drink Barrels" title="Herbal Drinks & Refreshments" />
+          <div className="container">
+            <div className="minis">
+              {[
+                ["Fruit Tea Barrel", "A sharing barrel for groups between soaks."],
+                ["Herbal Tea", "Warm herbal tea options from the TCM side."],
+                ["Dining & Dessert", "Light meals, fruits and ice cream are part of the spa rhythm."],
+              ].map(([title, desc]) => (
+                <article className="mini-card" key={title}>
+                  <h3>{title}</h3>
+                  <p className="desc">{desc}</p>
+                </article>
               ))}
             </div>
           </div>
@@ -251,6 +279,26 @@ export default function PackagesPage() {
                   </div>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="know">
+          <SectionHead eyebrow="Good to Know" title="Before You Buy" />
+          <div className="container knowwrap">
+            <div className="know">
+              {[
+                "Sunday counts as weekday rate; Fri, Sat and public holidays use weekend rate.",
+                "A standard ticket gives up to 12 hours from check-in.",
+                "Free rescheduling is available up to 1 day before your visit.",
+                "Kids age 12 and under need a Kids Ticket; age 2 and under register free at the front desk.",
+                "Show your booking on your phone when you arrive.",
+              ].map((item) => (
+                <div className="t" key={item}><span className="dia" />{item}</div>
+              ))}
+            </div>
+            <div className="center-cta">
+              <a className="btn" href={whatsappHref} target="_blank" rel="noopener">Ask on WhatsApp</a>
             </div>
           </div>
         </section>

@@ -4,13 +4,13 @@ import test from "node:test";
 
 const templateRoot = new URL("../", import.meta.url);
 
-async function render() {
+async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request("http://localhost/", {
+    new Request(`http://localhost${path}`, {
       headers: { accept: "text/html" },
     }),
     {
@@ -48,6 +48,18 @@ test("server-renders the One Spa page", async () => {
   assert.match(html, /href="\/packages\/#combos"/);
   assert.match(html, /href="\/faq\/"/);
   assert.doesNotMatch(html, /onespadw@gmail\.com|onespaofficial|cart|react-loading-skeleton|codex-preview/i);
+});
+
+test("server-renders Chinese routes", async () => {
+  for (const path of ["/cn", "/cn/packages", "/cn/facilities", "/cn/tcm", "/cn/contact"]) {
+    const response = await render(path);
+    assert.equal(response.status, 200, path);
+
+    const html = await response.text();
+    assert.match(html, /中文/);
+    assert.match(html, /WhatsApp \+60 12-670 2560/);
+    assert.match(html, /href="\/cn\/packages\/"/);
+  }
 });
 
 test("keeps starter preview removed", async () => {

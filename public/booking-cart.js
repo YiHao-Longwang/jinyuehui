@@ -195,6 +195,16 @@
     return apiBase() + path;
   }
 
+  function afterPageReady(callback) {
+    if (document.readyState === "complete") {
+      setTimeout(callback, 0);
+      return;
+    }
+    window.addEventListener("load", function () {
+      setTimeout(callback, 0);
+    }, { once: true });
+  }
+
   function setActiveSubnavLink(nav, link) {
     var changed = !link.classList.contains("on");
     nav.querySelectorAll(".pill").forEach(function (item) {
@@ -984,13 +994,9 @@
       });
   });
 
-  updateCartCount();
-  renderCart();
-  if (document.readyState === "complete") {
-    setTimeout(initSubnav, 0);
-  } else {
-    window.addEventListener("load", function () {
-      setTimeout(initSubnav, 0);
-    }, { once: true });
-  }
+  afterPageReady(function () {
+    updateCartCount();
+    renderCart();
+    initSubnav();
+  });
 })();

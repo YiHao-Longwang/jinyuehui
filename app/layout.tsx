@@ -33,7 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
-        <script src="/booking-cart.js?v=20260807-cart-modal" defer />
+        <script src="/booking-cart.js?v=20260807-cart-ready" defer />
       </body>
     </html>
   );

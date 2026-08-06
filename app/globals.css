@@ -2516,6 +2516,33 @@ footer.site .fwrap {
   letter-spacing: 0.05em;
 }
 
+footer.site .footer-contact-pair .btn.contact-wa,
+footer.site .footer-mini-contact .btn.contact-wa {
+  border: 1px solid rgba(255, 242, 233, 0.78);
+  background: var(--cream);
+  box-shadow: 0 12px 28px rgba(32, 12, 8, 0.22);
+  color: var(--clay);
+}
+
+footer.site .footer-contact-pair .btn.contact-wa:hover,
+footer.site .footer-mini-contact .btn.contact-wa:hover {
+  background: var(--peach);
+}
+
+footer.site .footer-contact-pair .btn.contact-tg,
+footer.site .footer-mini-contact .btn.contact-tg {
+  border: 1px solid rgba(255, 232, 218, 0.36);
+  background: rgba(255, 242, 233, 0.08);
+  box-shadow: none;
+  color: rgba(255, 242, 233, 0.9);
+}
+
+footer.site .footer-contact-pair .btn.contact-tg:hover,
+footer.site .footer-mini-contact .btn.contact-tg:hover {
+  background: rgba(255, 242, 233, 0.16);
+  color: var(--cream);
+}
+
 .wa {
   display: inline-flex;
   min-height: 50px;

@@ -787,6 +787,30 @@ body.booking-open {
   .booking-note {
     padding: 12px 14px;
   }
+
+  .combo {
+    border-radius: 14px;
+  }
+
+  .combo .row {
+    min-height: 0;
+    padding: 18px 16px;
+  }
+
+  .combo h4 {
+    font-size: 19px;
+  }
+
+  .combo p {
+    font-size: 13.5px;
+  }
+
+  .combo .mini {
+    min-height: 40px;
+    margin-top: 14px;
+    font-size: 13.5px;
+    padding: 0 18px;
+  }
 }
 
 .cart-shell {
@@ -1549,15 +1573,19 @@ ul.feat li::before {
 
 .combo {
   overflow: hidden;
-  margin-top: 18px;
+  margin-top: 22px;
   border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--paper);
+  border-radius: 18px;
+  background: rgba(255, 250, 246, 0.72);
   box-shadow: var(--shadow);
 }
 
 .combo .row {
-  padding: 16px 18px;
+  display: flex;
+  min-height: 168px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px 24px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -1566,31 +1594,41 @@ ul.feat li::before {
 }
 
 .combo h4 {
-  margin: 0 0 4px;
+  margin: 0 0 8px;
   color: var(--clay);
   font-family: var(--serif);
-  font-size: 17px;
+  font-size: 21px;
   font-weight: 700;
   letter-spacing: 0.05em;
+  line-height: 1.2;
 }
 
 .combo p {
   margin: 0;
-  font-size: 13.5px;
+  max-width: 520px;
+  color: var(--ink);
+  font-size: 15px;
   font-weight: 300;
+  line-height: 1.72;
 }
 
 .combo .mini {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
-  margin-top: 10px;
+  justify-content: center;
+  margin-top: auto;
   border: 1.5px solid var(--clay);
   border-radius: 999px;
   color: var(--clay);
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 500;
-  padding: 0 20px;
+  padding: 0 24px;
+}
+
+.combo .mini:hover {
+  background: var(--clay);
+  color: var(--cream);
 }
 
 .deal {
@@ -1758,10 +1796,11 @@ ul.feat li::before {
 .osw-detail-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  margin: 8px 0 10px;
+  gap: 6px;
+  margin: 10px 0 18px;
   color: var(--clay);
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .osw-detail-links a {
@@ -2470,6 +2509,11 @@ footer.site .col p {
   .combo .grid2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  .combo .grid2 .row {
+    min-height: 178px;
+    padding: 26px 30px;
   }
 
   .combo .grid2 .row:nth-child(odd) {

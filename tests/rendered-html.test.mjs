@@ -31,7 +31,7 @@ test("server-renders the One Spa page", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>24-Hour Onsen Spa &amp; Sauna in Kuala Lumpur · One Spa<\/title>/i);
+  assert.match(html, /<title>onepsa<\/title>/i);
   assert.match(html, /Give Yourself 12 Hours/);
   assert.match(html, /Pick Yours, Book in Minutes/);
   assert.match(html, /One-Stop Hot-Spring Retreat/);
@@ -121,7 +121,7 @@ test("keeps starter preview removed", async () => {
 
   assert.match(page, /whatsappHref/);
   assert.match(page, /telegramHref/);
-  assert.match(layout, /24-Hour Onsen Spa/);
+  assert.match(layout, /applicationName: "onepsa"/);
   assert.doesNotMatch(page, /SkeletonPreview|codex-preview/);
   assert.doesNotMatch(layout, /Starter Project|codex-preview|_sites-preview/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);

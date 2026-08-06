@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "24-Hour Onsen Spa & Sauna in Kuala Lumpur · One Spa",
+  title: "onepsa",
+  applicationName: "onepsa",
   description:
     "A warm 24-hour hot-spring spa page with packages, facilities, FAQ, and WhatsApp booking.",
   icons: {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     shortcut: "/favicon.svg",
   },
   openGraph: {
-    title: "24-Hour Onsen Spa & Sauna in Kuala Lumpur · One Spa",
+    title: "onepsa",
     description:
       "Pools, steam, sauna, massage and dining - one ticket, a full 12-hour stay.",
     images: [

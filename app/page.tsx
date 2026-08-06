@@ -448,7 +448,7 @@ export default function Home() {
           </a>
 
           <div className="cols">
-            <div className="col">
+            <div className="col footer-link-col">
               <h6>Explore</h6>
               {navItems.slice(0, 8).map(([label, href]) => (
                 <a href={href} key={label}>
@@ -456,7 +456,7 @@ export default function Home() {
                 </a>
               ))}
             </div>
-            <div className="col">
+            <div className="col footer-policy-col">
               <h6>Policies</h6>
               {footerPolicies.map(([label, href]) => (
                 <a href={href} key={label}>
@@ -464,7 +464,7 @@ export default function Home() {
                 </a>
               ))}
             </div>
-            <div className="col">
+            <div className="col footer-visit-col">
               <h6>Contact</h6>
               <p>
                 WhatsApp +60 12-670 2560

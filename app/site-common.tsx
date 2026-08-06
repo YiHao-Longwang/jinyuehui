@@ -262,7 +262,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
         </div>
 
         <div className="cols footer-grid">
-          <div className="col">
+          <div className="col footer-link-col">
             <h6>{isCn ? "浏览" : "Explore"}</h6>
             {items.map(([label, href]) => (
               <a href={href} key={label}>
@@ -270,7 +270,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
               </a>
             ))}
           </div>
-          <div className="col">
+          <div className="col footer-link-col">
             <h6>{isCn ? "项目" : "Experiences"}</h6>
             {experiences.map(([label, href]) => (
               <a href={href} key={label}>
@@ -278,7 +278,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
               </a>
             ))}
           </div>
-          <div className="col">
+          <div className="col footer-visit-col">
             <h6>{isCn ? "地址" : "Visit"}</h6>
             <p>
               Lot No. 2-53 & 2-56, Level 2, Viva Home Mall,
@@ -289,7 +289,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
               {isCn ? "WhatsApp 预约" : "Book on WhatsApp"}
             </a>
           </div>
-          <div className="col">
+          <div className="col footer-policy-col">
             <h6>{isCn ? "政策" : "Policies"}</h6>
             {policies.map(([label, href]) => (
               <a href={href} key={label}>

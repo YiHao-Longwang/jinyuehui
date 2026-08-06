@@ -404,6 +404,7 @@
       '<input name="qty" type="hidden" value="1" required />' +
       '<div class="booking-controls"><div><span class="booking-control-label" data-time-label></span><div class="booking-timegrid" data-booking-times></div></div><div><span class="booking-control-label" data-qty-label></span><div class="booking-stepper"><button type="button" data-booking-qty="-1">−</button><b data-booking-qty-value>1</b><button type="button" data-booking-qty="1">+</button></div></div></div>' +
       '<div class="booking-price" data-booking-price></div>' +
+      '<p class="booking-error" data-booking-error hidden></p>' +
       '<button class="btn wide" type="submit" data-booking-submit></button>' +
       "</form>";
     document.body.appendChild(el);
@@ -436,6 +437,7 @@
       }
       if (time && !time.disabled) {
         el.querySelector("[data-booking-form]").elements.time.value = time.getAttribute("data-booking-time");
+        setBookingError(el, "");
         renderBookingTimes(el);
         refreshBookingPrice(el);
       }
@@ -448,6 +450,68 @@
       }
     });
     return el;
+  }
+
+  function setBookingError(el, message) {
+    if (!el) return;
+    var error = el.querySelector("[data-booking-error]");
+    if (!error) return;
+    error.textContent = message || "";
+    error.hidden = !message;
+  }
+
+  function cartConfirmModal() {
+    var existing = document.querySelector("[data-cart-confirm]");
+    if (existing) return existing;
+    var el = document.createElement("div");
+    el.className = "cart-confirm-modal";
+    el.setAttribute("data-cart-confirm", "");
+    el.setAttribute("aria-hidden", "true");
+    el.innerHTML =
+      '<div class="cart-confirm-backdrop" aria-hidden="true"></div>' +
+      '<section class="cart-confirm-panel" role="dialog" aria-modal="true" aria-labelledby="cart-confirm-title">' +
+      '<button class="cart-confirm-x" type="button" data-cart-confirm-close aria-label="Close">×</button>' +
+      '<div class="cart-confirm-mark" aria-hidden="true">✓</div>' +
+      '<h3 id="cart-confirm-title" data-cart-confirm-title></h3>' +
+      '<p data-cart-confirm-copy></p>' +
+      '<div class="cart-confirm-actions">' +
+      '<button class="btn line" type="button" data-cart-confirm-close data-cart-confirm-stay></button>' +
+      '<a class="btn" data-cart-confirm-link></a>' +
+      "</div>" +
+      "</section>";
+    document.body.appendChild(el);
+    el.addEventListener("click", function (event) {
+      if (event.target.closest("[data-cart-confirm-close]")) {
+        closeCartConfirm();
+      }
+    });
+    return el;
+  }
+
+  function closeCartConfirm() {
+    var el = document.querySelector("[data-cart-confirm]");
+    if (!el) return;
+    el.classList.remove("on");
+    el.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("cart-confirm-open");
+  }
+
+  function openCartConfirm(item) {
+    var lang = item.locale || locale();
+    var el = cartConfirmModal();
+    el.querySelector("[data-cart-confirm-title]").textContent = tr(lang, "Added to Cart", "已加入购物车");
+    el.querySelector("[data-cart-confirm-copy]").textContent = tr(
+      lang,
+      "Your booking item is saved. You can continue browsing or checkout now.",
+      "预约项目已保存。你可以继续浏览，或现在去结账。"
+    );
+    el.querySelector("[data-cart-confirm-stay]").textContent = tr(lang, "Continue Browsing", "继续浏览");
+    var link = el.querySelector("[data-cart-confirm-link]");
+    link.href = lang === "cn" ? "/cn/cart/" : "/cart/";
+    link.textContent = tr(lang, "Go to Cart", "去购物车");
+    document.body.classList.add("cart-confirm-open");
+    el.classList.add("on");
+    el.setAttribute("aria-hidden", "false");
   }
 
   function rateCards(product, lang) {
@@ -701,6 +765,7 @@
     el.querySelector("[data-time-label]").textContent = lang === "cn" ? "时间" : "Time";
     el.querySelector("[data-qty-label]").textContent = lang === "cn" ? "数量" : "Qty";
     el.querySelector("[data-booking-submit]").textContent = tr(lang, "Add to Cart", "加入购物车");
+    setBookingError(el, "");
     date.value = todayValue;
     time.value = "";
     qty.value = "1";
@@ -728,7 +793,7 @@
     var product = products[code];
     if (!product) return;
     if (!form.elements.time.value) {
-      alert(text("Please choose a time.", "请选择时间。"));
+      setBookingError(document.querySelector("[data-booking-modal]"), text("Please choose a time before adding to cart.", "加入购物车前请选择时间。"));
       return;
     }
     var item = {
@@ -744,9 +809,7 @@
     cart.push(item);
     writeCart(cart);
     closeModal();
-    if (confirm(text("Added to cart. Checkout now?", "已加入购物车。现在去结账？"))) {
-      location.href = item.locale === "cn" ? "/cn/cart/" : "/cart/";
-    }
+    openCartConfirm(item);
   });
 
   function cartMessage(ref, items, customer) {

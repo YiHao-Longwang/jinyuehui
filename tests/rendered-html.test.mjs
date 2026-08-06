@@ -109,6 +109,9 @@ test("server-renders reservation cart", async () => {
   assert.match(cartScript, /Checkout Details/);
   assert.match(cartScript, /ONE_SPA_TELEGRAM_URL/);
   assert.match(cartScript, /Contact Staff on Telegram/);
+  assert.match(cartScript, /cart-confirm-modal/);
+  assert.doesNotMatch(cartScript, /confirm\(/);
+  assert.doesNotMatch(cartScript, /alert\(/);
   assert.doesNotMatch(cartScript, /booking-backdrop" data-booking-close/);
 });
 

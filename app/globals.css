@@ -413,6 +413,10 @@ body.booking-open {
   overflow: hidden;
 }
 
+body.cart-confirm-open {
+  overflow: hidden;
+}
+
 .booking-backdrop {
   position: absolute;
   inset: 0;
@@ -784,10 +788,114 @@ body.booking-open {
   text-align: left;
 }
 
+.booking-error {
+  border: 1px solid #f1c7b6;
+  border-radius: 12px;
+  background: #fff0e7;
+  color: var(--terra) !important;
+  padding: 10px 12px;
+  font-size: 13px !important;
+  font-weight: 600;
+  text-align: center;
+}
+
 .booking-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+}
+
+.cart-confirm-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.cart-confirm-modal.on {
+  display: flex;
+}
+
+.cart-confirm-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(33, 18, 12, 0.58);
+  backdrop-filter: blur(5px);
+}
+
+.cart-confirm-panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 430px);
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--paper);
+  box-shadow: 0 28px 80px rgba(40, 18, 12, 0.34);
+  padding: 28px;
+  text-align: center;
+}
+
+.cart-confirm-x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 28px;
+  line-height: 1;
+}
+
+.cart-confirm-mark {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border-radius: 999px;
+  background: #25d366;
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 800;
+  box-shadow: 0 16px 34px rgba(37, 211, 102, 0.25);
+}
+
+.cart-confirm-panel h3 {
+  margin: 2px 34px 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 27px;
+  line-height: 1.2;
+}
+
+.cart-confirm-panel p {
+  max-width: 320px;
+  margin: 0;
+  color: var(--taupe);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.cart-confirm-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.cart-confirm-actions .btn {
+  min-height: 46px;
+  padding: 0 14px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
 }
 
 .reserve-contact-actions {
@@ -843,6 +951,20 @@ body.booking-open {
 
   .booking-note {
     padding: 12px 14px;
+  }
+
+  .cart-confirm-panel {
+    gap: 12px;
+    border-radius: 18px;
+    padding: 24px 18px 18px;
+  }
+
+  .cart-confirm-panel h3 {
+    font-size: 24px;
+  }
+
+  .cart-confirm-actions {
+    grid-template-columns: 1fr;
   }
 
   .combo {

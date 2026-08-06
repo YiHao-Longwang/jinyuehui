@@ -571,21 +571,23 @@
         : preview.tier === "weekday"
           ? tr(lang, "Sun-Thu", "星期日-星期四")
           : tr(lang, "Daily", "每天同价");
+    var priceSuffix = product.kind === "home" ? "" : "<sup>++</sup>";
     el.querySelector("[data-booking-price]").innerHTML =
-      '<span>' +
+      '<div><span>' +
       tier +
       " · " +
       selectedDate +
-      " · " +
+      '</span><strong>' +
       baseMoney(preview.price) +
-      "<sup>++</sup> " +
+      priceSuffix +
+      " " +
       (lang === "cn" ? product.unitCn : product.unitEn) +
-      " · " +
+      "</strong></div><div><span>" +
       taxLabel(product, lang) +
       '</span><b>' +
       tr(lang, "Total ", "总额 ") +
       money(preview.total) +
-      "</b>";
+      "</b></div>";
   }
 
   function closeModal() {

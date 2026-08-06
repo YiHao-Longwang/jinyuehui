@@ -696,10 +696,9 @@ img {
 }
 
 .booking-price {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 8px 18px;
   border-radius: 12px;
   background: #fff4ec;
@@ -709,14 +708,25 @@ img {
   padding: 10px 14px;
 }
 
+.booking-price div {
+  display: grid;
+  gap: 2px;
+}
+
 .booking-price span {
   color: #82665c;
 }
 
+.booking-price strong,
 .booking-price b {
   color: var(--clay);
   font-family: var(--serif);
   font-size: 17px;
+  line-height: 1.2;
+}
+
+.booking-price b {
+  text-align: left;
 }
 
 .booking-actions {
@@ -2558,6 +2568,14 @@ footer.site .col p {
   .booking-inputs,
   .booking-controls {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .booking-price {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .booking-price b {
+    text-align: right;
   }
 
   .admin-toolbar {

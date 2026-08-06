@@ -1,4 +1,4 @@
-import { FloatingWhatsApp, Footer, Header, SectionHead } from "../../site-common";
+import { FloatingWhatsApp, Footer, Header, SectionHead, telegramHrefCn } from "../../site-common";
 
 export default function CartPageCn() {
   return (
@@ -18,6 +18,11 @@ export default function CartPageCn() {
           </div>
         </section>
       </main>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.ONE_SPA_TELEGRAM_URL=${JSON.stringify(telegramHrefCn)};`,
+        }}
+      />
       <Footer locale="cn" />
       <FloatingWhatsApp locale="cn" />
     </>

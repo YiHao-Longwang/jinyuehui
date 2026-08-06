@@ -4,7 +4,7 @@ const siteBase = "";
 const assetBase = "/assets";
 const whatsappHref =
   "https://wa.me/60126702560?text=Hi%2C%20I%20would%20like%20to%20ask%20about%20the%20packages";
-const telegramHref = "https://t.me/onespaofficial";
+const telegramHref = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/onespaofficial";
 
 const navItems = [
   ["Home", `${siteBase}/`],

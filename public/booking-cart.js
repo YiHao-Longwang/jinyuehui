@@ -4,7 +4,7 @@
   var CART_KEY = "onespa_reservation_cart_v1";
   var API_KEY = "onespa_admin_api_base";
   var WA = "https://wa.me/60126702560?text=";
-  var TG = "https://t.me/onespaofficial";
+  var TG = window.ONE_SPA_TELEGRAM_URL || "https://t.me/onespaofficial";
   var bookingState = null;
   var holidays = {
     "2026-01-01": true,

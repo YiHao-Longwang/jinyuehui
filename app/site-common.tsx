@@ -5,8 +5,8 @@ export const whatsappHref =
   "https://wa.me/60126702560?text=Hi%2C%20I%20would%20like%20to%20ask%20about%20the%20packages";
 export const whatsappHrefCn =
   "https://wa.me/60126702560?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%E9%85%8D%E5%A5%97";
-export const telegramHref = "https://t.me/onespaofficial";
-export const telegramHrefCn = "https://t.me/onespaofficial";
+export const telegramHref = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/onespaofficial";
+export const telegramHrefCn = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/onespaofficial";
 
 export const navItems = [
   ["Home", "/"],

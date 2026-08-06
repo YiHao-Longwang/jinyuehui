@@ -82,6 +82,7 @@ test("server-renders reservation cart", async () => {
   const cart = await (await render("/cart")).text();
   assert.match(cart, /Review Your Reservation/);
   assert.match(cart, /data-cart-page/);
+  assert.match(cart, /ONE_SPA_TELEGRAM_URL/);
   assert.match(cart, /booking-cart\.js/);
 
   const admin = await (await render("/admin")).text();
@@ -106,6 +107,7 @@ test("server-renders reservation cart", async () => {
   assert.match(cartScript, /booking-open/);
   assert.match(cartScript, /Add to Cart/);
   assert.match(cartScript, /Checkout Details/);
+  assert.match(cartScript, /ONE_SPA_TELEGRAM_URL/);
   assert.match(cartScript, /Contact Staff on Telegram/);
   assert.doesNotMatch(cartScript, /booking-backdrop" data-booking-close/);
 });

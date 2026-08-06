@@ -386,7 +386,7 @@
     el.className = "booking-modal";
     el.setAttribute("data-booking-modal", "");
     el.innerHTML =
-      '<div class="booking-backdrop" data-booking-close></div>' +
+      '<div class="booking-backdrop" aria-hidden="true"></div>' +
       '<form class="booking-panel" data-booking-form>' +
       '<button class="booking-x" type="button" data-booking-close aria-label="Close">×</button>' +
       '<h3 data-booking-title></h3>' +
@@ -555,6 +555,80 @@
       : '<span class="booking-no-slots">' + tr(bookingState.lang, "No online slots left for this date.", "这个日期已没有可线上预约时间。") + "</span>";
   }
 
+  function bookingNotes(code, product, lang) {
+    var commonPrice = product.kind === "home"
+      ? tr(lang, "Home massage is subject to 8% SST only; no service charge.", "上门按摩只加 8% SST，不收服务费。")
+      : product.single
+        ? tr(lang, "Same-price packages stay the same every day; the final total updates after date and quantity.", "每天同价配套不分平日周末；选日期和数量后自动显示总额。")
+        : tr(lang, "Pick a date and the price updates automatically; public holidays use the weekend rate.", "选日期价格自动跟着跳；公共假期算周末价。");
+    var notes = {
+      b1f1: [
+        tr(lang, "Both adults enter together - same day, same time; the pass can't be split into two visits.", "两位成人需同一天同一时间一起进场；不能拆成两次使用。"),
+        commonPrice,
+        tr(lang, "Add same-day treatments under RM499 and get 20% off automatically; RM499+ treatments are not discounted because each covers free entry for one guest.", "同日加购 RM499 以下护理自动 8 折；RM499 以上护理不折扣，因为每项已含一位免费入场。"),
+        tr(lang, "Bringing kids? Each child needs a Kids Ticket; age 2 and under registers free at the front desk.", "带小孩？每位儿童需儿童票；2 岁或以下到前台登记免费。")
+      ],
+      solo: [
+        tr(lang, "One adult gets 12-hour entry plus the online 30-min massage bonus.", "一位成人享 12 小时入场，并含线上预约 30 分钟按摩福利。"),
+        commonPrice,
+        tr(lang, "The free 30-min massage is registered with this booking and used on the same visit.", "赠送 30 分钟按摩会登记在此预约内，并在同次到店使用。"),
+        tr(lang, "Add same-day treatments under RM499 and get 20% off automatically.", "同日加购 RM499 以下护理自动 8 折。")
+      ],
+      daytime: [
+        tr(lang, "Entry time must be between 9:00 AM and 5:00 PM.", "入场时间需在早上 9 点至下午 5 点之间。"),
+        tr(lang, "Pick 1 treatment option on arrival: massage, foot therapy, or detox care.", "到店选择 1 项护理：按摩、足疗或排毒护理。"),
+        commonPrice,
+        tr(lang, "Staying past 5:00 PM may require a top-up ticket at the front desk.", "超过下午 5 点继续停留，可能需在前台补票。")
+      ],
+      scrub: [
+        tr(lang, "12-hour spa entry is already included - no separate entry ticket needed.", "已包含 12 小时温泉入场，不需要另买门票。"),
+        tr(lang, "Soak first, then enjoy the 30-min Yangzhou body scrub session.", "先泡汤，再进行 30 分钟扬州搓澡护理。"),
+        commonPrice,
+        tr(lang, "Dining, pools, steam, sauna and rest lounges are included for the same visit.", "同次到店包含餐饮、泡池、汗蒸、桑拿与休息区。")
+      ],
+      "allday-sm": [
+        tr(lang, "One ticket includes 12-hour spa access, a 30-min scrub and a 60-min massage.", "一张票包含 12 小时温泉入场、30 分钟搓澡与 60 分钟按摩。"),
+        commonPrice,
+        tr(lang, "Scrub and massage are used on the same visit and cannot be split into another day.", "搓澡与按摩需同次到店使用，不能拆到其他日期。")
+      ],
+      "daytime-duo": [
+        tr(lang, "Two guests enter together - same day, same time.", "两位需同一天同一时间一起进场。"),
+        tr(lang, "Each guest gets one 60-min treatment during the daytime visit.", "每位可在日间到店时享 1 项 60 分钟护理。"),
+        tr(lang, "Entry time must be between 9:00 AM and 5:00 PM.", "入场时间需在早上 9 点至下午 5 点之间。"),
+        commonPrice
+      ],
+      kids: [
+        tr(lang, "Kids Ticket is for children age 12 and under, entering with an adult.", "儿童票适用于 12 岁或以下，并需与成人同行入场。"),
+        tr(lang, "Age 2 and under registers free at the front desk.", "2 岁或以下到前台登记免费。"),
+        commonPrice
+      ],
+      "outcall-classic": [
+        tr(lang, "Earliest online home-service slot is 3 hours from now.", "上门服务最早只能预约 3 小时后的时间。"),
+        tr(lang, "Classic home massage starts between 9:00 AM and 10:00 PM.", "经典上门按摩开始时间为早上 9 点至晚上 10 点。"),
+        commonPrice,
+        tr(lang, "RM100 travel fee within 30km is paid separately in cash on arrival.", "30km 内 RM100 交通费到场现金另付。")
+      ],
+      "outcall-anytime": [
+        tr(lang, "Earliest online home-service slot is 3 hours from now.", "上门服务最早只能预约 3 小时后的时间。"),
+        tr(lang, "Anytime package is bookable 24 hours; message us for longer sessions.", "随时配套 24 小时可预约；需要更长时间请 WhatsApp。"),
+        commonPrice,
+        tr(lang, "RM100 travel fee within 30km is paid separately in cash on arrival.", "30km 内 RM100 交通费到场现金另付。")
+      ],
+      "outcall-fourhands": [
+        tr(lang, "Earliest online home-service slot is 3 hours from now.", "上门服务最早只能预约 3 小时后的时间。"),
+        tr(lang, "Four-Hands service starts between 9:00 AM and 10:00 PM and serves one guest only.", "四手护理开始时间为早上 9 点至晚上 10 点，只服务一位客人。"),
+        commonPrice,
+        tr(lang, "One RM100 travel fee within 30km covers both therapists and is paid on arrival.", "30km 内 RM100 交通费覆盖两位技师，到场另付。")
+      ]
+    };
+
+    return (notes[code] || [commonPrice])
+      .map(function (note) {
+        return "<p>· " + note + "</p>";
+      })
+      .join("");
+  }
+
   function refreshBookingPrice(el) {
     if (!bookingState) return;
     var form = el.querySelector("[data-booking-form]");
@@ -593,6 +667,7 @@
   function closeModal() {
     var el = document.querySelector("[data-booking-modal]");
     if (el) el.classList.remove("on");
+    document.body.classList.remove("booking-open");
   }
 
   function openModal(code, forcedLocale) {
@@ -621,16 +696,7 @@
         : product.single
           ? tr(lang, "Same price daily.", "每天同价。")
           : tr(lang, "Sunday counts as weekday price.", "星期日也是平日价");
-    el.querySelector("[data-booking-note]").innerHTML =
-      "<p>· " +
-      (product.kind === "home"
-        ? tr(lang, "Home massage is subject to 8% SST only; no service charge.", "上门按摩只加 8% SST，不收服务费。")
-        : tr(lang, "The selected date price updates automatically; public holidays follow weekend price.", "选日期价格自动跟着跳，公共假期算周末价")) +
-      "</p><p>· " +
-      (product.kind === "home"
-        ? tr(lang, "Earliest online home-service slot is 3 hours from now.", "上门服务最早只能预约 3 小时后的时间。")
-        : tr(lang, "For two-person packages, guests enter together on the same date and time.", "两位要同一天同一时间一起进场，不能拆开用")) +
-      "</p>";
+    el.querySelector("[data-booking-note]").innerHTML = bookingNotes(code, product, lang);
     el.querySelector("[data-time-label]").textContent = lang === "cn" ? "时间" : "Time";
     el.querySelector("[data-qty-label]").textContent = lang === "cn" ? "数量" : "Qty";
     el.querySelector("[data-booking-submit]").textContent = tr(lang, "Book", "预订");
@@ -642,6 +708,7 @@
     renderBookingCalendar(el);
     renderBookingTimes(el);
     refreshBookingPrice(el);
+    document.body.classList.add("booking-open");
     el.classList.add("on");
   }
 

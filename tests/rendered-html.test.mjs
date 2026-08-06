@@ -99,6 +99,9 @@ test("server-renders reservation cart", async () => {
   assert.match(cartScript, /Fri, Sat & Public Holidays/);
   assert.match(cartScript, /Home massage is subject to 8% SST only/);
   assert.match(cartScript, /basePrice/);
+  assert.match(cartScript, /bookingNotes/);
+  assert.match(cartScript, /booking-open/);
+  assert.doesNotMatch(cartScript, /booking-backdrop" data-booking-close/);
 });
 
 test("keeps starter preview removed", async () => {

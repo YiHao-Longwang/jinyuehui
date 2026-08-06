@@ -1,4 +1,12 @@
-import { FloatingWhatsApp, Footer, Header, SectionHead, whatsappHref } from "../site-common";
+import {
+  ContactButtons,
+  FloatingWhatsApp,
+  Footer,
+  Header,
+  SectionHead,
+  telegramHref,
+  whatsappHref,
+} from "../site-common";
 
 export default function ContactPage() {
   return (
@@ -28,7 +36,16 @@ export default function ContactPage() {
                   </a>
                 </span>
               </div>
+              <div className="cinfo">
+                <span className="ck">Telegram</span>
+                <span className="cv">
+                  <a href={telegramHref} target="_blank" rel="noopener">
+                    @onespaofficial (tap to chat)
+                  </a>
+                </span>
+              </div>
             </div>
+            <ContactButtons className="contact-page-pair" />
             <div className="btnrow contact-actions">
               <a
                 className="btn"

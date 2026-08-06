@@ -1,11 +1,13 @@
 import {
   assetBase,
+  ContactButtons,
   Diamond,
   FloatingWhatsApp,
   Footer,
   Header,
   Hero,
   SectionHead,
+  telegramHrefCn,
   whatsappHrefCn,
 } from "../../site-common";
 
@@ -477,7 +479,7 @@ function PackagesPageCn() {
                   </div>
                   <button className="mini" type="button" data-book="kids" data-book-locale="cn">儿童票 · 预约</button>
                 </div>
-                <div className="row"><h4>10 人以上 / 公司团</h4><p>直接联系 WhatsApp，团体价可商量。</p><a className="mini" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 我们</a></div>
+                <div className="row"><h4>10 人以上 / 公司团</h4><p>直接联系 WhatsApp 或 Telegram，团体价可商量。</p><div className="mini-contact-row"><a className="mini contact-wa" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 我们</a><a className="mini contact-tg" href={telegramHrefCn} target="_blank" rel="noopener">Telegram 我们</a></div></div>
               </div>
             </div>
             <p className="fine">示例使用星期日-星期四价格；++ = 10% 服务费 + 8% SST。</p>
@@ -546,7 +548,7 @@ function PackagesPageCn() {
                     <p className="taxnote">价格未含 10% 服务费与 8% SST，到店结算</p>
                     <ul className="feat">{room.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
                     <div className="grow" />
-                    <a className="btn line wide" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 预约私人房</a>
+                    <div className="contact-pair room-contact-pair"><a className="btn contact-wa wide" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 预约私人房</a><a className="btn contact-tg wide" href={telegramHrefCn} target="_blank" rel="noopener">Telegram 预约私人房</a></div>
                   </div>
                 </article>
               ))}
@@ -625,7 +627,7 @@ function HomeMassagePageCn() {
       <main>
         <Hero eyebrow="One Spa · 上门服务 · 吉隆坡" title={<>店里的按摩，<br />到你家</>} copy="同一批 One Spa 技师，现在可以到你的酒店、公寓或住家。技师会带按摩油和一次性床单毛巾，铺在你的床上后开始服务。你不用搬家具，只要躺下。" image="outcall-hero.jpg?osw=0.9.23">
           <a className="btn clay" href="#outcall-plans">线上购买</a>
-          <a className="btn cream-line" href={whatsappHrefCn} target="_blank" rel="noopener">有问题？WhatsApp 我们</a>
+          <ContactButtons locale="cn" className="hero-contact-pair" whatsappLabel="有问题？WhatsApp 我们" telegramLabel="Telegram 我们" />
         </Hero>
         <Chips items={homeChips} />
         <section id="outcall-plans">
@@ -646,7 +648,7 @@ function HomeMassagePageCn() {
                     </div>
                     <div className="btnrow outcall-actions">
                       <button className="btn" type="button" data-book={plan.code} data-book-locale="cn">线上购买 · {plan.price}</button>
-                      <a className="btn line" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 咨询</a>
+                      <ContactButtons locale="cn" className="outcall-contact-pair" whatsappLabel="WhatsApp 咨询" telegramLabel="Telegram 咨询" />
                     </div>
                   </div>
                 </article>
@@ -664,7 +666,7 @@ function HomeMassagePageCn() {
           <div className="container">
             <div className="faqwrap">
               <div className="faq">{homeFaqs.map(([question, answer]) => <details key={question}><summary>{question}<span className="plus" /></summary><div className="a">{answer}</div></details>)}</div>
-              <div className="center-cta faq-cta"><p className="fine">还有其他问题？</p><a className="btn" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 咨询</a></div>
+              <div className="center-cta faq-cta"><p className="fine">还有其他问题？</p><ContactButtons locale="cn" whatsappLabel="WhatsApp 咨询" telegramLabel="Telegram 咨询" /></div>
             </div>
           </div>
         </section>
@@ -684,7 +686,7 @@ function BeautyPageCn() {
         <Chips items={beautyChips} />
         <section id="beauty-signature">
           <SectionHead eyebrow="主推开业配套" title="身体焕亮水光配套" sub="一次到店完成三项护理：身体焕亮、水光面部护理与手部护理，并包含同日温泉门票。" />
-          <div className="container"><MiniGrid items={signature} /><div className="deal"><b>RM599</b> · 身体焕亮 + 水光面部 + 手部护理 + 同日温泉门票</div><div className="center-cta"><a className="btn" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 预约</a></div></div>
+          <div className="container"><MiniGrid items={signature} /><div className="deal"><b>RM599</b> · 身体焕亮 + 水光面部 + 手部护理 + 同日温泉门票</div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="WhatsApp 预约" telegramLabel="Telegram 预约" /></div></div>
         </section>
         <section id="beauty-light">
           <SectionHead eyebrow="光电项目" title="三项护理，咨询后定制" sub="每项都会按皮肤与部位定制，现场咨询后确认价格，无隐藏收费。" />
@@ -692,12 +694,12 @@ function BeautyPageCn() {
         </section>
         <section id="beauty-facial">
           <SectionHead eyebrow="深层护理" title="完整面部管理" sub="从深层清洁到最后修复面膜，一次完整重置面部状态。" />
-          <div className="container"><MiniGrid items={facial} /><div className="deal">价格与时段请 WhatsApp 咨询</div><div className="center-cta"><a className="btn" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 咨询</a></div></div>
+          <div className="container"><MiniGrid items={facial} /><div className="deal">价格与时段请 WhatsApp 或 Telegram 咨询</div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="WhatsApp 咨询" telegramLabel="Telegram 咨询" /></div></div>
         </section>
         <section id="beauty-team"><SectionHead eyebrow="你的专员" title="一对一美容专员" /><div className="container"><div className="deal text-left">每项护理都由驻店美容专员一对一完成，光电项目前会先做皮肤评估。</div></div></section>
         <section id="beauty-faq">
           <SectionHead eyebrow="预约前" title="美容部 FAQ" />
-          <div className="container"><div className="faqwrap"><div className="faq">{beautyFaqs.map(([question, answer]) => <details key={question}><summary>{question}<span className="plus" /></summary><div className="a">{answer}</div></details>)}</div><div className="center-cta faq-cta"><p className="fine">还有其他问题？</p><a className="btn" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 咨询</a></div></div></div>
+          <div className="container"><div className="faqwrap"><div className="faq">{beautyFaqs.map(([question, answer]) => <details key={question}><summary>{question}<span className="plus" /></summary><div className="a">{answer}</div></details>)}</div><div className="center-cta faq-cta"><p className="fine">还有其他问题？</p><ContactButtons locale="cn" whatsappLabel="WhatsApp 咨询" telegramLabel="Telegram 咨询" /></div></div></div>
         </section>
       </main>
       <Footer locale="cn" />
@@ -713,15 +715,15 @@ function TcmPageCn() {
       <main>
         <Hero eyebrow="One Spa · 中医部 · 吉隆坡" title={<>中医养生，现在也在 One Spa</>} copy="驻店中医师免费把脉评估，针灸、艾灸、草本泥灸与正骨调理，价格公开，WhatsApp 预约。" image="tcm-hero.jpg?osw=0.9.23" />
         <Chips items={tcmChips} />
-        <section id="tcm-pulse"><SectionHead eyebrow="免费体验" title="免费中医把脉" sub="一对一评估体质与当前状态，先评估，再给适合你的调理建议。" /><div className="container"><div className="deal"><b>全身药拓 · 肩颈脊柱调理 · 睡眠压力调理 · 药膳茶饮搭配</b></div><div className="center-cta"><a className="btn" href={whatsappHrefCn} target="_blank" rel="noopener">预约免费把脉</a></div></div></section>
+        <section id="tcm-pulse"><SectionHead eyebrow="免费体验" title="免费中医把脉" sub="一对一评估体质与当前状态，先评估，再给适合你的调理建议。" /><div className="container"><div className="deal"><b>全身药拓 · 肩颈脊柱调理 · 睡眠压力调理 · 药膳茶饮搭配</b></div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="预约免费把脉" telegramLabel="Telegram 预约" /></div></div></section>
         <section id="tcm-services"><SectionHead eyebrow="养生项目" title="五项传统护理，先约先得" sub="每个 session 都是一对一；列出的价格就是到店付款价。请 WhatsApp 提前预约。" /><div className="container"><div className="fac-grid">{tcmTreatments.map(([title, image, desc, price]) => <article className="fac" key={title}><div className="ph"><img src={`${assetBase}/${image}`} alt={title} /></div><div className="fb"><h3>{title}</h3><p>{desc}</p>{price ? <p><b>{price}</b></p> : null}</div></article>)}</div></div></section>
-        <section id="targeted-care"><SectionHead eyebrow="中医调理 · CHINESE MEDICINE CARE" title="Traditional Chinese Medicine Specialties" sub="由中医师评估后安排的一对一传统调理" /><div className="container"><MiniGrid items={specialties} /><div className="deal">具体项目、时长及适用情况，以中医师现场评估为准</div><div className="center-cta"><a className="btn" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 预约</a></div></div></section>
-        <section id="physician"><SectionHead eyebrow="医师项目" title="中医师操作项目" sub="针灸、小针刀与刺络均由中医师亲自操作，必须先把脉评估。" /><div className="container"><MiniGrid items={physician} /><div className="deal">列出的价格为到店付款价，先免费把脉，适合才继续。</div><div className="center-cta"><a className="btn" href={whatsappHrefCn} target="_blank" rel="noopener">预约医师项目</a></div></div></section>
-        <section id="meridian"><SectionHead eyebrow="招牌项目" title="全身经络药拓调理" sub="以十二经络为引导的全身温热调理，从紧到松，从冷到暖。" /><div className="container"><MiniGrid items={tcmInfo.meridian} /><div className="deal"><b>RM699</b> · 特价 · 到店付款；请 WhatsApp 提前预约</div><div className="center-cta"><a className="btn" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 预约</a></div></div></section>
-        <section id="intimate"><SectionHead eyebrow="女士专属" title="女性私密养护" sub="干净、专业、完全私密的女性护理。" /><div className="container"><MiniGrid items={tcmInfo.intimate} /><div className="deal">价格与时段请 WhatsApp 咨询</div><div className="center-cta"><a className="btn" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 预约</a></div></div></section>
+        <section id="targeted-care"><SectionHead eyebrow="中医调理 · CHINESE MEDICINE CARE" title="Traditional Chinese Medicine Specialties" sub="由中医师评估后安排的一对一传统调理" /><div className="container"><MiniGrid items={specialties} /><div className="deal">具体项目、时长及适用情况，以中医师现场评估为准</div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="WhatsApp 预约" telegramLabel="Telegram 预约" /></div></div></section>
+        <section id="physician"><SectionHead eyebrow="医师项目" title="中医师操作项目" sub="针灸、小针刀与刺络均由中医师亲自操作，必须先把脉评估。" /><div className="container"><MiniGrid items={physician} /><div className="deal">列出的价格为到店付款价，先免费把脉，适合才继续。</div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="预约医师项目" telegramLabel="Telegram 预约" /></div></div></section>
+        <section id="meridian"><SectionHead eyebrow="招牌项目" title="全身经络药拓调理" sub="以十二经络为引导的全身温热调理，从紧到松，从冷到暖。" /><div className="container"><MiniGrid items={tcmInfo.meridian} /><div className="deal"><b>RM699</b> · 特价 · 到店付款；请 WhatsApp 或 Telegram 提前预约</div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="WhatsApp 预约" telegramLabel="Telegram 预约" /></div></div></section>
+        <section id="intimate"><SectionHead eyebrow="女士专属" title="女性私密养护" sub="干净、专业、完全私密的女性护理。" /><div className="container"><MiniGrid items={tcmInfo.intimate} /><div className="deal">价格与时段请 WhatsApp 或 Telegram 咨询</div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="WhatsApp 预约" telegramLabel="Telegram 预约" /></div></div></section>
         <section id="tea"><SectionHead eyebrow="药食同源" title="中医草本茶饮" sub="中医部新鲜煮制草本茶，泡汤间隙可到店点，不需要预约。" /><div className="container"><div className="deal">护肝茶 RM29 · 祛湿茶 RM29 · 补肾茶 RM39 · 清肺茶 RM28 · 暖宫茶 RM28</div></div></section>
         <section id="tcm-team"><SectionHead eyebrow="你的调理师" title="中医师与康复调理师" /><div className="container"><div className="deal text-left">中医部由中医师与康复调理师驻店。医师项目会在把脉评估后由中医师亲自操作。</div></div></section>
-        <section id="tcm-faq"><SectionHead eyebrow="预约前" title="中医部 FAQ" /><div className="container"><div className="faqwrap"><div className="faq">{tcmFaqs.map(([question, answer]) => <details key={question}><summary>{question}<span className="plus" /></summary><div className="a">{answer}</div></details>)}</div><div className="center-cta faq-cta"><p className="fine">还有其他问题？</p><a className="btn" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 咨询</a></div></div></div></section>
+        <section id="tcm-faq"><SectionHead eyebrow="预约前" title="中医部 FAQ" /><div className="container"><div className="faqwrap"><div className="faq">{tcmFaqs.map(([question, answer]) => <details key={question}><summary>{question}<span className="plus" /></summary><div className="a">{answer}</div></details>)}</div><div className="center-cta faq-cta"><p className="fine">还有其他问题？</p><ContactButtons locale="cn" whatsappLabel="WhatsApp 咨询" telegramLabel="Telegram 咨询" /></div></div></div></section>
       </main>
       <Footer locale="cn" />
       <FloatingWhatsApp locale="cn" />
@@ -752,6 +754,7 @@ function ContactPageCn() {
               <div className="cinfo"><span className="ck">地址</span><span className="cv">Lot No. 2-53 & 2-56, Level 2, Viva Home Mall, 85, Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur</span></div>
               <div className="cinfo"><span className="ck">营业时间</span><span className="cv">每天 24 小时营业</span></div>
               <div className="cinfo"><span className="ck">WhatsApp</span><span className="cv"><a href={whatsappHrefCn} target="_blank" rel="noopener">+60 12-670 2560（点击聊天）</a></span></div>
+              <div className="cinfo"><span className="ck">Telegram</span><span className="cv"><a href={telegramHrefCn} target="_blank" rel="noopener">@onespaofficial（点击聊天）</a></span></div>
             </div>
             <div className="btnrow contact-actions">
               <a className="btn" href="https://www.google.com/maps/search/?api=1&query=One%20Spa%20%E5%A3%B9%E5%8F%B7%E6%B1%A4%E6%B3%89&query_place_id=ChIJEa1Xrew3zDEROXX0qPz4IdA" target="_blank" rel="noopener">打开 Google Maps</a>

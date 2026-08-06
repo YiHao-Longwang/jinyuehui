@@ -339,6 +339,47 @@ img {
   transform: translateY(-1px);
 }
 
+.btn svg,
+.wa svg {
+  flex: none;
+}
+
+.contact-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn.contact-wa,
+.wa.contact-wa {
+  background: #25d366;
+  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.22);
+  color: #ffffff;
+}
+
+.btn.contact-wa:hover,
+.wa.contact-wa:hover {
+  background: #1fb85a;
+}
+
+.btn.contact-tg,
+.wa.contact-tg {
+  background: #229ed9;
+  box-shadow: 0 8px 22px rgba(34, 158, 217, 0.22);
+  color: #ffffff;
+}
+
+.btn.contact-tg:hover,
+.wa.contact-tg:hover {
+  background: #168cc4;
+}
+
+.btn.contact-wa,
+.btn.contact-tg {
+  gap: 8px;
+}
+
 .btn.line {
   border: 1.5px solid var(--clay);
   background: transparent;
@@ -739,6 +780,14 @@ body.booking-open {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+}
+
+.reserve-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 12px;
 }
 
 @media (max-width: 640px) {
@@ -1631,6 +1680,41 @@ ul.feat li::before {
   color: var(--cream);
 }
 
+.mini-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.combo .mini.contact-wa {
+  border-color: #25d366;
+  background: #25d366;
+  color: #ffffff;
+}
+
+.combo .mini.contact-tg {
+  border-color: #229ed9;
+  background: #229ed9;
+  color: #ffffff;
+}
+
+.room-contact-pair {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.room-contact-pair .btn.wide {
+  width: auto;
+  flex: 1 1 220px;
+}
+
+.hero-contact-pair,
+.outcall-contact-pair,
+.contact-page-pair {
+  justify-content: center;
+}
+
 .deal {
   margin: 18px auto 0;
   border: 1px solid var(--line);
@@ -2229,6 +2313,10 @@ footer.site .fwrap {
   align-items: center;
 }
 
+.footer-contact-pair {
+  justify-content: flex-start;
+}
+
 .wa {
   display: inline-flex;
   min-height: 50px;
@@ -2256,6 +2344,20 @@ footer.site .fwrap {
 
 .footer-wa {
   margin-top: 0;
+}
+
+.footer-mini-contact {
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.footer-mini-contact .btn {
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  box-shadow: none;
+  font-size: 12px;
+  letter-spacing: 0.04em;
 }
 
 .footer-secondary {
@@ -2366,26 +2468,43 @@ footer.site .col p {
   text-align: center;
 }
 
-.fab {
+.fab-stack {
   position: fixed;
   right: 14px;
   bottom: 16px;
   z-index: 60;
   display: flex;
-  height: 48px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.fab {
+  position: relative;
+  display: flex;
+  height: 46px;
   align-items: center;
   gap: 8px;
-  padding: 0 18px 0 14px;
+  padding: 0 16px 0 14px;
   border-radius: 999px;
-  background: var(--deep);
-  box-shadow: 0 4px 14px rgba(110, 42, 28, 0.35);
-  color: var(--cream);
-  font-size: 14px;
+  background: #25d366;
+  box-shadow: 0 7px 20px rgba(18, 82, 38, 0.28);
+  color: #ffffff;
+  font-size: 13.5px;
   font-weight: 500;
 }
 
 .fab:hover {
-  background: var(--ink);
+  background: #1fb85a;
+}
+
+.fab.telegram {
+  background: #229ed9;
+  box-shadow: 0 7px 20px rgba(16, 86, 124, 0.28);
+}
+
+.fab.telegram:hover {
+  background: #168cc4;
 }
 
 @media (min-width: 1024px) {

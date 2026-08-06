@@ -4,6 +4,7 @@ const siteBase = "";
 const assetBase = "/assets";
 const whatsappHref =
   "https://wa.me/60126702560?text=Hi%2C%20I%20would%20like%20to%20ask%20about%20the%20packages";
+const telegramHref = "https://t.me/onespaofficial";
 
 const navItems = [
   ["Home", `${siteBase}/`],
@@ -152,6 +153,25 @@ function WhatsAppIcon() {
     >
       <path d="M21 11.6a8.4 8.4 0 0 1-12.3 7.4L4 20l1.1-4.4A8.4 8.4 0 1 1 21 11.6Z" />
       <path d="M8.8 10.2c.5 1.9 2.1 3.5 4 4l1.3-1.2 2.1 1" />
+    </svg>
+  );
+}
+
+function TelegramIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.6"
+      aria-hidden="true"
+    >
+      <path d="M21 4 3.7 10.8c-.8.3-.8 1.4.1 1.6l4.3 1.3 1.7 5.2c.3.8 1.3 1 1.8.3l2.5-3.3 4.7 3.5c.7.5 1.7.1 1.9-.8L23 5.2c.2-.9-.9-1.6-1.6-1.2Z" />
+      <path d="m8.2 13.7 6.7-4.2-5.1 5.8" />
     </svg>
   );
 }
@@ -443,9 +463,16 @@ export default function Home() {
             <br />
             In a Warm Spring
           </div>
-          <a className="wa" href={whatsappHref} target="_blank" rel="noopener">
-            WhatsApp +60 12-670 2560
-          </a>
+          <div className="contact-pair footer-contact-pair">
+            <a className="btn contact-wa" href={whatsappHref} target="_blank" rel="noopener">
+              <WhatsAppIcon />
+              WhatsApp +60 12-670 2560
+            </a>
+            <a className="btn contact-tg" href={telegramHref} target="_blank" rel="noopener">
+              <TelegramIcon />
+              Telegram Us
+            </a>
+          </div>
 
           <div className="cols">
             <div className="col footer-link-col">
@@ -469,6 +496,8 @@ export default function Home() {
               <p>
                 WhatsApp +60 12-670 2560
                 <br />
+                Telegram @onespaofficial
+                <br />
                 Open 24 Hours
                 <br />
                 Lot No. 2-53 & 2-56, Level 2, Viva Home Mall,
@@ -481,10 +510,16 @@ export default function Home() {
         </div>
       </footer>
 
-      <a className="fab" href={whatsappHref} target="_blank" rel="noopener" aria-label="WhatsApp">
-        <WhatsAppIcon />
-        WhatsApp
-      </a>
+      <div className="fab-stack" aria-label="Contact One Spa">
+        <a className="fab whatsapp" href={whatsappHref} target="_blank" rel="noopener" aria-label="WhatsApp">
+          <WhatsAppIcon />
+          WhatsApp
+        </a>
+        <a className="fab telegram" href={telegramHref} target="_blank" rel="noopener" aria-label="Telegram">
+          <TelegramIcon />
+          Telegram
+        </a>
+      </div>
     </>
   );
 }

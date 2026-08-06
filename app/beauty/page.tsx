@@ -1,12 +1,12 @@
 import {
   assetBase,
+  ContactButtons,
   Diamond,
   FloatingWhatsApp,
   Footer,
   Header,
   Hero,
   SectionHead,
-  whatsappHref,
 } from "../site-common";
 
 const chips = [
@@ -99,7 +99,7 @@ export default function BeautyPage() {
           <div className="container">
             <MiniGrid items={signature} />
             <div className="deal"><b>RM599</b> · Body brightening + aqua-glow facial + hand care + same-day spa ticket</div>
-            <div className="center-cta"><a className="btn" href={whatsappHref} target="_blank" rel="noopener">Book on WhatsApp</a></div>
+            <div className="center-cta"><ContactButtons whatsappLabel="Book on WhatsApp" /></div>
           </div>
         </section>
 
@@ -129,7 +129,7 @@ export default function BeautyPage() {
           <div className="container">
             <MiniGrid items={facial} />
             <div className="deal">Pricing and slots on WhatsApp</div>
-            <div className="center-cta"><a className="btn" href={whatsappHref} target="_blank" rel="noopener">Ask on WhatsApp</a></div>
+            <div className="center-cta"><ContactButtons whatsappLabel="Ask on WhatsApp" /></div>
           </div>
         </section>
 
@@ -154,7 +154,7 @@ export default function BeautyPage() {
               </div>
               <div className="center-cta faq-cta">
                 <p className="fine">Anything else?</p>
-                <a className="btn" href={whatsappHref} target="_blank" rel="noopener">Ask us on WhatsApp</a>
+                <ContactButtons whatsappLabel="Ask us on WhatsApp" />
               </div>
             </div>
           </div>

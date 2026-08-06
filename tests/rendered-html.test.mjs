@@ -36,7 +36,9 @@ test("server-renders the One Spa page", async () => {
   assert.match(html, /Pick Yours, Book in Minutes/);
   assert.match(html, /One-Stop Hot-Spring Retreat/);
   assert.match(html, /WhatsApp \+60 12-670 2560/);
+  assert.match(html, /Telegram Us/);
   assert.match(html, /https:\/\/wa\.me\/60126702560/);
+  assert.match(html, /https:\/\/t\.me\/onespaofficial/);
   assert.match(html, /href="\/packages\/#pk-b1f1"/);
   assert.match(html, /href="\/packages\/#pk-solo"/);
   assert.match(html, /href="\/packages\/#pk-daytime"/);
@@ -48,7 +50,7 @@ test("server-renders the One Spa page", async () => {
   assert.match(html, /href="\/packages\/#combos"/);
   assert.match(html, /href="\/faq\/"/);
   assert.match(html, /href="\/cart\/"/);
-  assert.doesNotMatch(html, /onespadw@gmail\.com|onespaofficial|react-loading-skeleton|codex-preview/i);
+  assert.doesNotMatch(html, /onespadw@gmail\.com|react-loading-skeleton|codex-preview/i);
 });
 
 test("server-renders Chinese routes", async () => {
@@ -59,6 +61,7 @@ test("server-renders Chinese routes", async () => {
     const html = await response.text();
     assert.match(html, /中文/);
     assert.match(html, /WhatsApp \+60 12-670 2560/);
+    assert.match(html, /Telegram/);
     assert.match(html, /href="\/cn\/packages\/"/);
   }
 
@@ -101,6 +104,9 @@ test("server-renders reservation cart", async () => {
   assert.match(cartScript, /basePrice/);
   assert.match(cartScript, /bookingNotes/);
   assert.match(cartScript, /booking-open/);
+  assert.match(cartScript, /Add to Cart/);
+  assert.match(cartScript, /Checkout Details/);
+  assert.match(cartScript, /Contact Staff on Telegram/);
   assert.doesNotMatch(cartScript, /booking-backdrop" data-booking-close/);
 });
 
@@ -112,6 +118,7 @@ test("keeps starter preview removed", async () => {
   ]);
 
   assert.match(page, /whatsappHref/);
+  assert.match(page, /telegramHref/);
   assert.match(layout, /24-Hour Onsen Spa/);
   assert.doesNotMatch(page, /SkeletonPreview|codex-preview/);
   assert.doesNotMatch(layout, /Starter Project|codex-preview|_sites-preview/);

@@ -4,6 +4,7 @@
   var CART_KEY = "onespa_reservation_cart_v1";
   var API_KEY = "onespa_admin_api_base";
   var WA = "https://wa.me/60126702560?text=";
+  var TG = "https://t.me/onespaofficial";
   var bookingState = null;
   var holidays = {
     "2026-01-01": true,
@@ -699,7 +700,7 @@
     el.querySelector("[data-booking-note]").innerHTML = bookingNotes(code, product, lang);
     el.querySelector("[data-time-label]").textContent = lang === "cn" ? "时间" : "Time";
     el.querySelector("[data-qty-label]").textContent = lang === "cn" ? "数量" : "Qty";
-    el.querySelector("[data-booking-submit]").textContent = tr(lang, "Book", "预订");
+    el.querySelector("[data-booking-submit]").textContent = tr(lang, "Add to Cart", "加入购物车");
     date.value = todayValue;
     time.value = "";
     qty.value = "1";
@@ -743,7 +744,7 @@
     cart.push(item);
     writeCart(cart);
     closeModal();
-    if (confirm(text("Added to cart. Go to cart now?", "已加入购物车。现在去购物车？"))) {
+    if (confirm(text("Added to cart. Checkout now?", "已加入购物车。现在去结账？"))) {
       location.href = item.locale === "cn" ? "/cn/cart/" : "/cart/";
     }
   });
@@ -826,11 +827,11 @@
       '<div class="cart-layout"><div class="cart-list">' +
       rows +
       '</div><form class="reserve-form" data-reserve-form><h3>' +
-      (lang === "cn" ? "预约资料" : "Reservation Details") +
+      (lang === "cn" ? "结账资料" : "Checkout Details") +
       '</h3><label><span>' +
       (lang === "cn" ? "姓名" : "Name") +
       '</span><input name="name" required autocomplete="name" /></label><label><span>' +
-      (lang === "cn" ? "电话 / WhatsApp" : "Phone / WhatsApp") +
+      (lang === "cn" ? "电话 / WhatsApp / Telegram" : "Phone / WhatsApp / Telegram") +
       '</span><input name="phone" required autocomplete="tel" /></label><label><span>Email</span><input name="email" type="email" autocomplete="email" /></label><label><span>' +
       (lang === "cn" ? "备注" : "Notes") +
       '</span><textarea name="notes" rows="3"></textarea></label><div class="cart-total"><div><span>Subtotal</span><b>' +
@@ -890,11 +891,15 @@
           (locale() === "cn" ? "预约已提交" : "Reservation submitted") +
           "</b><p>" +
           (ref || "") +
-          '</p><a class="btn" target="_blank" rel="noopener" href="' +
+          '</p><div class="reserve-contact-actions"><a class="btn contact-wa" target="_blank" rel="noopener" href="' +
           href +
           '">' +
           (locale() === "cn" ? "发送 WhatsApp 给店员" : "Send WhatsApp to Staff") +
-          "</a></div>";
+          '</a><a class="btn contact-tg" target="_blank" rel="noopener" href="' +
+          TG +
+          '">' +
+          (locale() === "cn" ? "Telegram 联系店员" : "Contact Staff on Telegram") +
+          "</a></div></div>";
         updateCartCount();
       })
       .catch(function (error) {
@@ -904,11 +909,15 @@
           (locale() === "cn" ? "预约暂时无法保存" : "Reservation could not be saved") +
           "</b><p>" +
           error.message +
-          '</p><a class="btn line" target="_blank" rel="noopener" href="' +
+          '</p><div class="reserve-contact-actions"><a class="btn contact-wa" target="_blank" rel="noopener" href="' +
           href +
           '">' +
           (locale() === "cn" ? "改用 WhatsApp 发送" : "Send by WhatsApp Instead") +
-          "</a></div>";
+          '</a><a class="btn contact-tg" target="_blank" rel="noopener" href="' +
+          TG +
+          '">' +
+          (locale() === "cn" ? "改用 Telegram 联系" : "Contact by Telegram Instead") +
+          "</a></div></div>";
       });
   });
 

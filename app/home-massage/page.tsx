@@ -1,12 +1,12 @@
 import {
   assetBase,
+  ContactButtons,
   Diamond,
   FloatingWhatsApp,
   Footer,
   Header,
   Hero,
   SectionHead,
-  whatsappHref,
 } from "../site-common";
 
 const chips = [
@@ -136,9 +136,7 @@ export default function HomeMassagePage() {
             <a className="btn clay" href="#outcall-plans">
               Buy Online
             </a>
-            <a className="btn cream-line" href={whatsappHref} target="_blank" rel="noopener">
-              Questions? WhatsApp us
-            </a>
+            <ContactButtons className="hero-contact-pair" whatsappLabel="Questions? WhatsApp us" />
           </Hero>
 
           <div className="chips">
@@ -189,9 +187,7 @@ export default function HomeMassagePage() {
                         <button className="btn" type="button" data-book={plan.code}>
                           Buy Online · {plan.price}
                         </button>
-                        <a className="btn line" href={whatsappHref} target="_blank" rel="noopener">
-                          Ask us on WhatsApp
-                        </a>
+                        <ContactButtons className="outcall-contact-pair" whatsappLabel="Ask on WhatsApp" />
                       </div>
                     </div>
                   </article>
@@ -235,9 +231,7 @@ export default function HomeMassagePage() {
                 </div>
                 <div className="center-cta faq-cta">
                   <p className="fine">Anything else?</p>
-                  <a className="btn" href={whatsappHref} target="_blank" rel="noopener">
-                    Ask us on WhatsApp
-                  </a>
+                  <ContactButtons whatsappLabel="Ask on WhatsApp" />
                 </div>
               </div>
             </div>

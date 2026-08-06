@@ -5,6 +5,8 @@ export const whatsappHref =
   "https://wa.me/60126702560?text=Hi%2C%20I%20would%20like%20to%20ask%20about%20the%20packages";
 export const whatsappHrefCn =
   "https://wa.me/60126702560?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%E9%85%8D%E5%A5%97";
+export const telegramHref = "https://t.me/onespaofficial";
+export const telegramHrefCn = "https://t.me/onespaofficial";
 
 export const navItems = [
   ["Home", "/"],
@@ -81,6 +83,51 @@ export function WhatsAppIcon() {
       <path d="M21 11.6a8.4 8.4 0 0 1-12.3 7.4L4 20l1.1-4.4A8.4 8.4 0 1 1 21 11.6Z" />
       <path d="M8.8 10.2c.5 1.9 2.1 3.5 4 4l1.3-1.2 2.1 1" />
     </svg>
+  );
+}
+
+export function TelegramIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.6"
+      aria-hidden="true"
+    >
+      <path d="M21 4 3.7 10.8c-.8.3-.8 1.4.1 1.6l4.3 1.3 1.7 5.2c.3.8 1.3 1 1.8.3l2.5-3.3 4.7 3.5c.7.5 1.7.1 1.9-.8L23 5.2c.2-.9-.9-1.6-1.6-1.2Z" />
+      <path d="m8.2 13.7 6.7-4.2-5.1 5.8" />
+    </svg>
+  );
+}
+
+export function ContactButtons({
+  locale = "en",
+  className = "",
+  whatsappLabel,
+  telegramLabel,
+}: {
+  locale?: Locale;
+  className?: string;
+  whatsappLabel?: string;
+  telegramLabel?: string;
+}) {
+  const isCn = locale === "cn";
+  return (
+    <div className={`contact-pair ${className}`.trim()}>
+      <a className="btn contact-wa" href={isCn ? whatsappHrefCn : whatsappHref} target="_blank" rel="noopener">
+        <WhatsAppIcon />
+        {whatsappLabel ?? (isCn ? "WhatsApp 咨询" : "WhatsApp Us")}
+      </a>
+      <a className="btn contact-tg" href={isCn ? telegramHrefCn : telegramHref} target="_blank" rel="noopener">
+        <TelegramIcon />
+        {telegramLabel ?? (isCn ? "Telegram 咨询" : "Telegram Us")}
+      </a>
+    </div>
   );
 }
 
@@ -222,7 +269,6 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
   const policies = isCn ? footerPoliciesCn : footerPolicies;
   const highlights = isCn ? footerHighlightsCn : footerHighlights;
   const experiences = isCn ? footerExperienceLinksCn : footerExperienceLinks;
-  const waHref = isCn ? whatsappHrefCn : whatsappHref;
 
   return (
     <footer className="site" id="contact">
@@ -245,10 +291,12 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
           </div>
 
           <div className="footer-cta">
-            <a className="wa footer-wa" href={waHref} target="_blank" rel="noopener">
-              <WhatsAppIcon />
-              WhatsApp +60 12-670 2560
-            </a>
+            <ContactButtons
+              locale={locale}
+              className="footer-contact-pair"
+              whatsappLabel="WhatsApp +60 12-670 2560"
+              telegramLabel={isCn ? "Telegram 咨询" : "Telegram Us"}
+            />
             <a className="footer-secondary" href={isCn ? "/cn/packages/" : "/packages/"}>
               {isCn ? "看配套" : "View Packages"}
             </a>
@@ -285,9 +333,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
               <br />
               85, Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur
             </p>
-            <a href={waHref} target="_blank" rel="noopener">
-              {isCn ? "WhatsApp 预约" : "Book on WhatsApp"}
-            </a>
+            <ContactButtons locale={locale} className="footer-mini-contact" />
           </div>
           <div className="col footer-policy-col">
             <h6>{isCn ? "政策" : "Policies"}</h6>
@@ -311,9 +357,15 @@ export function FloatingWhatsApp({ locale = "en" }: { locale?: Locale }) {
   const isCn = locale === "cn";
 
   return (
-    <a className="fab" href={isCn ? whatsappHrefCn : whatsappHref} target="_blank" rel="noopener" aria-label="WhatsApp">
-      <WhatsAppIcon />
-      WhatsApp
-    </a>
+    <div className="fab-stack" aria-label={isCn ? "联系 One Spa" : "Contact One Spa"}>
+      <a className="fab whatsapp" href={isCn ? whatsappHrefCn : whatsappHref} target="_blank" rel="noopener" aria-label="WhatsApp">
+        <WhatsAppIcon />
+        WhatsApp
+      </a>
+      <a className="fab telegram" href={isCn ? telegramHrefCn : telegramHref} target="_blank" rel="noopener" aria-label="Telegram">
+        <TelegramIcon />
+        Telegram
+      </a>
+    </div>
   );
 }

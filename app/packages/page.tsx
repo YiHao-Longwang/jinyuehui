@@ -5,6 +5,7 @@ import {
   Header,
   Hero,
   SectionHead,
+  telegramHref,
   whatsappHref,
 } from "../site-common";
 
@@ -344,7 +345,14 @@ export default function PackagesPage() {
                   </div>
                   <button className="mini" type="button" data-book="kids">Kids Ticket · Book</button>
                 </div>
-                <div className="row"><h4>10+ / company groups</h4><p>Message us - group deals are negotiable.</p><a className="mini" href={whatsappHref} target="_blank" rel="noopener">WhatsApp Us</a></div>
+                <div className="row">
+                  <h4>10+ / company groups</h4>
+                  <p>Message us - group deals are negotiable.</p>
+                  <div className="mini-contact-row">
+                    <a className="mini contact-wa" href={whatsappHref} target="_blank" rel="noopener">WhatsApp Us</a>
+                    <a className="mini contact-tg" href={telegramHref} target="_blank" rel="noopener">Telegram Us</a>
+                  </div>
+                </div>
               </div>
             </div>
             <p className="fine">Examples use Sun-Thu rates; ++ = 10% service charge + 8% SST.</p>
@@ -423,7 +431,10 @@ export default function PackagesPage() {
                     <p className="taxnote">Prices exclude 10% service charge & 8% SST - settled on site</p>
                     <ul className="feat">{room.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
                     <div className="grow" />
-                    <a className="btn line wide" href={whatsappHref} target="_blank" rel="noopener">WhatsApp to Book the Room</a>
+                    <div className="contact-pair room-contact-pair">
+                      <a className="btn contact-wa wide" href={whatsappHref} target="_blank" rel="noopener">WhatsApp to Book the Room</a>
+                      <a className="btn contact-tg wide" href={telegramHref} target="_blank" rel="noopener">Telegram to Book the Room</a>
+                    </div>
                   </div>
                 </article>
               ))}

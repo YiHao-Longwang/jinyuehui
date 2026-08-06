@@ -1,12 +1,12 @@
 import {
   assetBase,
+  ContactButtons,
   Diamond,
   FloatingWhatsApp,
   Footer,
   Header,
   Hero,
   SectionHead,
-  whatsappHref,
 } from "../site-common";
 
 const chips = [
@@ -135,7 +135,7 @@ export default function TCMPage() {
               <b>Full-body herbal compress · Neck, shoulder & spine care · Sleep & stress care · Food-as-medicine pairing</b>
             </div>
             <div className="center-cta">
-              <a className="btn" href={whatsappHref} target="_blank" rel="noopener">Book a free pulse reading</a>
+              <ContactButtons whatsappLabel="Book a free pulse reading" />
             </div>
           </div>
         </section>
@@ -167,7 +167,7 @@ export default function TCMPage() {
           <div className="container">
             <MiniGrid items={specialties} />
             <div className="deal">具体项目、时长及适用情况，以中医师现场评估为准</div>
-            <div className="center-cta"><a className="btn" href={whatsappHref} target="_blank" rel="noopener">Book on WhatsApp</a></div>
+            <div className="center-cta"><ContactButtons whatsappLabel="Book on WhatsApp" /></div>
           </div>
         </section>
 
@@ -176,7 +176,7 @@ export default function TCMPage() {
           <div className="container">
             <MiniGrid items={physician} />
             <div className="deal">Listed prices are final and paid in store - free pulse reading first, and we only proceed where it suits you.</div>
-            <div className="center-cta"><a className="btn" href={whatsappHref} target="_blank" rel="noopener">Book physician services</a></div>
+            <div className="center-cta"><ContactButtons whatsappLabel="Book physician services" /></div>
           </div>
         </section>
 
@@ -185,7 +185,7 @@ export default function TCMPage() {
           <div className="container">
             <MiniGrid items={infoBlocks.meridian} />
             <div className="deal"><b>RM699</b> · Special price · paid in store; book ahead on WhatsApp</div>
-            <div className="center-cta"><a className="btn" href={whatsappHref} target="_blank" rel="noopener">Book on WhatsApp</a></div>
+            <div className="center-cta"><ContactButtons whatsappLabel="Book on WhatsApp" /></div>
           </div>
         </section>
 
@@ -194,7 +194,7 @@ export default function TCMPage() {
           <div className="container">
             <MiniGrid items={infoBlocks.intimate} />
             <div className="deal">Pricing and slots on WhatsApp</div>
-            <div className="center-cta"><a className="btn" href={whatsappHref} target="_blank" rel="noopener">Book on WhatsApp</a></div>
+            <div className="center-cta"><ContactButtons whatsappLabel="Book on WhatsApp" /></div>
           </div>
         </section>
 
@@ -226,7 +226,7 @@ export default function TCMPage() {
               </div>
               <div className="center-cta faq-cta">
                 <p className="fine">Anything else?</p>
-                <a className="btn" href={whatsappHref} target="_blank" rel="noopener">Ask us on WhatsApp</a>
+                <ContactButtons whatsappLabel="Ask us on WhatsApp" />
               </div>
             </div>
           </div>

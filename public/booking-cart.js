@@ -194,6 +194,57 @@
     return apiBase() + path;
   }
 
+  function setActiveSubnavLink(nav, link) {
+    var changed = !link.classList.contains("on");
+    nav.querySelectorAll(".pill").forEach(function (item) {
+      var isActive = item === link;
+      item.classList.toggle("on", isActive);
+      if (isActive) item.setAttribute("aria-current", "true");
+      else item.removeAttribute("aria-current");
+    });
+    if (changed) link.scrollIntoView({ block: "nearest", inline: "center" });
+  }
+
+  function initSubnav() {
+    var navs = Array.from(document.querySelectorAll(".subnav"));
+    if (!navs.length) return;
+
+    navs.forEach(function (nav) {
+      var links = Array.from(nav.querySelectorAll('a.pill[href^="#"]'));
+      if (!links.length) return;
+
+      var sections = links
+        .map(function (link) {
+          return {
+            link: link,
+            section: document.getElementById(link.getAttribute("href").slice(1))
+          };
+        })
+        .filter(function (item) {
+          return item.section;
+        });
+
+      nav.addEventListener("click", function (event) {
+        var link = event.target.closest('a.pill[href^="#"]');
+        if (!link || !nav.contains(link)) return;
+        setActiveSubnavLink(nav, link);
+      });
+
+      function refreshActive() {
+        var anchor = nav.getBoundingClientRect().bottom + 36;
+        var current = sections[0];
+        sections.forEach(function (item) {
+          if (item.section.getBoundingClientRect().top <= anchor) current = item;
+        });
+        if (current) setActiveSubnavLink(nav, current.link);
+      }
+
+      refreshActive();
+      window.addEventListener("scroll", refreshActive, { passive: true });
+      window.addEventListener("resize", refreshActive);
+    });
+  }
+
   function writeCart(items) {
     localStorage.setItem(CART_KEY, JSON.stringify(items));
     updateCartCount();
@@ -794,4 +845,5 @@
 
   updateCartCount();
   renderCart();
+  initSubnav();
 })();

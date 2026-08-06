@@ -7,6 +7,7 @@ import {
   SectionHead,
   telegramHref,
   whatsappHref,
+  whatsappNumberDisplay,
 } from "../site-common";
 
 const packageCards = [
@@ -432,15 +433,15 @@ export default function PackagesPage() {
                     <ul className="feat">{room.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
                     <div className="grow" />
                     <div className="contact-pair room-contact-pair">
-                      <a className="btn contact-wa wide" href={whatsappHref} target="_blank" rel="noopener">WhatsApp to Book the Room</a>
-                      <a className="btn contact-tg wide" href={telegramHref} target="_blank" rel="noopener">Telegram to Book the Room</a>
+                      <a className="btn contact-wa wide" href={whatsappHref} target="_blank" rel="noopener">WhatsApp Room</a>
+                      <a className="btn contact-tg wide" href={telegramHref} target="_blank" rel="noopener">Telegram Room</a>
                     </div>
                   </div>
                 </article>
               ))}
             </div>
             <ul className="knowrules">
-              <li>Private rooms are booked via WhatsApp only (+60 12-670 2560) - not sold online</li>
+              <li>Private rooms are booked via WhatsApp only ({whatsappNumberDisplay}) - not sold online</li>
               <li>Priced per room; a RM499+ room fee covers 1 person&apos;s entry - other guests buy tickets as usual</li>
               <li>Room bookings don&apos;t combine with the ticket + massage 20% off offer</li>
             </ul>

@@ -4,8 +4,10 @@ import {
   Footer,
   Header,
   SectionHead,
+  telegramDisplay,
   telegramHref,
   whatsappHref,
+  whatsappNumberDisplay,
 } from "../site-common";
 
 export default function ContactPage() {
@@ -32,7 +34,7 @@ export default function ContactPage() {
                 <span className="ck">WhatsApp</span>
                 <span className="cv">
                   <a href={whatsappHref} target="_blank" rel="noopener">
-                    +60 12-670 2560 (tap to chat)
+                    {whatsappNumberDisplay} (tap to chat)
                   </a>
                 </span>
               </div>
@@ -40,7 +42,7 @@ export default function ContactPage() {
                 <span className="ck">Telegram</span>
                 <span className="cv">
                   <a href={telegramHref} target="_blank" rel="noopener">
-                    @onespaofficial (tap to chat)
+                    {telegramDisplay} (tap to chat)
                   </a>
                 </span>
               </div>

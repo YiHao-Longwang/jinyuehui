@@ -1,12 +1,15 @@
 import type { ReactNode } from "react";
 
 export const assetBase = "/assets";
-export const whatsappHref =
-  "https://wa.me/60126702560?text=Hi%2C%20I%20would%20like%20to%20ask%20about%20the%20packages";
-export const whatsappHrefCn =
-  "https://wa.me/60126702560?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%E9%85%8D%E5%A5%97";
-export const telegramHref = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/onespaofficial";
-export const telegramHrefCn = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/onespaofficial";
+export const whatsappNumberDisplay = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+60 14-315 5632";
+const whatsappDigits = whatsappNumberDisplay.replace(/\D/g, "");
+const whatsappBase = `https://wa.me/${whatsappDigits}`;
+export const whatsappCartBase = `${whatsappBase}?text=`;
+export const whatsappHref = `${whatsappBase}?text=Hi%2C%20I%20would%20like%20to%20ask%20about%20the%20packages`;
+export const whatsappHrefCn = `${whatsappBase}?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%E9%85%8D%E5%A5%97`;
+export const telegramHref = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/nhlg09";
+export const telegramHrefCn = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/nhlg09";
+export const telegramDisplay = telegramHref.replace(/^https?:\/\/t\.me\//, "@").replace(/\/$/, "");
 
 export const navItems = [
   ["Home", "/"],
@@ -294,7 +297,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
             <ContactButtons
               locale={locale}
               className="footer-contact-pair"
-              whatsappLabel="WhatsApp +60 12-670 2560"
+              whatsappLabel={`WhatsApp ${whatsappNumberDisplay}`}
               telegramLabel={isCn ? "Telegram 咨询" : "Telegram Us"}
             />
             <a className="footer-secondary" href={isCn ? "/cn/packages/" : "/packages/"}>

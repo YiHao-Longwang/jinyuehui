@@ -35,10 +35,10 @@ test("server-renders the One Spa page", async () => {
   assert.match(html, /Give Yourself 12 Hours/);
   assert.match(html, /Pick Yours, Book in Minutes/);
   assert.match(html, /One-Stop Hot-Spring Retreat/);
-  assert.match(html, /WhatsApp \+60 12-670 2560/);
+  assert.match(html, /\+60 14-315 5632/);
   assert.match(html, /Telegram Us/);
-  assert.match(html, /https:\/\/wa\.me\/60126702560/);
-  assert.match(html, /https:\/\/t\.me\/onespaofficial/);
+  assert.match(html, /https:\/\/wa\.me\/60143155632/);
+  assert.match(html, /https:\/\/t\.me\/nhlg09/);
   assert.match(html, /href="\/packages\/#pk-b1f1"/);
   assert.match(html, /href="\/packages\/#pk-solo"/);
   assert.match(html, /href="\/packages\/#pk-daytime"/);
@@ -60,7 +60,7 @@ test("server-renders Chinese routes", async () => {
 
     const html = await response.text();
     assert.match(html, /中文/);
-    assert.match(html, /WhatsApp \+60 12-670 2560/);
+    assert.match(html, /\+60 14-315 5632/);
     assert.match(html, /Telegram/);
     assert.match(html, /href="\/cn\/packages\/"/);
   }

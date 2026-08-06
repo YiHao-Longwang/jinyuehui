@@ -7,8 +7,10 @@ import {
   Header,
   Hero,
   SectionHead,
+  telegramDisplay,
   telegramHrefCn,
   whatsappHrefCn,
+  whatsappNumberDisplay,
 } from "../../site-common";
 
 const cnBase = "/cn";
@@ -548,13 +550,13 @@ function PackagesPageCn() {
                     <p className="taxnote">价格未含 10% 服务费与 8% SST，到店结算</p>
                     <ul className="feat">{room.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
                     <div className="grow" />
-                    <div className="contact-pair room-contact-pair"><a className="btn contact-wa wide" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 预约私人房</a><a className="btn contact-tg wide" href={telegramHrefCn} target="_blank" rel="noopener">Telegram 预约私人房</a></div>
+                    <div className="contact-pair room-contact-pair"><a className="btn contact-wa wide" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 预约</a><a className="btn contact-tg wide" href={telegramHrefCn} target="_blank" rel="noopener">Telegram 预约</a></div>
                   </div>
                 </article>
               ))}
             </div>
             <ul className="knowrules">
-              <li>私人房只通过 WhatsApp 预约（+60 12-670 2560），不在线上售卖</li>
+              <li>私人房只通过 WhatsApp 预约（{whatsappNumberDisplay}），不在线上售卖</li>
               <li>按房收费；RM499+ 房费只含 1 位入场，其他客人照常买票</li>
               <li>房间预约不与门票 + 按摩 20% 折扣叠加</li>
             </ul>
@@ -753,8 +755,8 @@ function ContactPageCn() {
             <div className="cinfo-wrap">
               <div className="cinfo"><span className="ck">地址</span><span className="cv">Lot No. 2-53 & 2-56, Level 2, Viva Home Mall, 85, Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur</span></div>
               <div className="cinfo"><span className="ck">营业时间</span><span className="cv">每天 24 小时营业</span></div>
-              <div className="cinfo"><span className="ck">WhatsApp</span><span className="cv"><a href={whatsappHrefCn} target="_blank" rel="noopener">+60 12-670 2560（点击聊天）</a></span></div>
-              <div className="cinfo"><span className="ck">Telegram</span><span className="cv"><a href={telegramHrefCn} target="_blank" rel="noopener">@onespaofficial（点击聊天）</a></span></div>
+              <div className="cinfo"><span className="ck">WhatsApp</span><span className="cv"><a href={whatsappHrefCn} target="_blank" rel="noopener">{whatsappNumberDisplay}（点击聊天）</a></span></div>
+              <div className="cinfo"><span className="ck">Telegram</span><span className="cv"><a href={telegramHrefCn} target="_blank" rel="noopener">{telegramDisplay}（点击聊天）</a></span></div>
             </div>
             <div className="btnrow contact-actions">
               <a className="btn" href="https://www.google.com/maps/search/?api=1&query=One%20Spa%20%E5%A3%B9%E5%8F%B7%E6%B1%A4%E6%B3%89&query_place_id=ChIJEa1Xrew3zDEROXX0qPz4IdA" target="_blank" rel="noopener">打开 Google Maps</a>

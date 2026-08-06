@@ -2,9 +2,11 @@ import { Fragment } from "react";
 
 const siteBase = "";
 const assetBase = "/assets";
-const whatsappHref =
-  "https://wa.me/60126702560?text=Hi%2C%20I%20would%20like%20to%20ask%20about%20the%20packages";
-const telegramHref = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/onespaofficial";
+const whatsappNumberDisplay = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+60 14-315 5632";
+const whatsappDigits = whatsappNumberDisplay.replace(/\D/g, "");
+const whatsappHref = `https://wa.me/${whatsappDigits}?text=Hi%2C%20I%20would%20like%20to%20ask%20about%20the%20packages`;
+const telegramHref = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/nhlg09";
+const telegramDisplay = telegramHref.replace(/^https?:\/\/t\.me\//, "@").replace(/\/$/, "");
 
 const navItems = [
   ["Home", `${siteBase}/`],
@@ -466,7 +468,7 @@ export default function Home() {
           <div className="contact-pair footer-contact-pair">
             <a className="btn contact-wa" href={whatsappHref} target="_blank" rel="noopener">
               <WhatsAppIcon />
-              WhatsApp +60 12-670 2560
+              WhatsApp {whatsappNumberDisplay}
             </a>
             <a className="btn contact-tg" href={telegramHref} target="_blank" rel="noopener">
               <TelegramIcon />
@@ -494,9 +496,9 @@ export default function Home() {
             <div className="col footer-visit-col">
               <h6>Contact</h6>
               <p>
-                WhatsApp +60 12-670 2560
+                WhatsApp {whatsappNumberDisplay}
                 <br />
-                Telegram @onespaofficial
+                Telegram {telegramDisplay}
                 <br />
                 Open 24 Hours
                 <br />

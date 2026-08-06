@@ -923,5 +923,11 @@
 
   updateCartCount();
   renderCart();
-  initSubnav();
+  if (document.readyState === "complete") {
+    setTimeout(initSubnav, 0);
+  } else {
+    window.addEventListener("load", function () {
+      setTimeout(initSubnav, 0);
+    }, { once: true });
+  }
 })();

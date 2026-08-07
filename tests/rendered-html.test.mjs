@@ -108,6 +108,12 @@ test("server-renders reservation cart", async () => {
   assert.match(cartScript, /basePrice/);
   assert.match(cartScript, /bookingNotes/);
   assert.match(cartScript, /booking-open/);
+  assert.match(cartScript, /Pick your date/);
+  assert.match(cartScript, /One order admits 2 adults together/);
+  assert.match(cartScript, /Free 30-min massage: foot & leg/);
+  assert.match(cartScript, /Pick 1 of 3 on arrival/);
+  assert.match(cartScript, /Traditional 30-min Yangzhou body scrub/);
+  assert.match(cartScript, /Fixed 120 minutes at RM798 flat/);
   assert.match(cartScript, /Add to Cart/);
   assert.match(cartScript, /Checkout Details/);
   assert.match(cartScript, /ONE_SPA_TELEGRAM_URL/);

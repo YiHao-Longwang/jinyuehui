@@ -638,62 +638,76 @@
         : tr(lang, "Pick a date and the price updates automatically; public holidays use the weekend rate.", "选日期价格自动跟着跳；公共假期算周末价。");
     var notes = {
       b1f1: [
-        tr(lang, "Both adults enter together - same day, same time; the pass can't be split into two visits.", "两位成人需同一天同一时间一起进场；不能拆成两次使用。"),
-        commonPrice,
-        tr(lang, "Add same-day treatments under RM499 and get 20% off automatically; RM499+ treatments are not discounted because each covers free entry for one guest.", "同日加购 RM499 以下护理自动 8 折；RM499 以上护理不折扣，因为每项已含一位免费入场。"),
-        tr(lang, "Bringing kids? Each child needs a Kids Ticket; age 2 and under registers free at the front desk.", "带小孩？每位儿童需儿童票；2 岁或以下到前台登记免费。")
+        tr(lang, "One order admits 2 adults together - same day, same time.", "一张订单两位大人同行入场，需同一天同一时间。"),
+        tr(lang, "Pools, steam, sauna, rest lounges and a full 12-hour stay are included.", "包含泡池、汗蒸、桑拿、休息区与完整 12 小时。"),
+        tr(lang, "Buffet dinner runs 6-9pm; light meals are available at other hours.", "晚餐自助 6-9pm；其他时段提供简餐。"),
+        tr(lang, "Sunday counts as a weekday here - Sun-Thu all get the lower price.", "星期日在这里算平日，星期日到星期四都是低价档。"),
+        tr(lang, "Total for 2 adults - not per person.", "价格是 2 位大人的总价，不是每人价。"),
+        commonPrice
       ],
       solo: [
-        tr(lang, "One adult gets 12-hour entry plus the online 30-min massage bonus.", "一位成人享 12 小时入场，并含线上预约 30 分钟按摩福利。"),
-        commonPrice,
-        tr(lang, "The free 30-min massage is registered with this booking and used on the same visit.", "赠送 30 分钟按摩会登记在此预约内，并在同次到店使用。"),
-        tr(lang, "Add same-day treatments under RM499 and get 20% off automatically.", "同日加购 RM499 以下护理自动 8 折。")
+        tr(lang, "A full 12 hours plus a massage, just for you.", "一个人也能泡足 12 小时，再送一项按摩。"),
+        tr(lang, "Free 30-min massage: foot & leg, or Chinese partial - choose on arrival.", "免费 30 分钟按摩：足腿或中式局部，到店自选。"),
+        tr(lang, "Pools, steam, sauna, rest lounges and buffet dinner are included.", "包含泡池、汗蒸、桑拿、休息区与晚餐自助。"),
+        tr(lang, "Online booking only - walk-ins don't get the bonus; we register it automatically on your order.", "只限线上预约，现场 walk-in 没有这个赠送；系统会自动登记在订单内。"),
+        tr(lang, "Coming as 3 or 5? Pair this with Buy 1 Free 1 for the best value.", "3 位或 5 位来？搭配买一送一最划算。"),
+        commonPrice
       ],
       daytime: [
-        tr(lang, "Entry time must be between 9:00 AM and 5:00 PM.", "入场时间需在早上 9 点至下午 5 点之间。"),
-        tr(lang, "Pick 1 treatment option on arrival: massage, foot therapy, or detox care.", "到店选择 1 项护理：按摩、足疗或排毒护理。"),
-        commonPrice,
-        tr(lang, "Staying past 5:00 PM may require a top-up ticket at the front desk.", "超过下午 5 点继续停留，可能需在前台补票。")
+        tr(lang, "Enter between 9:00 AM and 5:00 PM daily; your booking time is your entry time.", "每日 9am-5pm 入场；预约时间就是入场时间。"),
+        tr(lang, "Pick 1 of 3 on arrival: 60-min massage / 60-min foot therapy / detox care (2 of 5).", "到店 3 选 1：60 分钟按摩 / 60 分钟足疗 / 排毒护理 5 选 2。"),
+        tr(lang, "Pools, steam, sauna, dining, fruits and ice cream are included.", "包含泡池、汗蒸、桑拿、餐饮、水果与冰淇淋。"),
+        tr(lang, "Staying past 5:00 PM needs a top-up ticket at the front desk.", "超过 5pm 需要在前台补差价。"),
+        commonPrice
       ],
       scrub: [
-        tr(lang, "12-hour spa entry is already included - no separate entry ticket needed.", "已包含 12 小时温泉入场，不需要另买门票。"),
-        tr(lang, "Soak first, then enjoy the 30-min Yangzhou body scrub session.", "先泡汤，再进行 30 分钟扬州搓澡护理。"),
-        commonPrice,
-        tr(lang, "Dining, pools, steam, sauna and rest lounges are included for the same visit.", "同次到店包含餐饮、泡池、汗蒸、桑拿与休息区。")
+        tr(lang, "Traditional 30-min Yangzhou body scrub - soak first, then scrub.", "30 分钟传统扬州搓澡，先泡后搓。"),
+        tr(lang, "12-hour entry is already included - no separate ticket needed.", "12 小时门票已经包含，不需要另买入场券。"),
+        tr(lang, "Pools, steam, sauna, dining, fruits and ice cream are included.", "包含泡池、汗蒸、桑拿、餐饮、水果与冰淇淋。"),
+        commonPrice
       ],
       "allday-sm": [
-        tr(lang, "One ticket includes 12-hour spa access, a 30-min scrub and a 60-min massage.", "一张票包含 12 小时温泉入场、30 分钟搓澡与 60 分钟按摩。"),
-        commonPrice,
-        tr(lang, "Scrub and massage are used on the same visit and cannot be split into another day.", "搓澡与按摩需同次到店使用，不能拆到其他日期。")
+        tr(lang, "One ticket includes 12-hour spa access with buffet.", "一张票包含 12 小时温泉入场，含餐饮。"),
+        tr(lang, "Includes a 30-min Yangzhou body scrub.", "包含 30 分钟扬州搓澡。"),
+        tr(lang, "Includes a 60-min tuina or foot massage.", "包含 60 分钟推拿或足疗。"),
+        tr(lang, "Spa access, scrub and massage are used on the same visit.", "入场、搓澡与按摩需同次到店使用。"),
+        commonPrice
       ],
       "daytime-duo": [
-        tr(lang, "Two guests enter together - same day, same time.", "两位需同一天同一时间一起进场。"),
-        tr(lang, "Each guest gets one 60-min treatment during the daytime visit.", "每位可在日间到店时享 1 项 60 分钟护理。"),
-        tr(lang, "Entry time must be between 9:00 AM and 5:00 PM.", "入场时间需在早上 9 点至下午 5 点之间。"),
+        tr(lang, "Two daytime passes - both guests enter together.", "两张日间入场，两位需同行入场。"),
+        tr(lang, "Each guest gets one 60-min treatment.", "每人一项 60 分钟护理。"),
+        tr(lang, "Choose massage, foot therapy or detox care.", "按摩、足疗或排毒护理可选。"),
+        tr(lang, "Daily 9:00 AM-5:00 PM; one package covers two guests.", "每日 9:00-17:00；一个套餐覆盖两位客人。"),
         commonPrice
       ],
       kids: [
         tr(lang, "Kids Ticket is for children age 12 and under, entering with an adult.", "儿童票适用于 12 岁或以下，并需与成人同行入场。"),
+        tr(lang, "Adults book as usual; each child adds one Kids Ticket.", "成人照常预约；每位儿童加购一张儿童票。"),
         tr(lang, "Age 2 and under registers free at the front desk.", "2 岁或以下到前台登记免费。"),
         commonPrice
       ],
       "outcall-classic": [
-        tr(lang, "Earliest online home-service slot is 3 hours from now.", "上门服务最早只能预约 3 小时后的时间。"),
-        tr(lang, "Classic home massage starts between 9:00 AM and 10:00 PM.", "经典上门按摩开始时间为早上 9 点至晚上 10 点。"),
-        commonPrice,
-        tr(lang, "RM100 travel fee within 30km is paid separately in cash on arrival.", "30km 内 RM100 交通费到场现金另付。")
+        tr(lang, "60 min oil massage + 60 min traditional Thai - in that order, on purpose.", "60 分钟精油按摩 + 60 分钟传统泰式，顺序固定。"),
+        tr(lang, "Start anytime 9:00 AM-10:00 PM at your hotel or home.", "开始时间 9:00 AM-10:00 PM，可在酒店或家里。"),
+        tr(lang, "Earliest online slot is 3 hours from booking; sooner than that, WhatsApp us.", "线上最早可预约 3 小时后的时段；更急请 WhatsApp。"),
+        tr(lang, "RM100 travel fee within 30km is paid separately in cash on arrival.", "30km 内 RM100 交通费到场现金另付。"),
+        commonPrice
       ],
       "outcall-anytime": [
-        tr(lang, "Earliest online home-service slot is 3 hours from now.", "上门服务最早只能预约 3 小时后的时间。"),
-        tr(lang, "Anytime package is bookable 24 hours; message us for longer sessions.", "随时配套 24 小时可预约；需要更长时间请 WhatsApp。"),
-        commonPrice,
-        tr(lang, "RM100 travel fee within 30km is paid separately in cash on arrival.", "30km 内 RM100 交通费到场现金另付。")
+        tr(lang, "Fixed 120 minutes at RM798 flat.", "固定 120 分钟，RM798。"),
+        tr(lang, "Tell us your preferred mix of oil, tuina, Thai or foot work.", "可备注偏好的精油、推拿、泰式或足疗组合。"),
+        tr(lang, "Bookable round the clock - earliest slot 3 hours from booking.", "全天可预约，最早为下单后 3 小时。"),
+        tr(lang, "Message us directly for a longer session.", "需要更长时间请直接 WhatsApp。"),
+        tr(lang, "RM100 travel fee within 30km is paid separately in cash on arrival.", "30km 内 RM100 交通费到场现金另付。"),
+        commonPrice
       ],
       "outcall-fourhands": [
-        tr(lang, "Earliest online home-service slot is 3 hours from now.", "上门服务最早只能预约 3 小时后的时间。"),
-        tr(lang, "Four-Hands service starts between 9:00 AM and 10:00 PM and serves one guest only.", "四手护理开始时间为早上 9 点至晚上 10 点，只服务一位客人。"),
-        commonPrice,
-        tr(lang, "One RM100 travel fee within 30km covers both therapists and is paid on arrival.", "30km 内 RM100 交通费覆盖两位技师，到场另付。")
+        tr(lang, "Four hands in sync, one guest only.", "两位技师同步，只服务一位客人。"),
+        tr(lang, "Back and legs at the same time - deeper, faster release.", "背部与腿部同时护理，释放更快。"),
+        tr(lang, "Start daily from 9:00 AM to 10:00 PM.", "每日 9:00 AM-10:00 PM 可开始。"),
+        tr(lang, "Earliest online slot is 3 hours from booking; sooner than that, WhatsApp us.", "线上最早可预约 3 小时后；更急请 WhatsApp。"),
+        tr(lang, "One RM100 travel fee within 30km covers both therapists and is paid on arrival.", "30km 内 RM100 交通费覆盖两位技师，到场另付。"),
+        commonPrice
       ]
     };
 
@@ -763,7 +777,7 @@
     };
     form.dataset.code = code;
     form.dataset.locale = lang;
-    el.querySelector("[data-booking-title]").textContent = tr(lang, "Choose Visit Date", "选到店日期");
+    el.querySelector("[data-booking-title]").textContent = tr(lang, "Pick your date", "选到店日期");
     el.querySelector("[data-booking-rates]").innerHTML = rateCards(product, lang);
     el.querySelector("[data-booking-tier-note]").textContent =
       product.kind === "home"

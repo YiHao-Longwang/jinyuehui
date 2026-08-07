@@ -1,5 +1,5 @@
-import { FloatingWhatsApp, Footer, Header, SectionHead } from "../site-common";
-import { pageMetadata } from "../seo";
+import { FloatingWhatsApp, Footer, Header, JsonLd, SectionHead } from "../site-common";
+import { faqJsonLd, pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
   title: "One Spa FAQ | 吉隆坡SPA按摩预约问题 · 南海龙宫",
@@ -9,7 +9,27 @@ export const metadata = pageMetadata({
   keywords: ["吉隆坡SPA FAQ", "吉隆坡按摩预约", "南海龙宫预约", "KL spa FAQ"],
 });
 
-const faqs = [
+const faqs: [string, string][] = [
+  [
+    "Where is One Spa in Kuala Lumpur?",
+    "One Spa 南海龙宫 is at Lot No. 2-53 & 2-56, Level 2, Viva Home Mall, 85 Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur - on the Cheras side of KL, take the lift to Level 2.",
+  ],
+  [
+    "What are your opening hours?",
+    "One Spa is a 24 hour spa in KL - open every day, all day, including weekends and public holidays.",
+  ],
+  [
+    "Is there parking at Viva Home Mall?",
+    "Yes - park at Viva Home Mall and come up to Level 2. Grab and taxi drop-off is at the main mall entrance.",
+  ],
+  [
+    "What is included in the 12-hour pass?",
+    "12 hours from check-in with the hot spring pools, steam room, sauna, rest lounges and dining areas all included; towels and basic bathing wear are provided.",
+  ],
+  [
+    "How do I book a KL spa or massage session?",
+    "Pick your package and date online and pay, or message the team on WhatsApp at +60 14-315 5632 - book at least 1 hour ahead, then show your order at the front desk.",
+  ],
   ["Can I really stay 12 hours?", "Yes - 12 hours from check-in, all facilities included."],
   ["Is Sunday a weekday or weekend rate?", "Weekday rate. Sun-Thu are all weekday; Fri, Sat and public holidays are the other tier."],
   ["How are public holidays priced?", "Weekend rate. The price shows right on the calendar when you pick a date - no maths needed."],
@@ -35,6 +55,7 @@ const faqs = [
 export default function FAQPage() {
   return (
     <>
+      <JsonLd data={faqJsonLd(faqs)} />
       <Header active="FAQ" />
       <main>
         <section id="faq">

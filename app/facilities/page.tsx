@@ -52,7 +52,7 @@ export default function FacilitiesPage() {
               {facilities.map(([title, image, copy], index) => (
                 <article className={`fac${index === 0 ? " lead" : ""}`} key={title}>
                   <div className="ph">
-                    <img src={`${assetBase}/${image}`} alt={title} />
+                    <img src={`${assetBase}/${image}`} alt={`${title} - One Spa 南海龙宫, Kuala Lumpur`} />
                   </div>
                   <div className="fb">
                     <h3>{title}</h3>

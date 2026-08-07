@@ -23,6 +23,13 @@ export const seoKeywords = [
   "onsen KL",
   "massage KL",
   "Viva Home Mall spa",
+  "Kuala Lumpur spa",
+  "KL onsen spa",
+  "massage Kuala Lumpur",
+  "spa Kuala Lumpur 24 hours",
+  "吉隆坡水疗",
+  "南海龙宫 spa 会所",
+  "吉隆坡spa会所",
 ];
 
 type PageMetadataOptions = {
@@ -33,6 +40,49 @@ type PageMetadataOptions = {
   image?: string;
   noIndex?: boolean;
 };
+
+/** Slugs that differ between the English and Chinese trees. */
+const localisedSlugs: Record<string, string> = {
+  "/onsen-kl/": "/cn/wenquan/",
+};
+
+/**
+ * Returns the en <-> cn hreflang pair for a canonical path, so Google serves the
+ * right language version instead of treating the two trees as duplicates.
+ * Returns undefined for pages that only exist in one language.
+ */
+function alternateLanguages(canonicalPath: string) {
+  const isCn = canonicalPath === "/cn/" || canonicalPath.startsWith("/cn/");
+  const en = isCn
+    ? Object.entries(localisedSlugs).find(([, cn]) => cn === canonicalPath)?.[0] ??
+      (canonicalPath === "/cn/" ? "/" : canonicalPath.replace(/^\/cn/, ""))
+    : canonicalPath;
+  const cn = isCn ? canonicalPath : localisedSlugs[canonicalPath] ?? (canonicalPath === "/" ? "/cn/" : `/cn${canonicalPath}`);
+
+  if (!bilingualPaths.has(en)) return undefined;
+
+  return {
+    "en-MY": en,
+    "zh-MY": cn,
+    "x-default": en,
+  };
+}
+
+/** English canonical paths that have a Chinese counterpart. */
+const bilingualPaths = new Set([
+  "/",
+  "/packages/",
+  "/facilities/",
+  "/home-massage/",
+  "/beauty/",
+  "/tcm/",
+  "/onsen-kl/",
+  "/faq/",
+  "/contact/",
+  "/cancellation-and-refund-policy-on-service/",
+  "/terms-conditions/",
+  "/privacy-policy/",
+]);
 
 export function pageMetadata({
   title,
@@ -50,6 +100,7 @@ export function pageMetadata({
     keywords: [...keywords, ...seoKeywords],
     alternates: {
       canonical: canonicalPath,
+      languages: alternateLanguages(canonicalPath),
     },
     robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
     openGraph: {
@@ -102,5 +153,32 @@ export const localBusinessJsonLd = {
     },
   ],
   areaServed: ["Kuala Lumpur", "Cheras", "Taman Miharja", "Viva Home Mall"],
-  knowsAbout: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡娱乐", "klspa", "klmassage", "klentertainment"],
+  knowsAbout: [
+    "吉隆坡SPA",
+    "吉隆坡水疗",
+    "吉隆坡按摩",
+    "吉隆坡温泉",
+    "吉隆坡娱乐",
+    "klspa",
+    "klmassage",
+    "klentertainment",
+    "Kuala Lumpur spa",
+    "KL onsen spa",
+  ],
 };
+
+/**
+ * FAQPage structured data. Google can surface these as expandable answers in
+ * search results, so the FAQ copy on the page must match the copy passed here.
+ */
+export function faqJsonLd(faqs: [string, string][]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(([question, answer]) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer },
+    })),
+  };
+}

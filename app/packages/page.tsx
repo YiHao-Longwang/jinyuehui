@@ -306,7 +306,7 @@ export default function PackagesPage() {
               {packageCards.map((item) => (
                 <article className="card" id={item.id} key={item.id}>
                   <div className="ph">
-                    <img src={`${assetBase}/${item.image}`} alt={item.title} />
+                    <img src={`${assetBase}/${item.image}`} alt={`${item.title} - One Spa KL spa package, Kuala Lumpur`} />
                   </div>
                   <div className="body">
                     <div className="tagrow"><span className="tag">{item.tag}</span></div>
@@ -427,7 +427,7 @@ export default function PackagesPage() {
             <div className="cards rooms">
               {rooms.map((room) => (
                 <article className="card" id={room.id} key={room.id}>
-                  <div className="ph"><img src={`${assetBase}/${room.image}`} alt={room.title} /></div>
+                  <div className="ph"><img src={`${assetBase}/${room.image}`} alt={`${room.title} - private room at One Spa Kuala Lumpur`} /></div>
                   <div className="body">
                     <h3>{room.title}</h3>
                     <div className="roomprice">

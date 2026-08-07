@@ -142,8 +142,9 @@ export default function ChinesePage() {
               泡进一池温汤
             </h1>
             <p>
-              吉隆坡 24 小时温泉会所，南海龙宫品牌名也可找到我们。吉隆坡SPA、吉隆坡按摩与休闲娱乐，
-              泡汤 · 汗蒸 · 桑拿 · 餐饮，一张门票泡足 12 小时。
+              One Spa 南海龙宫是位于吉隆坡 Viva Home Mall 的 24 小时SPA水疗温泉会所。
+              吉隆坡SPA、吉隆坡水疗、吉隆坡按摩与休闲娱乐一次满足：泡汤 · 汗蒸 · 桑拿 · 餐饮，
+              一张门票泡足 12 小时。
             </p>
             <div className="cta">
               <a className="btn clay" href={`${siteBase}/packages/`}>
@@ -176,7 +177,7 @@ export default function ChinesePage() {
         </div>
 
         <section id="featured">
-          <SectionHead eyebrow="线上主推" title="挑好配套，几分钟订完" />
+          <SectionHead eyebrow="线上主推" title="吉隆坡SPA按摩配套 · 挑好配套，几分钟订完" />
           <div className="container">
             <div className="minis">
               {packages.map((pkg) => (
@@ -206,7 +207,7 @@ export default function ChinesePage() {
         </section>
 
         <section id="facilities">
-          <SectionHead eyebrow="店里有什么" title="一站式温泉会所" />
+          <SectionHead eyebrow="店里有什么" title="一站式吉隆坡温泉水疗会所" />
           <div className="container">
             <div className="fac-grid">
               {facilities.map((facility, index) => (

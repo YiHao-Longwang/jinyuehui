@@ -263,7 +263,7 @@ export default function Home() {
           <img
             className="hero-img"
             src={`${assetBase}/hero-onsen-warm.jpg`}
-            alt=""
+            alt="Warm hot spring pool at One Spa 南海龙宫, a 24 hour spa in Kuala Lumpur"
             fetchPriority="high"
           />
           <div className="container">
@@ -274,9 +274,9 @@ export default function Home() {
               In a Warm Spring
             </h1>
             <p>
-              A 24-hour hot-spring retreat in Kuala Lumpur, also known as
-              南海龙宫. Pools, steam, sauna, massage & dining - one ticket, a
-              full 12-hour stay.
+              One Spa 南海龙宫 is a 24 hour spa and onsen-style hot spring in
+              Kuala Lumpur, at Viva Home Mall. Hot spring pools, steam, sauna,
+              massage &amp; dining - one ticket, a full 12-hour stay.
             </p>
             <div className="cta">
               <a className="btn clay" href={`${siteBase}/packages/`}>
@@ -311,7 +311,7 @@ export default function Home() {
         <section id="featured">
           <div className="sec-head">
             <div className="k">Featured</div>
-            <h2>Pick Yours, Book in Minutes</h2>
+            <h2>KL Spa &amp; Massage Packages - Pick Yours, Book in Minutes</h2>
             <div className="divider">
               <Diamond />
             </div>
@@ -356,7 +356,7 @@ export default function Home() {
         <section id="facilities">
           <div className="sec-head">
             <div className="k">What&apos;s Inside</div>
-            <h2>One-Stop Hot-Spring Retreat</h2>
+            <h2>One-Stop Hot Spring, Sauna &amp; Massage in Kuala Lumpur</h2>
             <div className="divider">
               <Diamond />
             </div>
@@ -371,7 +371,7 @@ export default function Home() {
                     <div className="ph">
                       <img
                         src={`${assetBase}/${facility.image}`}
-                        alt={facility.title}
+                        alt={`${facility.title} - One Spa 南海龙宫, 24 hour spa in Kuala Lumpur`}
                         loading="eager"
                       />
                     </div>
@@ -435,7 +435,7 @@ export default function Home() {
         <section id="faq">
           <div className="sec-head">
             <div className="k">Before You Book</div>
-            <h2>Prices, booking, changes, arrival - the common questions are here.</h2>
+            <h2>KL Spa FAQ - Prices, Booking, Changes and Arrival</h2>
             <div className="divider">
               <Diamond />
             </div>

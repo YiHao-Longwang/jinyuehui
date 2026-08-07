@@ -1,5 +1,10 @@
 import type { ReactNode } from "react";
 
+/** Renders a structured-data block (see faqJsonLd / localBusinessJsonLd in seo.ts). */
+export function JsonLd({ data }: { data: unknown }) {
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+}
+
 export const assetBase = "/assets";
 export const whatsappNumberDisplay = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+60 14-315 5632";
 const whatsappDigits = whatsappNumberDisplay.replace(/\D/g, "");
@@ -224,17 +229,26 @@ export function Hero({
   title,
   copy,
   image,
+  imageAlt,
+  locale = "en",
   children,
 }: {
   eyebrow: string;
   title: ReactNode;
   copy: string;
   image: string;
+  imageAlt?: string;
+  locale?: Locale;
   children?: ReactNode;
 }) {
+  const defaultAlt =
+    locale === "cn"
+      ? "One Spa 南海龙宫 — 吉隆坡 24 小时SPA汤泉会所"
+      : "One Spa 南海龙宫 - 24 hour spa and hot spring in Kuala Lumpur";
+
   return (
     <section className="hero">
-      <img className="hero-img" src={`${assetBase}/${image}`} alt="" fetchPriority="high" />
+      <img className="hero-img" src={`${assetBase}/${image}`} alt={imageAlt ?? defaultAlt} fetchPriority="high" />
       <div className="container">
         <div className="k">{eyebrow}</div>
         <h1>{title}</h1>

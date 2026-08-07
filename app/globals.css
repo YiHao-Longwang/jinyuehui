@@ -2626,6 +2626,14 @@ footer.site {
   color: var(--cream);
 }
 
+/* The floating WhatsApp/Telegram stack is ~116px tall at the bottom-right;
+   keep the last footer rows clear of it on small screens. */
+@media (max-width: 640px) {
+  footer.site {
+    padding-bottom: 136px;
+  }
+}
+
 footer.site::before {
   position: absolute;
   inset: 0;
@@ -2699,6 +2707,19 @@ footer.site .fwrap {
   padding: 0 16px;
   font-size: 13.5px;
   letter-spacing: 0.05em;
+}
+
+@media (max-width: 640px) {
+  .footer-contact-pair {
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .footer-contact-pair .btn {
+    min-height: 42px;
+    font-size: 13px;
+  }
 }
 
 footer.site .footer-contact-pair .btn.contact-wa,

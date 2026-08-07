@@ -36,7 +36,7 @@ test("server-renders the One Spa page", async () => {
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /Give Yourself 12 Hours/);
   assert.match(html, /Pick Yours, Book in Minutes/);
-  assert.match(html, /One-Stop Hot-Spring Retreat/);
+  assert.match(html, /One-Stop Hot Spring, Sauna/);
   assert.match(html, /\+60 14-315 5632/);
   assert.match(html, /Telegram Us/);
   assert.match(html, /https:\/\/wa\.me\/60143155632/);

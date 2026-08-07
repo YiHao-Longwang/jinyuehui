@@ -20,6 +20,12 @@ const routes = [
   "/cn/wenquan",
   "/cn/faq",
   "/cn/contact",
+  "/cancellation-and-refund-policy-on-service",
+  "/terms-conditions",
+  "/privacy-policy",
+  "/cn/cancellation-and-refund-policy-on-service",
+  "/cn/terms-conditions",
+  "/cn/privacy-policy",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

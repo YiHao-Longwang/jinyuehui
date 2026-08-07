@@ -19,6 +19,25 @@ export const metadata = pageMetadata({
   keywords: ["南海龙宫地址", "One Spa contact", "吉隆坡SPA地址", "Viva Home Mall spa", "KL massage contact"],
 });
 
+const visitNotes: [string, string][] = [
+  [
+    "Where we are",
+    "Level 2, Viva Home Mall, 85 Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur - on the Cheras side of KL, a short drive from Bukit Bintang and KLCC.",
+  ],
+  ["Opening hours", "Open 24 hours a day, every day of the year, including weekends and public holidays."],
+  ["Parking", "Park at Viva Home Mall and take the lift to Level 2. Grab and taxi drop-off is at the main mall entrance."],
+  [
+    "How to book",
+    "Pick a package and date online and pay, or message us on WhatsApp. Book at least 1 hour ahead, then show your order at the front desk on arrival.",
+  ],
+  [
+    "What your ticket covers",
+    "A 12-hour stay from check-in with the hot spring pools, steam room, sauna, rest lounges and dining areas included. Towels and basic bathing wear are provided.",
+  ],
+  ["Massage and treatments", "Massage, body scrub, beauty and TCM sessions are booked on top of entry, or bundled into a package - prices are listed on each page."],
+  ["Changes and refunds", "Reschedule free of charge up to 1 day before your visit via WhatsApp. Eligible refunds go back to the original payment method."],
+];
+
 export default function ContactPage() {
   return (
     <>
@@ -79,6 +98,26 @@ export default function ContactPage() {
               <b>Our Only Outlet</b> - One Spa has just this one location - Level 2,
               Viva Home Mall, Taman Miharja, Kuala Lumpur. We have no branches;
               please navigate to the address above.
+            </div>
+          </div>
+        </section>
+
+        <section id="visit">
+          <SectionHead
+            eyebrow="Planning Your Visit"
+            title="Getting to One Spa Kuala Lumpur"
+            sub="Hours, parking, booking steps and what your ticket covers."
+          />
+          <div className="container">
+            <div className="knowwrap">
+              <div className="know">
+                {visitNotes.map(([head, body]) => (
+                  <div className="t" key={head}>
+                    <span className="dia" />
+                    <b>{head}</b>: {body}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>

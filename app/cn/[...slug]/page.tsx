@@ -6,21 +6,119 @@ import {
   Footer,
   Header,
   Hero,
+  JsonLd,
   SectionHead,
   telegramDisplay,
   telegramHrefCn,
   whatsappHrefCn,
   whatsappNumberDisplay,
 } from "../../site-common";
-import { pageMetadata } from "../../seo";
+import { faqJsonLd, pageMetadata } from "../../seo";
 
-export const metadata = pageMetadata({
+/**
+ * Every Chinese sub-page used to share one static metadata export pointing at
+ * /cn/, which made all of them look like duplicates of the Chinese homepage.
+ * Each slug now gets its own title, description and canonical.
+ */
+const cnPageSeo: Record<string, { title: string; description: string; path: string; keywords: string[]; image?: string }> = {
+  packages: {
+    title: "吉隆坡SPA配套价格 | 按摩汤泉套餐 · One Spa 南海龙宫",
+    description:
+      "One Spa 南海龙宫吉隆坡SPA配套与价格：12 小时汤泉通票、买一送一双人配套、按摩套餐、搓背去角质、儿童票与包厢价格，线上即可预约。",
+    path: "/cn/packages/",
+    keywords: ["吉隆坡SPA价格", "吉隆坡按摩价格", "吉隆坡水疗配套", "南海龙宫配套", "吉隆坡温泉套票"],
+    image: "/assets/hero-packages-rain.jpg",
+  },
+  facilities: {
+    title: "吉隆坡SPA设施 | 汤泉汗蒸桑拿包厢 · One Spa 南海龙宫",
+    description:
+      "One Spa 南海龙宫位于吉隆坡 Viva Home Mall：冷热汤池、盐晶汗蒸房、桑拿、按摩包厢、搓背房、休息大厅与餐饮区，24 小时开放。",
+    path: "/cn/facilities/",
+    keywords: ["吉隆坡SPA设施", "吉隆坡汗蒸", "吉隆坡桑拿", "吉隆坡娱乐", "南海龙宫设施"],
+    image: "/assets/fac-hero-immersive.jpg",
+  },
+  "home-massage": {
+    title: "吉隆坡上门按摩 | 酒店住家马杀鸡 · One Spa 南海龙宫",
+    description:
+      "One Spa 南海龙宫吉隆坡上门按摩服务：技师上门到酒店、公寓与住家，自带床单毛巾与精油，价格公开，WhatsApp 即可预约。",
+    path: "/cn/home-massage/",
+    keywords: ["吉隆坡上门按摩", "吉隆坡按摩", "KL上门马杀鸡", "南海龙宫按摩"],
+    image: "/assets/outcall-hero.jpg",
+  },
+  beauty: {
+    title: "吉隆坡美容SPA | 美白嫩肤脱毛 · One Spa 南海龙宫",
+    description:
+      "One Spa 南海龙宫吉隆坡美容部：全身亮肤、光子嫩肤、局部护理与脱毛项目，可搭配汤泉门票，男女皆可，一对一美容师服务。",
+    path: "/cn/beauty/",
+    keywords: ["吉隆坡美容", "吉隆坡美容SPA", "吉隆坡水疗", "南海龙宫美容"],
+    image: "/assets/beauty-hero.jpg",
+  },
+  tcm: {
+    title: "吉隆坡中医调理 | 艾灸推拿正骨 · One Spa 南海龙宫",
+    description:
+      "One Spa 南海龙宫吉隆坡中医部：免费把脉、艾灸、中药泥灸、正骨与经络调理，驻店中医师一对一，价格清楚列明。",
+    path: "/cn/tcm/",
+    keywords: ["吉隆坡中医", "吉隆坡艾灸", "吉隆坡推拿", "吉隆坡按摩", "南海龙宫中医"],
+    image: "/assets/tcm-hero.jpg",
+  },
+  faq: {
+    title: "常见问题 | 吉隆坡SPA预约须知 · One Spa 南海龙宫",
+    description:
+      "One Spa 南海龙宫常见问题：12 小时使用时间、平日与周末价格、买一送一规则、儿童票、停车、改期与付款方式，一次看清楚。",
+    path: "/cn/faq/",
+    keywords: ["吉隆坡SPA预约", "南海龙宫预约", "吉隆坡按摩问题", "吉隆坡水疗"],
+  },
+  contact: {
+    title: "联系我们 | 吉隆坡SPA地址电话 · One Spa 南海龙宫",
+    description:
+      "One Spa 南海龙宫地址：吉隆坡 Viva Home Mall 二楼 Lot 2-53 & 2-56，24 小时营业，WhatsApp +60 14-315 5632 预约吉隆坡SPA与按摩。",
+    path: "/cn/contact/",
+    keywords: ["南海龙宫地址", "吉隆坡SPA地址", "吉隆坡按摩电话", "Viva Home Mall spa"],
+  },
+  wenquan: {
+    title: "吉隆坡温泉汤泉 | 24小时中式泡汤 · One Spa 南海龙宫",
+    description:
+      "One Spa 南海龙宫吉隆坡 24 小时温泉汤泉：热汤池、汗蒸、桑拿与冰池交替，12 小时任泡任休息，位于 Viva Home Mall。",
+    path: "/cn/wenquan/",
+    keywords: ["吉隆坡温泉", "吉隆坡汤泉", "吉隆坡泡汤", "KL onsen spa", "24小时汤泉"],
+  },
+  "cancellation-and-refund-policy-on-service": {
+    title: "取消与改期政策 | One Spa 南海龙宫 吉隆坡SPA",
+    description: "One Spa 南海龙宫取消、改期与退款政策：到店前 1 天可免费改期，符合条件的退款退回原支付方式。",
+    path: "/cn/cancellation-and-refund-policy-on-service/",
+    keywords: ["南海龙宫改期", "吉隆坡SPA退款"],
+  },
+  "terms-conditions": {
+    title: "条款与细则 | One Spa 南海龙宫 吉隆坡SPA",
+    description: "One Spa 南海龙宫预约条款与细则：预约确认方式、价格与服务费说明、到店流程。",
+    path: "/cn/terms-conditions/",
+    keywords: ["南海龙宫条款", "吉隆坡SPA条款"],
+  },
+  "privacy-policy": {
+    title: "隐私政策 | One Spa 南海龙宫 吉隆坡SPA",
+    description: "One Spa 南海龙宫隐私政策：预约资料与联系资料的使用范围与保护方式。",
+    path: "/cn/privacy-policy/",
+    keywords: ["南海龙宫隐私", "吉隆坡SPA隐私政策"],
+  },
+};
+
+const cnFallbackSeo = {
   title: "One Spa 南海龙宫 | 吉隆坡SPA按摩娱乐",
   description:
     "One Spa 南海龙宫中文页面：吉隆坡SPA、吉隆坡按摩、吉隆坡娱乐、24 小时汤泉、配套价格、设施、美容、中医与联系资料。",
   path: "/cn/",
   keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡娱乐", "南海龙宫", "klspa", "klmassage", "klentertainment"],
-});
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
+  const { slug } = await params;
+  const key = slug.join("/");
+  return pageMetadata(cnPageSeo[key === "onsen-kl" ? "wenquan" : key] ?? cnFallbackSeo);
+}
+
+export function generateStaticParams() {
+  return Object.keys(cnPageSeo).map((slug) => ({ slug: [slug] }));
+}
 
 const cnBase = "/cn";
 
@@ -322,7 +420,21 @@ const tcmFaqs = [
   ["怎么付款？", "目前到店付款。WhatsApp 预约即可保留时段。"],
 ];
 
-const faqRows = [
+const faqRows: [string, string][] = [
+  [
+    "One Spa 在吉隆坡哪里？",
+    "地址是 Lot No. 2-53 & 2-56, Level 2, Viva Home Mall, 85, Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur，靠近 Cheras 一带，搭电梯上二楼即可。",
+  ],
+  ["营业时间是几点？", "One Spa 是吉隆坡 24 小时SPA会所，全年无休，周末与公共假期照常营业。"],
+  ["Viva Home Mall 有停车位吗？", "有，直接停在 Viva Home Mall，然后上二楼；Grab 或德士可在商场正门上下车。"],
+  [
+    "12 小时门票包含什么？",
+    "从进场算起 12 小时，汤池、汗蒸房、桑拿、休息大厅与餐饮区都包含，毛巾与基本浴衣也有提供。",
+  ],
+  [
+    "要怎么预约吉隆坡SPA或按摩？",
+    "线上选配套与日期付款，或直接 WhatsApp +60 14-315 5632 找我们；请至少提前 1 小时预约，到店出示订单即可。",
+  ],
   ["真的可以待 12 小时？", "可以，从进场算起 12 小时，设施都包含。"],
   ["星期日算平日还是周末？", "平日价。星期日到星期四都是平日；星期五、六和公共假期是另一个档。"],
   ["公共假期怎么算钱？", "按周末价。选日期时价格会直接显示，不用自己算。"],
@@ -745,13 +857,24 @@ function TcmPageCn() {
 function FaqPageCn() {
   return (
     <>
+      <JsonLd data={faqJsonLd(faqRows)} />
       <Header active="FAQ" locale="cn" />
-      <main><section id="faq"><SectionHead eyebrow="预约前" title="FAQ · One Spa" sub="价格、预约、改期、到店流程都在这里。还有不清楚，直接 WhatsApp 找真人。" /><div className="container"><div className="faqwrap"><div className="faq">{faqRows.map(([question, answer], index) => <details open={index === 0} key={question}><summary>{question}<span className="plus" /></summary><div className="a">{answer}</div></details>)}</div></div></div></section></main>
+      <main><section id="faq"><SectionHead eyebrow="预约前" title="FAQ · One Spa"sub="价格、预约、改期、到店流程都在这里。还有不清楚，直接 WhatsApp 找真人。" /><div className="container"><div className="faqwrap"><div className="faq">{faqRows.map(([question, answer], index) => <details open={index === 0} key={question}><summary>{question}<span className="plus" /></summary><div className="a">{answer}</div></details>)}</div></div></div></section></main>
       <Footer locale="cn" />
       <FloatingWhatsApp locale="cn" />
     </>
   );
 }
+
+const visitNotesCn: [string, string][] = [
+  ["地址", "吉隆坡 Viva Home Mall 二楼 Lot No. 2-53 & 2-56，85 Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur，位于 Cheras 一带，从武吉免登与 KLCC 开车很快到。"],
+  ["营业时间", "全年无休，每天 24 小时营业，周末与公共假期照常。"],
+  ["停车", "直接停在 Viva Home Mall，再搭电梯上二楼；Grab 或德士可在商场正门上下车。"],
+  ["预约方式", "线上选配套与日期付款，或 WhatsApp 找我们；请至少提前 1 小时预约，到店出示订单即可。"],
+  ["门票包含", "从进场算起 12 小时，汤池、汗蒸房、桑拿、休息大厅与餐饮区都包含，毛巾与基本浴衣有提供。"],
+  ["按摩与护理", "按摩、搓背、美容与中医项目可另外加购，或选择已含护理的配套，各页面都有列明价格。"],
+  ["改期与退款", "到店前 1 天可透过 WhatsApp 免费改期；符合条件的退款会退回原支付方式。"],
+];
 
 function ContactPageCn() {
   return (
@@ -773,6 +896,11 @@ function ContactPageCn() {
             </div>
             <div className="deal contact-note"><b>唯一门店</b> - One Spa 只有这一间门店，位于吉隆坡 Taman Miharja 的 Viva Home Mall Level 2。我们没有分店，请导航到以上地址。</div>
           </div>
+        </section>
+
+        <section id="visit">
+          <SectionHead eyebrow="到店前" title="怎么来 One Spa 吉隆坡SPA会所" sub="营业时间、停车、预约流程与门票包含什么。" />
+          <div className="container"><div className="knowwrap"><div className="know">{visitNotesCn.map(([head, body]) => <div className="t" key={head}><span className="dia" /><b>{head}</b>：{body}</div>)}</div></div></div>
         </section>
       </main>
       <Footer locale="cn" />

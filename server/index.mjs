@@ -263,7 +263,8 @@ async function ensureTable(sql) {
       status text not null default 'pending',
       locale text not null default 'en',
       customer_name text not null,
-      customer_phone text not null,
+      customer_phone text,
+      customer_telegram text,
       customer_email text,
       customer_notes text,
       visit_date date not null,
@@ -278,6 +279,8 @@ async function ensureTable(sql) {
       created_at timestamptz not null default now()
     )
   `;
+  await sql`alter table reservations alter column customer_phone drop not null`;
+  await sql`alter table reservations add column if not exists customer_telegram text`;
   await sql`alter table reservations add column if not exists reminder_sent_at timestamptz`;
   await sql`create index if not exists reservations_created_at_idx on reservations (created_at desc)`;
   await sql`create index if not exists reservations_status_idx on reservations (status)`;
@@ -286,7 +289,7 @@ async function ensureTable(sql) {
 async function listReservations(sql) {
   return sql`
     select reservation_ref, status, locale, customer_name, customer_phone,
-      customer_email, customer_notes, visit_date, items, subtotal_cents,
+      customer_telegram, customer_email, customer_notes, visit_date, items, subtotal_cents,
       service_charge_cents, sst_cents, total_cents, payment_status,
       payment_timing, reminder_sent_at, created_at
     from reservations
@@ -305,7 +308,8 @@ async function notifyTelegram(reservation) {
     "New One Spa reservation",
     `Ref: ${reservation.reservation_ref}`,
     `Name: ${reservation.customer_name}`,
-    `Phone: ${reservation.customer_phone}`,
+    reservation.customer_phone ? `WhatsApp: ${reservation.customer_phone}` : "",
+    reservation.customer_telegram ? `Telegram: ${reservation.customer_telegram}` : "",
     first ? `Visit: ${first.date} ${first.time}` : "",
     `Total: RM${(Number(reservation.total_cents || 0) / 100).toFixed(2)}`,
   ]
@@ -363,9 +367,10 @@ app.post("/api/reservations", async (req, res) => {
   const customer = payload.customer || {};
   const name = String(customer.name || "").trim();
   const phone = String(customer.phone || "").trim();
+  const telegram = String(customer.telegram || "").trim();
 
   if (!name) return errorResponse(res, "Customer name is required.");
-  if (!phone) return errorResponse(res, "Customer phone is required.");
+  if (!phone && !telegram) return errorResponse(res, "Please provide WhatsApp phone or Telegram username.");
   if (!Array.isArray(payload.items) || !payload.items.length) return errorResponse(res, "Cart is empty.");
 
   let totals;
@@ -381,18 +386,18 @@ app.post("/api/reservations", async (req, res) => {
     const ref = makeRef();
     const [reservation] = await sql`
       insert into reservations (
-        reservation_ref, locale, customer_name, customer_phone, customer_email,
+        reservation_ref, locale, customer_name, customer_phone, customer_telegram, customer_email,
         customer_notes, visit_date, items, subtotal_cents, service_charge_cents,
         sst_cents, total_cents
       )
       values (
-        ${ref}, ${payload.locale || "en"}, ${name}, ${phone}, ${String(customer.email || "").trim() || null},
+        ${ref}, ${payload.locale || "en"}, ${name}, ${phone || null}, ${telegram || null}, ${String(customer.email || "").trim() || null},
         ${String(customer.notes || "").trim() || null}, ${totals.items[0].date}, ${JSON.stringify(totals.items)}::jsonb,
         ${cents(totals.subtotal)}, ${cents(totals.serviceCharge)}, ${cents(totals.sst)},
         ${cents(totals.total)}
       )
       returning reservation_ref, status, locale, customer_name, customer_phone,
-        customer_email, customer_notes, visit_date, items, subtotal_cents,
+        customer_telegram, customer_email, customer_notes, visit_date, items, subtotal_cents,
         service_charge_cents, sst_cents, total_cents, payment_status,
         payment_timing, reminder_sent_at, created_at
     `;

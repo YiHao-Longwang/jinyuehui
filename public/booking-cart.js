@@ -789,7 +789,8 @@
     lines.push(lang === "cn" ? "你好，我已提交预约。" : "Hi, I have submitted a reservation.");
     if (ref) lines.push((lang === "cn" ? "预约编号: " : "Reservation ref: ") + ref);
     lines.push((lang === "cn" ? "姓名: " : "Name: ") + customer.name);
-    lines.push((lang === "cn" ? "电话: " : "Phone: ") + customer.phone);
+    if (customer.phone) lines.push("WhatsApp: " + customer.phone);
+    if (customer.telegram) lines.push("Telegram: " + customer.telegram);
     items.forEach(function (item, index) {
       var line = lineFor(item);
       lines.push(
@@ -865,8 +866,16 @@
       '</h3><label><span>' +
       (lang === "cn" ? "姓名" : "Name") +
       '</span><input name="name" required autocomplete="name" /></label><label><span>' +
-      (lang === "cn" ? "电话 / WhatsApp / Telegram" : "Phone / WhatsApp / Telegram") +
-      '</span><input name="phone" required autocomplete="tel" /></label><label><span>Email</span><input name="email" type="email" autocomplete="email" /></label><label><span>' +
+      (lang === "cn" ? "WhatsApp 电话" : "WhatsApp phone") +
+      '</span><input name="phone" autocomplete="tel" placeholder="' +
+      (lang === "cn" ? "例如 +60 14-315 5632" : "Example: +60 14-315 5632") +
+      '" /></label><label><span>' +
+      (lang === "cn" ? "Telegram 用户名" : "Telegram username") +
+      '</span><input name="telegram" autocomplete="off" placeholder="' +
+      (lang === "cn" ? "例如 @username" : "Example: @username") +
+      '" /></label><p class="reserve-help">' +
+      (lang === "cn" ? "WhatsApp 或 Telegram 至少填一个。" : "Fill in WhatsApp or Telegram, at least one contact method.") +
+      '</p><label><span>Email</span><input name="email" type="email" autocomplete="email" /></label><label><span>' +
       (lang === "cn" ? "备注" : "Notes") +
       '</span><textarea name="notes" rows="3"></textarea></label><div class="cart-total"><div><span>Subtotal</span><b>' +
       money(sum.subtotal) +
@@ -901,9 +910,14 @@
     var customer = {
       name: form.elements.name.value.trim(),
       phone: form.elements.phone.value.trim(),
+      telegram: form.elements.telegram.value.trim(),
       email: form.elements.email.value.trim(),
       notes: form.elements.notes.value.trim()
     };
+    if (!customer.phone && !customer.telegram) {
+      status.textContent = text("Please provide WhatsApp phone or Telegram username.", "请至少填写 WhatsApp 电话或 Telegram 用户名。");
+      return;
+    }
     status.textContent = text("Saving reservation...", "正在保存预约...");
     fetch(endpoint("/api/reservations"), {
       method: "POST",

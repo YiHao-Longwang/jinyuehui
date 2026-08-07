@@ -2,7 +2,6 @@
   "use strict";
 
   var TOKEN_KEY = "onespa_admin_token";
-  var API_KEY = "onespa_admin_api_base";
   var socket = null;
   var socketScript = null;
   var rows = [];
@@ -34,17 +33,30 @@
     return "RM" + (Number(cents || 0) / 100).toFixed(2);
   }
 
+  function lineMoney(value) {
+    return "RM" + Number(value || 0).toFixed(2);
+  }
+
   function formatDate(value) {
     if (!value) return "-";
     return String(value).slice(0, 10);
   }
 
-  function firstItem(row) {
-    return Array.isArray(row.items) ? row.items[0] : null;
+  function formatDateTime(value) {
+    if (!value) return "-";
+    var date = new Date(value);
+    if (Number.isNaN(date.getTime())) return formatDate(value);
+    return date.toLocaleString("en-MY", {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
   }
 
-  function setStatus(message, tone) {
-    var el = $("[data-admin-status]");
+  function setStatus(message, tone, target) {
+    var el = $(target || "[data-admin-status]");
     if (!el) return;
     el.textContent = message;
     el.dataset.tone = tone || "";
@@ -58,10 +70,77 @@
     return $("[data-admin-filter]")?.value || "all";
   }
 
+  function setLoggedIn(isLoggedIn) {
+    var login = $("[data-admin-login]");
+    var dashboard = $("[data-admin-dashboard]");
+    if (login) login.hidden = isLoggedIn;
+    if (dashboard) dashboard.hidden = !isLoggedIn;
+  }
+
+  function normalizeWhatsApp(value) {
+    var digits = String(value || "").replace(/\D/g, "");
+    if (!digits) return "";
+    if (digits.charAt(0) === "0") return "6" + digits;
+    return digits;
+  }
+
+  function telegramHref(value) {
+    var raw = String(value || "").trim();
+    if (!raw) return "";
+    if (/^https?:\/\//i.test(raw)) return raw;
+    raw = raw.replace(/^@/, "").replace(/^t\.me\//i, "").replace(/^telegram\.me\//i, "");
+    return raw ? "https://t.me/" + encodeURIComponent(raw) : "";
+  }
+
+  function contactActions(row) {
+    var actions = [];
+    var phoneDigits = normalizeWhatsApp(row.customer_phone);
+    var tg = telegramHref(row.customer_telegram);
+    if (phoneDigits) {
+      actions.push(
+        '<a class="admin-contact admin-wa" target="_blank" rel="noopener" href="https://wa.me/' +
+          phoneDigits +
+          '">WhatsApp</a>'
+      );
+    }
+    if (tg) {
+      actions.push(
+        '<a class="admin-contact admin-tg" target="_blank" rel="noopener" href="' +
+          escapeHtml(tg) +
+          '">Telegram</a>'
+      );
+    }
+    if (!actions.length) return '<span class="admin-no-contact">No chat contact</span>';
+    return actions.join("");
+  }
+
   function statusOptions(value) {
     return ["pending", "confirmed", "completed", "cancelled", "no_show"]
       .map(function (status) {
         return '<option value="' + status + '"' + (status === value ? " selected" : "") + ">" + status.replace("_", " ") + "</option>";
+      })
+      .join("");
+  }
+
+  function itemRows(row) {
+    var items = Array.isArray(row.items) ? row.items : [];
+    if (!items.length) return '<div class="admin-item muted">No item details saved.</div>';
+    return items
+      .map(function (item) {
+        return (
+          '<div class="admin-item"><div><b>' +
+          escapeHtml(item.nameEn || item.name || item.code || "Package") +
+          "</b><span>" +
+          escapeHtml(item.date || formatDate(row.visit_date)) +
+          " · " +
+          escapeHtml(item.time || "-") +
+          " · Qty " +
+          escapeHtml(item.qty || 1) +
+          (item.unit ? " · " + escapeHtml(item.unit) : "") +
+          '</span></div><strong>' +
+          lineMoney(item.total) +
+          "</strong></div>"
+        );
       })
       .join("");
   }
@@ -81,35 +160,41 @@
 
     root.innerHTML = visible
       .map(function (row) {
-        var item = firstItem(row);
-        var itemTitle = item ? item.nameEn || item.name || item.code : "Reservation";
-        var when = item ? item.date + " " + item.time : formatDate(row.visit_date);
-        var phoneDigits = String(row.customer_phone || "").replace(/\D/g, "");
         return (
           '<article class="admin-card" data-ref="' +
           escapeHtml(row.reservation_ref) +
-          '"><div class="admin-card-main"><div><span class="admin-ref">' +
+          '"><div class="admin-card-head"><div><span class="admin-ref">' +
           escapeHtml(row.reservation_ref) +
-          "</span><h3>" +
+          '</span><h2>' +
           escapeHtml(row.customer_name) +
-          "</h3><p>" +
-          escapeHtml(row.customer_phone) +
-          (row.customer_email ? " · " + escapeHtml(row.customer_email) : "") +
-          '</p></div><div class="admin-money">' +
+          '</h2><div class="admin-contact-row">' +
+          contactActions(row) +
+          '</div></div><div class="admin-money">' +
           money(row.total_cents) +
-          '</div></div><div class="admin-meta"><span>' +
-          escapeHtml(when) +
-          "</span><span>" +
-          escapeHtml(itemTitle) +
-          "</span><span>Qty " +
-          escapeHtml(item ? item.qty : "-") +
-          '</span></div><div class="admin-actions"><select data-admin-update="' +
+          '</div></div><div class="admin-detail-grid"><div><span>Visit date</span><b>' +
+          escapeHtml(formatDate(row.visit_date)) +
+          '</b></div><div><span>Created</span><b>' +
+          escapeHtml(formatDateTime(row.created_at)) +
+          '</b></div><div><span>Payment</span><b>After treatment</b></div></div><div class="admin-customer"><span>' +
+          (row.customer_phone ? "WhatsApp: " + escapeHtml(row.customer_phone) : "") +
+          (row.customer_phone && row.customer_telegram ? " · " : "") +
+          (row.customer_telegram ? "Telegram: " + escapeHtml(row.customer_telegram) : "") +
+          (row.customer_email ? " · Email: " + escapeHtml(row.customer_email) : "") +
+          '</span></div><div class="admin-items">' +
+          itemRows(row) +
+          '</div><div class="admin-breakdown"><div><span>Subtotal</span><b>' +
+          money(row.subtotal_cents) +
+          '</b></div><div><span>Service charge</span><b>' +
+          money(row.service_charge_cents) +
+          '</b></div><div><span>SST</span><b>' +
+          money(row.sst_cents) +
+          '</b></div><div class="grand"><span>Total</span><b>' +
+          money(row.total_cents) +
+          '</b></div></div><div class="admin-actions"><label><span>Status</span><select data-admin-update="' +
           escapeHtml(row.reservation_ref) +
           '">' +
           statusOptions(row.status) +
-          '</select><a class="btn line" target="_blank" rel="noopener" href="https://wa.me/' +
-          phoneDigits +
-          '">WhatsApp</a></div>' +
+          "</select></label></div>" +
           (row.customer_notes ? '<p class="admin-note">' + escapeHtml(row.customer_notes) + "</p>" : "") +
           "</article>"
         );
@@ -117,14 +202,19 @@
       .join("");
   }
 
-  function saveSettings() {
+  function saveToken() {
     localStorage.setItem(TOKEN_KEY, currentToken());
-    localStorage.removeItem(API_KEY);
   }
 
   function refresh() {
-    saveSettings();
+    saveToken();
     var token = currentToken();
+    if (!token) {
+      setLoggedIn(false);
+      setStatus("Enter your admin token to continue.", "bad", "[data-admin-login-status]");
+      return;
+    }
+
     setStatus("Loading reservations...", "");
     fetch(endpoint("/api/reservations?token=" + encodeURIComponent(token)))
       .then(function (res) {
@@ -135,17 +225,20 @@
       })
       .then(function (body) {
         rows = body.reservations || [];
+        setLoggedIn(true);
         render();
         setStatus("Loaded " + rows.length + " reservations.", "ok");
+        setStatus("", "", "[data-admin-login-status]");
         connectSocket();
       })
       .catch(function (error) {
-        setStatus(error.message, "bad");
+        setLoggedIn(false);
+        setStatus(error.message, "bad", "[data-admin-login-status]");
       });
   }
 
   function updateReservation(ref, status) {
-    saveSettings();
+    saveToken();
     fetch(endpoint("/api/reservations"), {
       method: "PATCH",
       headers: {
@@ -161,6 +254,10 @@
         });
       })
       .then(function () {
+        var row = rows.find(function (item) {
+          return item.reservation_ref === ref;
+        });
+        if (row) row.status = status;
         setStatus("Updated " + ref + ".", "ok");
       })
       .catch(function (error) {
@@ -232,7 +329,18 @@
 
     $("[data-admin-refresh]")?.addEventListener("click", refresh);
     $("[data-admin-save]")?.addEventListener("click", refresh);
+    $("[data-admin-logout]")?.addEventListener("click", function () {
+      localStorage.removeItem(TOKEN_KEY);
+      rows = [];
+      if (socket) socket.disconnect();
+      tokenInput.value = "";
+      setLoggedIn(false);
+      setStatus("Logged out.", "", "[data-admin-login-status]");
+    });
     $("[data-admin-filter]")?.addEventListener("change", render);
+    tokenInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") refresh();
+    });
     document.addEventListener("change", function (event) {
       var select = event.target.closest("[data-admin-update]");
       if (!select) return;
@@ -240,6 +348,9 @@
     });
 
     if (tokenInput.value) refresh();
-    else setStatus("Enter your admin token to load reservations.", "");
+    else {
+      setLoggedIn(false);
+      setStatus("Enter your admin token to continue.", "", "[data-admin-login-status]");
+    }
   });
 })();

@@ -1,51 +1,65 @@
-import { Footer, Header, SectionHead } from "../site-common";
+export const metadata = {
+  title: "oneSPA Admin",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function AdminPage() {
   return (
-    <>
-      <Header active="Cart" />
-      <main>
-        <section className="admin-section">
-          <SectionHead
-            eyebrow="Reservation Admin"
-            title="Live Booking Dashboard"
-            sub="View new reservations through the websocket backend and update each booking status."
-          />
-          <div className="container">
-            <div className="admin-shell" data-admin-page>
-              <div className="admin-toolbar">
-                <label>
-                  <span>Admin token</span>
-                  <input data-admin-token type="password" autoComplete="current-password" placeholder="ADMIN_TOKEN" />
-                </label>
-                <label>
-                  <span>Status</span>
-                  <select data-admin-filter defaultValue="all">
-                    <option value="all">All</option>
-                    <option value="pending">Pending</option>
-                    <option value="confirmed">Confirmed</option>
-                    <option value="completed">Completed</option>
-                    <option value="cancelled">Cancelled</option>
-                    <option value="no_show">No show</option>
-                  </select>
-                </label>
-                <button className="btn" type="button" data-admin-save>
-                  Connect
-                </button>
-                <button className="btn line" type="button" data-admin-refresh>
-                  Refresh
-                </button>
-              </div>
-              <div className="admin-status" data-admin-status />
-              <div className="admin-list" data-admin-list>
-                <div className="admin-empty">Enter your admin token to load reservations.</div>
-              </div>
-            </div>
+    <main className="admin-portal" data-admin-page>
+      <section className="admin-login" data-admin-login>
+        <div className="admin-login-card">
+          <div>
+            <span className="admin-kicker">oneSPA admin</span>
+            <h1>Reservation Portal</h1>
+            <p>Sign in with your admin token to view bookings, update status, and manually message customers.</p>
           </div>
-        </section>
-      </main>
-      <Footer />
-      <script src="/admin-reservations.js?v=20260807-token-only" defer />
-    </>
+          <label>
+            <span>Admin token</span>
+            <input data-admin-token type="password" autoComplete="current-password" placeholder="Enter admin token" />
+          </label>
+          <button className="btn wide" type="button" data-admin-save>
+            Login
+          </button>
+          <div className="admin-status" data-admin-login-status />
+        </div>
+      </section>
+
+      <section className="admin-dashboard" data-admin-dashboard hidden>
+        <header className="admin-top">
+          <div>
+            <span className="admin-kicker">Live dashboard</span>
+            <h1>Reservations</h1>
+            <p>New bookings appear here through websocket. Contact buttons only show methods provided by the customer.</p>
+          </div>
+          <div className="admin-top-actions">
+            <label>
+              <span>Status</span>
+              <select data-admin-filter defaultValue="all">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+                <option value="no_show">No show</option>
+              </select>
+            </label>
+            <button className="btn line" type="button" data-admin-refresh>
+              Refresh
+            </button>
+            <button className="btn line" type="button" data-admin-logout>
+              Logout
+            </button>
+          </div>
+        </header>
+        <div className="admin-status" data-admin-status />
+        <div className="admin-list" data-admin-list>
+          <div className="admin-empty">Login to load reservations.</div>
+        </div>
+      </section>
+      <script src="/admin-reservations.js?v=20260807-portal-contact" defer />
+    </main>
   );
 }

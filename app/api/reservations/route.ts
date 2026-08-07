@@ -9,6 +9,14 @@ type CartItem = {
   qty?: number;
 };
 
+type CustomerPayload = {
+  name?: string;
+  phone?: string;
+  telegram?: string;
+  email?: string;
+  notes?: string;
+};
+
 const holidays = new Set([
   "2026-01-01",
   "2026-02-01",
@@ -253,7 +261,8 @@ async function ensureTable(sql: ReturnType<typeof neon>) {
       status text not null default 'pending',
       locale text not null default 'en',
       customer_name text not null,
-      customer_phone text not null,
+      customer_phone text,
+      customer_telegram text,
       customer_email text,
       customer_notes text,
       visit_date date not null,
@@ -268,6 +277,8 @@ async function ensureTable(sql: ReturnType<typeof neon>) {
       created_at timestamptz not null default now()
     )
   `;
+  await sql`alter table reservations alter column customer_phone drop not null`;
+  await sql`alter table reservations add column if not exists customer_telegram text`;
   await sql`alter table reservations add column if not exists reminder_sent_at timestamptz`;
   await sql`create index if not exists reservations_created_at_idx on reservations (created_at desc)`;
   await sql`create index if not exists reservations_status_idx on reservations (status)`;
@@ -292,7 +303,7 @@ export async function GET(request: Request) {
   await ensureTable(sql);
   const rows = await sql`
       select reservation_ref, status, locale, customer_name, customer_phone,
-        customer_email, customer_notes, visit_date, items, subtotal_cents,
+        customer_telegram, customer_email, customer_notes, visit_date, items, subtotal_cents,
         service_charge_cents, sst_cents, total_cents, payment_status,
         payment_timing, reminder_sent_at, created_at
       from reservations
@@ -308,7 +319,7 @@ export async function POST(request: Request) {
 
   let payload: {
     locale?: "en" | "cn";
-    customer?: { name?: string; phone?: string; email?: string; notes?: string };
+    customer?: CustomerPayload;
     items?: CartItem[];
   };
 
@@ -321,8 +332,9 @@ export async function POST(request: Request) {
   const customer = payload.customer ?? {};
   const name = customer.name?.trim() ?? "";
   const phone = customer.phone?.trim() ?? "";
+  const telegram = customer.telegram?.trim() ?? "";
   if (!name) return errorResponse("Customer name is required.");
-  if (!phone) return errorResponse("Customer phone is required.");
+  if (!phone && !telegram) return errorResponse("Please provide WhatsApp phone or Telegram username.");
   if (!payload.items?.length) return errorResponse("Cart is empty.");
 
   let totals: ReturnType<typeof calculate>;
@@ -340,12 +352,12 @@ export async function POST(request: Request) {
     await ensureTable(sql);
     const [reservation] = await sql`
       insert into reservations (
-        reservation_ref, locale, customer_name, customer_phone, customer_email,
+        reservation_ref, locale, customer_name, customer_phone, customer_telegram, customer_email,
         customer_notes, visit_date, items, subtotal_cents, service_charge_cents,
         sst_cents, total_cents
       )
       values (
-        ${ref}, ${payload.locale ?? "en"}, ${name}, ${phone}, ${customer.email?.trim() || null},
+        ${ref}, ${payload.locale ?? "en"}, ${name}, ${phone || null}, ${telegram || null}, ${customer.email?.trim() || null},
         ${customer.notes?.trim() || null}, ${visitDate}, ${JSON.stringify(totals.items)}::jsonb,
         ${cents(totals.subtotal)}, ${cents(totals.serviceCharge)}, ${cents(totals.sst)},
         ${cents(totals.total)}

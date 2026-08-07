@@ -86,9 +86,11 @@ test("server-renders reservation cart", async () => {
   assert.match(cart, /booking-cart\.js/);
 
   const admin = await (await render("/admin")).text();
-  assert.match(admin, /Live Booking Dashboard/);
+  assert.match(admin, /Reservation Portal/);
+  assert.match(admin, /data-admin-login/);
+  assert.match(admin, /data-admin-dashboard/);
   assert.match(admin, /data-admin-page/);
-  assert.match(admin, /admin-reservations\.js\?v=20260807-token-only/);
+  assert.match(admin, /admin-reservations\.js\?v=20260807-portal-contact/);
   assert.match(admin, /data-admin-token/);
   assert.match(admin, /data-admin-filter/);
   assert.doesNotMatch(admin, /API base|data-admin-api-base/);
@@ -116,6 +118,9 @@ test("server-renders reservation cart", async () => {
   assert.match(cartScript, /Book ·/);
   assert.match(cartScript, /all-in/);
   assert.match(cartScript, /Checkout Details/);
+  assert.match(cartScript, /WhatsApp phone/);
+  assert.match(cartScript, /Telegram username/);
+  assert.match(cartScript, /Please provide WhatsApp phone or Telegram username/);
   assert.match(cartScript, /ONE_SPA_TELEGRAM_URL/);
   assert.match(cartScript, /Contact Staff on Telegram/);
   assert.match(cartScript, /cart-confirm-modal/);

@@ -1046,6 +1046,13 @@ body.cart-confirm-open {
   font-size: 13px;
 }
 
+.reserve-help {
+  margin: -6px 0 0;
+  color: var(--taupe);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .cart-layout {
   display: grid;
   gap: 18px;
@@ -1134,18 +1141,24 @@ body.cart-confirm-open {
   color: var(--clay);
 }
 
-.admin-section {
-  padding-top: 26px;
+.admin-portal {
+  min-height: 100vh;
+  background: #fff7f0;
+  color: var(--ink);
+  padding: 24px;
 }
 
-.admin-shell {
+.admin-portal [hidden] {
+  display: none !important;
+}
+
+.admin-login {
   display: grid;
-  gap: 18px;
-  max-width: 1060px;
-  margin: 18px auto 0;
+  min-height: calc(100vh - 48px);
+  place-items: center;
 }
 
-.admin-toolbar,
+.admin-login-card,
 .admin-card,
 .admin-empty {
   border: 1px solid var(--line);
@@ -1154,22 +1167,52 @@ body.cart-confirm-open {
   box-shadow: var(--shadow);
 }
 
-.admin-toolbar {
+.admin-login-card {
   display: grid;
-  gap: 12px;
-  padding: 16px;
+  width: min(100%, 430px);
+  gap: 18px;
+  padding: 28px;
 }
 
-.admin-toolbar label {
+.admin-kicker {
+  display: block;
+  color: var(--taupe);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.admin-login-card h1,
+.admin-top h1 {
+  margin: 6px 0 0;
+  color: var(--clay);
+  font-family: var(--serif);
+  font-size: clamp(34px, 5vw, 54px);
+  line-height: 1;
+}
+
+.admin-login-card p,
+.admin-top p {
+  margin: 10px 0 0;
+  max-width: 680px;
+  color: var(--taupe);
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.admin-login-card label,
+.admin-top-actions label,
+.admin-actions label {
   display: grid;
   gap: 6px;
   color: var(--taupe);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.admin-toolbar input,
-.admin-toolbar select,
+.admin-login-card input,
+.admin-top-actions select,
 .admin-card select {
   width: 100%;
   border: 1px solid var(--line);
@@ -1180,10 +1223,36 @@ body.cart-confirm-open {
   outline: none;
 }
 
-.admin-toolbar input:focus,
-.admin-toolbar select:focus,
+.admin-login-card input:focus,
+.admin-top-actions select:focus,
 .admin-card select:focus {
   border-color: var(--terra);
+}
+
+.admin-dashboard {
+  display: grid;
+  gap: 18px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.admin-top {
+  display: grid;
+  gap: 16px;
+  align-items: end;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 18px;
+}
+
+.admin-top-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 10px;
+}
+
+.admin-top-actions label {
+  min-width: 180px;
 }
 
 .admin-status {
@@ -1214,13 +1283,14 @@ body.cart-confirm-open {
 
 .admin-card {
   display: grid;
-  gap: 14px;
-  padding: 16px;
+  gap: 16px;
+  padding: 18px;
 }
 
-.admin-card-main,
+.admin-card-head,
 .admin-actions,
-.admin-meta {
+.admin-detail-grid,
+.admin-breakdown {
   display: grid;
   gap: 10px;
 }
@@ -1233,7 +1303,7 @@ body.cart-confirm-open {
   text-transform: uppercase;
 }
 
-.admin-card h3 {
+.admin-card h2 {
   margin: 2px 0 0;
   color: var(--clay);
   font-family: var(--serif);
@@ -1241,7 +1311,8 @@ body.cart-confirm-open {
   line-height: 1.15;
 }
 
-.admin-card p {
+.admin-card p,
+.admin-customer {
   margin: 0;
   color: var(--taupe);
 }
@@ -1254,17 +1325,131 @@ body.cart-confirm-open {
   line-height: 1.1;
 }
 
-.admin-meta {
+.admin-detail-grid {
+  grid-template-columns: 1fr;
   border-top: 1px solid var(--line);
   padding-top: 12px;
+}
+
+.admin-detail-grid div,
+.admin-breakdown,
+.admin-items {
+  border-radius: 10px;
+  background: var(--peach);
+}
+
+.admin-detail-grid div {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+}
+
+.admin-detail-grid span,
+.admin-breakdown span,
+.admin-item span {
+  color: var(--taupe);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-detail-grid b {
   color: var(--ink);
   font-size: 13px;
 }
 
-.admin-meta span {
+.admin-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.admin-contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
   border-radius: 999px;
-  background: var(--peach);
-  padding: 7px 10px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 14px;
+}
+
+.admin-wa {
+  background: #25d366;
+}
+
+.admin-tg {
+  background: #229ed9;
+}
+
+.admin-no-contact {
+  color: var(--taupe);
+  font-size: 12px;
+}
+
+.admin-items {
+  display: grid;
+  overflow: hidden;
+}
+
+.admin-item {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+}
+
+.admin-item + .admin-item {
+  border-top: 1px solid rgba(180, 127, 116, 0.18);
+}
+
+.admin-item div {
+  display: grid;
+  gap: 2px;
+}
+
+.admin-item strong {
+  color: var(--clay);
+  font-family: var(--serif);
+  font-size: 20px;
+}
+
+.admin-item.muted {
+  color: var(--taupe);
+}
+
+.admin-breakdown {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+}
+
+.admin-breakdown div {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.admin-breakdown b {
+  color: var(--ink);
+}
+
+.admin-breakdown .grand {
+  border-top: 1px solid rgba(180, 127, 116, 0.24);
+  color: var(--clay);
+  font-weight: 800;
+  padding-top: 8px;
+}
+
+.admin-actions {
+  justify-items: start;
+}
+
+.admin-actions label {
+  width: min(100%, 220px);
 }
 
 .admin-note {
@@ -2979,24 +3164,35 @@ footer.site .col p {
     text-align: right;
   }
 
-  .admin-toolbar {
-    grid-template-columns: minmax(180px, 1fr) minmax(220px, 1.2fr) 150px auto auto;
-    align-items: end;
+  .admin-top {
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .admin-card-main {
+  .admin-card-head {
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: start;
   }
 
-  .admin-meta {
+  .admin-detail-grid {
     grid-template-columns: repeat(3, max-content);
   }
 
   .admin-actions {
-    grid-template-columns: 180px auto;
-    align-items: center;
     justify-content: start;
+  }
+
+  .admin-item {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .admin-breakdown {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .admin-breakdown .grand {
+    border-top: 0;
+    padding-top: 0;
   }
 
   footer.site {

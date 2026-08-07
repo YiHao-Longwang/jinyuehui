@@ -16,8 +16,8 @@ export default function OnsenKLPage() {
       <main>
         <Hero
           eyebrow="24-Hour Onsen in KL"
-          title={<>Warm Spring Retreat in Kuala Lumpur</>}
-          copy="Pools, steam, sauna, dining and rest lounges in one 12-hour ticket."
+          title={<>A 24-Hour Onsen in Kuala Lumpur</>}
+          copy="Soak, sweat, cool off, eat, sleep it off in a lounge - all of it inside a single 12-hour ticket."
           image="hero-onsen-warm.jpg"
         >
           <a className="btn clay" href="/packages/">View Packages</a>
@@ -28,16 +28,16 @@ export default function OnsenKLPage() {
           <div className="container">
             <div className="combo">
               <div className="row">
-                <h4>Arrive Any Time</h4>
-                <p>Check in, change, soak, steam, eat, rest and repeat within your 12-hour stay.</p>
+                <h4>Come Whenever</h4>
+                <p>Check in, get changed, and then soak, steam, eat and rest in whatever order suits you - as many times round as your 12 hours allow.</p>
               </div>
               <div className="row">
-                <h4>Hot, Steam, Cold</h4>
-                <p>Alternate herbal pool, steam or sauna, and cold plunge for the bathhouse routine.</p>
+                <h4>Hot, Then Steam, Then Cold</h4>
+                <p>Herbal pool, steam room or sauna, cold plunge, repeat. That cycle is the whole bathhouse tradition in three steps.</p>
               </div>
               <div className="row">
-                <h4>Add Treatments</h4>
-                <p>Body scrub and massage treatments are available from the packages page.</p>
+                <h4>Add Something On</h4>
+                <p>Body scrubs and massages can be booked alongside your visit - they are listed on the packages page.</p>
               </div>
             </div>
           </div>

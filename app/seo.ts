@@ -126,22 +126,42 @@ export function pageMetadata({
   };
 }
 
+/** The Google Business Profile this site belongs to (南海龙宫SPA会所, Viva Home Mall). */
+const googlePlaceUrl =
+  "https://www.google.com/maps/search/?api=1&query=One%20Spa%20%E5%A3%B9%E5%8F%B7%E6%B1%A4%E6%B3%89&query_place_id=ChIJEa1Xrew3zDEROXX0qPz4IdA";
+
+/**
+ * Profiles that represent this same business. `sameAs` is how Google ties the
+ * site, the Business Profile and the social accounts together as one entity -
+ * which matters here because another operator trades under the One Spa name.
+ */
+const sameAsProfiles = [
+  "https://www.instagram.com/vivadespa/",
+  "https://www.facebook.com/onespaofficial",
+  "https://www.instagram.com/onespaofficial/",
+  "https://t.me/nhlg09",
+  googlePlaceUrl,
+];
+
 export const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "HealthAndBeautyBusiness",
-  name: "One Spa",
-  alternateName: ["oneSPA", "壹号汤泉", "南海龙宫", "KL Spa"],
+  "@id": `${siteUrl}/#business`,
+  name: "One Spa 南海龙宫",
+  alternateName: ["oneSPA", "壹号汤泉", "南海龙宫", "南海龙宫SPA会所", "KL Spa"],
   url: siteUrl,
   image: `${siteUrl}/assets/hero-onsen-warm.jpg`,
+  sameAs: sameAsProfiles,
+  hasMap: googlePlaceUrl,
   telephone: "+60 14-315 5632",
   priceRange: "RM58-RM1699",
   description:
     "One Spa 南海龙宫 is a 24-hour spa, massage, hot-spring and wellness destination in Kuala Lumpur at Viva Home Mall.",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Lot No. 2-53 & 2-56, Level 2, Viva Home Mall, 85, Jalan Loke Yew, Taman Miharja",
+    streetAddress: "Lot No. 2-69 & 2-70, Level 2, Viva Home Mall, 85, Jalan Loke Yew, Taman Miharja",
     addressLocality: "Kuala Lumpur",
-    postalCode: "55200",
+    postalCode: "52200",
     addressCountry: "MY",
   },
   openingHoursSpecification: [

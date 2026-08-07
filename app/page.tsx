@@ -29,47 +29,47 @@ const navItems = [
 ];
 
 const chips = [
-  "Open 24 hours",
-  "12-hour stay",
-  "Pools, steam & dining - one ticket",
-  "Free reschedule up to 1 day ahead",
+  "Doors never close",
+  "Stay the full 12 hours",
+  "Bathing, sauna and meals on one ticket",
+  "Change your date free, 1 day ahead",
 ];
 
 const packages = [
   {
     title: "Twin · Buy 1 Free 1",
-    desc: "One order, two adults · a full 12 hours",
+    desc: "Two adults enter on a single booking, 12 hours each",
     price: "From RM169++ / 2 adults",
     href: `${siteBase}/packages/#pk-b1f1`,
     featured: true,
   },
   {
     title: "Solo 12-Hour Pass",
-    desc: "12 hours for one + a free 30-min massage",
+    desc: "Going alone? 12 hours plus 30 minutes of massage on us",
     price: "From RM169++ / person",
     href: `${siteBase}/packages/#pk-solo`,
   },
   {
     title: "Daytime Massage Package",
-    desc: "Daytime unwind · 9am-5pm · solo-friendly",
+    desc: "A quieter 9am-5pm slot, and you can book it for one",
     price: "RM199++ / person",
     href: `${siteBase}/packages/#pk-daytime`,
   },
   {
     title: "Yangzhou Body Scrub",
-    desc: "Traditional scrub · 12-hour pass included",
+    desc: "The Yangzhou scrub, with your 12-hour entry built in",
     price: "From RM199++",
     href: `${siteBase}/packages/#pk-scrub`,
   },
   {
     title: "All-Day Scrub & Massage",
-    desc: "12-hour pass · scrub · 60-min massage",
+    desc: "Entry, a scrub and an hour of massage in one booking",
     price: "RM379++ / person",
     href: `${siteBase}/packages/#pk-allday-sm`,
   },
   {
     title: "Daytime Duo",
-    desc: "Entry for two · one 60-min treatment each",
+    desc: "Daytime entry for two, plus an hour of treatment each",
     price: "RM379++ / 2 people",
     href: `${siteBase}/packages/#pk-daytime-duo`,
   },
@@ -81,45 +81,45 @@ const facilities = [
     image: "fac-icefire.jpg",
     lead: true,
     copy:
-      "The icy pool sits at 13°C, the herbal pool at 43°C - alternate between them under the starlit ceiling and walk out completely refreshed.",
+      "Drop into the 13°C plunge, then back into the 43°C herbal pool, over and over beneath a ceiling of false stars. You leave wide awake.",
   },
   {
     title: "Salt-Crystal Steam Room",
     image: "fac-steam.jpg",
     copy:
-      "A salt-crystal steam room in warm light - sit back, sweat it out, circulate better.",
+      "Walls of salt crystal, low amber light, and enough heat to sweat the week out of you.",
   },
   {
     title: "Massage Rooms",
     image: "fac-massage.jpg",
     copy:
-      "Private massage rooms with three beds - family and friends can share a room. Tui Na, Thai, aroma oil and more: 20 treatments arranged here.",
+      "Three beds to a room, so nobody has to be separated from their group. Twenty treatments run out of these rooms - Tui Na, Thai, aroma oil and the rest.",
     more: true,
   },
   {
     title: "Yangzhou Body Scrub",
     image: "fac-scrub.jpg",
     copy:
-      "A dedicated scrub room with the Yangzhou craft written on its walls - scrub away the day, as a single treatment or a scrub-plus-entry package.",
+      "A room built for one thing: the Yangzhou scrub, its history painted across the walls. Book it on its own or bundled with entry.",
     more: true,
   },
   {
     title: "Movie & Rest Lounge",
     image: "fac-movie.jpg",
     copy:
-      "The screening hall joins the rest lounge, with a headset for every seat - watch your film or sleep in peace; overnight guests usually settle here.",
+      "Screening hall and rest lounge share a space, and every seat has its own headset - so one guest watches a film while the next one sleeps through it. This is where the overnight crowd ends up.",
   },
   {
     title: "Immersive Light Walk",
     image: "fac-immersive.jpg",
     copy:
-      "A starlit light corridor - drift through after your soak, and take a photo while you are at it.",
+      "A corridor of drifting light to wander through after your soak. Most people stop halfway for a photo.",
   },
   {
     title: "Foot Bath Room",
     image: "fac-recliner.jpg",
     copy:
-      "A recliner room made for foot work - foot therapy and grooming happen here; power recliners tilt right back for a nap after.",
+      "The room where feet get looked after - foot therapy and grooming both. The recliners go all the way flat when you would rather nap than talk.",
     more: true,
   },
 ];
@@ -127,15 +127,15 @@ const facilities = [
 const faqs = [
   [
     "Can I really stay 12 hours?",
-    "Yes - 12 hours from check-in, all facilities included.",
+    "You can. The clock starts when you check in and runs for 12 hours, and every facility is yours for all of it.",
   ],
   [
     "Is Sunday a weekday or weekend rate?",
-    "Weekday rate. Sun-Thu are all weekday; Fri, Sat and public holidays are the other tier.",
+    "Sunday counts as a weekday here. Sunday through Thursday sit on the lower tier; Friday, Saturday and public holidays sit on the higher one.",
   ],
   [
     "How are public holidays priced?",
-    "Weekend rate. The price shows right on the calendar when you pick a date - no maths needed.",
+    "At the weekend tier. You will not have to work it out yourself - pick your date and the calendar shows you the price for it.",
   ],
 ];
 
@@ -269,14 +269,15 @@ export default function Home() {
           <div className="container">
             <div className="k">One Spa · 南海龙宫 · Kuala Lumpur · Open 24 Hours</div>
             <h1>
-              Give Yourself 12 Hours
+              Twelve Hours in a
               <br />
-              In a Warm Spring
+              Kuala Lumpur Hot Spring
             </h1>
             <p>
-              One Spa 南海龙宫 is a 24 hour spa and onsen-style hot spring in
-              Kuala Lumpur, at Viva Home Mall. Hot spring pools, steam, sauna,
-              massage &amp; dining - one ticket, a full 12-hour stay.
+              One Spa 南海龙宫 keeps its doors open around the clock on Level 2 of
+              Viva Home Mall. One ticket buys twelve hours of it - the hot spring
+              pools, the steam room, the sauna, a massage if you want one, and
+              dinner when you get hungry.
             </p>
             <div className="cta">
               <a className="btn clay" href={`${siteBase}/packages/`}>
@@ -389,22 +390,23 @@ export default function Home() {
                     <section className="osw-home-sauna" key="sauna">
                       <h3>Steam Room & Sauna</h3>
                       <p>
-                        Beyond the pools, One Spa has a{" "}
-                        <strong>salt-crystal steam room</strong> and both{" "}
-                        <strong>dry and wet saunas</strong>. The salt room runs
-                        at a gentler heat - good for staying in longer, and
-                        where most guests head right after a soak.
+                        The pools are only half of it. There is a{" "}
+                        <strong>salt-crystal steam room</strong> here, plus{" "}
+                        <strong>dry and wet saunas</strong>. The salt room is
+                        the mildest of the three, which is why people last
+                        longer in it and why most head there straight out of
+                        the water.
                       </p>
                       <p>
-                        The Chinese bathhouse way is to alternate:{" "}
-                        <strong>hot pool, steam or sauna, cold plunge</strong>.
-                        Each round opens and closes your pores once; two or
-                        three rounds does more for tired muscles than simply
-                        soaking.
+                        Bathhouses in China have always worked in rounds:{" "}
+                        <strong>hot pool, then steam or sauna, then cold
+                        plunge</strong>. Every round opens your pores and shuts
+                        them again. Do it two or three times and your muscles
+                        will notice the difference from soaking alone.
                       </p>
                       <p>
-                        Steam room and sauna access is included in the 12-hour
-                        ticket, available 24 hours, at no extra charge.
+                        None of it costs extra. Steam room and saunas come
+                        with the 12-hour ticket and run all day and night.
                       </p>
                     </section>
                   ) : null}
@@ -419,10 +421,11 @@ export default function Home() {
 
             <div className="banner">
               <div>
-                <h3>Coming With Friends or Family?</h3>
+                <h3>Bringing the Whole Group?</h3>
                 <p>
-                  Two go Buy-1-Free-1; odd numbers add a Solo Pass; kids add a
-                  Kids Ticket. Full combos are available through WhatsApp.
+                  Work in pairs on Buy 1 Free 1, and whoever is left over takes
+                  a Solo Pass. Children get a Kids Ticket. Message us on
+                  WhatsApp and we will put the combination together for you.
                 </p>
               </div>
               <a className="btn" href={`${siteBase}/packages/#combos`}>
@@ -471,9 +474,9 @@ export default function Home() {
             alt="One Spa"
           />
           <div className="slogan">
-            Give Yourself 12 Hours
+            Twelve Hours in a
             <br />
-            In a Warm Spring
+            Kuala Lumpur Hot Spring
           </div>
           <div className="contact-pair footer-contact-pair">
             <a className="btn contact-wa" href={whatsappHref} target="_blank" rel="noopener">
@@ -512,9 +515,9 @@ export default function Home() {
                 <br />
                 Open 24 Hours
                 <br />
-                Lot No. 2-53 & 2-56, Level 2, Viva Home Mall,
+                Lot No. 2-69 & 2-70, Level 2, Viva Home Mall,
                 <br />
-                85, Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur
+                85, Jalan Loke Yew, Taman Miharja, 52200 Kuala Lumpur
               </p>
             </div>
           </div>

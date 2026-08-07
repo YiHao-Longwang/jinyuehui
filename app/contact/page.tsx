@@ -22,7 +22,7 @@ export const metadata = pageMetadata({
 const visitNotes: [string, string][] = [
   [
     "Where we are",
-    "Level 2, Viva Home Mall, 85 Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur - on the Cheras side of KL, a short drive from Bukit Bintang and KLCC.",
+    "Level 2, Viva Home Mall, 85 Jalan Loke Yew, Taman Miharja, 52200 Kuala Lumpur - on the Cheras side of KL, a short drive from Bukit Bintang and KLCC.",
   ],
   ["Opening hours", "Open 24 hours a day, every day of the year, including weekends and public holidays."],
   ["Parking", "Park at Viva Home Mall and take the lift to Level 2. Grab and taxi drop-off is at the main mall entrance."],
@@ -50,8 +50,8 @@ export default function ContactPage() {
               <div className="cinfo">
                 <span className="ck">Address</span>
                 <span className="cv">
-                  Lot No. 2-53 & 2-56, Level 2, Viva Home Mall, 85, Jalan Loke
-                  Yew, Taman Miharja, 55200 Kuala Lumpur
+                  Lot No. 2-69 & 2-70, Level 2, Viva Home Mall, 85, Jalan Loke
+                  Yew, Taman Miharja, 52200 Kuala Lumpur
                 </span>
               </div>
               <div className="cinfo">

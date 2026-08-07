@@ -18,20 +18,20 @@ export const metadata = pageMetadata({
 });
 
 const facilities = [
-  ["Fire & Ice Pools", "fac-icefire.jpg?osw=0.9.23", "The icy pool sits at 13°C, the herbal pool at 43°C - alternate between them under the starlit ceiling and walk out completely refreshed."],
-  ["Salt-Crystal Steam Room", "fac-steam.jpg?osw=0.9.23", "A salt-crystal steam room in warm light - sit back, sweat it out, circulate better."],
-  ["Massage Rooms", "fac-massage.jpg?osw=0.9.23", "Private massage rooms with three beds - family and friends can share a room. Tui Na, Thai, aroma oil and more: 20 treatments arranged here."],
-  ["Yangzhou Body Scrub", "fac-scrub.jpg?osw=0.9.23", "A dedicated scrub room with the Yangzhou craft written on its walls - scrub away the day, as a single treatment or a scrub-plus-entry package."],
-  ["Movie & Rest Lounge", "fac-movie.jpg?osw=0.9.23", "The screening hall joins the rest lounge, with a headset for every seat - watch your film or sleep in peace; overnight guests usually settle here."],
-  ["Immersive Light Walk", "fac-immersive.jpg?osw=0.9.23", "A starlit light corridor - drift through after your soak, and take a photo while you are at it."],
-  ["Foot Bath Room", "fac-recliner.jpg?osw=0.9.23", "A recliner room made for foot work - foot therapy and grooming happen here; power recliners tilt right back for a nap after."],
-  ["Salt-Stone Sweat Room", "fac-onsen.jpg?osw=0.9.23", "Lie back on warmed salt-stone beds ringed by glowing salt bricks, and let the heat slowly work through you - best right before or after a soak."],
-  ["Treatment Rooms", "fac-treatment.jpg?osw=0.9.23", "Deeper rituals - hot-stone detox, French indulgence, Five Elements - are arranged in these dedicated treatment rooms. See the packages page for treatments and prices."],
-  ["Yihe Private Dining Room", "fac-vip.jpg?osw=0.9.23", "Book the Yihe room for a proper gathering - order signature dishes a la carte around one big table. Reservation required."],
-  ["Golf Theme Room", "fac-golf.jpg?osw=0.9.23", "A golf-themed private room, from RM99/hour per room - bookable directly."],
-  ["Changing Room", "fac-locker.jpg?osw=0.9.23", "A lockable locker for every guest and wide benches - settle in comfortably before your soak."],
-  ["Grooming & Wash Area", "fac-grooming.jpg?osw=0.9.23", "Wash stations and vanity seating - freshen up properly after steam and soak, and step out feeling crisp."],
-  ["Dining Hall", "fac-dining.jpg?osw=0.9.23", "Dinner buffet 6-9pm, light meals at other hours; fruits and ice cream on hand."],
+  ["Fire & Ice Pools", "fac-icefire.jpg?osw=0.9.23", "Drop into the 13°C plunge, then back into the 43°C herbal pool, over and over beneath a ceiling of false stars. You leave wide awake."],
+  ["Salt-Crystal Steam Room", "fac-steam.jpg?osw=0.9.23", "Walls of salt crystal, low amber light, and enough heat to sweat the week out of you."],
+  ["Massage Rooms", "fac-massage.jpg?osw=0.9.23", "Three beds to a room, so nobody has to be separated from their group. Twenty treatments run out of these rooms - Tui Na, Thai, aroma oil and the rest."],
+  ["Yangzhou Body Scrub", "fac-scrub.jpg?osw=0.9.23", "A room built for one thing: the Yangzhou scrub, its history painted across the walls. Book it on its own or bundled with entry."],
+  ["Movie & Rest Lounge", "fac-movie.jpg?osw=0.9.23", "Screening hall and rest lounge share a space, and every seat has its own headset - so one guest watches a film while the next one sleeps through it. This is where the overnight crowd ends up."],
+  ["Immersive Light Walk", "fac-immersive.jpg?osw=0.9.23", "A corridor of drifting light to wander through after your soak. Most people stop halfway for a photo."],
+  ["Foot Bath Room", "fac-recliner.jpg?osw=0.9.23", "The room where feet get looked after - foot therapy and grooming both. The recliners go all the way flat when you would rather nap than talk."],
+  ["Salt-Stone Sweat Room", "fac-onsen.jpg?osw=0.9.23", "Warmed salt-stone beds inside a ring of glowing salt brick. The heat takes its time getting through you, which is why it works best either side of a soak."],
+  ["Treatment Rooms", "fac-treatment.jpg?osw=0.9.23", "The longer rituals happen in here - hot-stone detox, French indulgence, Five Elements. Treatments and prices are set out on the packages page."],
+  ["Yihe Private Dining Room", "fac-vip.jpg?osw=0.9.23", "For a proper sit-down, take the Yihe room: one large table, signature dishes ordered a la carte. It has to be reserved in advance."],
+  ["Golf Theme Room", "fac-golf.jpg?osw=0.9.23", "A private room done out in golf, from RM99 an hour for the room. Book it straight through us."],
+  ["Changing Room", "fac-locker.jpg?osw=0.9.23", "Everyone gets a locker that locks, and the benches are wide enough to get changed without knocking elbows."],
+  ["Grooming & Wash Area", "fac-grooming.jpg?osw=0.9.23", "Wash stations and seated vanities, so you can put yourself back together after the heat and walk out looking it."],
+  ["Dining Hall", "fac-dining.jpg?osw=0.9.23", "The buffet runs 6 to 9pm; outside those hours there are lighter dishes, with fruit and ice cream always out."],
 ];
 
 export default function FacilitiesPage() {
@@ -41,8 +41,8 @@ export default function FacilitiesPage() {
       <main>
         <Hero
           eyebrow="One Spa · Facilities"
-          title={<>One-Stop Hot-Spring Retreat</>}
-          copy="One ticket covers pools, steam, sauna, lounges, the movie area and dining - a full 12-hour stay."
+          title={<>Everything Inside One Spa KL</>}
+          copy="Pools, steam room, saunas, the lounges, the screening area, the food - one ticket covers all of it, for twelve hours."
           image="fac-hero-immersive.jpg?osw=0.9.23"
         />
 
@@ -78,7 +78,7 @@ export default function FacilitiesPage() {
           <SectionHead
             eyebrow="Treatments"
             title="20 Massage & Care Treatments"
-            sub="Foot therapy, ear spa, cupping, gua sha and our signature rituals - every price listed openly on the packages page."
+            sub="Foot therapy, ear spa, cupping, gua sha and the signature rituals. Every price is written out on the packages page."
           />
           <div className="center-cta">
             <a className="btn line" href="/packages/#treatments">

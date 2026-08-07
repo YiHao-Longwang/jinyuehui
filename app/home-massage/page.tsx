@@ -140,7 +140,7 @@ export default function HomeMassagePage() {
                 at your door
               </>
             }
-            copy="The same therapists from our spa, now at your place - hotel, condo or home. They arrive with massage oil and fresh single-use linens and towels, lay them over your own bed, and begin. Nothing to clear, no furniture to move - you just lie down."
+            copy="Our spa therapists, working out of your place instead of ours - hotel, condo or home. They bring the oil and fresh single-use linens and towels, spread them over your own bed, and start. No clearing up beforehand, no furniture to shift. You lie down, that is all."
             image="outcall-hero.jpg?osw=0.9.23"
           >
             <a className="btn clay" href="#outcall-plans">
@@ -164,7 +164,7 @@ export default function HomeMassagePage() {
             <SectionHead
               eyebrow="Packages & Prices"
               title="Three packages, priced upfront"
-              sub="Honest pricing, no surprises. Prices are subject to 8% SST only - no service charge. The RM100 travel fee within 30km is paid in cash on arrival."
+              sub="What you see is what you pay. Only 8% SST is added - there is no service charge. Within 30km, the RM100 travel fee is settled in cash when the therapist arrives."
             />
             <div className="container">
               <div className="cards">

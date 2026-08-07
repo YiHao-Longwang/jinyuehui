@@ -84,8 +84,8 @@ export default function BeautyPage() {
       <main>
         <Hero
           eyebrow="One Spa · Beauty Studio · Kuala Lumpur"
-          title={<>The Beauty Studio, now at One Spa</>}
-          copy="Launching with the Body Glow & Aqua Package at RM599, spa ticket included - plus photon skin brightening, spot care and ice-point hair removal, all by appointment."
+          title={<>Beauty Treatments at One Spa KL</>}
+          copy="We are opening with the Body Glow & Aqua Package at RM599, and your spa ticket comes with it. Photon skin brightening, spot care and ice-point hair removal are here too - all by appointment."
           image="beauty-hero.jpg?osw=0.9.23"
         />
 
@@ -104,7 +104,7 @@ export default function BeautyPage() {
           <SectionHead
             eyebrow="Signature launch offer"
             title="Body Glow & Aqua Package"
-            sub="Three treatments in one visit - body brightening, needle-free aqua-glow facial and hand care - with a same-day spa ticket included."
+            sub="One visit, three treatments: body brightening, a needle-free aqua-glow facial and hand care - plus a spa ticket for the same day."
           />
           <div className="container">
             <MiniGrid items={signature} />
@@ -117,7 +117,7 @@ export default function BeautyPage() {
           <SectionHead
             eyebrow="Light-based treatments"
             title="Three treatments, tailored after consultation"
-            sub="Each is customised to your skin and area - pricing is confirmed at an in-store consultation, with no hidden fees."
+            sub="Every one is fitted to your skin and the area being treated. Price is agreed at the in-store consultation, and nothing is added afterwards."
           />
           <div className="container">
             <div className="fac-grid">
@@ -135,7 +135,7 @@ export default function BeautyPage() {
         </section>
 
         <section id="beauty-facial">
-          <SectionHead eyebrow="Deep care" title="Complete Facial Management" sub="A full reset for your face, from deep cleansing to final mask." />
+          <SectionHead eyebrow="Deep care" title="Complete Facial Management" sub="Deep cleansing through to the closing mask - the whole face, start to finish." />
           <div className="container">
             <MiniGrid items={facial} />
             <div className="deal">Pricing and slots on WhatsApp</div>

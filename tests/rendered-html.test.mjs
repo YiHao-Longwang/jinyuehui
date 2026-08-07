@@ -34,7 +34,7 @@ test("server-renders the One Spa page", async () => {
   assert.match(html, /<title>One Spa 南海龙宫 \| 吉隆坡SPA · 24小时KL按摩娱乐<\/title>/i);
   assert.match(html, /name="keywords" content="[^"]*吉隆坡SPA[^"]*南海龙宫[^"]*klspa/i);
   assert.match(html, /application\/ld\+json/);
-  assert.match(html, /Give Yourself 12 Hours/);
+  assert.match(html, /Twelve Hours in a/);
   assert.match(html, /Pick Yours, Book in Minutes/);
   assert.match(html, /One-Stop Hot Spring, Sauna/);
   assert.match(html, /\+60 14-315 5632/);

@@ -71,7 +71,7 @@ const cnPageSeo: Record<string, { title: string; description: string; path: stri
   contact: {
     title: "联系我们 | 吉隆坡SPA地址电话 · One Spa 南海龙宫",
     description:
-      "One Spa 南海龙宫地址：吉隆坡 Viva Home Mall 二楼 Lot 2-53 & 2-56，24 小时营业，WhatsApp +60 14-315 5632 预约吉隆坡SPA与按摩。",
+      "One Spa 南海龙宫地址：吉隆坡 Viva Home Mall 二楼 Lot 2-69 & 2-70，24 小时营业，WhatsApp +60 14-315 5632 预约吉隆坡SPA与按摩。",
     path: "/cn/contact/",
     keywords: ["南海龙宫地址", "吉隆坡SPA地址", "吉隆坡按摩电话", "Viva Home Mall spa"],
   },
@@ -128,13 +128,13 @@ const packageCards = [
     title: "双人 12 小时门票",
     tag: "2 位大人 · 买一送一",
     image: "img-b1f1.jpg",
-    desc: "一张订单两位大人同行入场",
+    desc: "下一次单，两位大人一起进场",
     prices: [
       { label: "星期日-星期四", price: "169", per: "/ 2 位" },
       { label: "星期五、六与公共假期", price: "199", per: "/ 2 位" },
     ],
-    features: ["泡池、汗蒸、桑拿与休息区", "晚餐自助 6-9pm + 其他时段简餐", "完整 12 小时，双人最划算"],
-    notes: ["星期日在这里算平日，星期日到星期四都是低价档。", "价格是 2 位大人的总价，不是每人价。"],
+    features: ["所有汤池、汗蒸房、桑拿与休息区", "6-9pm 自助晚餐，其余时段供应简餐", "整整 12 小时，两个人一起来最省"],
+    notes: ["星期日和星期一到星期四同一档，走的是低价那一边。", "这个数字是两位大人的总价，不是一个人的价钱。"],
     button: "预约",
   },
   {
@@ -142,13 +142,13 @@ const packageCards = [
     title: "单人 12 小时门票 + 送 30 分钟按摩",
     tag: "单人 · 线上福利",
     image: "img-solo.jpg",
-    desc: "一个人也能泡足 12 小时，再送一项按摩",
+    desc: "一个人来，12 小时照泡，另外再送一次按摩",
     prices: [
       { label: "星期日-星期四", price: "169", per: "/ 人" },
       { label: "星期五、六与公共假期", price: "199", per: "/ 人" },
     ],
-    features: ["泡池、汗蒸、桑拿、休息区 + 晚餐自助", "免费 30 分钟按摩：足腿或中式局部，自选", "3 位或 5 位来？搭配买一送一最划算"],
-    notes: ["星期日在这里算平日，星期日到星期四都是低价档。", "只限线上预约，现场 walk-in 没有这个赠送。"],
+    features: ["汤池、汗蒸、桑拿、休息区，加上自助晚餐", "免费 30 分钟按摩，足腿或中式局部，自己挑", "人数是单数？和买一送一搭着买最划算"],
+    notes: ["星期日和星期一到星期四同一档，走的是低价那一边。", "赠送只对线上订单有效，现场走进来不含这一项。"],
     button: "预约",
   },
   {
@@ -156,10 +156,10 @@ const packageCards = [
     title: "日间按摩配套",
     tag: "日间 · 9am-5pm",
     image: "img-daytime.jpg",
-    desc: "每日 9am-5pm 入场，一个人也能买",
+    desc: "每天 9am 到 5pm 之间进场，单人也可以下单",
     prices: [{ label: "每人 · 每天同价", was: "RM498", price: "199", per: "/ 人" }],
-    features: ["3 选 1：60 分钟按摩 / 60 分钟足疗 / 排毒护理 5 选 2", "泡池、汗蒸与桑拿", "餐饮、水果与冰淇淋"],
-    notes: ["预约时间就是入场时间；超过 5pm 需要补差价。"],
+    features: ["三选一：60 分钟按摩、60 分钟足疗，或排毒护理五选二", "汤池、汗蒸房与桑拿", "餐饮、水果与冰淇淋"],
+    notes: ["预约的时间就是进场时间，待过 5pm 要补成全日票的差价。"],
     button: "预约 · RM199 / 人",
   },
   {
@@ -167,13 +167,13 @@ const packageCards = [
     title: "扬州搓澡配套",
     tag: "深层洁净 · 搓澡 + 门票",
     image: "img-scrub.jpg",
-    desc: "传统搓澡，已含 12 小时门票",
+    desc: "老手艺搓澡，门票已经包在里面",
     prices: [
       { label: "星期日-星期四", was: "RM319", price: "199", per: "/ 人" },
       { label: "星期五、六与公共假期", was: "RM349", price: "239", per: "/ 人" },
     ],
-    features: ["30 分钟传统扬州搓澡，先泡后搓", "12 小时入场：泡池、汗蒸与桑拿", "餐饮、水果与冰淇淋"],
-    notes: ["12 小时门票已经包含，不需要另买入场券。"],
+    features: ["30 分钟传统扬州搓澡，先泡开再搓", "12 小时入场，汤池、汗蒸与桑拿都能用", "餐饮、水果与冰淇淋"],
+    notes: ["这个价钱已经含了 12 小时门票，不必再买入场券。"],
     button: "预约",
   },
   {
@@ -181,10 +181,10 @@ const packageCards = [
     title: "沐净舒养套餐",
     tag: "搓澡 + 按摩 · 全天",
     image: "img-scrub.jpg",
-    desc: "12 小时门票 + 30 分钟搓澡 + 60 分钟按摩",
+    desc: "门票、搓澡、按摩，一次买齐",
     prices: [{ label: "套餐", price: "379", per: "/ 人" }],
-    features: ["12 小时温泉入场，含餐饮", "30 分钟扬州搓澡", "60 分钟推拿或足疗"],
-    notes: ["一张票包含入场、搓澡与按摩。"],
+    features: ["12 小时温泉入场，餐饮包含在内", "扬州搓澡 30 分钟", "推拿或足疗 60 分钟"],
+    notes: ["入场、搓澡、按摩三项，都在这一张票里。"],
     button: "预约 · RM379 / 人",
   },
   {
@@ -192,10 +192,10 @@ const packageCards = [
     title: "日间双人套餐",
     tag: "双人 · 日间",
     image: "img-daytime.jpg",
-    desc: "两位日间入场 + 每人一项 60 分钟护理",
+    desc: "两张日间门票，每人再做一次 60 分钟护理",
     prices: [{ label: "双人套餐", price: "379", per: "/ 2 人" }],
-    features: ["两张日间入场", "每人一项 60 分钟护理", "按摩、足疗或排毒护理可选"],
-    notes: ["每日 9:00-17:00 · 一个套餐覆盖两位客人。"],
+    features: ["日间门票两张", "每人 60 分钟护理一项", "按摩、足疗或排毒护理，自己选"],
+    notes: ["每天 9:00 到 17:00，一个套餐就够两位客人用。"],
     button: "预约 · RM379 / 2 人",
   },
 ];
@@ -423,7 +423,7 @@ const tcmFaqs = [
 const faqRows: [string, string][] = [
   [
     "One Spa 在吉隆坡哪里？",
-    "地址是 Lot No. 2-53 & 2-56, Level 2, Viva Home Mall, 85, Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur，靠近 Cheras 一带，搭电梯上二楼即可。",
+    "地址是 Lot No. 2-69 & 2-70, Level 2, Viva Home Mall, 85, Jalan Loke Yew, Taman Miharja, 52200 Kuala Lumpur，靠近 Cheras 一带，搭电梯上二楼即可。",
   ],
   ["营业时间是几点？", "One Spa 是吉隆坡 24 小时SPA会所，全年无休，周末与公共假期照常营业。"],
   ["Viva Home Mall 有停车位吗？", "有，直接停在 Viva Home Mall，然后上二楼；Grab 或德士可在商场正门上下车。"],
@@ -435,26 +435,26 @@ const faqRows: [string, string][] = [
     "要怎么预约吉隆坡SPA或按摩？",
     "线上选配套与日期付款，或直接 WhatsApp +60 14-315 5632 找我们；请至少提前 1 小时预约，到店出示订单即可。",
   ],
-  ["真的可以待 12 小时？", "可以，从进场算起 12 小时，设施都包含。"],
-  ["星期日算平日还是周末？", "平日价。星期日到星期四都是平日；星期五、六和公共假期是另一个档。"],
-  ["公共假期怎么算钱？", "按周末价。选日期时价格会直接显示，不用自己算。"],
-  ["买一送一怎么用？", "一张订单，2 位大人，同一天同一时间一起进场；不能拆成两次使用。"],
-  ["一个人最划算买什么？", "单人 12 小时门票，线上预约送 30 分钟按摩。"],
-  ["3 位或 5 位怎么买？", "成双的人买买一送一，多出来的一位买单人票。"],
-  ["配套包含按摩吗？", "单人票线上预约送 30 分钟按摩，日间配套也包含指定护理。"],
-  ["消费 RM499 可以免费入场吗？", "单笔护理消费 RM499 以上可免费入场，直接预约护理即可，不需要另买门票。"],
-  ["小孩可以来吗？", "可以。儿童票适合 12 岁及以下并需成人陪同；2 岁及以下到前台登记免费。"],
-  ["情侣可以一起泡吗？", "公共区域共享，浴区男女分开，没有混浴区。"],
-  ["需要泳衣吗？会提供什么？", "浴区以裸浴为主，也可自带泳衣；店内提供毛巾与基本浴服。"],
-  ["可以过夜吗？", "12 小时内可以在休息区过夜休息，但这里是 spa，不是酒店。"],
-  ["食物是 halal 吗？", "不是，食物非 halal，也没有 halal 认证。"],
-  ["可以带蛋糕或外食吗？", "蛋糕可以，外食可以；酒精饮品不允许带入。"],
-  ["生日有优惠吗？", "生日正负 2 天内可向团队询问生日票。"],
-  ["需要提前多久预约？", "所有配套至少提前 1 小时预约。"],
-  ["可以改期吗？", "可以，到店前 1 天可通过 WhatsApp 免费改期。"],
-  ["退款怎么处理？", "WhatsApp 联系团队核实订单，退款会按原支付方式处理。"],
-  ["到店需要带什么？", "带手机即可，到前台出示订单。"],
-  ["walk-in 和线上预约有差吗？", "线上预约有指定福利，周末也比较满，建议提前预约。"],
+  ["真的可以待 12 小时？", "可以。从进场那一刻开始算满 12 小时，这段时间店里的设施都能随便用。"],
+  ["星期日算平日还是周末？", "在我们这里算平日。星期日到星期四同属低价档，星期五、星期六和公共假期是另一档。"],
+  ["公共假期怎么算钱？", "按周末那一档。不用自己算，日历上选好日期就会显示当天价格。"],
+  ["买一送一怎么用？", "一张订单管两位大人，同一天同一个时间一起进来。不能拆开分两次用。"],
+  ["一个人最划算买什么？", "买单人 12 小时门票。线上下单还会附 30 分钟按摩。"],
+  ["3 位或 5 位怎么买？", "先两两配对买买一送一，剩下的那一位买单人票就行。"],
+  ["配套包含按摩吗？", "单人票线上预约会送 30 分钟按摩；日间配套本身也含指定护理。"],
+  ["消费 RM499 可以免费入场吗？", "可以。单笔护理消费满 RM499，入场就免了，直接约护理，不必另买门票。"],
+  ["小孩可以来吗？", "可以。12 岁及以下买儿童票，并要有大人陪同；2 岁及以下在前台登记就好，不收费。"],
+  ["情侣可以一起泡吗？", "除了浴区都可以。浴区是男女分开的，店里没有混浴。"],
+  ["需要泳衣吗？会提供什么？", "浴区以裸浴为主，想穿泳衣也可以自己带。毛巾和基本浴服店里都有提供。"],
+  ["可以过夜吗？", "在 12 小时之内于休息区睡一晚没问题，只是要记得这里是 spa，不是酒店。"],
+  ["食物是 halal 吗？", "不是。我们的食物属于非 halal，也没有申请 halal 认证。"],
+  ["可以带蛋糕或外食吗？", "蛋糕和外食都可以带进来，唯独酒精饮品不行。"],
+  ["生日有优惠吗？", "有的。生日前后各 2 天之内，向店里的同事问生日票即可。"],
+  ["需要提前多久预约？", "最少提前 1 小时，所有配套都一样。"],
+  ["可以改期吗？", "可以，而且不收费。到店前 1 天之内 WhatsApp 跟我们说一声就行。"],
+  ["退款怎么处理？", "先 WhatsApp 联系我们核对订单，确认后退款会原路退回付款方式。"],
+  ["到店需要带什么？", "带手机就够了，到前台把订单调出来给同事看。"],
+  ["walk-in 和线上预约有差吗？", "有些福利只给线上订单，周末又比较满，所以还是提前订比较稳。"],
 ];
 
 function Money({ was, price, per }: { was?: string; price: string; per?: string }) {
@@ -517,8 +517,8 @@ function PackagesPageCn() {
       <main>
         <Hero
           eyebrow="One Spa · 吉隆坡 · 24 小时营业"
-          title={<>泡进一池温汤</>}
-          copy="一张票，完整 12 小时；泡池、汗蒸、按摩与餐饮都包含在内。"
+          title={<>吉隆坡SPA配套与价格</>}
+          copy="不管选哪个配套，买到的都是同样的 12 小时：汤池、汗蒸房、含在里面的按摩，以及饿了就有的餐饮。"
           image="hero-packages-rain.jpg?osw=0.9.23"
         />
 
@@ -610,7 +610,7 @@ function PackagesPageCn() {
         </section>
 
         <section id="treatments">
-          <SectionHead eyebrow="按摩与护理" title="加一项护理" sub="护理项目需要入场券；单笔消费 RM499+，即可含一位免费入场。" />
+          <SectionHead eyebrow="按摩与护理" title="加一项护理" sub="做护理要配一张入场券。不过单笔账单超过 RM499，入场我们就免了。" />
           <div className="container">
             <div className="deal">
               已预约 <b>买一送一</b> 或 <b>单人票</b>？<b>同一订单加购当日 RM499 以下护理，可自动享 20% 折扣</b>。RM499 以上（★）项目不参与折扣，因为<b>每项已含一位免费入场</b>，可单独预约护理，不用另买门票。
@@ -635,7 +635,7 @@ function PackagesPageCn() {
         </section>
 
         <section id="drinks">
-          <SectionHead eyebrow="酒水桶" title="派对酒水桶" sub="不用一杯一杯点，1.5L 起，适合球赛夜、私人房和聚会。" />
+          <SectionHead eyebrow="酒水桶" title="派对酒水桶" sub="这里没人一杯一杯点。酒水桶 1.5L 起跳，球赛夜、私人房或聚会刚好够喝。" />
           <div className="container">
             <Band cn="酒水桶" en="Drink Barrels · 1.5L / 3L" />
             <div className="tlist">
@@ -714,7 +714,7 @@ function FacilitiesPageCn() {
     <>
       <Header active="Facilities" locale="cn" />
       <main>
-        <Hero eyebrow="One Spa · 设施" title={<>一站式温泉会所</>} copy="一张票包含泡池、汗蒸、桑拿、休息厅、影视区与餐饮，完整 12 小时。" image="fac-hero-immersive.jpg?osw=0.9.23" />
+        <Hero eyebrow="One Spa · 设施" title={<>南海龙宫的设施都在这里</>} copy="汤池、汗蒸房、桑拿、休息厅、影视区到餐饮，一张票全部用足 12 小时。" image="fac-hero-immersive.jpg?osw=0.9.23" />
         <section id="facilities">
           <div className="container fac-page-grid">
             <div className="fac-grid">
@@ -733,7 +733,7 @@ function FacilitiesPageCn() {
           </div>
         </section>
         <section id="treatments-teaser">
-          <SectionHead eyebrow="护理项目" title="20 项按摩与护理" sub="足疗、耳疗、拔罐、刮痧与招牌疗程，所有价格都公开列在配套页。" />
+          <SectionHead eyebrow="护理项目" title="20 项按摩与护理" sub="足疗、耳疗、拔罐、刮痧到招牌疗程都有，价格全部公开写在配套页上。" />
           <div className="center-cta"><a className="btn line" href={`${cnBase}/packages/#treatments`}>看按摩项目与价格</a></div>
         </section>
       </main>
@@ -748,13 +748,13 @@ function HomeMassagePageCn() {
     <div className="osw-outcall">
       <Header active="Home Service" locale="cn" />
       <main>
-        <Hero eyebrow="One Spa · 上门服务 · 吉隆坡" title={<>店里的按摩，<br />到你家</>} copy="同一批 One Spa 技师，现在可以到你的酒店、公寓或住家。技师会带按摩油和一次性床单毛巾，铺在你的床上后开始服务。你不用搬家具，只要躺下。" image="outcall-hero.jpg?osw=0.9.23">
+        <Hero eyebrow="One Spa · 上门服务 · 吉隆坡" title={<>店里的按摩，<br />到你家</>} copy="店里的那批技师，现在也出门。酒店、公寓或住家都能去，按摩油和一次性床单毛巾由技师带齐，在你自己的床上铺好就开始。家具不用挪，你只要躺下。" image="outcall-hero.jpg?osw=0.9.23">
           <a className="btn clay" href="#outcall-plans">线上购买</a>
           <ContactButtons locale="cn" className="hero-contact-pair" whatsappLabel="有问题？WhatsApp 我们" telegramLabel="Telegram 我们" />
         </Hero>
         <Chips items={homeChips} />
         <section id="outcall-plans">
-          <SectionHead eyebrow="配套与价格" title="三个配套，价格清楚" sub="价格公开，没有隐藏收费。价格只需加 8% SST，不收服务费；30km 内 RM100 交通费到场现金支付。" />
+          <SectionHead eyebrow="配套与价格" title="三个配套，价格清楚" sub="价格都写在上面，没有别的名目。只加 8% SST，不收服务费；30km 以内收 RM100 车马费，技师到了现金付。" />
           <div className="container">
             <div className="cards">
               {homePlans.map((plan) => (
@@ -805,10 +805,10 @@ function BeautyPageCn() {
     <>
       <Header active="Beauty" locale="cn" />
       <main>
-        <Hero eyebrow="One Spa · 美容部 · 吉隆坡" title={<>美容护理，现在也在 One Spa</>} copy="主推身体焕亮水光配套 RM599，含同日温泉门票；另有光子嫩肤、淡斑护理与冰点脱毛，均需预约。" image="beauty-hero.jpg?osw=0.9.23" />
+        <Hero eyebrow="One Spa · 美容部 · 吉隆坡" title={<>美容护理，现在也在 One Spa</>} copy="开业主打身体焕亮水光配套 RM599，同日温泉门票一起给。另外还有光子嫩肤、淡斑护理与冰点脱毛，都要先预约。" image="beauty-hero.jpg?osw=0.9.23" />
         <Chips items={beautyChips} />
         <section id="beauty-signature">
-          <SectionHead eyebrow="主推开业配套" title="身体焕亮水光配套" sub="一次到店完成三项护理：身体焕亮、水光面部护理与手部护理，并包含同日温泉门票。" />
+          <SectionHead eyebrow="主推开业配套" title="身体焕亮水光配套" sub="来一趟做完三项：身体焕亮、水光面部与手部护理，当天的温泉门票也算在内。" />
           <div className="container"><MiniGrid items={signature} /><div className="deal"><b>RM599</b> · 身体焕亮 + 水光面部 + 手部护理 + 同日温泉门票</div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="WhatsApp 预约" telegramLabel="Telegram 预约" /></div></div>
         </section>
         <section id="beauty-light">
@@ -836,9 +836,9 @@ function TcmPageCn() {
     <>
       <Header active="TCM" locale="cn" />
       <main>
-        <Hero eyebrow="One Spa · 中医部 · 吉隆坡" title={<>中医养生，现在也在 One Spa</>} copy="驻店中医师免费把脉评估，针灸、艾灸、草本泥灸与正骨调理，价格公开，WhatsApp 预约。" image="tcm-hero.jpg?osw=0.9.23" />
+        <Hero eyebrow="One Spa · 中医部 · 吉隆坡" title={<>中医养生，现在也在 One Spa</>} copy="驻店中医师先免费把脉，再谈要不要做。针灸、艾灸、草本泥灸与正骨调理都有，价格公开，WhatsApp 就能约。" image="tcm-hero.jpg?osw=0.9.23" />
         <Chips items={tcmChips} />
-        <section id="tcm-pulse"><SectionHead eyebrow="免费体验" title="免费中医把脉" sub="一对一评估体质与当前状态，先评估，再给适合你的调理建议。" /><div className="container"><div className="deal"><b>全身药拓 · 肩颈脊柱调理 · 睡眠压力调理 · 药膳茶饮搭配</b></div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="预约免费把脉" telegramLabel="Telegram 预约" /></div></div></section>
+        <section id="tcm-pulse"><SectionHead eyebrow="免费体验" title="免费中医把脉" sub="一对一看你的体质和眼下的状态，评估完才谈该怎么调。" /><div className="container"><div className="deal"><b>全身药拓 · 肩颈脊柱调理 · 睡眠压力调理 · 药膳茶饮搭配</b></div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="预约免费把脉" telegramLabel="Telegram 预约" /></div></div></section>
         <section id="tcm-services"><SectionHead eyebrow="养生项目" title="五项传统护理，先约先得" sub="每个 session 都是一对一；列出的价格就是到店付款价。请 WhatsApp 提前预约。" /><div className="container"><div className="fac-grid">{tcmTreatments.map(([title, image, desc, price]) => <article className="fac" key={title}><div className="ph"><img src={`${assetBase}/${image}`} alt={title} /></div><div className="fb"><h3>{title}</h3><p>{desc}</p>{price ? <p><b>{price}</b></p> : null}</div></article>)}</div></div></section>
         <section id="targeted-care"><SectionHead eyebrow="中医调理 · CHINESE MEDICINE CARE" title="Traditional Chinese Medicine Specialties" sub="由中医师评估后安排的一对一传统调理" /><div className="container"><MiniGrid items={specialties} /><div className="deal">具体项目、时长及适用情况，以中医师现场评估为准</div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="WhatsApp 预约" telegramLabel="Telegram 预约" /></div></div></section>
         <section id="physician"><SectionHead eyebrow="医师项目" title="中医师操作项目" sub="针灸、小针刀与刺络均由中医师亲自操作，必须先把脉评估。" /><div className="container"><MiniGrid items={physician} /><div className="deal">列出的价格为到店付款价，先免费把脉，适合才继续。</div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="预约医师项目" telegramLabel="Telegram 预约" /></div></div></section>
@@ -867,7 +867,7 @@ function FaqPageCn() {
 }
 
 const visitNotesCn: [string, string][] = [
-  ["地址", "吉隆坡 Viva Home Mall 二楼 Lot No. 2-53 & 2-56，85 Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur，位于 Cheras 一带，从武吉免登与 KLCC 开车很快到。"],
+  ["地址", "吉隆坡 Viva Home Mall 二楼 Lot No. 2-69 & 2-70，85 Jalan Loke Yew, Taman Miharja, 52200 Kuala Lumpur，位于 Cheras 一带，从武吉免登与 KLCC 开车很快到。"],
   ["营业时间", "全年无休，每天 24 小时营业，周末与公共假期照常。"],
   ["停车", "直接停在 Viva Home Mall，再搭电梯上二楼；Grab 或德士可在商场正门上下车。"],
   ["预约方式", "线上选配套与日期付款，或 WhatsApp 找我们；请至少提前 1 小时预约，到店出示订单即可。"],
@@ -885,7 +885,7 @@ function ContactPageCn() {
           <SectionHead eyebrow="One Spa · 联系我们" title="来找我们" />
           <div className="container">
             <div className="cinfo-wrap">
-              <div className="cinfo"><span className="ck">地址</span><span className="cv">Lot No. 2-53 & 2-56, Level 2, Viva Home Mall, 85, Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur</span></div>
+              <div className="cinfo"><span className="ck">地址</span><span className="cv">Lot No. 2-69 & 2-70, Level 2, Viva Home Mall, 85, Jalan Loke Yew, Taman Miharja, 52200 Kuala Lumpur</span></div>
               <div className="cinfo"><span className="ck">营业时间</span><span className="cv">每天 24 小时营业</span></div>
               <div className="cinfo"><span className="ck">WhatsApp</span><span className="cv"><a href={whatsappHrefCn} target="_blank" rel="noopener">{whatsappNumberDisplay}（点击聊天）</a></span></div>
               <div className="cinfo"><span className="ck">Telegram</span><span className="cv"><a href={telegramHrefCn} target="_blank" rel="noopener">{telegramDisplay}（点击聊天）</a></span></div>
@@ -925,8 +925,8 @@ function OnsenPageCn() {
     <>
       <Header active="Facilities" locale="cn" />
       <main>
-        <Hero eyebrow="One Spa · 中式汤泉" title={<>吉隆坡 24 小时中式汤泉</>} copy="热汤、汗蒸、桑拿与冰池交替循环，12 小时内慢慢泡、慢慢休息。" image="hero-onsen-warm.jpg" />
-        <section><SectionHead eyebrow="泡法" title="热汤 · 汗蒸 · 冰池" sub="按自己的节奏循环，不赶时间。" /><div className="container"><MiniGrid items={[["热汤", "先让身体慢慢暖起来。"], ["汗蒸或桑拿", "出一身透汗，放松紧绷感。"], ["冰池", "短暂冷却，整个人更清醒。"]]} /></div></section>
+        <Hero eyebrow="One Spa · 中式汤泉" title={<>吉隆坡 24 小时温泉汤泉</>} copy="热汤泡开，汗蒸或桑拿出汗，再进冰池收一收。一轮一轮来，12 小时够你慢慢泡、慢慢躺。" image="hero-onsen-warm.jpg" />
+        <section><SectionHead eyebrow="泡法" title="热汤 · 汗蒸 · 冰池" sub="按自己的节奏循环，不赶时间。" /><div className="container"><MiniGrid items={[["热汤", "先泡进去，让身体从里面暖起来。"], ["汗蒸或桑拿", "发一身透汗，把绷着的地方松开。"], ["冰池", "短短几秒冷下来，人立刻清醒。"]]} /></div></section>
       </main>
       <Footer locale="cn" />
       <FloatingWhatsApp locale="cn" />

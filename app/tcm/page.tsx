@@ -118,8 +118,8 @@ export default function TCMPage() {
       <main>
         <Hero
           eyebrow="One Spa · TCM Wellness · Kuala Lumpur"
-          title={<>TCM Wellness, now at One Spa</>}
-          copy="Resident TCM physicians with a free pulse-reading assessment - acupuncture, moxibustion, herbal mud therapy and bone-setting, all with listed prices. Book on WhatsApp."
+          title={<>Chinese Medicine at One Spa KL</>}
+          copy="Our resident physicians read your pulse for free before anything else is decided. Acupuncture, moxibustion, herbal mud therapy and bone-setting follow from there, every price listed. WhatsApp us to book."
           image="tcm-hero.jpg?osw=0.9.23"
         />
 
@@ -138,7 +138,7 @@ export default function TCMPage() {
           <SectionHead
             eyebrow="Free experience"
             title="Free TCM Pulse Reading"
-            sub="A one-on-one assessment of your constitution and current state - assessment first, then a plan made for you."
+            sub="One-on-one, looking at your constitution and how you are right now. The assessment comes first; the plan comes out of it."
           />
           <div className="container">
             <div className="deal">
@@ -154,7 +154,7 @@ export default function TCMPage() {
           <SectionHead
             eyebrow="Wellness treatments"
             title="Five traditional treatments, first booked first served"
-            sub="Every session is one-on-one; listed prices are what you pay in store. Book ahead on WhatsApp."
+            sub="Sessions are one-on-one, and the price listed is the price at the counter. Book ahead on WhatsApp."
           />
           <div className="container">
             <div className="fac-grid">
@@ -173,7 +173,7 @@ export default function TCMPage() {
         </section>
 
         <section id="targeted-care">
-          <SectionHead eyebrow="中医调理 · CHINESE MEDICINE CARE" title="Traditional Chinese Medicine Specialties" sub="One-on-one traditional care, assessed by our TCM physicians" />
+          <SectionHead eyebrow="中医调理 · CHINESE MEDICINE CARE" title="Traditional Chinese Medicine Specialties" sub="Traditional one-on-one care, arranged after our physicians have assessed you" />
           <div className="container">
             <MiniGrid items={specialties} />
             <div className="deal">具体项目、时长及适用情况，以中医师现场评估为准</div>
@@ -182,7 +182,7 @@ export default function TCMPage() {
         </section>
 
         <section id="physician">
-          <SectionHead eyebrow="Physician services" title="Physician Treatment Services" sub="Performed personally by our TCM physicians, always after a pulse-reading assessment." />
+          <SectionHead eyebrow="Physician services" title="Physician Treatment Services" sub="Carried out by the physicians themselves, and never before a pulse reading." />
           <div className="container">
             <MiniGrid items={physician} />
             <div className="deal">Listed prices are final and paid in store - free pulse reading first, and we only proceed where it suits you.</div>
@@ -191,7 +191,7 @@ export default function TCMPage() {
         </section>
 
         <section id="meridian">
-          <SectionHead eyebrow="Signature treatment" title="Full-Body Herbal Meridian Care" sub="A whole-body warming ritual guided by the twelve meridians - from tight to loose, cold to warm." />
+          <SectionHead eyebrow="Signature treatment" title="Full-Body Herbal Meridian Care" sub="A warming full-body ritual that follows the twelve meridians, working from tight to loose and cold to warm." />
           <div className="container">
             <MiniGrid items={infoBlocks.meridian} />
             <div className="deal"><b>RM699</b> · Special price · paid in store; book ahead on WhatsApp</div>
@@ -200,7 +200,7 @@ export default function TCMPage() {
         </section>
 
         <section id="intimate">
-          <SectionHead eyebrow="Ladies only" title="Women's Intimate Wellness" sub="Clean, professional and completely private care for women." />
+          <SectionHead eyebrow="Ladies only" title="Women's Intimate Wellness" sub="Care for women, handled cleanly, professionally and in complete privacy." />
           <div className="container">
             <MiniGrid items={infoBlocks.intimate} />
             <div className="deal">Pricing and slots on WhatsApp</div>

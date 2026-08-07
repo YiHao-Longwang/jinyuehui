@@ -295,9 +295,9 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
             <img className="flogo" src={`${assetBase}/logo-cream.svg`} alt={isCn ? "One Spa 壹号汤泉" : "One Spa"} />
             <div>
               <div className="slogan">
-                {isCn ? "给自己 12 小时" : "Give Yourself 12 Hours"}
+                {isCn ? "泡足 12 小时" : "Twelve Hours in a"}
                 <br />
-                {isCn ? "泡进一池温汤" : "In a Warm Spring"}
+                {isCn ? "吉隆坡 24 小时温泉会所" : "Kuala Lumpur Hot Spring"}
               </div>
               <p className="footer-copy">
                 {isCn
@@ -346,9 +346,9 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
           <div className="col footer-visit-col">
             <h6>{isCn ? "地址" : "Visit"}</h6>
             <p>
-              Lot No. 2-53 & 2-56, Level 2, Viva Home Mall,
+              Lot No. 2-69 & 2-70, Level 2, Viva Home Mall,
               <br />
-              85, Jalan Loke Yew, Taman Miharja, 55200 Kuala Lumpur
+              85, Jalan Loke Yew, Taman Miharja, 52200 Kuala Lumpur
             </p>
             <ContactButtons locale={locale} className="footer-mini-contact" />
           </div>

@@ -26,19 +26,19 @@ const packageCards = [
     title: "Twin 12-Hour Pass",
     tag: "2 Adults · Buy 1 Free 1",
     image: "img-b1f1.jpg",
-    desc: "One order admits 2 adults together",
+    desc: "Book once, walk in as two",
     prices: [
       { label: "Sun-Thu", price: "169", per: "/ 2 adults" },
       { label: "Fri, Sat & Public Holidays", price: "199", per: "/ 2 adults" },
     ],
     features: [
-      "Pools, steam, sauna & rest lounges",
-      "Buffet dinner 6-9pm + light meals at other hours",
-      "A full 12-hour stay - best value for two",
+      "Every pool, the steam room, the saunas and the rest lounges",
+      "Buffet dinner between 6 and 9pm, lighter food the rest of the day",
+      "Twelve full hours, and the cheapest way in for a pair",
     ],
     notes: [
-      "Sunday counts as a weekday here - Sun-Thu all get the lower price.",
-      "Total for 2 adults - not per person.",
+      "Sunday sits on the weekday tier with Monday through Thursday, so it takes the lower price.",
+      "That figure covers both adults. It is not a per-person price.",
     ],
     button: "Book",
   },
@@ -47,19 +47,19 @@ const packageCards = [
     title: "Solo 12-Hour Pass + Free 30-min Massage",
     tag: "Solo · Online Bonus",
     image: "img-solo.jpg",
-    desc: "A full 12 hours plus a massage, just for you",
+    desc: "Twelve hours to yourself, with a massage thrown in",
     prices: [
       { label: "Sun-Thu", price: "169", per: "/ person" },
       { label: "Fri, Sat & Public Holidays", price: "199", per: "/ person" },
     ],
     features: [
-      "Pools, steam, sauna, rest lounges + buffet dinner",
-      "Free 30-min massage: foot & leg, or Chinese partial - your pick",
-      "Coming as 3 or 5? Pair this with Buy 1 Free 1 (see combos below)",
+      "Pools, steam room, saunas, rest lounges and the buffet dinner",
+      "A complimentary 30-minute massage - foot and leg, or Chinese partial, whichever you prefer",
+      "Odd-numbered group? Add this to a Buy 1 Free 1 - the combos below show how",
     ],
     notes: [
       "Sunday counts as a weekday here - Sun-Thu all get the lower price.",
-      "Online booking only - walk-ins don't get the bonus. We register the bonus on your order automatically.",
+      "The massage comes with online bookings only; walking in does not include it. We attach it to your order for you.",
     ],
     button: "Book",
   },
@@ -68,16 +68,16 @@ const packageCards = [
     title: "Daytime Massage Package",
     tag: "Daytime · 9am-5pm",
     image: "img-daytime.jpg",
-    desc: "Enter 9am-5pm daily · solo-friendly",
+    desc: "Arrive any time between 9am and 5pm, on your own if you like",
     prices: [
       { label: "Per person - same price daily", was: "RM498", price: "199", per: "/ person" },
     ],
     features: [
-      "Pick 1 of 3: 60-min massage / 60-min foot therapy / detox (2 of 5)",
-      "Pools, steam & sauna",
-      "Dining, fruits & ice cream",
+      "Choose one: an hour of massage, an hour of foot therapy, or a detox treatment (any 2 of 5)",
+      "The pools, the steam room and the saunas",
+      "Food, fruit and ice cream",
     ],
-    notes: ["Booking time = entry time; staying past 5pm needs a top-up ticket."],
+    notes: ["The time you book is the time you come in. Staying beyond 5pm means topping up to a full ticket."],
     button: "Book · RM199 / person",
   },
   {
@@ -85,17 +85,17 @@ const packageCards = [
     title: "Yangzhou Body Scrub Package",
     tag: "Deep Cleanse · Scrub + Pass",
     image: "img-scrub.jpg",
-    desc: "Traditional scrub, 12-hour pass included",
+    desc: "The old-school scrub, with entry already covered",
     prices: [
       { label: "Sun-Thu", was: "RM319", price: "199", per: "/ person" },
       { label: "Fri, Sat & Public Holidays", was: "RM349", price: "239", per: "/ person" },
     ],
     features: [
-      "A 30-min traditional Yangzhou scrub - soak first, then scrub",
-      "12-hour entry: pools, steam & sauna",
+      "Thirty minutes of traditional Yangzhou scrubbing, done after you have soaked",
+      "Twelve hours of entry - pools, steam room, saunas",
       "Dining, fruits & ice cream",
     ],
-    notes: ["12-hour entry already included - no separate ticket needed."],
+    notes: ["Entry for the full 12 hours is built into this price. There is no second ticket to buy."],
     button: "Book",
   },
   {
@@ -103,14 +103,14 @@ const packageCards = [
     title: "All-Day Scrub & Massage Package",
     tag: "Scrub + Massage · All Day",
     image: "img-scrub.jpg",
-    desc: "12-hour pass + 30-min scrub + 60-min massage",
+    desc: "Entry, a scrub and an hour of massage, bought together",
     prices: [{ label: "Package", price: "379", per: "/ person" }],
     features: [
-      "12-hour spa access with buffet",
-      "30-min Yangzhou body scrub",
-      "60-min tuina or foot massage",
+      "Twelve hours in the spa, buffet included",
+      "A 30-minute Yangzhou body scrub",
+      "An hour of tuina or foot massage",
     ],
-    notes: ["One ticket includes spa access, scrub and massage."],
+    notes: ["All three - entry, scrub and massage - sit on the one ticket."],
     button: "Book · RM379 / person",
   },
   {
@@ -118,14 +118,14 @@ const packageCards = [
     title: "Daytime Duo Package",
     tag: "For Two · Daytime",
     image: "img-daytime.jpg",
-    desc: "Daytime entry for two + one 60-min treatment each",
+    desc: "Two daytime tickets, and an hour of treatment for each of you",
     prices: [{ label: "Package for two", price: "379", per: "/ 2 people" }],
     features: [
-      "Two daytime passes",
-      "One 60-min treatment each",
-      "Choose massage, foot therapy or detox care",
+      "A daytime pass each",
+      "Sixty minutes of treatment per person",
+      "Take your pick of massage, foot therapy or detox care",
     ],
-    notes: ["Daily 9:00-17:00 · one package covers two guests."],
+    notes: ["Runs 9:00 to 17:00 every day, and the one package covers both of you."],
     button: "Book · RM379 / 2 people",
   },
 ];
@@ -268,8 +268,8 @@ export default function PackagesPage() {
       <main>
         <Hero
           eyebrow="One Spa · Kuala Lumpur · Open 24 Hours"
-          title={<>Sink Into a Warm Spring</>}
-          copy="One ticket, a full 12-hour stay - pools, steam, massage & dining all included."
+          title={<>Packages &amp; Prices at One Spa KL</>}
+          copy="Whichever package you pick, it buys the same twelve hours: the pools, the steam room, a massage if it is included, and food when you want it."
           image="hero-packages-rain.jpg?osw=0.9.23"
         />
 
@@ -286,9 +286,9 @@ export default function PackagesPage() {
 
         <section className="trust">
           <div className="container">
-            <div className="t"><span className="dia" />Pay and get a confirmation email - show your order at the front desk</div>
-            <div className="t"><span className="dia" />12 hours from check-in - pools, steam, lounges & dining all included</div>
-            <div className="t"><span className="dia" />Reschedule free up to 1 day ahead, unlimited times · <a href="#know">Policy</a></div>
+            <div className="t"><span className="dia" />Once you pay, a confirmation email lands in your inbox - show it at the front desk</div>
+            <div className="t"><span className="dia" />Your 12 hours start at check-in, with pools, steam, lounges and dining all covered</div>
+            <div className="t"><span className="dia" />Move your booking as often as you need, free, up to a day before · <a href="#know">Policy</a></div>
           </div>
         </section>
 
@@ -346,11 +346,11 @@ export default function PackagesPage() {
           <div className="container">
             <div className="combo">
               <div className="grid2">
-                <div className="row"><h4>2 adults</h4><p>One Buy 1 Free 1 order covers you both.</p></div>
-                <div className="row"><h4>3 or 5 adults</h4><p>Pairs take Buy 1 Free 1; the extra person takes a Solo Pass - and still gets the free 30-min massage. E.g. 3 adults Sun-Thu: RM169 + RM169.</p></div>
+                <div className="row"><h4>2 adults</h4><p>A single Buy 1 Free 1 order is all you need.</p></div>
+                <div className="row"><h4>3 or 5 adults</h4><p>Split into pairs on Buy 1 Free 1, then the person left over books a Solo Pass - the free 30-minute massage still applies to them. Three adults Sun-Thu, for instance, comes to RM169 + RM169.</p></div>
                 <div className="row">
                   <h4>With kids</h4>
-                  <p>Adults book as above; each child adds a Kids Ticket (age 12 & under, with an adult; under 2 free at the front desk).</p>
+                  <p>Adults follow the same combinations; every child needs a Kids Ticket on top (12 and under, accompanied by an adult - under 2s are registered free at the desk).</p>
                   <div className="osw-detail-links">
                     <a href="/packages/#know">Weekday ticket details</a><span aria-hidden="true">·</span><a href="/packages/#know">Weekend / PH details</a>
                   </div>
@@ -358,7 +358,7 @@ export default function PackagesPage() {
                 </div>
                 <div className="row">
                   <h4>10+ / company groups</h4>
-                  <p>Message us - group deals are negotiable.</p>
+                  <p>Send us a message. For groups that size, the price is something we can talk about.</p>
                   <div className="mini-contact-row">
                     <a className="mini contact-wa" href={whatsappHref} target="_blank" rel="noopener">WhatsApp Us</a>
                     <a className="mini contact-tg" href={telegramHref} target="_blank" rel="noopener">Telegram Us</a>
@@ -374,7 +374,7 @@ export default function PackagesPage() {
           <SectionHead
             eyebrow="Massage & Treatments"
             title="Add a Treatment"
-            sub="Treatments need an entry ticket; spend RM499+ in one bill and entry is free."
+            sub="Treatments are booked alongside an entry ticket - though if one bill passes RM499, we waive the entry."
           />
           <div className="container">
             <div className="deal">
@@ -403,7 +403,7 @@ export default function PackagesPage() {
           <SectionHead
             eyebrow="Drink Barrels"
             title="Party Drink Barrels"
-            sub="Skip the single glass - barrels from 1.5L, made for match nights, private rooms and parties."
+            sub="Nobody orders by the glass here. Barrels start at 1.5L, which is about right for a match night, a private room or a party."
           />
           <div className="container">
             <Band cn="酒水桶" en="Drink Barrels · 1.5L / 3L" />

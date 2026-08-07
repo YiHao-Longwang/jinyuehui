@@ -46,7 +46,7 @@ const products = {
     weekday: 169,
     weekend: 199,
     kind: "spa-tiered",
-    leadHours: 1,
+    leadHours: 0,
     fee: { sc: 0.1, sst: 0.08 },
   },
   solo: {
@@ -56,7 +56,7 @@ const products = {
     weekday: 169,
     weekend: 199,
     kind: "spa-tiered",
-    leadHours: 1,
+    leadHours: 0,
     fee: { sc: 0.1, sst: 0.08 },
   },
   daytime: {
@@ -65,7 +65,7 @@ const products = {
     unit: "/ person",
     single: 199,
     kind: "spa-daily",
-    leadHours: 1,
+    leadHours: 0,
     hours: [9, 17],
     fee: { sc: 0.1, sst: 0.08 },
   },
@@ -76,7 +76,7 @@ const products = {
     weekday: 199,
     weekend: 239,
     kind: "spa-tiered",
-    leadHours: 1,
+    leadHours: 0,
     fee: { sc: 0.1, sst: 0.08 },
   },
   "allday-sm": {
@@ -85,7 +85,7 @@ const products = {
     unit: "/ person",
     single: 379,
     kind: "spa-daily",
-    leadHours: 1,
+    leadHours: 0,
     fee: { sc: 0.1, sst: 0.08 },
   },
   "daytime-duo": {
@@ -94,7 +94,7 @@ const products = {
     unit: "/ 2 people",
     single: 379,
     kind: "spa-daily",
-    leadHours: 1,
+    leadHours: 0,
     hours: [9, 17],
     fee: { sc: 0.1, sst: 0.08 },
   },
@@ -105,7 +105,7 @@ const products = {
     weekday: 58,
     weekend: 88,
     kind: "spa-tiered",
-    leadHours: 1,
+    leadHours: 0,
     fee: { sc: 0.1, sst: 0.08 },
   },
   "outcall-classic": {

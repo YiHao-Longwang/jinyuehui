@@ -41,7 +41,7 @@
       weekend: 199,
       stay: "12h",
       kind: "spa-tiered",
-      leadHours: 1,
+      leadHours: 0,
       sc: 0.1,
       sst: 0.08
     },
@@ -54,7 +54,7 @@
       weekend: 199,
       stay: "12h",
       kind: "spa-tiered",
-      leadHours: 1,
+      leadHours: 0,
       sc: 0.1,
       sst: 0.08
     },
@@ -66,7 +66,7 @@
       single: 199,
       stay: "daytime",
       kind: "spa-daily",
-      leadHours: 1,
+      leadHours: 0,
       hours: [9, 17],
       sc: 0.1,
       sst: 0.08
@@ -80,7 +80,7 @@
       weekend: 239,
       stay: "12h",
       kind: "spa-tiered",
-      leadHours: 1,
+      leadHours: 0,
       sc: 0.1,
       sst: 0.08
     },
@@ -92,7 +92,7 @@
       single: 379,
       stay: "12h",
       kind: "spa-daily",
-      leadHours: 1,
+      leadHours: 0,
       sc: 0.1,
       sst: 0.08
     },
@@ -104,7 +104,7 @@
       single: 379,
       stay: "daytime",
       kind: "spa-daily",
-      leadHours: 1,
+      leadHours: 0,
       hours: [9, 17],
       sc: 0.1,
       sst: 0.08
@@ -118,7 +118,7 @@
       weekend: 88,
       stay: "12h",
       kind: "spa-tiered",
-      leadHours: 1,
+      leadHours: 0,
       sc: 0.1,
       sst: 0.08
     },
@@ -291,7 +291,7 @@
 
   function minStartTime(product) {
     var d = new Date();
-    d.setHours(d.getHours() + Number(product.leadHours || 1));
+    d.setHours(d.getHours() + Number(product.leadHours == null ? 1 : product.leadHours));
     return d;
   }
 
@@ -302,12 +302,6 @@
 
   function tierFor(product, date) {
     return product.single ? "single" : isWeekendOrHoliday(date) ? "weekend" : "weekday";
-  }
-
-  function taxLabel(product, lang) {
-    return product.kind === "home"
-      ? tr(lang, "+ 8% SST only", "+ 8% SST，无服务费")
-      : tr(lang, "++ = 10% service charge + 8% SST", "++ = 10% 服务费 + 8% SST");
   }
 
   function basePrice(product, date) {
@@ -328,6 +322,15 @@
     var month = date.getMonth();
     if (lang === "cn") return year + " 年 " + (month + 1) + " 月";
     return date.toLocaleString("en-US", { month: "long", year: "numeric" });
+  }
+
+  function selectedDateLabel(date, lang) {
+    var d = new Date(date + "T12:00:00+08:00");
+    if (lang === "cn") {
+      return d.getMonth() + 1 + " 月 " + d.getDate() + " 日（星期" + ["日", "一", "二", "三", "四", "五", "六"][d.getDay()] + "）";
+    }
+    var mon = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][d.getMonth()];
+    return mon + " " + d.getDate() + " (" + ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][d.getDay()] + ")";
   }
 
   function lineFor(item) {
@@ -526,15 +529,7 @@
 
   function rateCards(product, lang) {
     if (product.single) {
-      var suffix = product.kind === "home" ? "" : "<sup>++</sup>";
-      return (
-        '<div class="booking-rate-card"><span>' +
-        tr(lang, product.kind === "home" ? "Daily package price" : "Daily", product.kind === "home" ? "每天同价 · 配套价" : "每天同价") +
-        "</span><b>" +
-        baseMoney(product.single) +
-        suffix +
-        "</b></div>"
-      );
+      return "";
     }
 
     return (
@@ -630,88 +625,56 @@
       : '<span class="booking-no-slots">' + tr(bookingState.lang, "No online slots left for this date.", "这个日期已没有可线上预约时间。") + "</span>";
   }
 
-  function bookingNotes(code, product, lang) {
-    var commonPrice = product.kind === "home"
-      ? tr(lang, "Home massage is subject to 8% SST only; no service charge.", "上门按摩只加 8% SST，不收服务费。")
-      : product.single
-        ? tr(lang, "Same-price packages stay the same every day; the final total updates after date and quantity.", "每天同价配套不分平日周末；选日期和数量后自动显示总额。")
-        : tr(lang, "Pick a date and the price updates automatically; public holidays use the weekend rate.", "选日期价格自动跟着跳；公共假期算周末价。");
+  function bookingNotes(code, lang) {
     var notes = {
       b1f1: [
-        tr(lang, "One order admits 2 adults together - same day, same time.", "一张订单两位大人同行入场，需同一天同一时间。"),
-        tr(lang, "Pools, steam, sauna, rest lounges and a full 12-hour stay are included.", "包含泡池、汗蒸、桑拿、休息区与完整 12 小时。"),
-        tr(lang, "Buffet dinner runs 6-9pm; light meals are available at other hours.", "晚餐自助 6-9pm；其他时段提供简餐。"),
-        tr(lang, "Sunday counts as a weekday here - Sun-Thu all get the lower price.", "星期日在这里算平日，星期日到星期四都是低价档。"),
-        tr(lang, "Total for 2 adults - not per person.", "价格是 2 位大人的总价，不是每人价。"),
-        commonPrice
+        tr(lang, "Both adults enter together — same day, same time; the pass can't be split into two visits", "两位要同一天同一时间一起进场，不能拆开用"),
+        tr(lang, "Pick a date and the price updates automatically; public holidays use the weekend rate", "选日期价格自动跟着跳，公共假期算周末价"),
+        tr(lang, "Add same-day treatments under RM499 — 20% off (auto-applied); RM499+ treatments aren't discounted, each covers free entry for one", "同一订单加购同日按摩，RM499 以下全部 8 折（自动折扣）；RM499 及以上项目不折——单项即免 1 位门票"),
+        tr(lang, "Bringing kids? Each child just needs a Kids Ticket — they don't take an adult spot", "带小孩？小孩买儿童票就行，不占大人名额")
       ],
       solo: [
-        tr(lang, "A full 12 hours plus a massage, just for you.", "一个人也能泡足 12 小时，再送一项按摩。"),
-        tr(lang, "Free 30-min massage: foot & leg, or Chinese partial - choose on arrival.", "免费 30 分钟按摩：足腿或中式局部，到店自选。"),
-        tr(lang, "Pools, steam, sauna, rest lounges and buffet dinner are included.", "包含泡池、汗蒸、桑拿、休息区与晚餐自助。"),
-        tr(lang, "Online booking only - walk-ins don't get the bonus; we register it automatically on your order.", "只限线上预约，现场 walk-in 没有这个赠送；系统会自动登记在订单内。"),
-        tr(lang, "Coming as 3 or 5? Pair this with Buy 1 Free 1 for the best value.", "3 位或 5 位来？搭配买一送一最划算。"),
-        commonPrice
+        tr(lang, "The free massage is an online-booking bonus — walk-ins don't get it", "线上预订才送按摩；到店现买没有这个赠送"),
+        tr(lang, "We register the bonus on your order automatically, nothing to note down", "下单时系统自动帮你登记赠送，不用自己写备注"),
+        tr(lang, "Choose on arrival: 30-min foot & leg, or 30-min Chinese partial", "到店选：足疗腿部 30 分钟，或中式局部 30 分钟"),
+        tr(lang, "Add same-day treatments under RM499 — 20% off (auto-applied); RM499+ treatments aren't discounted, each covers free entry for one", "同一订单加购同日按摩，RM499 以下全部 8 折（自动折扣）；RM499 及以上项目不折——单项即免 1 位门票")
       ],
       daytime: [
-        tr(lang, "Enter between 9:00 AM and 5:00 PM daily; your booking time is your entry time.", "每日 9am-5pm 入场；预约时间就是入场时间。"),
-        tr(lang, "Pick 1 of 3 on arrival: 60-min massage / 60-min foot therapy / detox care (2 of 5).", "到店 3 选 1：60 分钟按摩 / 60 分钟足疗 / 排毒护理 5 选 2。"),
-        tr(lang, "Pools, steam, sauna, dining, fruits and ice cream are included.", "包含泡池、汗蒸、桑拿、餐饮、水果与冰淇淋。"),
-        tr(lang, "Staying past 5:00 PM needs a top-up ticket at the front desk.", "超过 5pm 需要在前台补差价。"),
-        commonPrice
+        tr(lang, "Booking time = entry time; staying past 5pm needs a top-up ticket", "预约时间=入场时间；5PM 后继续待要补门票")
       ],
       scrub: [
-        tr(lang, "Traditional 30-min Yangzhou body scrub - soak first, then scrub.", "30 分钟传统扬州搓澡，先泡后搓。"),
-        tr(lang, "12-hour entry is already included - no separate ticket needed.", "12 小时门票已经包含，不需要另买入场券。"),
-        tr(lang, "Pools, steam, sauna, dining, fruits and ice cream are included.", "包含泡池、汗蒸、桑拿、餐饮、水果与冰淇淋。"),
-        commonPrice
+        tr(lang, "12-hour entry already included — no separate ticket needed", "已含 12 小时门票，不用另外买票")
       ],
       "allday-sm": [
-        tr(lang, "One ticket includes 12-hour spa access with buffet.", "一张票包含 12 小时温泉入场，含餐饮。"),
-        tr(lang, "Includes a 30-min Yangzhou body scrub.", "包含 30 分钟扬州搓澡。"),
-        tr(lang, "Includes a 60-min tuina or foot massage.", "包含 60 分钟推拿或足疗。"),
-        tr(lang, "Spa access, scrub and massage are used on the same visit.", "入场、搓澡与按摩需同次到店使用。"),
-        commonPrice
+        tr(lang, "One ticket includes 12-hour spa access, buffet, a 30-minute Yangzhou scrub and a 60-minute massage", "一张票已含 12 小时汤泉、自助餐、30 分钟扬州搓澡与 60 分钟按摩"),
+        tr(lang, "Choose tuina or foot therapy for the 60-minute massage on arrival", "60 分钟按摩可选推拿或足疗，到店确认")
       ],
       "daytime-duo": [
-        tr(lang, "Two daytime passes - both guests enter together.", "两张日间入场，两位需同行入场。"),
-        tr(lang, "Each guest gets one 60-min treatment.", "每人一项 60 分钟护理。"),
-        tr(lang, "Choose massage, foot therapy or detox care.", "按摩、足疗或排毒护理可选。"),
-        tr(lang, "Daily 9:00 AM-5:00 PM; one package covers two guests.", "每日 9:00-17:00；一个套餐覆盖两位客人。"),
-        commonPrice
+        tr(lang, "One package covers two guests: daytime entry for both plus one 60-minute treatment each", "一份套餐含两人：双人日间门票 + 每人一项 60 分钟护理"),
+        tr(lang, "Book daily from 9:00 to 17:00; the time selected is your entry time", "每日 9:00–17:00 可订；预约时间即入场时间")
       ],
       kids: [
-        tr(lang, "Kids Ticket is for children age 12 and under, entering with an adult.", "儿童票适用于 12 岁或以下，并需与成人同行入场。"),
-        tr(lang, "Adults book as usual; each child adds one Kids Ticket.", "成人照常预约；每位儿童加购一张儿童票。"),
-        tr(lang, "Age 2 and under registers free at the front desk.", "2 岁或以下到前台登记免费。"),
-        commonPrice
+        tr(lang, "Kids Ticket: age 12 & under, must be accompanied by an adult", "儿童票：12 岁及以下，须有大人陪同入场"),
+        tr(lang, "Age 2 & under enter free — just register at the front desk", "2 岁及以下不用买票，到前台登记就免费")
       ],
       "outcall-classic": [
-        tr(lang, "60 min oil massage + 60 min traditional Thai - in that order, on purpose.", "60 分钟精油按摩 + 60 分钟传统泰式，顺序固定。"),
-        tr(lang, "Start anytime 9:00 AM-10:00 PM at your hotel or home.", "开始时间 9:00 AM-10:00 PM，可在酒店或家里。"),
-        tr(lang, "Earliest online slot is 3 hours from booking; sooner than that, WhatsApp us.", "线上最早可预约 3 小时后的时段；更急请 WhatsApp。"),
-        tr(lang, "RM100 travel fee within 30km is paid separately in cash on arrival.", "30km 内 RM100 交通费到场现金另付。"),
-        commonPrice
+        tr(lang, "Fixed two-hour session; choose a start time from 9:00 am to 10:00 pm daily", "固定 2 小时；每日 09:00–22:00 可选开始时段"),
+        tr(lang, "After payment, our team confirms the address and arrival time on WhatsApp", "付款后客服通过 WhatsApp 确认地址与到达时间"),
+        tr(lang, "RM100 travel fee is paid in cash on arrival; for bookings within 3 hours, WhatsApp us directly", "车费 RM100 到府现场现金另付；3 小时内加急请直接 WhatsApp")
       ],
       "outcall-anytime": [
-        tr(lang, "Fixed 120 minutes at RM798 flat.", "固定 120 分钟，RM798。"),
-        tr(lang, "Tell us your preferred mix of oil, tuina, Thai or foot work.", "可备注偏好的精油、推拿、泰式或足疗组合。"),
-        tr(lang, "Bookable round the clock - earliest slot 3 hours from booking.", "全天可预约，最早为下单后 3 小时。"),
-        tr(lang, "Message us directly for a longer session.", "需要更长时间请直接 WhatsApp。"),
-        tr(lang, "RM100 travel fee within 30km is paid separately in cash on arrival.", "30km 内 RM100 交通费到场现金另付。"),
-        commonPrice
+        tr(lang, "Fixed two-hour session at RM798 flat; session length is not selected at checkout", "固定 2 小时、一口价 RM798，不在结账页自选时长"),
+        tr(lang, "After payment, our team confirms the address and arrival time on WhatsApp", "付款后客服通过 WhatsApp 确认地址与到达时间"),
+        tr(lang, "RM100 travel fee is paid in cash on arrival; for a longer session or bookings within 3 hours, WhatsApp us directly", "车费 RM100 到府现场现金另付；更长时段或 3 小时内加急请直接 WhatsApp")
       ],
       "outcall-fourhands": [
-        tr(lang, "Four hands in sync, one guest only.", "两位技师同步，只服务一位客人。"),
-        tr(lang, "Back and legs at the same time - deeper, faster release.", "背部与腿部同时护理，释放更快。"),
-        tr(lang, "Start daily from 9:00 AM to 10:00 PM.", "每日 9:00 AM-10:00 PM 可开始。"),
-        tr(lang, "Earliest online slot is 3 hours from booking; sooner than that, WhatsApp us.", "线上最早可预约 3 小时后；更急请 WhatsApp。"),
-        tr(lang, "One RM100 travel fee within 30km covers both therapists and is paid on arrival.", "30km 内 RM100 交通费覆盖两位技师，到场另付。"),
-        commonPrice
+        tr(lang, "Fixed two-hour session with two therapists working on one guest", "固定 2 小时，两位技师同时为一位客人服务"),
+        tr(lang, "Choose a start time from 9:00 am to 10:00 pm daily; after payment, our team confirms the address and arrival time on WhatsApp", "每日 09:00–22:00 可选开始时段；付款后客服通过 WhatsApp 确认地址与到达时间"),
+        tr(lang, "RM100 travel fee is paid in cash on arrival; for bookings within 3 hours, WhatsApp us directly", "车费 RM100 到府现场现金另付；3 小时内加急请直接 WhatsApp")
       ]
     };
 
-    return (notes[code] || [commonPrice])
+    return (notes[code] || [])
       .map(function (note) {
         return "<p>· " + note + "</p>";
       })
@@ -723,34 +686,22 @@
     var form = el.querySelector("[data-booking-form]");
     var code = bookingState.code;
     var lang = bookingState.lang;
-    var product = products[code];
     var selectedDate = form.elements.date.value || today();
     var preview = lineFor({ code: code, date: selectedDate, time: form.elements.time.value || "00:00", qty: form.elements.qty.value });
-    var tier =
-      product.kind === "home"
-        ? tr(lang, "Home service", "上门服务")
-        : preview.tier === "weekend"
-        ? tr(lang, "Fri, Sat & PH", "星期五、六与公假")
-        : preview.tier === "weekday"
-          ? tr(lang, "Sun-Thu", "星期日-星期四")
-          : tr(lang, "Daily", "每天同价");
-    var priceSuffix = product.kind === "home" ? "" : "<sup>++</sup>";
+    var unitPreview = lineFor({ code: code, date: selectedDate, time: form.elements.time.value || "00:00", qty: 1 });
+    var unitTotal = Number((preview.price * preview.qty).toFixed(2));
+    var selectedText = lang === "cn"
+      ? "已选 " + selectedDateLabel(selectedDate, lang) + " · 当天 " + baseMoney(preview.price)
+      : selectedDateLabel(selectedDate, lang) + " · " + baseMoney(preview.price);
+    var allInText = lang === "cn"
+      ? " · 到手 " + money(unitPreview.total)
+      : " · " + money(unitPreview.total) + " all-in";
     el.querySelector("[data-booking-price]").innerHTML =
-      '<div><span>' +
-      tier +
-      " · " +
-      selectedDate +
-      '</span><strong>' +
-      baseMoney(preview.price) +
-      priceSuffix +
-      " " +
-      (lang === "cn" ? product.unitCn : product.unitEn) +
-      "</strong></div><div><span>" +
-      taxLabel(product, lang) +
-      '</span><b>' +
-      tr(lang, "Total ", "总额 ") +
-      money(preview.total) +
-      "</b></div>";
+      "<strong>" + selectedText + '<b class="booking-allin">' + allInText + "</b></strong>";
+    el.querySelector("[data-booking-submit]").textContent =
+      preview.qty > 1
+        ? tr(lang, "Book " + preview.qty + " · " + baseMoney(unitTotal), "预订 " + preview.qty + " 份 · " + baseMoney(unitTotal))
+        : tr(lang, "Book · " + baseMoney(preview.price), "预订 · " + baseMoney(preview.price));
   }
 
   function closeModal() {
@@ -780,15 +731,11 @@
     el.querySelector("[data-booking-title]").textContent = tr(lang, "Pick your date", "选到店日期");
     el.querySelector("[data-booking-rates]").innerHTML = rateCards(product, lang);
     el.querySelector("[data-booking-tier-note]").textContent =
-      product.kind === "home"
-        ? tr(lang, "Home massage price is daily flat rate. Travel fee is paid separately on arrival.", "上门按摩每天同价；交通费到场另付。")
-        : product.single
-          ? tr(lang, "Same price daily.", "每天同价。")
-          : tr(lang, "Sunday counts as weekday price.", "星期日也是平日价");
-    el.querySelector("[data-booking-note]").innerHTML = bookingNotes(code, product, lang);
+      product.single ? "" : tr(lang, "Sunday counts as weekday price.", "星期日也是平日价");
+    el.querySelector("[data-booking-note]").innerHTML = bookingNotes(code, lang);
     el.querySelector("[data-time-label]").textContent = lang === "cn" ? "时间" : "Time";
     el.querySelector("[data-qty-label]").textContent = lang === "cn" ? "数量" : "Qty";
-    el.querySelector("[data-booking-submit]").textContent = tr(lang, "Add to Cart", "加入购物车");
+    el.querySelector("[data-booking-submit]").textContent = tr(lang, "Book", "预订");
     setBookingError(el, "");
     date.value = todayValue;
     time.value = "";

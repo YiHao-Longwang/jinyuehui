@@ -88,7 +88,10 @@ test("server-renders reservation cart", async () => {
   const admin = await (await render("/admin")).text();
   assert.match(admin, /Live Booking Dashboard/);
   assert.match(admin, /data-admin-page/);
-  assert.match(admin, /admin-reservations\.js/);
+  assert.match(admin, /admin-reservations\.js\?v=20260807-token-only/);
+  assert.match(admin, /data-admin-token/);
+  assert.match(admin, /data-admin-filter/);
+  assert.doesNotMatch(admin, /API base|data-admin-api-base/);
 
   const packages = await (await render("/packages")).text();
   assert.match(packages, /data-book="b1f1"/);

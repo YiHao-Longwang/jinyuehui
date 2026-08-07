@@ -14,8 +14,6 @@
   function storedApiBase() {
     var configured = (window.ONESPA_API_BASE || "").trim().replace(/\/$/, "");
     if (configured) return configured;
-    var saved = (localStorage.getItem(API_KEY) || "").trim().replace(/\/$/, "");
-    if (saved) return saved;
     if (location.hostname === "localhost" && location.port !== "4000") return "http://localhost:4000";
     return "";
   }
@@ -121,9 +119,7 @@
 
   function saveSettings() {
     localStorage.setItem(TOKEN_KEY, currentToken());
-    var base = ($("[data-admin-api-base]")?.value || "").trim().replace(/\/$/, "");
-    if (base) localStorage.setItem(API_KEY, base);
-    else localStorage.removeItem(API_KEY);
+    localStorage.removeItem(API_KEY);
   }
 
   function refresh() {
@@ -225,16 +221,14 @@
         });
       })
       .catch(function () {
-        setStatus("Websocket client not found. Start npm run backend or set API base.", "bad");
+        setStatus("Websocket client not found. Check that the backend and /socket.io proxy are running.", "bad");
       });
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     var tokenInput = $("[data-admin-token]");
-    var apiInput = $("[data-admin-api-base]");
-    if (!tokenInput || !apiInput) return;
+    if (!tokenInput) return;
     tokenInput.value = localStorage.getItem(TOKEN_KEY) || "";
-    apiInput.value = localStorage.getItem(API_KEY) || storedApiBase();
 
     $("[data-admin-refresh]")?.addEventListener("click", refresh);
     $("[data-admin-save]")?.addEventListener("click", refresh);

@@ -19,10 +19,6 @@ export default function AdminPage() {
                   <input data-admin-token type="password" autoComplete="current-password" placeholder="ADMIN_TOKEN" />
                 </label>
                 <label>
-                  <span>API base</span>
-                  <input data-admin-api-base type="url" placeholder="http://localhost:4000" />
-                </label>
-                <label>
                   <span>Status</span>
                   <select data-admin-filter defaultValue="all">
                     <option value="all">All</option>
@@ -49,7 +45,7 @@ export default function AdminPage() {
         </section>
       </main>
       <Footer />
-      <script src="/admin-reservations.js" defer />
+      <script src="/admin-reservations.js?v=20260807-token-only" defer />
     </>
   );
 }

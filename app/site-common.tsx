@@ -287,8 +287,8 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
               </div>
               <p className="footer-copy">
                 {isCn
-                  ? "吉隆坡 24 小时温泉会所，集合泡汤、按摩、美容、中医调理与私人养生护理。"
-                  : "A warm, all-hours retreat for hot spring, massage, beauty, TCM and private wellness sessions in Kuala Lumpur."}
+                  ? "One Spa 南海龙宫，吉隆坡 24 小时温泉会所，集合泡汤、按摩、美容、中医调理与私人养生护理。"
+                  : "One Spa 南海龙宫 is a warm, all-hours retreat for hot spring, massage, beauty, TCM and private wellness sessions in Kuala Lumpur."}
               </p>
             </div>
           </div>

@@ -1,4 +1,13 @@
 import { Fragment } from "react";
+import { pageMetadata } from "./seo";
+
+export const metadata = pageMetadata({
+  title: "One Spa 南海龙宫 | 吉隆坡SPA · 24小时KL按摩娱乐",
+  description:
+    "One Spa 南海龙宫是吉隆坡 24 小时SPA、按摩与休闲娱乐会所，位于 Viva Home Mall。泡汤、汗蒸、桑拿、按摩、餐饮与美容养生一站式预约。",
+  path: "/",
+  keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡娱乐", "南海龙宫", "klspa", "klmassage", "klentertainment"],
+});
 
 const siteBase = "";
 const assetBase = "/assets";
@@ -258,15 +267,16 @@ export default function Home() {
             fetchPriority="high"
           />
           <div className="container">
-            <div className="k">One Spa · Kuala Lumpur · Open 24 Hours</div>
+            <div className="k">One Spa · 南海龙宫 · Kuala Lumpur · Open 24 Hours</div>
             <h1>
               Give Yourself 12 Hours
               <br />
               In a Warm Spring
             </h1>
             <p>
-              A 24-hour hot-spring retreat in Kuala Lumpur. Pools, steam, sauna,
-              massage & dining - one ticket, a full 12-hour stay.
+              A 24-hour hot-spring retreat in Kuala Lumpur, also known as
+              南海龙宫. Pools, steam, sauna, massage & dining - one ticket, a
+              full 12-hour stay.
             </p>
             <div className="cta">
               <a className="btn clay" href={`${siteBase}/packages/`}>

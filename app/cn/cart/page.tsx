@@ -1,4 +1,12 @@
 import { FloatingWhatsApp, Footer, Header, SectionHead, telegramHrefCn, whatsappCartBase } from "../../site-common";
+import { pageMetadata } from "../../seo";
+
+export const metadata = pageMetadata({
+  title: "预约购物车 | One Spa 南海龙宫",
+  description: "确认 One Spa 南海龙宫预约购物车。",
+  path: "/cn/cart/",
+  noIndex: true,
+});
 
 export default function CartPageCn() {
   return (

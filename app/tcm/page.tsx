@@ -8,6 +8,16 @@ import {
   Hero,
   SectionHead,
 } from "../site-common";
+import { pageMetadata } from "../seo";
+
+export const metadata = pageMetadata({
+  title: "TCM Wellness KL | 吉隆坡中医调理 · One Spa 南海龙宫",
+  description:
+    "One Spa 南海龙宫 TCM wellness in Kuala Lumpur: pulse reading, moxibustion, herbal mud therapy, bone-setting and meridian care with listed prices.",
+  path: "/tcm/",
+  keywords: ["吉隆坡中医", "吉隆坡SPA", "中医按摩KL", "南海龙宫中医", "TCM KL"],
+  image: "/assets/tcm-hero.jpg",
+});
 
 const chips = [
   "Free TCM pulse reading",

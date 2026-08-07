@@ -9,6 +9,15 @@ import {
   whatsappHref,
   whatsappNumberDisplay,
 } from "../site-common";
+import { pageMetadata } from "../seo";
+
+export const metadata = pageMetadata({
+  title: "Contact One Spa 南海龙宫 | 吉隆坡SPA Viva Home Mall",
+  description:
+    "Contact One Spa 南海龙宫 at Level 2, Viva Home Mall Kuala Lumpur. Open 24 hours for KL spa, massage, hot spring and wellness reservations.",
+  path: "/contact/",
+  keywords: ["南海龙宫地址", "One Spa contact", "吉隆坡SPA地址", "Viva Home Mall spa", "KL massage contact"],
+});
 
 export default function ContactPage() {
   return (

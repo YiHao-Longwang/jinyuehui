@@ -31,7 +31,9 @@ test("server-renders the One Spa page", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>onepsa<\/title>/i);
+  assert.match(html, /<title>One Spa 南海龙宫 \| 吉隆坡SPA · 24小时KL按摩娱乐<\/title>/i);
+  assert.match(html, /name="keywords" content="[^"]*吉隆坡SPA[^"]*南海龙宫[^"]*klspa/i);
+  assert.match(html, /application\/ld\+json/);
   assert.match(html, /Give Yourself 12 Hours/);
   assert.match(html, /Pick Yours, Book in Minutes/);
   assert.match(html, /One-Stop Hot-Spring Retreat/);
@@ -130,15 +132,19 @@ test("server-renders reservation cart", async () => {
 });
 
 test("keeps starter preview removed", async () => {
-  const [page, layout, packageJson] = await Promise.all([
+  const [page, layout, packageJson, robots, sitemap] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../public/robots.txt", import.meta.url), "utf8"),
+    readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /whatsappHref/);
   assert.match(page, /telegramHref/);
   assert.match(layout, /applicationName: "onepsa"/);
+  assert.match(robots, /Sitemap: https:\/\/onespa\.klyihao\.com\/sitemap\.xml/);
+  assert.match(sitemap, /https:\/\/onespa\.klyihao\.com\/cn\/packages\//);
   assert.doesNotMatch(page, /SkeletonPreview|codex-preview/);
   assert.doesNotMatch(layout, /Starter Project|codex-preview|_sites-preview/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);

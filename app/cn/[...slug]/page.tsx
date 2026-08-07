@@ -12,6 +12,15 @@ import {
   whatsappHrefCn,
   whatsappNumberDisplay,
 } from "../../site-common";
+import { pageMetadata } from "../../seo";
+
+export const metadata = pageMetadata({
+  title: "One Spa 南海龙宫 | 吉隆坡SPA按摩娱乐",
+  description:
+    "One Spa 南海龙宫中文页面：吉隆坡SPA、吉隆坡按摩、吉隆坡娱乐、24 小时汤泉、配套价格、设施、美容、中医与联系资料。",
+  path: "/cn/",
+  keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡娱乐", "南海龙宫", "klspa", "klmassage", "klentertainment"],
+});
 
 const cnBase = "/cn";
 

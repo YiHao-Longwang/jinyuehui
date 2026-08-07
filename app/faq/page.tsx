@@ -1,4 +1,13 @@
 import { FloatingWhatsApp, Footer, Header, SectionHead } from "../site-common";
+import { pageMetadata } from "../seo";
+
+export const metadata = pageMetadata({
+  title: "One Spa FAQ | 吉隆坡SPA按摩预约问题 · 南海龙宫",
+  description:
+    "FAQ for One Spa 南海龙宫 Kuala Lumpur: KL spa package pricing, massage booking, 12-hour stay, kids tickets, rescheduling and payment after treatment.",
+  path: "/faq/",
+  keywords: ["吉隆坡SPA FAQ", "吉隆坡按摩预约", "南海龙宫预约", "KL spa FAQ"],
+});
 
 const faqs = [
   ["Can I really stay 12 hours?", "Yes - 12 hours from check-in, all facilities included."],

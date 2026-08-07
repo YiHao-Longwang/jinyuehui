@@ -7,6 +7,15 @@ import {
   Header,
   SectionHead,
 } from "../site-common";
+import { pageMetadata } from "../seo";
+
+export const metadata = pageMetadata({
+  title: "One Spa 南海龙宫 | 吉隆坡SPA · 吉隆坡按摩娱乐",
+  description:
+    "One Spa 南海龙宫位于吉隆坡 Viva Home Mall，24 小时营业，提供吉隆坡SPA、吉隆坡按摩、汤泉汗蒸、美容、中医调理与休闲娱乐。",
+  path: "/cn/",
+  keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡娱乐", "南海龙宫", "klspa", "klmassage", "klentertainment"],
+});
 
 const siteBase = "/cn";
 
@@ -126,15 +135,15 @@ export default function ChinesePage() {
             fetchPriority="high"
           />
           <div className="container">
-            <div className="k">One Spa · 吉隆坡 · 24 小时营业</div>
+            <div className="k">One Spa · 南海龙宫 · 吉隆坡 · 24 小时营业</div>
             <h1>
               给自己 12 小时
               <br />
               泡进一池温汤
             </h1>
             <p>
-              吉隆坡 24 小时温泉会所。泡汤 · 汗蒸 · 桑拿 · 按摩 · 餐饮，一站式，一张门票泡足
-              12 小时。
+              吉隆坡 24 小时温泉会所，南海龙宫品牌名也可找到我们。吉隆坡SPA、吉隆坡按摩与休闲娱乐，
+              泡汤 · 汗蒸 · 桑拿 · 餐饮，一张门票泡足 12 小时。
             </p>
             <div className="cta">
               <a className="btn clay" href={`${siteBase}/packages/`}>

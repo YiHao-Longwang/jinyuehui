@@ -1,4 +1,13 @@
 import { FloatingWhatsApp, Footer, Header, Hero, SectionHead } from "../site-common";
+import { pageMetadata } from "../seo";
+
+export const metadata = pageMetadata({
+  title: "Onsen KL | 吉隆坡24小时汤泉SPA · One Spa 南海龙宫",
+  description:
+    "One Spa 南海龙宫 is a 24-hour onsen-style hot spring and spa in Kuala Lumpur with warm pools, sauna, steam, dining and 12-hour packages.",
+  path: "/onsen-kl/",
+  keywords: ["onsen KL", "吉隆坡汤泉", "吉隆坡温泉", "南海龙宫", "24 hour spa KL"],
+});
 
 export default function OnsenKLPage() {
   return (

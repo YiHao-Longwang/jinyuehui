@@ -1,4 +1,12 @@
 import { FloatingWhatsApp, Footer, Header, SectionHead, telegramHref, whatsappCartBase } from "../site-common";
+import { pageMetadata } from "../seo";
+
+export const metadata = pageMetadata({
+  title: "Reservation Cart | One Spa 南海龙宫",
+  description: "Review your One Spa reservation cart.",
+  path: "/cart/",
+  noIndex: true,
+});
 
 export default function CartPage() {
   return (

@@ -6,6 +6,16 @@ import {
   Hero,
   SectionHead,
 } from "../site-common";
+import { pageMetadata } from "../seo";
+
+export const metadata = pageMetadata({
+  title: "One Spa Facilities | 吉隆坡SPA娱乐设施 · 南海龙宫",
+  description:
+    "Explore One Spa 南海龙宫 facilities at Viva Home Mall KL: hot spring pools, sauna, steam room, massage rooms, scrub room, lounge, dining and private rooms.",
+  path: "/facilities/",
+  keywords: ["吉隆坡娱乐", "吉隆坡SPA设施", "南海龙宫设施", "KL entertainment", "KL spa facilities"],
+  image: "/assets/fac-hero-immersive.jpg",
+});
 
 const facilities = [
   ["Fire & Ice Pools", "fac-icefire.jpg?osw=0.9.23", "The icy pool sits at 13°C, the herbal pool at 43°C - alternate between them under the starlit ceiling and walk out completely refreshed."],

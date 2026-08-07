@@ -8,6 +8,16 @@ import {
   Hero,
   SectionHead,
 } from "../site-common";
+import { pageMetadata } from "../seo";
+
+export const metadata = pageMetadata({
+  title: "Beauty Spa KL | 吉隆坡美容SPA · One Spa 南海龙宫",
+  description:
+    "One Spa 南海龙宫 beauty studio in Kuala Lumpur for body glow, photon skin brightening, spot care and hair removal, with spa ticket options.",
+  path: "/beauty/",
+  keywords: ["吉隆坡美容SPA", "吉隆坡SPA", "南海龙宫美容", "beauty spa KL", "KL beauty spa"],
+  image: "/assets/beauty-hero.jpg",
+});
 
 const chips = [
   "RM599 with spa ticket included",

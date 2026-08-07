@@ -9,6 +9,16 @@ import {
   whatsappHref,
   whatsappNumberDisplay,
 } from "../site-common";
+import { pageMetadata } from "../seo";
+
+export const metadata = pageMetadata({
+  title: "One Spa Packages | 吉隆坡SPA按摩价格 · 南海龙宫",
+  description:
+    "View One Spa 南海龙宫 packages in Kuala Lumpur: 12-hour spa pass, KL massage package, body scrub, daytime duo, kids ticket and private room prices.",
+  path: "/packages/",
+  keywords: ["吉隆坡SPA价格", "吉隆坡按摩价格", "南海龙宫配套", "KL spa package", "KL massage package"],
+  image: "/assets/hero-packages-rain.jpg",
+});
 
 const packageCards = [
   {

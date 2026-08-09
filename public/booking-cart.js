@@ -265,9 +265,12 @@
     var count = readCart().reduce(function (sum, item) {
       return sum + Number(item.qty || 1);
     }, 0);
+    var label = String(count);
     document.querySelectorAll("[data-cart-count]").forEach(function (el) {
-      el.textContent = String(count);
-      el.hidden = count === 0;
+      // Only write when the value actually differs - this runs from a
+      // MutationObserver, and an unconditional write would retrigger it.
+      if (el.textContent !== label) el.textContent = label;
+      if (el.hidden !== (count === 0)) el.hidden = count === 0;
     });
   }
 
@@ -973,5 +976,49 @@
     updateCartCount();
     renderCart();
     initSubnav();
+  });
+
+  /**
+   * This script is deferred, so it runs and paints before React finishes
+   * hydrating. Hydration then reconciles the shell back to its server-rendered
+   * markup, wiping out whatever we rendered - which left the cart stuck on
+   * "Loading your cart..." and the header badge on 0 until a manual refresh.
+   *
+   * Re-render whenever the placeholder reappears. renderCart() only runs while
+   * .cart-loading is on screen, so this settles after one pass and never
+   * clobbers a checkout form the customer is part-way through filling in.
+   */
+  function refreshCartUI() {
+    updateCartCount();
+    var root = document.querySelector("[data-cart-page]");
+    if (root && root.querySelector(".cart-loading")) renderCart();
+  }
+
+  // setTimeout rather than requestAnimationFrame: rAF is paused in background
+  // and inactive tabs, which would leave the cart unrendered until the tab is
+  // focused - the same "refresh before it works" symptom we are fixing.
+  var refreshQueued = false;
+  function queueRefresh() {
+    if (refreshQueued) return;
+    refreshQueued = true;
+    setTimeout(function () {
+      refreshQueued = false;
+      refreshCartUI();
+    }, 0);
+  }
+
+  if (window.MutationObserver && document.body) {
+    new MutationObserver(queueRefresh).observe(document.body, { childList: true, subtree: true });
+  }
+
+  // Back/forward out of the bfcache does not fire load, and another tab may
+  // have changed the cart while this one sat idle.
+  window.addEventListener("pageshow", queueRefresh);
+  window.addEventListener("popstate", queueRefresh);
+  window.addEventListener("storage", function (event) {
+    if (!event.key || event.key === CART_KEY) queueRefresh();
+  });
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) queueRefresh();
   });
 })();

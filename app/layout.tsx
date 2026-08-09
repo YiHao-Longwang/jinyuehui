@@ -31,7 +31,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
-        <script src="/booking-cart.js?v=20260807-live-modal-copy" defer />
+        <script src="/booking-cart.js?v=20260809-cart-rehydrate" defer />
       </body>
     </html>
   );

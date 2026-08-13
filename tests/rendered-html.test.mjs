@@ -33,6 +33,8 @@ test("server-renders the One Spa page", async () => {
   const html = await response.text();
   assert.match(html, /<title>One Spa 南海龙宫 \| 吉隆坡SPA · 24小时KL按摩娱乐<\/title>/i);
   assert.match(html, /name="keywords" content="[^"]*吉隆坡SPA[^"]*南海龙宫[^"]*klspa/i);
+  assert.match(html, /favicon-48x48\.png/);
+  assert.match(html, /apple-touch-icon\.png/);
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /Twelve Hours in a/);
   assert.match(html, /Pick Yours, Book in Minutes/);

@@ -69,6 +69,16 @@ const footerExperienceLinksCn = [
   ["中医部", "/cn/tcm/"],
 ];
 
+/**
+ * Public profiles for this outlet. Keep in sync with sameAsProfiles in seo.ts.
+ * The onespaofficial accounts are deliberately absent - they belong to the
+ * other operator trading under the One Spa name.
+ */
+const socialLinks = [
+  ["Instagram", "https://www.instagram.com/vivadespa/"],
+  ["Telegram", telegramHref],
+];
+
 type Locale = "en" | "cn";
 
 export function Diamond() {
@@ -351,6 +361,18 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
               85, Jalan Loke Yew, Taman Miharja, 52200 Kuala Lumpur
             </p>
             <ContactButtons locale={locale} className="footer-mini-contact" />
+            <div className="footer-social">
+              <h6>{isCn ? "关注我们" : "Follow Us"}</h6>
+              <div className="footer-social-row">
+                {socialLinks.map(([label, href]) => (
+                  // rel="me" marks these as profiles of the same entity, which
+                  // backs up the sameAs claim in the business structured data.
+                  <a href={href} key={label} target="_blank" rel="me noopener">
+                    {label}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="col footer-policy-col">
             <h6>{isCn ? "政策" : "Policies"}</h6>

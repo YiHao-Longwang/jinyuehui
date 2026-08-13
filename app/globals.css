@@ -2783,6 +2783,24 @@ footer.site .footer-mini-contact .btn.contact-tg:hover {
   margin-top: 12px;
 }
 
+.footer-social {
+  margin-top: 18px;
+}
+
+footer.site .footer-social h6 {
+  margin: 0 0 4px;
+}
+
+.footer-social-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+footer.site .footer-social-row a {
+  min-height: 28px;
+}
+
 .footer-mini-contact .btn {
   min-height: 36px;
   padding: 0 12px;

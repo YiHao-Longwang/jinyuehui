@@ -137,10 +137,11 @@ const googlePlaceUrl =
  */
 const sameAsProfiles = [
   "https://www.instagram.com/vivadespa/",
-  "https://www.facebook.com/onespaofficial",
-  "https://www.instagram.com/onespaofficial/",
   "https://t.me/nhlg09",
   googlePlaceUrl,
+  // Deliberately excludes the onespaofficial accounts: they are linked from
+  // onespa.com.my, so claiming them here would tell Google this site and that
+  // operator's site are one business - the opposite of what we want.
 ];
 
 export const localBusinessJsonLd = {

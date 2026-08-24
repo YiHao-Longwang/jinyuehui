@@ -55,11 +55,26 @@ export default function AdminPage() {
           </div>
         </header>
         <div className="admin-status" data-admin-status />
+        <section className="admin-click-stats" aria-label="Contact click analytics">
+          <div className="admin-click-head">
+            <div>
+              <span className="admin-kicker">Contact clicks</span>
+              <h2>WhatsApp & Telegram</h2>
+            </div>
+            <button className="btn line" type="button" data-admin-refresh-clicks>
+              Refresh clicks
+            </button>
+          </div>
+          <div className="admin-click-grid" data-admin-click-stats>
+            <div className="admin-empty">Click analytics will load after login.</div>
+          </div>
+          <div className="admin-click-recent" data-admin-click-recent />
+        </section>
         <div className="admin-list" data-admin-list>
           <div className="admin-empty">Login to load reservations.</div>
         </div>
       </section>
-      <script src="/admin-reservations.js?v=20260807-portal-contact" defer />
+      <script src="/admin-reservations.js?v=20260824-contact-clicks" defer />
     </main>
   );
 }

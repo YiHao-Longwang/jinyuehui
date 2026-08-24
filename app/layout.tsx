@@ -36,6 +36,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
+        <script src="/contact-clicks.js?v=20260824-contact-clicks" defer />
         <script src="/booking-cart.js?v=20260809-cart-rehydrate" defer />
       </body>
     </html>

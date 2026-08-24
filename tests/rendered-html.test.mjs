@@ -94,7 +94,9 @@ test("server-renders reservation cart", async () => {
   assert.match(admin, /data-admin-login/);
   assert.match(admin, /data-admin-dashboard/);
   assert.match(admin, /data-admin-page/);
-  assert.match(admin, /admin-reservations\.js\?v=20260807-portal-contact/);
+  assert.match(admin, /data-admin-click-stats/);
+  assert.match(admin, /data-admin-refresh-clicks/);
+  assert.match(admin, /admin-reservations\.js\?v=20260824-contact-clicks/);
   assert.match(admin, /data-admin-token/);
   assert.match(admin, /data-admin-filter/);
   assert.doesNotMatch(admin, /API base|data-admin-api-base/);
@@ -131,6 +133,12 @@ test("server-renders reservation cart", async () => {
   assert.doesNotMatch(cartScript, /confirm\(/);
   assert.doesNotMatch(cartScript, /alert\(/);
   assert.doesNotMatch(cartScript, /booking-backdrop" data-booking-close/);
+
+  const contactScript = await readFile(new URL("../public/contact-clicks.js", import.meta.url), "utf8");
+  assert.match(contactScript, /api\/contact-clicks/);
+  assert.match(contactScript, /sendBeacon/);
+  assert.match(contactScript, /whatsapp/);
+  assert.match(contactScript, /telegram/);
 });
 
 test("keeps starter preview removed", async () => {
@@ -145,6 +153,7 @@ test("keeps starter preview removed", async () => {
   assert.match(page, /whatsappHref/);
   assert.match(page, /telegramHref/);
   assert.match(layout, /applicationName: "onepsa"/);
+  assert.match(layout, /contact-clicks\.js\?v=20260824-contact-clicks/);
   assert.match(robots, /Sitemap: https:\/\/onespa\.klyihao\.com\/sitemap\.xml/);
   assert.match(sitemap, /https:\/\/onespa\.klyihao\.com\/cn\/packages\//);
   assert.doesNotMatch(page, /SkeletonPreview|codex-preview/);

@@ -298,6 +298,50 @@ async function listReservations(sql) {
   `;
 }
 
+async function ensureContactClicksTable(sql) {
+  await sql`
+    create table if not exists contact_clicks (
+      id bigserial primary key,
+      channel text not null check (channel in ('whatsapp', 'telegram')),
+      path text,
+      href text,
+      label text,
+      created_at timestamptz not null default now()
+    )
+  `;
+  await sql`create index if not exists contact_clicks_created_at_idx on contact_clicks (created_at desc)`;
+  await sql`create index if not exists contact_clicks_channel_idx on contact_clicks (channel)`;
+}
+
+function clean(value, max = 240) {
+  return String(value ?? "").trim().slice(0, max);
+}
+
+function cleanChannel(value) {
+  const channel = clean(value, 20).toLowerCase();
+  return channel === "whatsapp" || channel === "telegram" ? channel : "";
+}
+
+async function contactClickStats(sql) {
+  const summary = await sql`
+    select
+      channel,
+      count(*)::int as total,
+      count(*) filter (where created_at >= date_trunc('day', now()))::int as today,
+      count(*) filter (where created_at >= now() - interval '7 days')::int as last_7_days
+    from contact_clicks
+    group by channel
+    order by channel
+  `;
+  const recent = await sql`
+    select channel, path, label, created_at
+    from contact_clicks
+    order by created_at desc
+    limit 20
+  `;
+  return { summary, recent };
+}
+
 async function notifyTelegram(reservation) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -359,6 +403,34 @@ app.get("/api/reservations", async (req, res) => {
     res.json({ reservations: await listReservations(sql) });
   } catch (error) {
     errorResponse(res, error instanceof Error ? error.message : "Could not load reservations.", 500);
+  }
+});
+
+app.get("/api/contact-clicks", async (req, res) => {
+  if (!verifyAdmin(req)) return errorResponse(res, "Unauthorized", 401);
+  try {
+    const sql = db();
+    await ensureContactClicksTable(sql);
+    res.json(await contactClickStats(sql));
+  } catch (error) {
+    errorResponse(res, error instanceof Error ? error.message : "Could not load contact click stats.", 500);
+  }
+});
+
+app.post("/api/contact-clicks", async (req, res) => {
+  const channel = cleanChannel(req.body?.channel);
+  if (!channel) return errorResponse(res, "Invalid contact channel.");
+
+  try {
+    const sql = db();
+    await ensureContactClicksTable(sql);
+    await sql`
+      insert into contact_clicks (channel, path, href, label)
+      values (${channel}, ${clean(req.body?.path, 180) || null}, ${clean(req.body?.href, 300) || null}, ${clean(req.body?.label, 120) || null})
+    `;
+    res.status(201).json({ ok: true });
+  } catch (error) {
+    errorResponse(res, error instanceof Error ? error.message : "Could not save contact click.", 500);
   }
 });
 

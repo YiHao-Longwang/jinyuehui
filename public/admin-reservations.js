@@ -5,6 +5,8 @@
   var socket = null;
   var socketScript = null;
   var rows = [];
+  var clickSummary = [];
+  var recentClicks = [];
 
   function $(selector) {
     return document.querySelector(selector);
@@ -75,6 +77,71 @@
     var dashboard = $("[data-admin-dashboard]");
     if (login) login.hidden = isLoggedIn;
     if (dashboard) dashboard.hidden = !isLoggedIn;
+  }
+
+  function emptyClickStats() {
+    return [
+      { channel: "whatsapp", total: 0, today: 0, last_7_days: 0 },
+      { channel: "telegram", total: 0, today: 0, last_7_days: 0 }
+    ];
+  }
+
+  function clickRow(channel) {
+    return (
+      clickSummary.find(function (row) {
+        return row.channel === channel;
+      }) || emptyClickStats().find(function (row) {
+        return row.channel === channel;
+      })
+    );
+  }
+
+  function renderClickStats() {
+    var root = $("[data-admin-click-stats]");
+    var recentRoot = $("[data-admin-click-recent]");
+    if (!root) return;
+
+    root.innerHTML = ["whatsapp", "telegram"]
+      .map(function (channel) {
+        var row = clickRow(channel);
+        var label = channel === "whatsapp" ? "WhatsApp" : "Telegram";
+        return (
+          '<article class="admin-click-card ' +
+          channel +
+          '"><span>' +
+          label +
+          '</span><strong>' +
+          escapeHtml(row.total || 0) +
+          '</strong><div><b>' +
+          escapeHtml(row.today || 0) +
+          '</b> today · <b>' +
+          escapeHtml(row.last_7_days || 0) +
+          "</b> last 7 days</div></article>"
+        );
+      })
+      .join("");
+
+    if (!recentRoot) return;
+    if (!recentClicks.length) {
+      recentRoot.innerHTML = '<div class="admin-click-muted">No contact clicks recorded yet.</div>';
+      return;
+    }
+    recentRoot.innerHTML =
+      '<h3>Recent clicks</h3>' +
+      recentClicks
+        .slice(0, 8)
+        .map(function (row) {
+          return (
+            '<div class="admin-click-line"><b>' +
+            escapeHtml(row.channel === "whatsapp" ? "WhatsApp" : "Telegram") +
+            '</b><span>' +
+            escapeHtml(row.label || row.path || "-") +
+            '</span><time>' +
+            escapeHtml(formatDateTime(row.created_at)) +
+            "</time></div>"
+          );
+        })
+        .join("");
   }
 
   function normalizeWhatsApp(value) {
@@ -229,11 +296,34 @@
         render();
         setStatus("Loaded " + rows.length + " reservations.", "ok");
         setStatus("", "", "[data-admin-login-status]");
+        refreshClickStats();
         connectSocket();
       })
       .catch(function (error) {
         setLoggedIn(false);
         setStatus(error.message, "bad", "[data-admin-login-status]");
+      });
+  }
+
+  function refreshClickStats() {
+    var token = currentToken();
+    if (!token) return;
+
+    fetch(endpoint("/api/contact-clicks?token=" + encodeURIComponent(token)))
+      .then(function (res) {
+        return res.json().then(function (body) {
+          if (!res.ok) throw new Error(body.error || "Could not load contact click stats.");
+          return body;
+        });
+      })
+      .then(function (body) {
+        clickSummary = body.summary || [];
+        recentClicks = body.recent || [];
+        renderClickStats();
+      })
+      .catch(function (error) {
+        var root = $("[data-admin-click-stats]");
+        if (root) root.innerHTML = '<div class="admin-empty">' + escapeHtml(error.message) + "</div>";
       });
   }
 
@@ -328,10 +418,13 @@
     tokenInput.value = localStorage.getItem(TOKEN_KEY) || "";
 
     $("[data-admin-refresh]")?.addEventListener("click", refresh);
+    $("[data-admin-refresh-clicks]")?.addEventListener("click", refreshClickStats);
     $("[data-admin-save]")?.addEventListener("click", refresh);
     $("[data-admin-logout]")?.addEventListener("click", function () {
       localStorage.removeItem(TOKEN_KEY);
       rows = [];
+      clickSummary = [];
+      recentClicks = [];
       if (socket) socket.disconnect();
       tokenInput.value = "";
       setLoggedIn(false);

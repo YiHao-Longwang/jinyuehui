@@ -79,6 +79,26 @@
     if (dashboard) dashboard.hidden = !isLoggedIn;
   }
 
+  function isDashboardVisible() {
+    var dashboard = $("[data-admin-dashboard]");
+    return Boolean(dashboard && !dashboard.hidden);
+  }
+
+  function readJsonResponse(res, fallback) {
+    return res.text().then(function (text) {
+      var body = {};
+      if (text) {
+        try {
+          body = JSON.parse(text);
+        } catch {
+          body = { error: text.slice(0, 180) };
+        }
+      }
+      if (!res.ok) throw new Error(body.error || fallback || "Request failed.");
+      return body;
+    });
+  }
+
   function emptyClickStats() {
     return [
       { channel: "whatsapp", total: 0, today: 0, last_7_days: 0 },
@@ -276,6 +296,7 @@
   function refresh() {
     saveToken();
     var token = currentToken();
+    var wasLoggedIn = isDashboardVisible();
     if (!token) {
       setLoggedIn(false);
       setStatus("Enter your admin token to continue.", "bad", "[data-admin-login-status]");
@@ -285,10 +306,7 @@
     setStatus("Loading reservations...", "");
     fetch(endpoint("/api/reservations?token=" + encodeURIComponent(token)))
       .then(function (res) {
-        return res.json().then(function (body) {
-          if (!res.ok) throw new Error(body.error || "Could not load reservations.");
-          return body;
-        });
+        return readJsonResponse(res, "Could not load reservations.");
       })
       .then(function (body) {
         rows = body.reservations || [];
@@ -300,8 +318,13 @@
         connectSocket();
       })
       .catch(function (error) {
-        setLoggedIn(false);
-        setStatus(error.message, "bad", "[data-admin-login-status]");
+        if (wasLoggedIn) {
+          setLoggedIn(true);
+          setStatus(error.message, "bad");
+        } else {
+          setLoggedIn(false);
+          setStatus(error.message, "bad", "[data-admin-login-status]");
+        }
       });
   }
 
@@ -311,10 +334,7 @@
 
     fetch(endpoint("/api/contact-clicks?token=" + encodeURIComponent(token)))
       .then(function (res) {
-        return res.json().then(function (body) {
-          if (!res.ok) throw new Error(body.error || "Could not load contact click stats.");
-          return body;
-        });
+        return readJsonResponse(res, "Could not load contact click stats.");
       })
       .then(function (body) {
         clickSummary = body.summary || [];
@@ -338,10 +358,7 @@
       body: JSON.stringify({ reservationRef: ref, status: status })
     })
       .then(function (res) {
-        return res.json().then(function (body) {
-          if (!res.ok) throw new Error(body.error || "Could not update reservation.");
-          return body;
-        });
+        return readJsonResponse(res, "Could not update reservation.");
       })
       .then(function () {
         var row = rows.find(function (item) {
@@ -435,6 +452,7 @@
       if (event.key === "Enter") refresh();
     });
     document.addEventListener("change", function (event) {
+      if (!event.target || !event.target.closest) return;
       var select = event.target.closest("[data-admin-update]");
       if (!select) return;
       updateReservation(select.getAttribute("data-admin-update"), select.value);

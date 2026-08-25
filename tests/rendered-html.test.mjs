@@ -96,7 +96,7 @@ test("server-renders reservation cart", async () => {
   assert.match(admin, /data-admin-page/);
   assert.match(admin, /data-admin-click-stats/);
   assert.match(admin, /data-admin-refresh-clicks/);
-  assert.match(admin, /admin-reservations\.js\?v=20260824-contact-clicks/);
+  assert.match(admin, /admin-reservations\.js\?v=20260825-admin-refresh/);
   assert.match(admin, /data-admin-token/);
   assert.match(admin, /data-admin-filter/);
   assert.doesNotMatch(admin, /API base|data-admin-api-base/);

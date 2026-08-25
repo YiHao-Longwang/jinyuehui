@@ -156,6 +156,7 @@ test("server-renders reservation cart", async () => {
   const clickHistoryScript = await readFile(new URL("../public/admin-click-history.js", import.meta.url), "utf8");
   assert.match(clickHistoryScript, /view=history/);
   assert.match(clickHistoryScript, /view=series/);
+  assert.match(clickHistoryScript, /click-line-chart/);
   assert.match(clickHistoryScript, /onespa_admin_token/);
 });
 

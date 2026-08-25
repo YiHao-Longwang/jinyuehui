@@ -164,34 +164,135 @@
     var max = seriesRows.reduce(function (highest, row) {
       return Math.max(highest, Number(row.total || 0));
     }, 0);
-    if (!max) max = 1;
+    var yMax = max <= 5 ? 5 : Math.ceil(max / 5) * 5;
+    var width = 900;
+    var height = 340;
+    var padLeft = 48;
+    var padRight = 24;
+    var padTop = 30;
+    var padBottom = 52;
+    var innerWidth = width - padLeft - padRight;
+    var innerHeight = height - padTop - padBottom;
+    var lastIndex = Math.max(1, seriesRows.length - 1);
+    var labelEvery = Math.max(1, Math.ceil(seriesRows.length / 7));
+    var whatsappTotal = seriesRows.reduce(function (sum, row) {
+      return sum + Number(row.whatsapp || 0);
+    }, 0);
+    var telegramTotal = seriesRows.reduce(function (sum, row) {
+      return sum + Number(row.telegram || 0);
+    }, 0);
 
-    root.innerHTML =
-      '<div class="click-chart-legend"><span><i class="wa"></i>WhatsApp</span><span><i class="tg"></i>Telegram</span></div>' +
-      '<div class="click-chart">' +
-      seriesRows
-        .map(function (row) {
-          var whatsapp = Number(row.whatsapp || 0);
-          var telegram = Number(row.telegram || 0);
-          var totalCount = Number(row.total || 0);
-          var waWidth = Math.max(whatsapp ? 3 : 0, (whatsapp / max) * 100);
-          var tgWidth = Math.max(telegram ? 3 : 0, (telegram / max) * 100);
+    function x(index) {
+      return padLeft + (index / lastIndex) * innerWidth;
+    }
+
+    function y(value) {
+      return padTop + innerHeight - (Number(value || 0) / yMax) * innerHeight;
+    }
+
+    function linePath(key) {
+      return seriesRows
+        .map(function (row, index) {
+          return (index ? "L" : "M") + x(index).toFixed(1) + " " + y(row[key]).toFixed(1);
+        })
+        .join(" ");
+    }
+
+    function points(key, klass) {
+      return seriesRows
+        .map(function (row, index) {
+          var value = Number(row[key] || 0);
           return (
-            '<div class="click-chart-row"><time>' +
-            escapeHtml(formatDay(row.day)) +
-            '</time><div class="click-bar-stack" aria-label="' +
-            escapeHtml(row.day + " total " + totalCount) +
-            '"><span class="click-bar wa" style="width:' +
-            waWidth +
-            '%"></span><span class="click-bar tg" style="width:' +
-            tgWidth +
-            '%"></span></div><b>' +
-            totalCount +
-            "</b></div>"
+            '<circle class="click-line-point ' +
+            klass +
+            '" cx="' +
+            x(index).toFixed(1) +
+            '" cy="' +
+            y(value).toFixed(1) +
+            '" r="' +
+            (value ? 4.8 : 3.2) +
+            '"><title>' +
+            escapeHtml(formatDay(row.day) + " · " + channelLabel(key) + " " + value) +
+            "</title></circle>"
           );
         })
-        .join("") +
-      "</div>";
+        .join("");
+    }
+
+    function yAxis() {
+      return [0, 0.25, 0.5, 0.75, 1]
+        .map(function (ratio) {
+          var value = Math.round(yMax * ratio);
+          var pos = y(value).toFixed(1);
+          return (
+            '<g><line class="click-grid-line" x1="' +
+            padLeft +
+            '" x2="' +
+            (width - padRight) +
+            '" y1="' +
+            pos +
+            '" y2="' +
+            pos +
+            '"></line><text class="click-axis-label" x="' +
+            (padLeft - 14) +
+            '" y="' +
+            (Number(pos) + 4) +
+            '" text-anchor="end">' +
+            value +
+            "</text></g>"
+          );
+        })
+        .join("");
+    }
+
+    function xAxis() {
+      return seriesRows
+        .map(function (row, index) {
+          if (index !== 0 && index !== seriesRows.length - 1 && index % labelEvery !== 0) return "";
+          return (
+            '<text class="click-axis-label" x="' +
+            x(index).toFixed(1) +
+            '" y="' +
+            (height - 16) +
+            '" text-anchor="middle">' +
+            escapeHtml(formatDay(row.day)) +
+            "</text>"
+          );
+        })
+        .join("");
+    }
+
+    root.innerHTML =
+      '<div class="click-chart-summary"><div><span>WhatsApp</span><strong class="wa">' +
+      whatsappTotal +
+      '</strong></div><div><span>Telegram</span><strong class="tg">' +
+      telegramTotal +
+      '</strong></div><div><span>Highest day</span><strong>' +
+      max +
+      '</strong></div></div><div class="click-chart-legend"><span><i class="wa"></i>WhatsApp</span><span><i class="tg"></i>Telegram</span></div>' +
+      '<div class="click-line-wrap"><svg class="click-line-chart" viewBox="0 0 ' +
+      width +
+      " " +
+      height +
+      '" role="img" aria-label="WhatsApp and Telegram click line graph">' +
+      yAxis() +
+      '<line class="click-axis-line" x1="' +
+      padLeft +
+      '" x2="' +
+      (width - padRight) +
+      '" y1="' +
+      (padTop + innerHeight) +
+      '" y2="' +
+      (padTop + innerHeight) +
+      '"></line><path class="click-line wa" d="' +
+      linePath("whatsapp") +
+      '"></path><path class="click-line tg" d="' +
+      linePath("telegram") +
+      '"></path>' +
+      points("whatsapp", "wa") +
+      points("telegram", "tg") +
+      xAxis() +
+      "</svg></div>";
   }
 
   function switchTab(tab) {

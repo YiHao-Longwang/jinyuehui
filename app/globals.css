@@ -1512,6 +1512,45 @@ body.cart-confirm-open {
   padding: 22px;
 }
 
+.click-chart-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.click-chart-summary div {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--cream);
+  padding: 14px;
+}
+
+.click-chart-summary span {
+  display: block;
+  color: var(--taupe);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.click-chart-summary strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--clay);
+  font-family: var(--serif);
+  font-size: 32px;
+  line-height: 1;
+}
+
+.click-chart-summary strong.wa {
+  color: #15823a;
+}
+
+.click-chart-summary strong.tg {
+  color: #1477a8;
+}
+
 .click-chart-legend {
   display: flex;
   flex-wrap: wrap;
@@ -1541,46 +1580,63 @@ body.cart-confirm-open {
   background: #229ed9;
 }
 
-.click-chart {
-  display: grid;
-  gap: 10px;
-}
-
-.click-chart-row {
-  display: grid;
-  grid-template-columns: 70px minmax(0, 1fr) 42px;
-  gap: 12px;
-  align-items: center;
-  color: var(--taupe);
-  font-size: 12px;
-}
-
-.click-chart-row b {
-  color: var(--ink);
-  font-size: 13px;
-  text-align: right;
-}
-
-.click-bar-stack {
-  display: flex;
+.click-line-wrap {
   overflow: hidden;
-  height: 18px;
-  border-radius: 999px;
+  border: 1px solid rgba(180, 127, 116, 0.18);
+  border-radius: 12px;
   background: var(--peach);
+  padding: 12px;
 }
 
-.click-bar {
+.click-line-chart {
   display: block;
-  min-width: 0;
-  height: 100%;
+  width: 100%;
+  min-height: 280px;
 }
 
-.click-bar.wa {
-  background: #25d366;
+.click-grid-line {
+  stroke: rgba(180, 127, 116, 0.24);
+  stroke-dasharray: 4 5;
+  stroke-width: 1;
 }
 
-.click-bar.tg {
-  background: #229ed9;
+.click-axis-line {
+  stroke: rgba(95, 52, 37, 0.3);
+  stroke-width: 1.2;
+}
+
+.click-axis-label {
+  fill: var(--taupe);
+  font-family: var(--sans);
+  font-size: 13px;
+}
+
+.click-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
+.click-line.wa {
+  stroke: #25d366;
+}
+
+.click-line.tg {
+  stroke: #229ed9;
+}
+
+.click-line-point {
+  fill: var(--paper);
+  stroke-width: 3;
+}
+
+.click-line-point.wa {
+  stroke: #25d366;
+}
+
+.click-line-point.tg {
+  stroke: #229ed9;
 }
 
 @media (max-width: 760px) {
@@ -1611,9 +1667,17 @@ body.cart-confirm-open {
     justify-content: space-between;
   }
 
-  .click-chart-row {
-    grid-template-columns: 56px minmax(0, 1fr) 34px;
-    gap: 8px;
+  .click-chart-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .click-line-wrap {
+    overflow-x: auto;
+  }
+
+  .click-line-chart {
+    min-width: 680px;
+    min-height: 250px;
   }
 }
 

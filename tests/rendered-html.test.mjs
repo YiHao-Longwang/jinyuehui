@@ -139,6 +139,7 @@ test("server-renders reservation cart", async () => {
   assert.match(contactScript, /sendBeacon/);
   assert.match(contactScript, /whatsapp/);
   assert.match(contactScript, /telegram/);
+  assert.match(contactScript, /codex-healthcheck/);
 
   const adminScript = await readFile(new URL("../public/admin-reservations.js", import.meta.url), "utf8");
   assert.match(adminScript, /query: \{ token: token \}/);
@@ -160,6 +161,8 @@ test("keeps starter preview removed", async () => {
   assert.match(layout, /contact-clicks\.js\?v=20260824-contact-clicks/);
   assert.match(robots, /Sitemap: https:\/\/onespa\.klyihao\.com\/sitemap\.xml/);
   assert.match(sitemap, /https:\/\/onespa\.klyihao\.com\/cn\/packages\//);
+  const chineseRoutes = await readFile(new URL("../app/cn/[...slug]/page.tsx", import.meta.url), "utf8");
+  assert.doesNotMatch(chineseRoutes, /Telegram 我们|WhatsApp 我们/);
   assert.doesNotMatch(page, /SkeletonPreview|codex-preview/);
   assert.doesNotMatch(layout, /Starter Project|codex-preview|_sites-preview/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);

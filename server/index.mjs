@@ -322,6 +322,10 @@ function cleanChannel(value) {
   return channel === "whatsapp" || channel === "telegram" ? channel : "";
 }
 
+function isIgnoredClickPath(path) {
+  return /^\/(?:admin|codex-healthcheck)(?:\/|$)/.test(path);
+}
+
 async function contactClickStats(sql) {
   const summary = await sql`
     select
@@ -421,13 +425,15 @@ app.get("/api/contact-clicks", async (req, res) => {
 app.post("/api/contact-clicks", async (req, res) => {
   const channel = cleanChannel(req.body?.channel);
   if (!channel) return errorResponse(res, "Invalid contact channel.");
+  const path = clean(req.body?.path, 180);
+  if (isIgnoredClickPath(path)) return res.status(202).json({ ok: true, ignored: true });
 
   try {
     const sql = db();
     await ensureContactClicksTable(sql);
     await sql`
       insert into contact_clicks (channel, path, href, label)
-      values (${channel}, ${clean(req.body?.path, 180) || null}, ${clean(req.body?.href, 300) || null}, ${clean(req.body?.label, 120) || null})
+      values (${channel}, ${path || null}, ${clean(req.body?.href, 300) || null}, ${clean(req.body?.label, 120) || null})
     `;
     res.status(201).json({ ok: true });
   } catch (error) {

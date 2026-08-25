@@ -602,7 +602,7 @@ function PackagesPageCn() {
                   </div>
                   <button className="mini" type="button" data-book="kids" data-book-locale="cn">儿童票 · 预约</button>
                 </div>
-                <div className="row"><h4>10 人以上 / 公司团</h4><p>直接联系 WhatsApp 或 Telegram，团体价可商量。</p><div className="mini-contact-row"><a className="mini contact-wa" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 我们</a><a className="mini contact-tg" href={telegramHrefCn} target="_blank" rel="noopener">Telegram 我们</a></div></div>
+                <div className="row"><h4>10 人以上 / 公司团</h4><p>直接联系 WhatsApp 或 Telegram，团体价可商量。</p><div className="mini-contact-row"><a className="mini contact-wa" href={whatsappHrefCn} target="_blank" rel="noopener">WhatsApp 咨询</a><a className="mini contact-tg" href={telegramHrefCn} target="_blank" rel="noopener">Telegram 咨询</a></div></div>
               </div>
             </div>
             <p className="fine">示例使用星期日-星期四价格；++ = 10% 服务费 + 8% SST。</p>
@@ -750,7 +750,7 @@ function HomeMassagePageCn() {
       <main>
         <Hero eyebrow="One Spa · 上门服务 · 吉隆坡" title={<>店里的按摩，<br />到你家</>} copy="店里的那批技师，现在也出门。酒店、公寓或住家都能去，按摩油和一次性床单毛巾由技师带齐，在你自己的床上铺好就开始。家具不用挪，你只要躺下。" image="outcall-hero.jpg?osw=0.9.23">
           <a className="btn clay" href="#outcall-plans">线上购买</a>
-          <ContactButtons locale="cn" className="hero-contact-pair" whatsappLabel="有问题？WhatsApp 我们" telegramLabel="Telegram 我们" />
+          <ContactButtons locale="cn" className="hero-contact-pair" whatsappLabel="WhatsApp 咨询" telegramLabel="Telegram 咨询" />
         </Hero>
         <Chips items={homeChips} />
         <section id="outcall-plans">

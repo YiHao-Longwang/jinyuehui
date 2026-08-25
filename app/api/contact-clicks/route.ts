@@ -53,6 +53,10 @@ function cleanChannel(value: unknown) {
   return channel === "whatsapp" || channel === "telegram" ? channel : "";
 }
 
+function isIgnoredPath(path: string) {
+  return /^\/(?:admin|codex-healthcheck)(?:\/|$)/.test(path);
+}
+
 export async function GET(request: Request) {
   const token = await adminToken();
   const url = new URL(request.url);
@@ -98,12 +102,14 @@ export async function POST(request: Request) {
 
   const channel = cleanChannel(payload.channel);
   if (!channel) return errorResponse("Invalid contact channel.");
+  const path = clean(payload.path, 180);
+  if (isIgnoredPath(path)) return Response.json({ ok: true, ignored: true }, { status: 202 });
 
   const sql = neon(urlValue);
   await ensureTable(sql);
   await sql`
     insert into contact_clicks (channel, path, href, label)
-    values (${channel}, ${clean(payload.path, 180) || null}, ${clean(payload.href, 300) || null}, ${clean(payload.label, 120) || null})
+    values (${channel}, ${path || null}, ${clean(payload.href, 300) || null}, ${clean(payload.label, 120) || null})
   `;
 
   return Response.json({ ok: true }, { status: 201 });

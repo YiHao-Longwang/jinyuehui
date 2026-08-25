@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  if (/^\/admin(?:\/|$)/.test(location.pathname)) return;
+  if (/^\/(?:admin|codex-healthcheck)(?:\/|$)/.test(location.pathname)) return;
 
   function channelFor(link) {
     var href = String(link.href || "");

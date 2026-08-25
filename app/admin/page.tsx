@@ -74,7 +74,7 @@ export default function AdminPage() {
           <div className="admin-empty">Login to load reservations.</div>
         </div>
       </section>
-      <script src="/admin-reservations.js?v=20260825-admin-refresh" defer />
+      <script src="/admin-reservations.js?v=20260825-socket-auth" defer />
     </main>
   );
 }

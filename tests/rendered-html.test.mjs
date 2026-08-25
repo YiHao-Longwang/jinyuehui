@@ -96,7 +96,7 @@ test("server-renders reservation cart", async () => {
   assert.match(admin, /data-admin-page/);
   assert.match(admin, /data-admin-click-stats/);
   assert.match(admin, /data-admin-refresh-clicks/);
-  assert.match(admin, /admin-reservations\.js\?v=20260825-admin-refresh/);
+  assert.match(admin, /admin-reservations\.js\?v=20260825-socket-auth/);
   assert.match(admin, /data-admin-token/);
   assert.match(admin, /data-admin-filter/);
   assert.doesNotMatch(admin, /API base|data-admin-api-base/);
@@ -139,6 +139,10 @@ test("server-renders reservation cart", async () => {
   assert.match(contactScript, /sendBeacon/);
   assert.match(contactScript, /whatsapp/);
   assert.match(contactScript, /telegram/);
+
+  const adminScript = await readFile(new URL("../public/admin-reservations.js", import.meta.url), "utf8");
+  assert.match(adminScript, /query: \{ token: token \}/);
+  assert.match(adminScript, /Realtime offline/);
 });
 
 test("keeps starter preview removed", async () => {

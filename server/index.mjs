@@ -382,7 +382,8 @@ const io = new Server(httpServer, {
 });
 
 io.use((socket, next) => {
-  if (!ADMIN_TOKEN || socket.handshake.auth?.token === ADMIN_TOKEN) return next();
+  const token = socket.handshake.auth?.token || socket.handshake.query?.token;
+  if (!ADMIN_TOKEN || token === ADMIN_TOKEN) return next();
   return next(new Error("Unauthorized"));
 });
 

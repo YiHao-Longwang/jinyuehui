@@ -7,6 +7,7 @@
   var rows = [];
   var clickSummary = [];
   var recentClicks = [];
+  var lastReservationStatus = "";
 
   function $(selector) {
     return document.querySelector(selector);
@@ -312,7 +313,8 @@
         rows = body.reservations || [];
         setLoggedIn(true);
         render();
-        setStatus("Loaded " + rows.length + " reservations.", "ok");
+        lastReservationStatus = "Loaded " + rows.length + " reservations.";
+        setStatus(lastReservationStatus, "ok");
         setStatus("", "", "[data-admin-login-status]");
         refreshClickStats();
         connectSocket();
@@ -331,6 +333,7 @@
   function refreshClickStats() {
     var token = currentToken();
     if (!token) return;
+    renderClickStats();
 
     fetch(endpoint("/api/contact-clicks?token=" + encodeURIComponent(token)))
       .then(function (res) {
@@ -407,13 +410,14 @@
         if (socket) socket.disconnect();
         socket = window.io(base || undefined, {
           auth: { token: token },
+          query: { token: token },
           transports: ["websocket", "polling"]
         });
         socket.on("connect", function () {
-          setStatus("Websocket connected. Waiting for live reservations.", "ok");
+          setStatus((lastReservationStatus || "Reservations loaded.") + " Realtime connected.", "ok");
         });
         socket.on("connect_error", function (error) {
-          setStatus("Websocket offline: " + error.message, "bad");
+          setStatus((lastReservationStatus || "Reservations loaded.") + " Realtime offline: " + error.message, "bad");
         });
         socket.on("reservation:created", function (row) {
           upsert(row);
@@ -442,6 +446,7 @@
       rows = [];
       clickSummary = [];
       recentClicks = [];
+      lastReservationStatus = "";
       if (socket) socket.disconnect();
       tokenInput.value = "";
       setLoggedIn(false);

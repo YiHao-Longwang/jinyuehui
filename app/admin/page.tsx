@@ -64,6 +64,9 @@ export default function AdminPage() {
             <button className="btn line" type="button" data-admin-refresh-clicks>
               Refresh clicks
             </button>
+            <a className="btn line" href="/admin/clicks">
+              View all history
+            </a>
           </div>
           <div className="admin-click-grid" data-admin-click-stats>
             <div className="admin-empty">Click analytics will load after login.</div>

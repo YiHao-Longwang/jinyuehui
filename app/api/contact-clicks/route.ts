@@ -53,8 +53,105 @@ function cleanChannel(value: unknown) {
   return channel === "whatsapp" || channel === "telegram" ? channel : "";
 }
 
+function channelFilter(value: unknown) {
+  return cleanChannel(value) || "all";
+}
+
+function intParam(value: string | null, fallback: number, min: number, max: number) {
+  const parsed = Number.parseInt(value || "", 10);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.min(max, Math.max(min, parsed));
+}
+
 function isIgnoredPath(path: string) {
   return /^\/(?:admin|codex-healthcheck)(?:\/|$)/.test(path);
+}
+
+const MALAYSIA_OFFSET_MS = 8 * 60 * 60 * 1000;
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+function startOfLocalDay(days: number) {
+  const klNow = new Date(Date.now() + MALAYSIA_OFFSET_MS);
+  klNow.setUTCHours(0, 0, 0, 0);
+  return new Date(klNow.getTime() - MALAYSIA_OFFSET_MS - (days - 1) * DAY_MS).toISOString();
+}
+
+function localDayKey(startIso: string, offsetDays: number) {
+  const utcMs = new Date(startIso).getTime() + offsetDays * DAY_MS;
+  return new Date(utcMs + MALAYSIA_OFFSET_MS).toISOString().slice(0, 10);
+}
+
+async function clickHistory(sql: ReturnType<typeof neon>, url: URL) {
+  const channel = channelFilter(url.searchParams.get("channel"));
+  const limit = intParam(url.searchParams.get("limit"), 25, 10, 100);
+  const offset = intParam(url.searchParams.get("offset"), 0, 0, 100000);
+
+  if (channel === "all") {
+    const [count] = await sql`select count(*)::int as total from contact_clicks`;
+    const clicks = await sql`
+      select id, channel, path, href, label, created_at
+      from contact_clicks
+      order by created_at desc
+      limit ${limit}
+      offset ${offset}
+    `;
+    return { clicks, total: count?.total ?? 0, limit, offset };
+  }
+
+  const [count] = await sql`select count(*)::int as total from contact_clicks where channel = ${channel}`;
+  const clicks = await sql`
+    select id, channel, path, href, label, created_at
+    from contact_clicks
+    where channel = ${channel}
+    order by created_at desc
+    limit ${limit}
+    offset ${offset}
+  `;
+  return { clicks, total: count?.total ?? 0, limit, offset };
+}
+
+async function clickSeries(sql: ReturnType<typeof neon>, url: URL) {
+  const channel = channelFilter(url.searchParams.get("channel"));
+  const days = intParam(url.searchParams.get("days"), 14, 7, 90);
+  const startIso = startOfLocalDay(days);
+  const rows =
+    channel === "all"
+      ? await sql`
+          select
+            to_char(created_at at time zone 'Asia/Kuala_Lumpur', 'YYYY-MM-DD') as day,
+            channel,
+            count(*)::int as count
+          from contact_clicks
+          where created_at >= ${startIso}
+          group by day, channel
+          order by day asc
+        `
+      : await sql`
+          select
+            to_char(created_at at time zone 'Asia/Kuala_Lumpur', 'YYYY-MM-DD') as day,
+            channel,
+            count(*)::int as count
+          from contact_clicks
+          where created_at >= ${startIso} and channel = ${channel}
+          group by day, channel
+          order by day asc
+        `;
+
+  const byDay = new Map<string, { day: string; whatsapp: number; telegram: number; total: number }>();
+  for (let index = 0; index < days; index += 1) {
+    const day = localDayKey(startIso, index);
+    byDay.set(day, { day, whatsapp: 0, telegram: 0, total: 0 });
+  }
+
+  rows.forEach((row) => {
+    const item = byDay.get(String(row.day));
+    if (!item) return;
+    if (row.channel === "whatsapp") item.whatsapp = Number(row.count || 0);
+    if (row.channel === "telegram") item.telegram = Number(row.count || 0);
+    item.total = item.whatsapp + item.telegram;
+  });
+
+  return { series: Array.from(byDay.values()), days };
 }
 
 export async function GET(request: Request) {
@@ -69,6 +166,10 @@ export async function GET(request: Request) {
 
   const sql = neon(urlValue);
   await ensureTable(sql);
+  const view = clean(url.searchParams.get("view"), 20).toLowerCase();
+  if (view === "history") return Response.json(await clickHistory(sql, url));
+  if (view === "series") return Response.json(await clickSeries(sql, url));
+
   const summary = await sql`
     select
       channel,

@@ -322,8 +322,32 @@ function cleanChannel(value) {
   return channel === "whatsapp" || channel === "telegram" ? channel : "";
 }
 
+function channelFilter(value) {
+  return cleanChannel(value) || "all";
+}
+
+function intParam(value, fallback, min, max) {
+  const parsed = Number.parseInt(value || "", 10);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.min(max, Math.max(min, parsed));
+}
+
 function isIgnoredClickPath(path) {
   return /^\/(?:admin|codex-healthcheck)(?:\/|$)/.test(path);
+}
+
+const MALAYSIA_OFFSET_MS = 8 * 60 * 60 * 1000;
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+function startOfLocalDay(days) {
+  const klNow = new Date(Date.now() + MALAYSIA_OFFSET_MS);
+  klNow.setUTCHours(0, 0, 0, 0);
+  return new Date(klNow.getTime() - MALAYSIA_OFFSET_MS - (days - 1) * DAY_MS).toISOString();
+}
+
+function localDayKey(startIso, offsetDays) {
+  const utcMs = new Date(startIso).getTime() + offsetDays * DAY_MS;
+  return new Date(utcMs + MALAYSIA_OFFSET_MS).toISOString().slice(0, 10);
 }
 
 async function contactClickStats(sql) {
@@ -344,6 +368,86 @@ async function contactClickStats(sql) {
     limit 20
   `;
   return { summary, recent };
+}
+
+async function contactClickHistory(sql, query) {
+  const channel = channelFilter(query.channel);
+  const limit = intParam(query.limit, 25, 10, 100);
+  const offset = intParam(query.offset, 0, 0, 100000);
+
+  if (channel === "all") {
+    const [count] = await sql`select count(*)::int as total from contact_clicks`;
+    const clicks = await sql`
+      select id, channel, path, href, label, created_at
+      from contact_clicks
+      order by created_at desc
+      limit ${limit}
+      offset ${offset}
+    `;
+    return { clicks, total: count?.total ?? 0, limit, offset };
+  }
+
+  const [count] = await sql`select count(*)::int as total from contact_clicks where channel = ${channel}`;
+  const clicks = await sql`
+    select id, channel, path, href, label, created_at
+    from contact_clicks
+    where channel = ${channel}
+    order by created_at desc
+    limit ${limit}
+    offset ${offset}
+  `;
+  return { clicks, total: count?.total ?? 0, limit, offset };
+}
+
+async function contactClickSeries(sql, query) {
+  const channel = channelFilter(query.channel);
+  const days = intParam(query.days, 14, 7, 90);
+  const startIso = startOfLocalDay(days);
+  const rows =
+    channel === "all"
+      ? await sql`
+          select
+            to_char(created_at at time zone 'Asia/Kuala_Lumpur', 'YYYY-MM-DD') as day,
+            channel,
+            count(*)::int as count
+          from contact_clicks
+          where created_at >= ${startIso}
+          group by day, channel
+          order by day asc
+        `
+      : await sql`
+          select
+            to_char(created_at at time zone 'Asia/Kuala_Lumpur', 'YYYY-MM-DD') as day,
+            channel,
+            count(*)::int as count
+          from contact_clicks
+          where created_at >= ${startIso} and channel = ${channel}
+          group by day, channel
+          order by day asc
+        `;
+
+  const byDay = new Map();
+  for (let index = 0; index < days; index += 1) {
+    const day = localDayKey(startIso, index);
+    byDay.set(day, { day, whatsapp: 0, telegram: 0, total: 0 });
+  }
+
+  rows.forEach((row) => {
+    const item = byDay.get(String(row.day));
+    if (!item) return;
+    if (row.channel === "whatsapp") item.whatsapp = Number(row.count || 0);
+    if (row.channel === "telegram") item.telegram = Number(row.count || 0);
+    item.total = item.whatsapp + item.telegram;
+  });
+
+  return { series: Array.from(byDay.values()), days };
+}
+
+async function contactClickResponse(sql, query) {
+  const view = clean(query.view, 20).toLowerCase();
+  if (view === "history") return contactClickHistory(sql, query);
+  if (view === "series") return contactClickSeries(sql, query);
+  return contactClickStats(sql);
 }
 
 async function notifyTelegram(reservation) {
@@ -416,7 +520,7 @@ app.get("/api/contact-clicks", async (req, res) => {
   try {
     const sql = db();
     await ensureContactClicksTable(sql);
-    res.json(await contactClickStats(sql));
+    res.json(await contactClickResponse(sql, req.query));
   } catch (error) {
     errorResponse(res, error instanceof Error ? error.message : "Could not load contact click stats.", 500);
   }

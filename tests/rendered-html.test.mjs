@@ -96,10 +96,18 @@ test("server-renders reservation cart", async () => {
   assert.match(admin, /data-admin-page/);
   assert.match(admin, /data-admin-click-stats/);
   assert.match(admin, /data-admin-refresh-clicks/);
+  assert.match(admin, /href="\/admin\/clicks"/);
   assert.match(admin, /admin-reservations\.js\?v=20260825-socket-auth/);
   assert.match(admin, /data-admin-token/);
   assert.match(admin, /data-admin-filter/);
   assert.doesNotMatch(admin, /API base|data-admin-api-base/);
+
+  const clickHistory = await (await render("/admin/clicks")).text();
+  assert.match(clickHistory, /Click Analytics/);
+  assert.match(clickHistory, /data-click-history-page/);
+  assert.match(clickHistory, /data-click-tab="history"/);
+  assert.match(clickHistory, /data-click-tab="graph"/);
+  assert.match(clickHistory, /admin-click-history\.js\?v=20260825-click-history/);
 
   const packages = await (await render("/packages")).text();
   assert.match(packages, /data-book="b1f1"/);
@@ -144,6 +152,11 @@ test("server-renders reservation cart", async () => {
   const adminScript = await readFile(new URL("../public/admin-reservations.js", import.meta.url), "utf8");
   assert.match(adminScript, /query: \{ token: token \}/);
   assert.match(adminScript, /Realtime offline/);
+
+  const clickHistoryScript = await readFile(new URL("../public/admin-click-history.js", import.meta.url), "utf8");
+  assert.match(clickHistoryScript, /view=history/);
+  assert.match(clickHistoryScript, /view=series/);
+  assert.match(clickHistoryScript, /onespa_admin_token/);
 });
 
 test("keeps starter preview removed", async () => {

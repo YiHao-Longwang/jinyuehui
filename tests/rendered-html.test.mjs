@@ -107,6 +107,9 @@ test("server-renders reservation cart", async () => {
   assert.match(clickHistory, /data-click-history-page/);
   assert.match(clickHistory, /data-click-tab="history"/);
   assert.match(clickHistory, /data-click-tab="graph"/);
+  assert.match(clickHistory, /data-click-period/);
+  assert.match(clickHistory, /This week/);
+  assert.match(clickHistory, /This month/);
   assert.match(clickHistory, /admin-click-history\.js\?v=20260825-click-history/);
 
   const packages = await (await render("/packages")).text();
@@ -156,8 +159,14 @@ test("server-renders reservation cart", async () => {
   const clickHistoryScript = await readFile(new URL("../public/admin-click-history.js", import.meta.url), "utf8");
   assert.match(clickHistoryScript, /view=history/);
   assert.match(clickHistoryScript, /view=series/);
+  assert.match(clickHistoryScript, /period=/);
   assert.match(clickHistoryScript, /click-line-chart/);
   assert.match(clickHistoryScript, /onespa_admin_token/);
+  assert.doesNotMatch(clickHistoryScript, /data-click-days/);
+
+  assert.match(adminScript, /this week/);
+  assert.match(adminScript, /this month/);
+  assert.doesNotMatch(adminScript, /last 7 days/);
 });
 
 test("keeps starter preview removed", async () => {

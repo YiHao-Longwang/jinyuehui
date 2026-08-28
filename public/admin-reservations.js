@@ -102,8 +102,8 @@
 
   function emptyClickStats() {
     return [
-      { channel: "whatsapp", total: 0, today: 0, last_7_days: 0 },
-      { channel: "telegram", total: 0, today: 0, last_7_days: 0 }
+      { channel: "whatsapp", total: 0, today: 0, this_week: 0, this_month: 0 },
+      { channel: "telegram", total: 0, today: 0, this_week: 0, this_month: 0 }
     ];
   }
 
@@ -136,8 +136,10 @@
           '</strong><div><b>' +
           escapeHtml(row.today || 0) +
           '</b> today · <b>' +
-          escapeHtml(row.last_7_days || 0) +
-          "</b> last 7 days</div></article>"
+          escapeHtml(row.this_week || 0) +
+          '</b> this week · <b>' +
+          escapeHtml(row.this_month || 0) +
+          "</b> this month</div></article>"
         );
       })
       .join("");

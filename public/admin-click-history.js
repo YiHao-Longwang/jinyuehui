@@ -66,8 +66,8 @@
     return $("[data-click-channel]")?.value || "all";
   }
 
-  function currentDays() {
-    return $("[data-click-days]")?.value || "14";
+  function currentPeriod() {
+    return $("[data-click-period]")?.value || "week";
   }
 
   function saveToken() {
@@ -331,13 +331,14 @@
 
   function loadSeries() {
     var token = currentToken();
+    var period = currentPeriod();
+    var periodQuery = /^\d+$/.test(period) ? "&days=" + encodeURIComponent(period) : "&period=" + encodeURIComponent(period);
     var query =
       "?view=series&token=" +
       encodeURIComponent(token) +
       "&channel=" +
       encodeURIComponent(currentChannel()) +
-      "&days=" +
-      encodeURIComponent(currentDays());
+      periodQuery;
     return fetch(endpoint("/api/contact-clicks" + query))
       .then(function (res) {
         return readJsonResponse(res, "Could not load click graph.");
@@ -389,7 +390,7 @@
       offset = 0;
       refreshAll();
     });
-    $("[data-click-days]")?.addEventListener("change", refreshAll);
+    $("[data-click-period]")?.addEventListener("change", refreshAll);
     $("[data-click-prev]")?.addEventListener("click", function () {
       offset = Math.max(0, offset - LIMIT);
       refreshAll();

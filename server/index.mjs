@@ -339,10 +339,55 @@ function isIgnoredClickPath(path) {
 const MALAYSIA_OFFSET_MS = 8 * 60 * 60 * 1000;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-function startOfLocalDay(days) {
+function localTodayStartMs() {
   const klNow = new Date(Date.now() + MALAYSIA_OFFSET_MS);
   klNow.setUTCHours(0, 0, 0, 0);
-  return new Date(klNow.getTime() - MALAYSIA_OFFSET_MS - (days - 1) * DAY_MS).toISOString();
+  return klNow.getTime();
+}
+
+function localMonthStartMs() {
+  const klNow = new Date(Date.now() + MALAYSIA_OFFSET_MS);
+  return Date.UTC(klNow.getUTCFullYear(), klNow.getUTCMonth(), 1);
+}
+
+function localPeriodWindow(periodValue, dayValue) {
+  const period = clean(periodValue, 20).toLowerCase();
+  const todayMs = localTodayStartMs();
+  const day = new Date(todayMs).getUTCDay();
+  const daysSinceMonday = (day + 6) % 7;
+
+  if (period === "day") {
+    return {
+      period: "day",
+      days: 1,
+      startIso: new Date(todayMs - MALAYSIA_OFFSET_MS).toISOString(),
+    };
+  }
+
+  if (period === "week") {
+    const startLocalMs = todayMs - daysSinceMonday * DAY_MS;
+    return {
+      period: "week",
+      days: daysSinceMonday + 1,
+      startIso: new Date(startLocalMs - MALAYSIA_OFFSET_MS).toISOString(),
+    };
+  }
+
+  if (period === "month") {
+    const startLocalMs = localMonthStartMs();
+    return {
+      period: "month",
+      days: Math.floor((todayMs - startLocalMs) / DAY_MS) + 1,
+      startIso: new Date(startLocalMs - MALAYSIA_OFFSET_MS).toISOString(),
+    };
+  }
+
+  const days = intParam(dayValue ?? null, 30, 7, 90);
+  return {
+    period: "days",
+    days,
+    startIso: new Date(todayMs - MALAYSIA_OFFSET_MS - (days - 1) * DAY_MS).toISOString(),
+  };
 }
 
 function localDayKey(startIso, offsetDays) {
@@ -351,12 +396,16 @@ function localDayKey(startIso, offsetDays) {
 }
 
 async function contactClickStats(sql) {
+  const todayIso = localPeriodWindow("day").startIso;
+  const weekIso = localPeriodWindow("week").startIso;
+  const monthIso = localPeriodWindow("month").startIso;
   const summary = await sql`
     select
       channel,
       count(*)::int as total,
-      count(*) filter (where created_at >= date_trunc('day', now()))::int as today,
-      count(*) filter (where created_at >= now() - interval '7 days')::int as last_7_days
+      count(*) filter (where created_at >= ${todayIso})::int as today,
+      count(*) filter (where created_at >= ${weekIso})::int as this_week,
+      count(*) filter (where created_at >= ${monthIso})::int as this_month
     from contact_clicks
     group by channel
     order by channel
@@ -401,8 +450,7 @@ async function contactClickHistory(sql, query) {
 
 async function contactClickSeries(sql, query) {
   const channel = channelFilter(query.channel);
-  const days = intParam(query.days, 14, 7, 90);
-  const startIso = startOfLocalDay(days);
+  const { period, days, startIso } = localPeriodWindow(query.period, query.days);
   const rows =
     channel === "all"
       ? await sql`
@@ -440,7 +488,7 @@ async function contactClickSeries(sql, query) {
     item.total = item.whatsapp + item.telegram;
   });
 
-  return { series: Array.from(byDay.values()), days };
+  return { series: Array.from(byDay.values()), days, period };
 }
 
 async function contactClickResponse(sql, query) {

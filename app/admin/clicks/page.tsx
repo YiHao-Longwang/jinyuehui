@@ -44,12 +44,12 @@ export default function AdminClickHistoryPage() {
               </select>
             </label>
             <label>
-              <span>Graph range</span>
-              <select data-click-days defaultValue="14">
-                <option value="7">7 days</option>
-                <option value="14">14 days</option>
-                <option value="30">30 days</option>
-                <option value="90">90 days</option>
+              <span>Graph period</span>
+              <select data-click-period defaultValue="week">
+                <option value="week">This week</option>
+                <option value="month">This month</option>
+                <option value="30">Last 30 days</option>
+                <option value="90">Last 90 days</option>
               </select>
             </label>
             <button className="btn line" type="button" data-click-refresh>

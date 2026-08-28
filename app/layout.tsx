@@ -5,13 +5,13 @@ import { localBusinessJsonLd, pageMetadata, siteUrl } from "./seo";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   ...pageMetadata({
-    title: "One Spa 南海龙宫 | 吉隆坡SPA · KL Spa & Massage",
+    title: "金悦汇 Indulgence | 吉隆坡SPA · KL Spa & Massage",
     description:
-      "One Spa 南海龙宫 at Viva Home Mall Kuala Lumpur: 24-hour spa, hot spring, KL massage, 吉隆坡下水, 吉隆坡莞式按摩服务, beauty, TCM wellness and home massage booking.",
+      "金悦汇 Indulgence at Viva Home Mall Kuala Lumpur: 24-hour spa, hot spring, KL massage, 吉隆坡下水, 吉隆坡莞式按摩服务, beauty, TCM wellness and home massage booking.",
     path: "/",
-    keywords: ["南海龙宫 SPA", "吉隆坡按摩推荐", "吉隆坡下水", "吉隆坡莞式按摩服务", "Kuala Lumpur spa", "Viva Home Mall massage"],
+    keywords: ["金悦汇 SPA", "吉隆坡按摩推荐", "吉隆坡下水", "吉隆坡莞式按摩服务", "Kuala Lumpur spa", "Viva Home Mall massage"],
   }),
-  applicationName: "onepsa",
+  applicationName: "jinyuehui",
   icons: {
     icon: [
       { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },

@@ -12,11 +12,11 @@ import {
 import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
-  title: "One Spa Packages | 吉隆坡SPA按摩价格 · 南海龙宫",
+  title: "金悦汇 Indulgence Packages | 吉隆坡SPA按摩价格 · 金悦汇",
   description:
-    "View One Spa 南海龙宫 packages in Kuala Lumpur: 12-hour spa pass, KL massage package, body scrub, daytime duo, kids ticket and private room prices.",
+    "View 金悦汇 Indulgence packages in Kuala Lumpur: 12-hour spa pass, KL massage package, body scrub, daytime duo, kids ticket and private room prices.",
   path: "/packages/",
-  keywords: ["吉隆坡SPA价格", "吉隆坡按摩价格", "南海龙宫配套", "KL spa package", "KL massage package"],
+  keywords: ["吉隆坡SPA价格", "吉隆坡按摩价格", "金悦汇配套", "KL spa package", "KL massage package"],
   image: "/assets/hero-packages-rain.jpg",
 });
 
@@ -267,8 +267,8 @@ export default function PackagesPage() {
       <Header active="Packages" />
       <main>
         <Hero
-          eyebrow="One Spa · Kuala Lumpur · Open 24 Hours"
-          title={<>Packages &amp; Prices at One Spa KL</>}
+          eyebrow="金悦汇 Indulgence · Kuala Lumpur · Open 24 Hours"
+          title={<>Packages &amp; Prices at 金悦汇 Indulgence KL</>}
           copy="Whichever package you pick, it buys the same twelve hours: the pools, the steam room, a massage if it is included, and food when you want it."
           image="hero-packages-rain.jpg?osw=0.9.23"
         />
@@ -306,7 +306,7 @@ export default function PackagesPage() {
               {packageCards.map((item) => (
                 <article className="card" id={item.id} key={item.id}>
                   <div className="ph">
-                    <img src={`${assetBase}/${item.image}`} alt={`${item.title} - One Spa KL spa package, Kuala Lumpur`} />
+                    <img src={`${assetBase}/${item.image}`} alt={`${item.title} - 金悦汇 Indulgence KL spa package, Kuala Lumpur`} />
                   </div>
                   <div className="body">
                     <div className="tagrow"><span className="tag">{item.tag}</span></div>
@@ -427,7 +427,7 @@ export default function PackagesPage() {
             <div className="cards rooms">
               {rooms.map((room) => (
                 <article className="card" id={room.id} key={room.id}>
-                  <div className="ph"><img src={`${assetBase}/${room.image}`} alt={`${room.title} - private room at One Spa Kuala Lumpur`} /></div>
+                  <div className="ph"><img src={`${assetBase}/${room.image}`} alt={`${room.title} - private room at 金悦汇 Indulgence Kuala Lumpur`} /></div>
                   <div className="body">
                     <h3>{room.title}</h3>
                     <div className="roomprice">

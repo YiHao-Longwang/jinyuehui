@@ -2,21 +2,21 @@ import { FloatingWhatsApp, Footer, Header, JsonLd, SectionHead } from "../site-c
 import { faqJsonLd, pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
-  title: "One Spa FAQ | 吉隆坡SPA按摩预约问题 · 南海龙宫",
+  title: "金悦汇 Indulgence FAQ | 吉隆坡SPA按摩预约问题 · 金悦汇",
   description:
-    "FAQ for One Spa 南海龙宫 Kuala Lumpur: KL spa package pricing, massage booking, 12-hour stay, kids tickets, rescheduling and payment after treatment.",
+    "FAQ for 金悦汇 Indulgence Kuala Lumpur: KL spa package pricing, massage booking, 12-hour stay, kids tickets, rescheduling and payment after treatment.",
   path: "/faq/",
-  keywords: ["吉隆坡SPA FAQ", "吉隆坡按摩预约", "南海龙宫预约", "KL spa FAQ"],
+  keywords: ["吉隆坡SPA FAQ", "吉隆坡按摩预约", "金悦汇预约", "KL spa FAQ"],
 });
 
 const faqs: [string, string][] = [
   [
-    "Where is One Spa in Kuala Lumpur?",
-    "One Spa 南海龙宫 is at Lot No. 2-69 & 2-70, Level 2, Viva Home Mall, 85 Jalan Loke Yew, Taman Miharja, 52200 Kuala Lumpur - on the Cheras side of KL, take the lift to Level 2.",
+    "Where is 金悦汇 Indulgence in Kuala Lumpur?",
+    "金悦汇 Indulgence is at Lot No. 2-69 & 2-70, Level 2, Viva Home Mall, 85 Jalan Loke Yew, Taman Miharja, 52200 Kuala Lumpur - on the Cheras side of KL, take the lift to Level 2.",
   ],
   [
     "What are your opening hours?",
-    "One Spa is a 24 hour spa in KL - open every day, all day, including weekends and public holidays.",
+    "金悦汇 Indulgence is a 24 hour spa in KL - open every day, all day, including weekends and public holidays.",
   ],
   [
     "Is there parking at Viva Home Mall?",
@@ -61,7 +61,7 @@ export default function FAQPage() {
         <section id="faq">
           <SectionHead
             eyebrow="Before You Book"
-            title="FAQ · One Spa"
+            title="FAQ · 金悦汇 Indulgence"
             sub="Prices, booking, changes, arrival - all here. Still stuck? Tap WhatsApp for a real person."
           />
           <div className="container">

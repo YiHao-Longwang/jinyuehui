@@ -2,8 +2,8 @@ import { FloatingWhatsApp, Footer, Header, SectionHead, telegramHref, whatsappCa
 import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
-  title: "Reservation Cart | One Spa 南海龙宫",
-  description: "Review your One Spa reservation cart.",
+  title: "Reservation Cart | 金悦汇 Indulgence",
+  description: "Review your 金悦汇 Indulgence reservation cart.",
   path: "/cart/",
   noIndex: true,
 });
@@ -17,7 +17,7 @@ export default function CartPage() {
           <SectionHead
             eyebrow="Reservation Cart"
             title="Review Your Reservation"
-            sub="No online payment. Submit your reservation and pay after the treatment at One Spa."
+            sub="No online payment. Submit your reservation and pay after the treatment at 金悦汇 Indulgence."
           />
           <div className="container">
             <div className="cart-shell" data-cart-page data-locale="en">
@@ -28,7 +28,7 @@ export default function CartPage() {
       </main>
       <script
         dangerouslySetInnerHTML={{
-          __html: `window.ONE_SPA_TELEGRAM_URL=${JSON.stringify(telegramHref)};window.ONE_SPA_WHATSAPP_URL=${JSON.stringify(whatsappCartBase)};`,
+          __html: `window.JINYUEHUI_TELEGRAM_URL=${JSON.stringify(telegramHref)};window.JINYUEHUI_WHATSAPP_URL=${JSON.stringify(whatsappCartBase)};`,
         }}
       />
       <Footer />

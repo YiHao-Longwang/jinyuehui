@@ -11,11 +11,11 @@ import {
 import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
-  title: "Home Massage KL | 吉隆坡上门按摩 · One Spa 南海龙宫",
+  title: "Home Massage KL | 吉隆坡上门按摩 · 金悦汇 Indulgence",
   description:
-    "Book One Spa 南海龙宫 home massage in Kuala Lumpur. KL massage therapists for hotel, condo and home sessions with clear prices and reservation online.",
+    "Book 金悦汇 Indulgence home massage in Kuala Lumpur. KL massage therapists for hotel, condo and home sessions with clear prices and reservation online.",
   path: "/home-massage/",
-  keywords: ["吉隆坡上门按摩", "吉隆坡按摩", "klmassage", "home massage KL", "南海龙宫按摩"],
+  keywords: ["吉隆坡上门按摩", "吉隆坡按摩", "klmassage", "home massage KL", "金悦汇按摩"],
   image: "/assets/outcall-hero.jpg",
 });
 
@@ -132,7 +132,7 @@ export default function HomeMassagePage() {
         <Header active="Home Service" />
         <main>
           <Hero
-            eyebrow="One Spa · Home Service · Kuala Lumpur"
+            eyebrow="金悦汇 Indulgence · Home Service · Kuala Lumpur"
             title={
               <>
                 Our spa massage,

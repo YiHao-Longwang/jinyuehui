@@ -12,11 +12,11 @@ import {
 import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
-  title: "Contact One Spa 南海龙宫 | 吉隆坡SPA Viva Home Mall",
+  title: "Contact 金悦汇 Indulgence | 吉隆坡SPA Viva Home Mall",
   description:
-    "Contact One Spa 南海龙宫 at Level 2, Viva Home Mall Kuala Lumpur. Open 24 hours for KL spa, massage, hot spring and wellness reservations.",
+    "Contact 金悦汇 Indulgence at Level 2, Viva Home Mall Kuala Lumpur. Open 24 hours for KL spa, massage, hot spring and wellness reservations.",
   path: "/contact/",
-  keywords: ["南海龙宫地址", "One Spa contact", "吉隆坡SPA地址", "Viva Home Mall spa", "KL massage contact"],
+  keywords: ["金悦汇地址", "金悦汇 Indulgence contact", "吉隆坡SPA地址", "Viva Home Mall spa", "KL massage contact"],
 });
 
 const visitNotes: [string, string][] = [
@@ -44,7 +44,7 @@ export default function ContactPage() {
       <Header active="Contact" />
       <main>
         <section id="contact">
-          <SectionHead eyebrow="One Spa · Contact" title="Come See Us" />
+          <SectionHead eyebrow="金悦汇 Indulgence · Contact" title="Come See Us" />
           <div className="container">
             <div className="cinfo-wrap">
               <div className="cinfo">
@@ -79,7 +79,7 @@ export default function ContactPage() {
             <div className="btnrow contact-actions">
               <a
                 className="btn"
-                href="https://www.google.com/maps/search/?api=1&query=One%20Spa%20%E5%A3%B9%E5%8F%B7%E6%B1%A4%E6%B3%89&query_place_id=ChIJEa1Xrew3zDEROXX0qPz4IdA"
+                href="https://www.google.com/maps/search/?api=1&query=%E9%87%91%E6%82%A6%E6%B1%87%20Indulgence&query_place_id=ChIJEa1Xrew3zDEROXX0qPz4IdA"
                 target="_blank"
                 rel="noopener"
               >
@@ -87,7 +87,7 @@ export default function ContactPage() {
               </a>
               <a
                 className="btn line"
-                href="https://waze.com/ul?q=One%20Spa%20Viva%20Home%20Mall"
+                href="https://waze.com/ul?q=%E9%87%91%E6%82%A6%E6%B1%87%20Indulgence%20Viva%20Home%20Mall"
                 target="_blank"
                 rel="noopener"
               >
@@ -95,7 +95,7 @@ export default function ContactPage() {
               </a>
             </div>
             <div className="deal contact-note">
-              <b>Our Only Outlet</b> - One Spa has just this one location - Level 2,
+              <b>Our Only Outlet</b> - 金悦汇 Indulgence has just this one location - Level 2,
               Viva Home Mall, Taman Miharja, Kuala Lumpur. We have no branches;
               please navigate to the address above.
             </div>
@@ -105,7 +105,7 @@ export default function ContactPage() {
         <section id="visit">
           <SectionHead
             eyebrow="Planning Your Visit"
-            title="Getting to One Spa Kuala Lumpur"
+            title="Getting to 金悦汇 Indulgence Kuala Lumpur"
             sub="Hours, parking, booking steps and what your ticket covers."
           />
           <div className="container">

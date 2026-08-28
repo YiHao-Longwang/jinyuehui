@@ -71,8 +71,8 @@ const footerExperienceLinksCn = [
 
 /**
  * Public profiles for this outlet. Keep in sync with sameAsProfiles in seo.ts.
- * The onespaofficial accounts are deliberately absent - they belong to the
- * other operator trading under the One Spa name.
+ * The jinyuehuiofficial accounts are deliberately absent - they belong to the
+ * other operator trading under the 金悦汇 Indulgence name.
  */
 const socialLinks = [
   ["Instagram", "https://www.instagram.com/vivadespa/"],
@@ -161,7 +161,7 @@ export function Header({ active = "Home", locale = "en" }: { active?: string; lo
   return (
     <header className="topbar">
       <div className="container">
-        <a className="brand" href={isCn ? "/cn/" : "/"} aria-label="One Spa home">
+        <a className="brand" href={isCn ? "/cn/" : "/"} aria-label="金悦汇 Indulgence home">
           <img className="brand-lockup" src={`${assetBase}/jinyuehui-logo.png`} alt="金悦汇 Indulgence" />
         </a>
         <a className="seo-header-link" href={isCn ? "/cn/packages/#treatments" : "/packages/#treatments"}>
@@ -259,8 +259,8 @@ export function Hero({
 }) {
   const defaultAlt =
     locale === "cn"
-      ? "One Spa 南海龙宫 — 吉隆坡 24 小时SPA汤泉会所"
-      : "One Spa 南海龙宫 - 24 hour spa and hot spring in Kuala Lumpur";
+      ? "金悦汇 Indulgence — 吉隆坡 24 小时SPA汤泉会所"
+      : "金悦汇 Indulgence - 24 hour spa and hot spring in Kuala Lumpur";
 
   return (
     <section className="hero">
@@ -317,8 +317,8 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
               </div>
               <p className="footer-copy">
                 {isCn
-                  ? "One Spa 南海龙宫，吉隆坡 24 小时温泉会所，集合泡汤、按摩、美容、中医调理与私人养生护理。"
-                  : "One Spa 南海龙宫 is a warm, all-hours retreat for hot spring, massage, beauty, TCM and private wellness sessions in Kuala Lumpur."}
+                  ? "金悦汇 Indulgence，吉隆坡 24 小时温泉会所，集合泡汤、按摩、美容、中医调理与私人养生护理。"
+                  : "金悦汇 Indulgence is a warm, all-hours retreat for hot spring, massage, beauty, TCM and private wellness sessions in Kuala Lumpur."}
               </p>
             </div>
           </div>
@@ -336,7 +336,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
           </div>
         </div>
 
-        <div className="footer-highlights" aria-label="One Spa highlights">
+        <div className="footer-highlights" aria-label="金悦汇 Indulgence highlights">
           {highlights.map((item) => (
             <span key={item}>{item}</span>
           ))}
@@ -390,7 +390,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
           </div>
         </div>
         <div className="bottom">
-          <span>One Spa · © 2026 One Spa. All rights reserved.</span>
+          <span>金悦汇 Indulgence · © 2026 金悦汇 Indulgence. All rights reserved.</span>
           <span>{isCn ? "通过 WhatsApp 预约" : "Bookings handled through WhatsApp"}</span>
         </div>
       </div>
@@ -402,7 +402,7 @@ export function FloatingWhatsApp({ locale = "en" }: { locale?: Locale }) {
   const isCn = locale === "cn";
 
   return (
-    <div className="fab-stack" aria-label={isCn ? "联系 One Spa" : "Contact One Spa"}>
+    <div className="fab-stack" aria-label={isCn ? "联系 金悦汇 Indulgence" : "Contact 金悦汇 Indulgence"}>
       <a className="fab whatsapp" href={isCn ? whatsappHrefCn : whatsappHref} target="_blank" rel="noopener" aria-label="WhatsApp">
         <WhatsAppIcon />
         WhatsApp

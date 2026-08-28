@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://onespa.klyihao.com").replace(/\/$/, "");
+export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://jinyuehui.klyihao.com").replace(/\/$/, "");
 
 export const seoKeywords = [
-  "One Spa",
-  "oneSPA",
-  "onepsa",
-  "壹号汤泉",
-  "南海龙宫",
+  "金悦汇 Indulgence",
+  "金悦汇",
+  "jinyuehui",
   "吉隆坡SPA",
   "吉隆坡按摩",
   "吉隆坡下水",
@@ -31,7 +29,7 @@ export const seoKeywords = [
   "massage Kuala Lumpur",
   "spa Kuala Lumpur 24 hours",
   "吉隆坡水疗",
-  "南海龙宫 spa 会所",
+  "金悦汇 spa 会所",
   "吉隆坡spa会所",
 ];
 
@@ -110,7 +108,7 @@ export function pageMetadata({
       title,
       description,
       url: canonicalPath,
-      siteName: "One Spa 南海龙宫",
+      siteName: "金悦汇 Indulgence",
       type: "website",
       images: [
         {
@@ -129,30 +127,26 @@ export function pageMetadata({
   };
 }
 
-/** The Google Business Profile this site belongs to (南海龙宫SPA会所, Viva Home Mall). */
+/** The Google Business Profile this site belongs to at Viva Home Mall. */
 const googlePlaceUrl =
-  "https://www.google.com/maps/search/?api=1&query=One%20Spa%20%E5%A3%B9%E5%8F%B7%E6%B1%A4%E6%B3%89&query_place_id=ChIJEa1Xrew3zDEROXX0qPz4IdA";
+  "https://www.google.com/maps/search/?api=1&query=%E9%87%91%E6%82%A6%E6%B1%87%20Indulgence&query_place_id=ChIJEa1Xrew3zDEROXX0qPz4IdA";
 
 /**
  * Profiles that represent this same business. `sameAs` is how Google ties the
- * site, the Business Profile and the social accounts together as one entity -
- * which matters here because another operator trades under the One Spa name.
+ * site, the Business Profile and the social accounts together as one entity.
  */
 const sameAsProfiles = [
   "https://www.instagram.com/vivadespa/",
   "https://t.me/nhlg09",
   googlePlaceUrl,
-  // Deliberately excludes the onespaofficial accounts: they are linked from
-  // onespa.com.my, so claiming them here would tell Google this site and that
-  // operator's site are one business - the opposite of what we want.
 ];
 
 export const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "HealthAndBeautyBusiness",
   "@id": `${siteUrl}/#business`,
-  name: "One Spa 南海龙宫",
-  alternateName: ["oneSPA", "壹号汤泉", "南海龙宫", "南海龙宫SPA会所", "KL Spa", "吉隆坡莞式按摩服务"],
+  name: "金悦汇 Indulgence",
+  alternateName: ["金悦汇", "Indulgence", "金悦汇SPA会所", "KL Spa", "吉隆坡莞式按摩服务"],
   url: siteUrl,
   image: `${siteUrl}/assets/hero-onsen-warm.jpg`,
   sameAs: sameAsProfiles,
@@ -160,7 +154,7 @@ export const localBusinessJsonLd = {
   telephone: "+60 14-315 5632",
   priceRange: "RM58-RM1699",
   description:
-    "One Spa 南海龙宫 is a 24-hour spa, massage, hot-spring and wellness destination in Kuala Lumpur at Viva Home Mall.",
+    "金悦汇 Indulgence is a 24-hour spa, massage, hot-spring and wellness destination in Kuala Lumpur at Viva Home Mall.",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Lot No. 2-69 & 2-70, Level 2, Viva Home Mall, 85, Jalan Loke Yew, Taman Miharja",

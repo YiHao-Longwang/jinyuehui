@@ -9,11 +9,11 @@ import {
 import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
-  title: "One Spa Facilities | 吉隆坡SPA娱乐设施 · 南海龙宫",
+  title: "金悦汇 Indulgence Facilities | 吉隆坡SPA娱乐设施 · 金悦汇",
   description:
-    "Explore One Spa 南海龙宫 facilities at Viva Home Mall KL: hot spring pools, sauna, steam room, massage rooms, scrub room, lounge, dining and private rooms.",
+    "Explore 金悦汇 Indulgence facilities at Viva Home Mall KL: hot spring pools, sauna, steam room, massage rooms, scrub room, lounge, dining and private rooms.",
   path: "/facilities/",
-  keywords: ["吉隆坡娱乐", "吉隆坡SPA设施", "南海龙宫设施", "KL entertainment", "KL spa facilities"],
+  keywords: ["吉隆坡娱乐", "吉隆坡SPA设施", "金悦汇设施", "KL entertainment", "KL spa facilities"],
   image: "/assets/fac-hero-immersive.jpg",
 });
 
@@ -40,8 +40,8 @@ export default function FacilitiesPage() {
       <Header active="Facilities" />
       <main>
         <Hero
-          eyebrow="One Spa · Facilities"
-          title={<>Everything Inside One Spa KL</>}
+          eyebrow="金悦汇 Indulgence · Facilities"
+          title={<>Everything Inside 金悦汇 Indulgence KL</>}
           copy="Pools, steam room, saunas, the lounges, the screening area, the food - one ticket covers all of it, for twelve hours."
           image="fac-hero-immersive.jpg?osw=0.9.23"
         />
@@ -52,7 +52,7 @@ export default function FacilitiesPage() {
               {facilities.map(([title, image, copy], index) => (
                 <article className={`fac${index === 0 ? " lead" : ""}`} key={title}>
                   <div className="ph">
-                    <img src={`${assetBase}/${image}`} alt={`${title} - One Spa 南海龙宫, Kuala Lumpur`} />
+                    <img src={`${assetBase}/${image}`} alt={`${title} - 金悦汇 Indulgence, Kuala Lumpur`} />
                   </div>
                   <div className="fb">
                     <h3>{title}</h3>

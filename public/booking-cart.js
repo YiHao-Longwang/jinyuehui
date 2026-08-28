@@ -1,10 +1,10 @@
 (function () {
   "use strict";
 
-  var CART_KEY = "onespa_reservation_cart_v1";
-  var API_KEY = "onespa_admin_api_base";
-  var WA = window.ONE_SPA_WHATSAPP_URL || "https://wa.me/60143155632?text=";
-  var TG = window.ONE_SPA_TELEGRAM_URL || "https://t.me/nhlg09";
+  var CART_KEY = "jinyuehui_reservation_cart_v1";
+  var API_KEY = "jinyuehui_admin_api_base";
+  var WA = window.JINYUEHUI_WHATSAPP_URL || "https://wa.me/60143155632?text=";
+  var TG = window.JINYUEHUI_TELEGRAM_URL || "https://t.me/nhlg09";
   var bookingState = null;
   var holidays = {
     "2026-01-01": true,
@@ -889,7 +889,7 @@
       "</b></div><div class=\"grand\"><span>Total</span><b>" +
       money(sum.total) +
       "</b></div></div><p class=\"cart-pay-note\">" +
-      (lang === "cn" ? "无需线上付款。护理完成后到店付款。" : "No online payment. Pay after treatment at One Spa.") +
+      (lang === "cn" ? "无需线上付款。护理完成后到店付款。" : "No online payment. Pay after treatment at 金悦汇 Indulgence.") +
       '</p><button class="btn wide" type="submit">' +
       (lang === "cn" ? "提交预约" : "Submit Reservation") +
       '</button><div class="reserve-status" data-reserve-status></div></form></div>';

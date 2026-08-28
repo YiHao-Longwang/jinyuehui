@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Contact Click History | oneSPA Admin",
+  title: "Contact Click History | 金悦汇 Admin",
   robots: {
     index: false,
     follow: false,
@@ -12,7 +12,7 @@ export default function AdminClickHistoryPage() {
       <section className="admin-login" data-click-login>
         <div className="admin-login-card">
           <div>
-            <span className="admin-kicker">oneSPA admin</span>
+            <span className="admin-kicker">金悦汇 admin</span>
             <h1>Click Analytics</h1>
             <p>Sign in with your admin token to review every WhatsApp and Telegram contact click.</p>
           </div>

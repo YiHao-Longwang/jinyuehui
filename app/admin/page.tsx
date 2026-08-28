@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "oneSPA Admin",
+  title: "金悦汇 Admin",
   robots: {
     index: false,
     follow: false,
@@ -12,7 +12,7 @@ export default function AdminPage() {
       <section className="admin-login" data-admin-login>
         <div className="admin-login-card">
           <div>
-            <span className="admin-kicker">oneSPA admin</span>
+            <span className="admin-kicker">金悦汇 admin</span>
             <h1>Reservation Portal</h1>
             <p>Sign in with your admin token to view bookings, update status, and manually message customers.</p>
           </div>

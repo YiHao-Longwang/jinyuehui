@@ -11,11 +11,11 @@ import {
 import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
-  title: "Beauty Spa KL | 吉隆坡美容SPA · One Spa 南海龙宫",
+  title: "Beauty Spa KL | 吉隆坡美容SPA · 金悦汇 Indulgence",
   description:
-    "One Spa 南海龙宫 beauty studio in Kuala Lumpur for body glow, photon skin brightening, spot care and hair removal, with spa ticket options.",
+    "金悦汇 Indulgence beauty studio in Kuala Lumpur for body glow, photon skin brightening, spot care and hair removal, with spa ticket options.",
   path: "/beauty/",
-  keywords: ["吉隆坡美容SPA", "吉隆坡SPA", "南海龙宫美容", "beauty spa KL", "KL beauty spa"],
+  keywords: ["吉隆坡美容SPA", "吉隆坡SPA", "金悦汇美容", "beauty spa KL", "KL beauty spa"],
   image: "/assets/beauty-hero.jpg",
 });
 
@@ -83,8 +83,8 @@ export default function BeautyPage() {
       <Header active="Beauty" />
       <main>
         <Hero
-          eyebrow="One Spa · Beauty Studio · Kuala Lumpur"
-          title={<>Beauty Treatments at One Spa KL</>}
+          eyebrow="金悦汇 Indulgence · Beauty Studio · Kuala Lumpur"
+          title={<>Beauty Treatments at 金悦汇 Indulgence KL</>}
           copy="We are opening with the Body Glow & Aqua Package at RM599, and your spa ticket comes with it. Photon skin brightening, spot care and ice-point hair removal are here too - all by appointment."
           image="beauty-hero.jpg?osw=0.9.23"
         />

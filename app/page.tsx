@@ -2,11 +2,11 @@ import { Fragment } from "react";
 import { pageMetadata } from "./seo";
 
 export const metadata = pageMetadata({
-  title: "One Spa 南海龙宫 | 吉隆坡SPA · 24小时KL按摩娱乐",
+  title: "金悦汇 Indulgence | 吉隆坡SPA · 24小时KL按摩娱乐",
   description:
-    "One Spa 南海龙宫是吉隆坡 24 小时SPA、按摩与休闲娱乐会所，位于 Viva Home Mall。吉隆坡下水、吉隆坡莞式按摩服务、泡汤、汗蒸、桑拿、餐饮与美容养生一站式预约。",
+    "金悦汇 Indulgence是吉隆坡 24 小时SPA、按摩与休闲娱乐会所，位于 Viva Home Mall。吉隆坡下水、吉隆坡莞式按摩服务、泡汤、汗蒸、桑拿、餐饮与美容养生一站式预约。",
   path: "/",
-  keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡下水", "吉隆坡莞式按摩服务", "吉隆坡娱乐", "南海龙宫", "klspa", "klmassage", "klentertainment"],
+  keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡下水", "吉隆坡莞式按摩服务", "吉隆坡娱乐", "金悦汇", "klspa", "klmassage", "klentertainment"],
 });
 
 const siteBase = "";
@@ -192,7 +192,7 @@ export default function Home() {
     <>
       <header className="topbar" id="home">
         <div className="container">
-          <a className="brand" href={`${siteBase}/`} aria-label="One Spa home">
+          <a className="brand" href={`${siteBase}/`} aria-label="金悦汇 Indulgence home">
             <img
               className="brand-lockup"
               src={`${assetBase}/jinyuehui-logo.png`}
@@ -269,18 +269,18 @@ export default function Home() {
           <img
             className="hero-img"
             src={`${assetBase}/hero-onsen-warm.jpg`}
-            alt="Warm hot spring pool at One Spa 南海龙宫, a 24 hour spa in Kuala Lumpur"
+            alt="Warm hot spring pool at 金悦汇 Indulgence, a 24 hour spa in Kuala Lumpur"
             fetchPriority="high"
           />
           <div className="container">
-            <div className="k">One Spa · 南海龙宫 · Kuala Lumpur · Open 24 Hours</div>
+            <div className="k">金悦汇 Indulgence · 金悦汇 · Kuala Lumpur · Open 24 Hours</div>
             <h1>
               Twelve Hours in a
               <br />
               Kuala Lumpur Hot Spring
             </h1>
             <p>
-              One Spa 南海龙宫 keeps its doors open around the clock on Level 2 of
+              金悦汇 Indulgence keeps its doors open around the clock on Level 2 of
               Viva Home Mall. One ticket buys twelve hours of it - the hot spring
               pools, the steam room, the sauna, a massage if you want one, and
               dinner when you get hungry.
@@ -378,7 +378,7 @@ export default function Home() {
                     <div className="ph">
                       <img
                         src={`${assetBase}/${facility.image}`}
-                        alt={`${facility.title} - One Spa 南海龙宫, 24 hour spa in Kuala Lumpur`}
+                        alt={`${facility.title} - 金悦汇 Indulgence, 24 hour spa in Kuala Lumpur`}
                         loading="eager"
                       />
                     </div>
@@ -527,11 +527,11 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="bottom">One Spa · © 2026 One Spa. All rights reserved.</div>
+          <div className="bottom">金悦汇 Indulgence · © 2026 金悦汇 Indulgence. All rights reserved.</div>
         </div>
       </footer>
 
-      <div className="fab-stack" aria-label="Contact One Spa">
+      <div className="fab-stack" aria-label="Contact 金悦汇 Indulgence">
         <a className="fab whatsapp" href={whatsappHref} target="_blank" rel="noopener" aria-label="WhatsApp">
           <WhatsAppIcon />
           WhatsApp

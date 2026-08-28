@@ -10,11 +10,11 @@ import {
 import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
-  title: "One Spa 南海龙宫 | 吉隆坡SPA · 吉隆坡按摩娱乐",
+  title: "金悦汇 Indulgence | 吉隆坡SPA · 吉隆坡按摩娱乐",
   description:
-    "One Spa 南海龙宫位于吉隆坡 Viva Home Mall，24 小时营业，提供吉隆坡SPA、吉隆坡按摩、汤泉汗蒸、美容、中医调理与休闲娱乐。",
+    "金悦汇 Indulgence位于吉隆坡 Viva Home Mall，24 小时营业，提供吉隆坡SPA、吉隆坡按摩、汤泉汗蒸、美容、中医调理与休闲娱乐。",
   path: "/cn/",
-  keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡娱乐", "南海龙宫", "klspa", "klmassage", "klentertainment"],
+  keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡娱乐", "金悦汇", "klspa", "klmassage", "klentertainment"],
 });
 
 const siteBase = "/cn";
@@ -135,14 +135,14 @@ export default function ChinesePage() {
             fetchPriority="high"
           />
           <div className="container">
-            <div className="k">One Spa · 南海龙宫 · 吉隆坡 · 24 小时营业</div>
+            <div className="k">金悦汇 Indulgence · 金悦汇 · 吉隆坡 · 24 小时营业</div>
             <h1>
               在吉隆坡泡足 12 小时
               <br />
-              南海龙宫温泉会所
+              金悦汇温泉会所
             </h1>
             <p>
-              One Spa 南海龙宫开在吉隆坡 Viva Home Mall 二楼，一天 24 小时都不关门。
+              金悦汇 Indulgence开在吉隆坡 Viva Home Mall 二楼，一天 24 小时都不关门。
               一张门票就是 12 小时：吉隆坡SPA水疗、汤池、汗蒸、桑拿、按摩，
               饿了还有餐饮，慢慢泡不用赶。
             </p>
@@ -234,7 +234,7 @@ export default function ChinesePage() {
                     <section className="osw-home-sauna" key="sauna">
                       <h3>汗蒸与桑拿</h3>
                       <p>
-                        泡池之外，壹号汤泉设有<strong>盐晶汗蒸房</strong>与
+                        泡池之外，金悦汇设有<strong>盐晶汗蒸房</strong>与
                         <strong>干湿桑拿</strong>。盐晶房温度较缓，适合久待，喜欢慢慢出汗、边聊天边放松的人通常泡完汤就直接进来。
                       </p>
                       <p>

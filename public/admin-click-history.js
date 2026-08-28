@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var TOKEN_KEY = "onespa_admin_token";
+  var TOKEN_KEY = "jinyuehui_admin_token";
   var LIMIT = 25;
   var offset = 0;
   var total = 0;

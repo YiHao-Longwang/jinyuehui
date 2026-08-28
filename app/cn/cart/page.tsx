@@ -2,8 +2,8 @@ import { FloatingWhatsApp, Footer, Header, SectionHead, telegramHrefCn, whatsapp
 import { pageMetadata } from "../../seo";
 
 export const metadata = pageMetadata({
-  title: "预约购物车 | One Spa 南海龙宫",
-  description: "确认 One Spa 南海龙宫预约购物车。",
+  title: "预约购物车 | 金悦汇 Indulgence",
+  description: "确认 金悦汇 Indulgence预约购物车。",
   path: "/cn/cart/",
   noIndex: true,
 });
@@ -28,7 +28,7 @@ export default function CartPageCn() {
       </main>
       <script
         dangerouslySetInnerHTML={{
-          __html: `window.ONE_SPA_TELEGRAM_URL=${JSON.stringify(telegramHrefCn)};window.ONE_SPA_WHATSAPP_URL=${JSON.stringify(whatsappCartBase)};`,
+          __html: `window.JINYUEHUI_TELEGRAM_URL=${JSON.stringify(telegramHrefCn)};window.JINYUEHUI_WHATSAPP_URL=${JSON.stringify(whatsappCartBase)};`,
         }}
       />
       <Footer locale="cn" />

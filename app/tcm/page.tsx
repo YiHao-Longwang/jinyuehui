@@ -11,11 +11,11 @@ import {
 import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
-  title: "TCM Wellness KL | 吉隆坡中医调理 · One Spa 南海龙宫",
+  title: "TCM Wellness KL | 吉隆坡中医调理 · 金悦汇 Indulgence",
   description:
-    "One Spa 南海龙宫 TCM wellness in Kuala Lumpur: pulse reading, moxibustion, herbal mud therapy, bone-setting and meridian care with listed prices.",
+    "金悦汇 Indulgence TCM wellness in Kuala Lumpur: pulse reading, moxibustion, herbal mud therapy, bone-setting and meridian care with listed prices.",
   path: "/tcm/",
-  keywords: ["吉隆坡中医", "吉隆坡SPA", "中医按摩KL", "南海龙宫中医", "TCM KL"],
+  keywords: ["吉隆坡中医", "吉隆坡SPA", "中医按摩KL", "金悦汇中医", "TCM KL"],
   image: "/assets/tcm-hero.jpg",
 });
 
@@ -117,8 +117,8 @@ export default function TCMPage() {
       <Header active="TCM" />
       <main>
         <Hero
-          eyebrow="One Spa · TCM Wellness · Kuala Lumpur"
-          title={<>Chinese Medicine at One Spa KL</>}
+          eyebrow="金悦汇 Indulgence · TCM Wellness · Kuala Lumpur"
+          title={<>Chinese Medicine at 金悦汇 Indulgence KL</>}
           copy="Our resident physicians read your pulse for free before anything else is decided. Acupuncture, moxibustion, herbal mud therapy and bone-setting follow from there, every price listed. WhatsApp us to book."
           image="tcm-hero.jpg?osw=0.9.23"
         />

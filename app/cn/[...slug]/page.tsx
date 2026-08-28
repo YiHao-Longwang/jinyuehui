@@ -22,92 +22,92 @@ import { faqJsonLd, pageMetadata } from "../../seo";
  */
 const cnPageSeo: Record<string, { title: string; description: string; path: string; keywords: string[]; image?: string }> = {
   packages: {
-    title: "吉隆坡SPA配套价格 | 按摩汤泉套餐 · One Spa 南海龙宫",
+    title: "吉隆坡SPA配套价格 | 按摩汤泉套餐 · 金悦汇 Indulgence",
     description:
-      "One Spa 南海龙宫吉隆坡SPA配套与价格：12 小时汤泉通票、买一送一双人配套、按摩套餐、搓背去角质、儿童票与包厢价格，线上即可预约。",
+      "金悦汇 Indulgence吉隆坡SPA配套与价格：12 小时汤泉通票、买一送一双人配套、按摩套餐、搓背去角质、儿童票与包厢价格，线上即可预约。",
     path: "/cn/packages/",
-    keywords: ["吉隆坡SPA价格", "吉隆坡按摩价格", "吉隆坡水疗配套", "南海龙宫配套", "吉隆坡温泉套票"],
+    keywords: ["吉隆坡SPA价格", "吉隆坡按摩价格", "吉隆坡水疗配套", "金悦汇配套", "吉隆坡温泉套票"],
     image: "/assets/hero-packages-rain.jpg",
   },
   facilities: {
-    title: "吉隆坡SPA设施 | 汤泉汗蒸桑拿包厢 · One Spa 南海龙宫",
+    title: "吉隆坡SPA设施 | 汤泉汗蒸桑拿包厢 · 金悦汇 Indulgence",
     description:
-      "One Spa 南海龙宫位于吉隆坡 Viva Home Mall：冷热汤池、盐晶汗蒸房、桑拿、按摩包厢、搓背房、休息大厅与餐饮区，24 小时开放。",
+      "金悦汇 Indulgence位于吉隆坡 Viva Home Mall：冷热汤池、盐晶汗蒸房、桑拿、按摩包厢、搓背房、休息大厅与餐饮区，24 小时开放。",
     path: "/cn/facilities/",
-    keywords: ["吉隆坡SPA设施", "吉隆坡汗蒸", "吉隆坡桑拿", "吉隆坡娱乐", "南海龙宫设施"],
+    keywords: ["吉隆坡SPA设施", "吉隆坡汗蒸", "吉隆坡桑拿", "吉隆坡娱乐", "金悦汇设施"],
     image: "/assets/fac-hero-immersive.jpg",
   },
   "home-massage": {
-    title: "吉隆坡上门按摩 | 酒店住家马杀鸡 · One Spa 南海龙宫",
+    title: "吉隆坡上门按摩 | 酒店住家马杀鸡 · 金悦汇 Indulgence",
     description:
-      "One Spa 南海龙宫吉隆坡上门按摩服务：技师上门到酒店、公寓与住家，自带床单毛巾与精油，价格公开，WhatsApp 即可预约。",
+      "金悦汇 Indulgence吉隆坡上门按摩服务：技师上门到酒店、公寓与住家，自带床单毛巾与精油，价格公开，WhatsApp 即可预约。",
     path: "/cn/home-massage/",
-    keywords: ["吉隆坡上门按摩", "吉隆坡按摩", "KL上门马杀鸡", "南海龙宫按摩"],
+    keywords: ["吉隆坡上门按摩", "吉隆坡按摩", "KL上门马杀鸡", "金悦汇按摩"],
     image: "/assets/outcall-hero.jpg",
   },
   beauty: {
-    title: "吉隆坡美容SPA | 美白嫩肤脱毛 · One Spa 南海龙宫",
+    title: "吉隆坡美容SPA | 美白嫩肤脱毛 · 金悦汇 Indulgence",
     description:
-      "One Spa 南海龙宫吉隆坡美容部：全身亮肤、光子嫩肤、局部护理与脱毛项目，可搭配汤泉门票，男女皆可，一对一美容师服务。",
+      "金悦汇 Indulgence吉隆坡美容部：全身亮肤、光子嫩肤、局部护理与脱毛项目，可搭配汤泉门票，男女皆可，一对一美容师服务。",
     path: "/cn/beauty/",
-    keywords: ["吉隆坡美容", "吉隆坡美容SPA", "吉隆坡水疗", "南海龙宫美容"],
+    keywords: ["吉隆坡美容", "吉隆坡美容SPA", "吉隆坡水疗", "金悦汇美容"],
     image: "/assets/beauty-hero.jpg",
   },
   tcm: {
-    title: "吉隆坡中医调理 | 艾灸推拿正骨 · One Spa 南海龙宫",
+    title: "吉隆坡中医调理 | 艾灸推拿正骨 · 金悦汇 Indulgence",
     description:
-      "One Spa 南海龙宫吉隆坡中医部：免费把脉、艾灸、中药泥灸、正骨与经络调理，驻店中医师一对一，价格清楚列明。",
+      "金悦汇 Indulgence吉隆坡中医部：免费把脉、艾灸、中药泥灸、正骨与经络调理，驻店中医师一对一，价格清楚列明。",
     path: "/cn/tcm/",
-    keywords: ["吉隆坡中医", "吉隆坡艾灸", "吉隆坡推拿", "吉隆坡按摩", "南海龙宫中医"],
+    keywords: ["吉隆坡中医", "吉隆坡艾灸", "吉隆坡推拿", "吉隆坡按摩", "金悦汇中医"],
     image: "/assets/tcm-hero.jpg",
   },
   faq: {
-    title: "常见问题 | 吉隆坡SPA预约须知 · One Spa 南海龙宫",
+    title: "常见问题 | 吉隆坡SPA预约须知 · 金悦汇 Indulgence",
     description:
-      "One Spa 南海龙宫常见问题：12 小时使用时间、平日与周末价格、买一送一规则、儿童票、停车、改期与付款方式，一次看清楚。",
+      "金悦汇 Indulgence常见问题：12 小时使用时间、平日与周末价格、买一送一规则、儿童票、停车、改期与付款方式，一次看清楚。",
     path: "/cn/faq/",
-    keywords: ["吉隆坡SPA预约", "南海龙宫预约", "吉隆坡按摩问题", "吉隆坡水疗"],
+    keywords: ["吉隆坡SPA预约", "金悦汇预约", "吉隆坡按摩问题", "吉隆坡水疗"],
   },
   contact: {
-    title: "联系我们 | 吉隆坡SPA地址电话 · One Spa 南海龙宫",
+    title: "联系我们 | 吉隆坡SPA地址电话 · 金悦汇 Indulgence",
     description:
-      "One Spa 南海龙宫地址：吉隆坡 Viva Home Mall 二楼 Lot 2-69 & 2-70，24 小时营业，WhatsApp +60 14-315 5632 预约吉隆坡SPA与按摩。",
+      "金悦汇 Indulgence地址：吉隆坡 Viva Home Mall 二楼 Lot 2-69 & 2-70，24 小时营业，WhatsApp +60 14-315 5632 预约吉隆坡SPA与按摩。",
     path: "/cn/contact/",
-    keywords: ["南海龙宫地址", "吉隆坡SPA地址", "吉隆坡按摩电话", "Viva Home Mall spa"],
+    keywords: ["金悦汇地址", "吉隆坡SPA地址", "吉隆坡按摩电话", "Viva Home Mall spa"],
   },
   wenquan: {
-    title: "吉隆坡温泉汤泉 | 24小时中式泡汤 · One Spa 南海龙宫",
+    title: "吉隆坡温泉汤泉 | 24小时中式泡汤 · 金悦汇 Indulgence",
     description:
-      "One Spa 南海龙宫吉隆坡 24 小时温泉汤泉：热汤池、汗蒸、桑拿与冰池交替，12 小时任泡任休息，位于 Viva Home Mall。",
+      "金悦汇 Indulgence吉隆坡 24 小时温泉汤泉：热汤池、汗蒸、桑拿与冰池交替，12 小时任泡任休息，位于 Viva Home Mall。",
     path: "/cn/wenquan/",
     keywords: ["吉隆坡温泉", "吉隆坡汤泉", "吉隆坡泡汤", "KL onsen spa", "24小时汤泉"],
   },
   "cancellation-and-refund-policy-on-service": {
-    title: "取消与改期政策 | One Spa 南海龙宫 吉隆坡SPA",
-    description: "One Spa 南海龙宫取消、改期与退款政策：到店前 1 天可免费改期，符合条件的退款退回原支付方式。",
+    title: "取消与改期政策 | 金悦汇 Indulgence 吉隆坡SPA",
+    description: "金悦汇 Indulgence取消、改期与退款政策：到店前 1 天可免费改期，符合条件的退款退回原支付方式。",
     path: "/cn/cancellation-and-refund-policy-on-service/",
-    keywords: ["南海龙宫改期", "吉隆坡SPA退款"],
+    keywords: ["金悦汇改期", "吉隆坡SPA退款"],
   },
   "terms-conditions": {
-    title: "条款与细则 | One Spa 南海龙宫 吉隆坡SPA",
-    description: "One Spa 南海龙宫预约条款与细则：预约确认方式、价格与服务费说明、到店流程。",
+    title: "条款与细则 | 金悦汇 Indulgence 吉隆坡SPA",
+    description: "金悦汇 Indulgence预约条款与细则：预约确认方式、价格与服务费说明、到店流程。",
     path: "/cn/terms-conditions/",
-    keywords: ["南海龙宫条款", "吉隆坡SPA条款"],
+    keywords: ["金悦汇条款", "吉隆坡SPA条款"],
   },
   "privacy-policy": {
-    title: "隐私政策 | One Spa 南海龙宫 吉隆坡SPA",
-    description: "One Spa 南海龙宫隐私政策：预约资料与联系资料的使用范围与保护方式。",
+    title: "隐私政策 | 金悦汇 Indulgence 吉隆坡SPA",
+    description: "金悦汇 Indulgence隐私政策：预约资料与联系资料的使用范围与保护方式。",
     path: "/cn/privacy-policy/",
-    keywords: ["南海龙宫隐私", "吉隆坡SPA隐私政策"],
+    keywords: ["金悦汇隐私", "吉隆坡SPA隐私政策"],
   },
 };
 
 const cnFallbackSeo = {
-  title: "One Spa 南海龙宫 | 吉隆坡SPA按摩娱乐",
+  title: "金悦汇 Indulgence | 吉隆坡SPA按摩娱乐",
   description:
-    "One Spa 南海龙宫中文页面：吉隆坡SPA、吉隆坡按摩、吉隆坡娱乐、24 小时汤泉、配套价格、设施、美容、中医与联系资料。",
+    "金悦汇 Indulgence中文页面：吉隆坡SPA、吉隆坡按摩、吉隆坡娱乐、24 小时汤泉、配套价格、设施、美容、中医与联系资料。",
   path: "/cn/",
-  keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡娱乐", "南海龙宫", "klspa", "klmassage", "klentertainment"],
+  keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡娱乐", "金悦汇", "klspa", "klmassage", "klentertainment"],
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
@@ -422,10 +422,10 @@ const tcmFaqs = [
 
 const faqRows: [string, string][] = [
   [
-    "One Spa 在吉隆坡哪里？",
+    "金悦汇 Indulgence 在吉隆坡哪里？",
     "地址是 Lot No. 2-69 & 2-70, Level 2, Viva Home Mall, 85, Jalan Loke Yew, Taman Miharja, 52200 Kuala Lumpur，靠近 Cheras 一带，搭电梯上二楼即可。",
   ],
-  ["营业时间是几点？", "One Spa 是吉隆坡 24 小时SPA会所，全年无休，周末与公共假期照常营业。"],
+  ["营业时间是几点？", "金悦汇 Indulgence 是吉隆坡 24 小时SPA会所，全年无休，周末与公共假期照常营业。"],
   ["Viva Home Mall 有停车位吗？", "有，直接停在 Viva Home Mall，然后上二楼；Grab 或德士可在商场正门上下车。"],
   [
     "12 小时门票包含什么？",
@@ -516,7 +516,7 @@ function PackagesPageCn() {
       <Header active="Packages" locale="cn" />
       <main>
         <Hero
-          eyebrow="One Spa · 吉隆坡 · 24 小时营业"
+          eyebrow="金悦汇 Indulgence · 吉隆坡 · 24 小时营业"
           title={<>吉隆坡SPA配套与价格</>}
           copy="不管选哪个配套，买到的都是同样的 12 小时：汤池、汗蒸房、含在里面的按摩，以及饿了就有的餐饮。"
           image="hero-packages-rain.jpg?osw=0.9.23"
@@ -714,7 +714,7 @@ function FacilitiesPageCn() {
     <>
       <Header active="Facilities" locale="cn" />
       <main>
-        <Hero eyebrow="One Spa · 设施" title={<>南海龙宫的设施都在这里</>} copy="汤池、汗蒸房、桑拿、休息厅、影视区到餐饮，一张票全部用足 12 小时。" image="fac-hero-immersive.jpg?osw=0.9.23" />
+        <Hero eyebrow="金悦汇 Indulgence · 设施" title={<>金悦汇的设施都在这里</>} copy="汤池、汗蒸房、桑拿、休息厅、影视区到餐饮，一张票全部用足 12 小时。" image="fac-hero-immersive.jpg?osw=0.9.23" />
         <section id="facilities">
           <div className="container fac-page-grid">
             <div className="fac-grid">
@@ -748,7 +748,7 @@ function HomeMassagePageCn() {
     <div className="osw-outcall">
       <Header active="Home Service" locale="cn" />
       <main>
-        <Hero eyebrow="One Spa · 上门服务 · 吉隆坡" title={<>店里的按摩，<br />到你家</>} copy="店里的那批技师，现在也出门。酒店、公寓或住家都能去，按摩油和一次性床单毛巾由技师带齐，在你自己的床上铺好就开始。家具不用挪，你只要躺下。" image="outcall-hero.jpg?osw=0.9.23">
+        <Hero eyebrow="金悦汇 Indulgence · 上门服务 · 吉隆坡" title={<>店里的按摩，<br />到你家</>} copy="店里的那批技师，现在也出门。酒店、公寓或住家都能去，按摩油和一次性床单毛巾由技师带齐，在你自己的床上铺好就开始。家具不用挪，你只要躺下。" image="outcall-hero.jpg?osw=0.9.23">
           <a className="btn clay" href="#outcall-plans">线上购买</a>
           <ContactButtons locale="cn" className="hero-contact-pair" whatsappLabel="WhatsApp 咨询" telegramLabel="Telegram 咨询" />
         </Hero>
@@ -805,7 +805,7 @@ function BeautyPageCn() {
     <>
       <Header active="Beauty" locale="cn" />
       <main>
-        <Hero eyebrow="One Spa · 美容部 · 吉隆坡" title={<>美容护理，现在也在 One Spa</>} copy="开业主打身体焕亮水光配套 RM599，同日温泉门票一起给。另外还有光子嫩肤、淡斑护理与冰点脱毛，都要先预约。" image="beauty-hero.jpg?osw=0.9.23" />
+        <Hero eyebrow="金悦汇 Indulgence · 美容部 · 吉隆坡" title={<>美容护理，现在也在 金悦汇 Indulgence</>} copy="开业主打身体焕亮水光配套 RM599，同日温泉门票一起给。另外还有光子嫩肤、淡斑护理与冰点脱毛，都要先预约。" image="beauty-hero.jpg?osw=0.9.23" />
         <Chips items={beautyChips} />
         <section id="beauty-signature">
           <SectionHead eyebrow="主推开业配套" title="身体焕亮水光配套" sub="来一趟做完三项：身体焕亮、水光面部与手部护理，当天的温泉门票也算在内。" />
@@ -836,7 +836,7 @@ function TcmPageCn() {
     <>
       <Header active="TCM" locale="cn" />
       <main>
-        <Hero eyebrow="One Spa · 中医部 · 吉隆坡" title={<>中医养生，现在也在 One Spa</>} copy="驻店中医师先免费把脉，再谈要不要做。针灸、艾灸、草本泥灸与正骨调理都有，价格公开，WhatsApp 就能约。" image="tcm-hero.jpg?osw=0.9.23" />
+        <Hero eyebrow="金悦汇 Indulgence · 中医部 · 吉隆坡" title={<>中医养生，现在也在 金悦汇 Indulgence</>} copy="驻店中医师先免费把脉，再谈要不要做。针灸、艾灸、草本泥灸与正骨调理都有，价格公开，WhatsApp 就能约。" image="tcm-hero.jpg?osw=0.9.23" />
         <Chips items={tcmChips} />
         <section id="tcm-pulse"><SectionHead eyebrow="免费体验" title="免费中医把脉" sub="一对一看你的体质和眼下的状态，评估完才谈该怎么调。" /><div className="container"><div className="deal"><b>全身药拓 · 肩颈脊柱调理 · 睡眠压力调理 · 药膳茶饮搭配</b></div><div className="center-cta"><ContactButtons locale="cn" whatsappLabel="预约免费把脉" telegramLabel="Telegram 预约" /></div></div></section>
         <section id="tcm-services"><SectionHead eyebrow="养生项目" title="五项传统护理，先约先得" sub="每个 session 都是一对一；列出的价格就是到店付款价。请 WhatsApp 提前预约。" /><div className="container"><div className="fac-grid">{tcmTreatments.map(([title, image, desc, price]) => <article className="fac" key={title}><div className="ph"><img src={`${assetBase}/${image}`} alt={title} /></div><div className="fb"><h3>{title}</h3><p>{desc}</p>{price ? <p><b>{price}</b></p> : null}</div></article>)}</div></div></section>
@@ -859,7 +859,7 @@ function FaqPageCn() {
     <>
       <JsonLd data={faqJsonLd(faqRows)} />
       <Header active="FAQ" locale="cn" />
-      <main><section id="faq"><SectionHead eyebrow="预约前" title="FAQ · One Spa"sub="价格、预约、改期、到店流程都在这里。还有不清楚，直接 WhatsApp 找真人。" /><div className="container"><div className="faqwrap"><div className="faq">{faqRows.map(([question, answer], index) => <details open={index === 0} key={question}><summary>{question}<span className="plus" /></summary><div className="a">{answer}</div></details>)}</div></div></div></section></main>
+      <main><section id="faq"><SectionHead eyebrow="预约前" title="FAQ · 金悦汇 Indulgence"sub="价格、预约、改期、到店流程都在这里。还有不清楚，直接 WhatsApp 找真人。" /><div className="container"><div className="faqwrap"><div className="faq">{faqRows.map(([question, answer], index) => <details open={index === 0} key={question}><summary>{question}<span className="plus" /></summary><div className="a">{answer}</div></details>)}</div></div></div></section></main>
       <Footer locale="cn" />
       <FloatingWhatsApp locale="cn" />
     </>
@@ -882,7 +882,7 @@ function ContactPageCn() {
       <Header active="Contact" locale="cn" />
       <main>
         <section id="contact">
-          <SectionHead eyebrow="One Spa · 联系我们" title="来找我们" />
+          <SectionHead eyebrow="金悦汇 Indulgence · 联系我们" title="来找我们" />
           <div className="container">
             <div className="cinfo-wrap">
               <div className="cinfo"><span className="ck">地址</span><span className="cv">Lot No. 2-69 & 2-70, Level 2, Viva Home Mall, 85, Jalan Loke Yew, Taman Miharja, 52200 Kuala Lumpur</span></div>
@@ -891,15 +891,15 @@ function ContactPageCn() {
               <div className="cinfo"><span className="ck">Telegram</span><span className="cv"><a href={telegramHrefCn} target="_blank" rel="noopener">{telegramDisplay}（点击聊天）</a></span></div>
             </div>
             <div className="btnrow contact-actions">
-              <a className="btn" href="https://www.google.com/maps/search/?api=1&query=One%20Spa%20%E5%A3%B9%E5%8F%B7%E6%B1%A4%E6%B3%89&query_place_id=ChIJEa1Xrew3zDEROXX0qPz4IdA" target="_blank" rel="noopener">打开 Google Maps</a>
-              <a className="btn line" href="https://waze.com/ul?q=One%20Spa%20Viva%20Home%20Mall" target="_blank" rel="noopener">打开 Waze</a>
+              <a className="btn" href="https://www.google.com/maps/search/?api=1&query=%E9%87%91%E6%82%A6%E6%B1%87%20Indulgence&query_place_id=ChIJEa1Xrew3zDEROXX0qPz4IdA" target="_blank" rel="noopener">打开 Google Maps</a>
+              <a className="btn line" href="https://waze.com/ul?q=%E9%87%91%E6%82%A6%E6%B1%87%20Indulgence%20Viva%20Home%20Mall" target="_blank" rel="noopener">打开 Waze</a>
             </div>
-            <div className="deal contact-note"><b>唯一门店</b> - One Spa 只有这一间门店，位于吉隆坡 Taman Miharja 的 Viva Home Mall Level 2。我们没有分店，请导航到以上地址。</div>
+            <div className="deal contact-note"><b>唯一门店</b> - 金悦汇 Indulgence 只有这一间门店，位于吉隆坡 Taman Miharja 的 Viva Home Mall Level 2。我们没有分店，请导航到以上地址。</div>
           </div>
         </section>
 
         <section id="visit">
-          <SectionHead eyebrow="到店前" title="怎么来 One Spa 吉隆坡SPA会所" sub="营业时间、停车、预约流程与门票包含什么。" />
+          <SectionHead eyebrow="到店前" title="怎么来 金悦汇 Indulgence 吉隆坡SPA会所" sub="营业时间、停车、预约流程与门票包含什么。" />
           <div className="container"><div className="knowwrap"><div className="know">{visitNotesCn.map(([head, body]) => <div className="t" key={head}><span className="dia" /><b>{head}</b>：{body}</div>)}</div></div></div>
         </section>
       </main>
@@ -925,7 +925,7 @@ function OnsenPageCn() {
     <>
       <Header active="Facilities" locale="cn" />
       <main>
-        <Hero eyebrow="One Spa · 中式汤泉" title={<>吉隆坡 24 小时温泉汤泉</>} copy="热汤泡开，汗蒸或桑拿出汗，再进冰池收一收。一轮一轮来，12 小时够你慢慢泡、慢慢躺。" image="hero-onsen-warm.jpg" />
+        <Hero eyebrow="金悦汇 Indulgence · 中式汤泉" title={<>吉隆坡 24 小时温泉汤泉</>} copy="热汤泡开，汗蒸或桑拿出汗，再进冰池收一收。一轮一轮来，12 小时够你慢慢泡、慢慢躺。" image="hero-onsen-warm.jpg" />
         <section><SectionHead eyebrow="泡法" title="热汤 · 汗蒸 · 冰池" sub="按自己的节奏循环，不赶时间。" /><div className="container"><MiniGrid items={[["热汤", "先泡进去，让身体从里面暖起来。"], ["汗蒸或桑拿", "发一身透汗，把绷着的地方松开。"], ["冰池", "短短几秒冷下来，人立刻清醒。"]]} /></div></section>
       </main>
       <Footer locale="cn" />
@@ -947,13 +947,13 @@ export default async function ChineseSubPage({ params }: { params: Promise<{ slu
   if (key === "contact") return <ContactPageCn />;
   if (key === "wenquan" || key === "onsen-kl") return <OnsenPageCn />;
   if (key === "cancellation-and-refund-policy-on-service") {
-    return <PolicyPageCn eyebrow="One Spa · 政策" title="取消与改期" rows={[["免费改期", "到店前 1 天可免费改期，不限次数。"], ["退款", "符合条件的退款会退回原支付方式，通常 14 天内处理。"], ["需要协助", "直接 WhatsApp 联系我们处理。"]]} />;
+    return <PolicyPageCn eyebrow="金悦汇 Indulgence · 政策" title="取消与改期" rows={[["免费改期", "到店前 1 天可免费改期，不限次数。"], ["退款", "符合条件的退款会退回原支付方式，通常 14 天内处理。"], ["需要协助", "直接 WhatsApp 联系我们处理。"]]} />;
   }
   if (key === "terms-conditions") {
-    return <PolicyPageCn eyebrow="One Spa · 政策" title="条款与细则" rows={[["预约", "所有预约以付款确认或 WhatsApp 确认为准。"], ["价格", "线上显示价格可能未含服务费与 SST，最终价格以下单页面为准。"], ["到店", "请按预约时间到达并出示确认记录。"]]} />;
+    return <PolicyPageCn eyebrow="金悦汇 Indulgence · 政策" title="条款与细则" rows={[["预约", "所有预约以付款确认或 WhatsApp 确认为准。"], ["价格", "线上显示价格可能未含服务费与 SST，最终价格以下单页面为准。"], ["到店", "请按预约时间到达并出示确认记录。"]]} />;
   }
   if (key === "privacy-policy") {
-    return <PolicyPageCn eyebrow="One Spa · 政策" title="隐私政策" rows={[["预约资料", "用于确认订单、联系客户与安排服务。"], ["联系资料", "用于 WhatsApp 沟通与售后协助。"], ["安全", "我们不会在页面展示不必要的个人资料。"]]} />;
+    return <PolicyPageCn eyebrow="金悦汇 Indulgence · 政策" title="隐私政策" rows={[["预约资料", "用于确认订单、联系客户与安排服务。"], ["联系资料", "用于 WhatsApp 沟通与售后协助。"], ["安全", "我们不会在页面展示不必要的个人资料。"]]} />;
   }
 
   return <FaqPageCn />;

@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var TOKEN_KEY = "onespa_admin_token";
+  var TOKEN_KEY = "jinyuehui_admin_token";
   var socket = null;
   var socketScript = null;
   var rows = [];

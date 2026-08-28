@@ -25,14 +25,14 @@ async function render(path = "/") {
   );
 }
 
-test("server-renders the One Spa page", async () => {
+test("server-renders the 金悦汇 Indulgence page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>One Spa 南海龙宫 \| 吉隆坡SPA · 24小时KL按摩娱乐<\/title>/i);
-  assert.match(html, /name="keywords" content="[^"]*吉隆坡SPA[^"]*南海龙宫[^"]*klspa/i);
+  assert.match(html, /<title>金悦汇 Indulgence \| 吉隆坡SPA · 24小时KL按摩娱乐<\/title>/i);
+  assert.match(html, /name="keywords" content="[^"]*吉隆坡SPA[^"]*金悦汇[^"]*klspa/i);
   assert.match(html, /favicon-48x48\.png/);
   assert.match(html, /apple-touch-icon\.png/);
   assert.match(html, /application\/ld\+json/);
@@ -54,7 +54,7 @@ test("server-renders the One Spa page", async () => {
   assert.match(html, /href="\/packages\/#combos"/);
   assert.match(html, /href="\/faq\/"/);
   assert.match(html, /href="\/cart\/"/);
-  assert.doesNotMatch(html, /onespadw@gmail\.com|react-loading-skeleton|codex-preview/i);
+  assert.doesNotMatch(html, /jinyuehuidw@gmail\.com|react-loading-skeleton|codex-preview/i);
 });
 
 test("server-renders Chinese routes", async () => {
@@ -86,7 +86,7 @@ test("server-renders reservation cart", async () => {
   const cart = await (await render("/cart")).text();
   assert.match(cart, /Review Your Reservation/);
   assert.match(cart, /data-cart-page/);
-  assert.match(cart, /ONE_SPA_TELEGRAM_URL/);
+  assert.match(cart, /JINYUEHUI_TELEGRAM_URL/);
   assert.match(cart, /booking-cart\.js/);
 
   const admin = await (await render("/admin")).text();
@@ -138,7 +138,7 @@ test("server-renders reservation cart", async () => {
   assert.match(cartScript, /WhatsApp phone/);
   assert.match(cartScript, /Telegram username/);
   assert.match(cartScript, /Please provide WhatsApp phone or Telegram username/);
-  assert.match(cartScript, /ONE_SPA_TELEGRAM_URL/);
+  assert.match(cartScript, /JINYUEHUI_TELEGRAM_URL/);
   assert.match(cartScript, /Contact Staff on Telegram/);
   assert.match(cartScript, /cart-confirm-modal/);
   assert.doesNotMatch(cartScript, /confirm\(/);
@@ -161,7 +161,7 @@ test("server-renders reservation cart", async () => {
   assert.match(clickHistoryScript, /view=series/);
   assert.match(clickHistoryScript, /period=/);
   assert.match(clickHistoryScript, /click-line-chart/);
-  assert.match(clickHistoryScript, /onespa_admin_token/);
+  assert.match(clickHistoryScript, /jinyuehui_admin_token/);
   assert.doesNotMatch(clickHistoryScript, /data-click-days/);
 
   assert.match(adminScript, /this week/);
@@ -180,10 +180,10 @@ test("keeps starter preview removed", async () => {
 
   assert.match(page, /whatsappHref/);
   assert.match(page, /telegramHref/);
-  assert.match(layout, /applicationName: "onepsa"/);
+  assert.match(layout, /applicationName: "jinyuehui"/);
   assert.match(layout, /contact-clicks\.js\?v=20260824-contact-clicks/);
-  assert.match(robots, /Sitemap: https:\/\/onespa\.klyihao\.com\/sitemap\.xml/);
-  assert.match(sitemap, /https:\/\/onespa\.klyihao\.com\/cn\/packages\//);
+  assert.match(robots, /Sitemap: https:\/\/jinyuehui\.klyihao\.com\/sitemap\.xml/);
+  assert.match(sitemap, /https:\/\/jinyuehui\.klyihao\.com\/cn\/packages\//);
   const chineseRoutes = await readFile(new URL("../app/cn/[...slug]/page.tsx", import.meta.url), "utf8");
   assert.doesNotMatch(chineseRoutes, /Telegram 我们|WhatsApp 我们/);
   assert.doesNotMatch(page, /SkeletonPreview|codex-preview/);

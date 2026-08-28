@@ -164,6 +164,9 @@ export function Header({ active = "Home", locale = "en" }: { active?: string; lo
         <a className="brand" href={isCn ? "/cn/" : "/"} aria-label="One Spa home">
           <img className="brand-lockup" src={`${assetBase}/logo-duo.svg`} alt={isCn ? "One Spa 壹号汤泉" : "One Spa"} />
         </a>
+        <a className="seo-header-link" href={isCn ? "/cn/packages/#treatments" : "/packages/#treatments"}>
+          吉隆坡下水 · 吉隆坡莞式按摩服务
+        </a>
         <nav className="nav" aria-label="Primary navigation">
           {items.map(({ key, label, href }) => (
             <a className={key === active ? "on" : undefined} href={href} key={key}>
@@ -221,6 +224,9 @@ export function Header({ active = "Home", locale = "en" }: { active?: string; lo
               </svg>
             </summary>
             <nav className="mnav-list" aria-label="Mobile navigation">
+              <a href={isCn ? "/cn/packages/#treatments" : "/packages/#treatments"}>
+                吉隆坡下水 · 吉隆坡莞式按摩服务
+              </a>
               {items.map(({ key, label, href }) => (
                 <a href={href} key={key}>
                   {label}

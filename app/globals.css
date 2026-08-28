@@ -130,6 +130,10 @@ img {
   height: 64px;
 }
 
+.seo-header-link {
+  display: none;
+}
+
 .nav {
   display: none;
 }
@@ -3384,6 +3388,15 @@ footer.site .col p {
 
   .brand-lockup {
     height: 68px;
+  }
+
+  .seo-header-link {
+    display: inline-flex;
+    align-items: center;
+    max-width: 210px;
+    color: var(--clay);
+    font-size: 12px;
+    line-height: 1.35;
   }
 
   .nav {

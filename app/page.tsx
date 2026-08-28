@@ -4,9 +4,9 @@ import { pageMetadata } from "./seo";
 export const metadata = pageMetadata({
   title: "One Spa 南海龙宫 | 吉隆坡SPA · 24小时KL按摩娱乐",
   description:
-    "One Spa 南海龙宫是吉隆坡 24 小时SPA、按摩与休闲娱乐会所，位于 Viva Home Mall。泡汤、汗蒸、桑拿、按摩、餐饮与美容养生一站式预约。",
+    "One Spa 南海龙宫是吉隆坡 24 小时SPA、按摩与休闲娱乐会所，位于 Viva Home Mall。吉隆坡下水、吉隆坡莞式按摩服务、泡汤、汗蒸、桑拿、餐饮与美容养生一站式预约。",
   path: "/",
-  keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡娱乐", "南海龙宫", "klspa", "klmassage", "klentertainment"],
+  keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡下水", "吉隆坡莞式按摩服务", "吉隆坡娱乐", "南海龙宫", "klspa", "klmassage", "klentertainment"],
 });
 
 const siteBase = "";
@@ -199,6 +199,9 @@ export default function Home() {
               alt="One Spa"
             />
           </a>
+          <a className="seo-header-link" href={`${siteBase}/cn/packages/#treatments`}>
+            吉隆坡下水 · 吉隆坡莞式按摩服务
+          </a>
           <nav className="nav" aria-label="Primary navigation">
             {navItems.map(([label, href], index) => (
               <a className={index === 0 ? "on" : undefined} href={href} key={label}>
@@ -247,6 +250,9 @@ export default function Home() {
                 </svg>
               </summary>
               <nav className="mnav-list" aria-label="Mobile navigation">
+                <a href={`${siteBase}/cn/packages/#treatments`}>
+                  吉隆坡下水 · 吉隆坡莞式按摩服务
+                </a>
                 {navItems.map(([label, href]) => (
                   <a href={href} key={label}>
                     {label}

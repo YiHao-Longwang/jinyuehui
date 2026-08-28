@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   ...pageMetadata({
     title: "One Spa 南海龙宫 | 吉隆坡SPA · KL Spa & Massage",
     description:
-      "One Spa 南海龙宫 at Viva Home Mall Kuala Lumpur: 24-hour spa, hot spring, KL massage, beauty, TCM wellness, private rooms and home massage booking.",
+      "One Spa 南海龙宫 at Viva Home Mall Kuala Lumpur: 24-hour spa, hot spring, KL massage, 吉隆坡下水, 吉隆坡莞式按摩服务, beauty, TCM wellness and home massage booking.",
     path: "/",
-    keywords: ["南海龙宫 SPA", "吉隆坡按摩推荐", "Kuala Lumpur spa", "Viva Home Mall massage"],
+    keywords: ["南海龙宫 SPA", "吉隆坡按摩推荐", "吉隆坡下水", "吉隆坡莞式按摩服务", "Kuala Lumpur spa", "Viva Home Mall massage"],
   }),
   applicationName: "onepsa",
   icons: {

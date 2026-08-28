@@ -195,8 +195,8 @@ export default function Home() {
           <a className="brand" href={`${siteBase}/`} aria-label="One Spa home">
             <img
               className="brand-lockup"
-              src={`${assetBase}/logo-duo.svg`}
-              alt="One Spa"
+              src={`${assetBase}/jinyuehui-logo.png`}
+              alt="金悦汇 Indulgence"
             />
           </a>
           <a className="seo-header-link" href={`${siteBase}/cn/packages/#treatments`}>
@@ -476,8 +476,8 @@ export default function Home() {
         <div className="container fwrap">
           <img
             className="flogo"
-            src={`${assetBase}/logo-cream.svg`}
-            alt="One Spa"
+            src={`${assetBase}/jinyuehui-logo.png`}
+            alt="金悦汇 Indulgence"
           />
           <div className="slogan">
             Twelve Hours in a

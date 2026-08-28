@@ -162,7 +162,7 @@ export function Header({ active = "Home", locale = "en" }: { active?: string; lo
     <header className="topbar">
       <div className="container">
         <a className="brand" href={isCn ? "/cn/" : "/"} aria-label="One Spa home">
-          <img className="brand-lockup" src={`${assetBase}/logo-duo.svg`} alt={isCn ? "One Spa 壹号汤泉" : "One Spa"} />
+          <img className="brand-lockup" src={`${assetBase}/jinyuehui-logo.png`} alt="金悦汇 Indulgence" />
         </a>
         <a className="seo-header-link" href={isCn ? "/cn/packages/#treatments" : "/packages/#treatments"}>
           吉隆坡下水 · 吉隆坡莞式按摩服务
@@ -308,7 +308,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
       <div className="container fwrap">
         <div className="footer-top">
           <div className="footer-brand">
-            <img className="flogo" src={`${assetBase}/logo-cream.svg`} alt={isCn ? "One Spa 壹号汤泉" : "One Spa"} />
+            <img className="flogo" src={`${assetBase}/jinyuehui-logo.png`} alt="金悦汇 Indulgence" />
             <div>
               <div className="slogan">
                 {isCn ? "泡足 12 小时" : "Twelve Hours in a"}

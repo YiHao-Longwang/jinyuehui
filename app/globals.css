@@ -127,7 +127,8 @@ img {
 
 .brand-lockup {
   width: auto;
-  height: 64px;
+  height: 68px;
+  border-radius: 4px;
 }
 
 .seo-header-link {
@@ -3079,7 +3080,8 @@ footer.site .fwrap {
 }
 
 .flogo {
-  width: 132px;
+  width: 140px;
+  border-radius: 4px;
   margin: 0;
 }
 
@@ -3387,7 +3389,7 @@ footer.site .col p {
   }
 
   .brand-lockup {
-    height: 68px;
+    height: 72px;
   }
 
   .seo-header-link {

@@ -192,12 +192,8 @@ export default function Home() {
     <>
       <header className="topbar" id="home">
         <div className="container">
-          <a className="brand" href={`${siteBase}/`} aria-label="金悦汇 Indulgence home">
-            <img
-              className="brand-lockup"
-              src={`${assetBase}/jinyuehui-logo.png`}
-              alt="金悦汇 Indulgence"
-            />
+          <a className="brand wordmark" href={`${siteBase}/`} aria-label="金悦汇 Indulgence home">
+            金悦汇
           </a>
           <a className="seo-header-link" href={`${siteBase}/cn/packages/#treatments`}>
             吉隆坡下水 · 吉隆坡莞式按摩服务
@@ -474,11 +470,6 @@ export default function Home() {
 
       <footer className="site" id="contact">
         <div className="container fwrap">
-          <img
-            className="flogo"
-            src={`${assetBase}/jinyuehui-logo.png`}
-            alt="金悦汇 Indulgence"
-          />
           <div className="slogan">
             Twelve Hours in a
             <br />

@@ -161,8 +161,8 @@ export function Header({ active = "Home", locale = "en" }: { active?: string; lo
   return (
     <header className="topbar">
       <div className="container">
-        <a className="brand" href={isCn ? "/cn/" : "/"} aria-label="金悦汇 Indulgence home">
-          <img className="brand-lockup" src={`${assetBase}/jinyuehui-logo.png`} alt="金悦汇 Indulgence" />
+        <a className="brand wordmark" href={isCn ? "/cn/" : "/"} aria-label="金悦汇 Indulgence home">
+          金悦汇
         </a>
         <a className="seo-header-link" href={isCn ? "/cn/packages/#treatments" : "/packages/#treatments"}>
           吉隆坡下水 · 吉隆坡莞式按摩服务
@@ -308,7 +308,6 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
       <div className="container fwrap">
         <div className="footer-top">
           <div className="footer-brand">
-            <img className="flogo" src={`${assetBase}/jinyuehui-logo.png`} alt="金悦汇 Indulgence" />
             <div>
               <div className="slogan">
                 {isCn ? "泡足 12 小时" : "Twelve Hours in a"}

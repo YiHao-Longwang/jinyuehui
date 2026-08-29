@@ -125,10 +125,13 @@ img {
   min-height: 44px;
 }
 
-.brand-lockup {
-  width: auto;
-  height: 68px;
-  border-radius: 4px;
+.wordmark {
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: 0;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .seo-header-link {
@@ -3079,11 +3082,6 @@ footer.site .fwrap {
   gap: 18px;
 }
 
-.flogo {
-  width: 140px;
-  border-radius: 4px;
-  margin: 0;
-}
 
 .slogan {
   margin: 0;
@@ -3388,9 +3386,6 @@ footer.site .col p {
     padding-bottom: 12px;
   }
 
-  .brand-lockup {
-    height: 72px;
-  }
 
   .seo-header-link {
     display: inline-flex;
@@ -3677,9 +3672,6 @@ footer.site .col p {
     gap: 28px;
   }
 
-  .flogo {
-    width: 164px;
-  }
 
   .slogan {
     font-size: 29px;

@@ -32,22 +32,9 @@
   };
 
   var products = {
-    b1f1: {
-      en: "Twin 12-Hour Pass",
-      cn: "双人 12 小时门票",
-      unitEn: "/ 2 adults",
-      unitCn: "/ 2 位",
-      weekday: 169,
-      weekend: 199,
-      stay: "12h",
-      kind: "spa-tiered",
-      leadHours: 0,
-      sc: 0.1,
-      sst: 0.08
-    },
     solo: {
-      en: "Solo 12-Hour Pass + Free 30-min Massage",
-      cn: "单人 12 小时门票 + 送 30 分钟按摩",
+      en: "12-Hour Entry",
+      cn: "12 小时普通入场",
       unitEn: "/ person",
       unitCn: "/ 人",
       weekday: 169,
@@ -59,8 +46,8 @@
       sst: 0.08
     },
     daytime: {
-      en: "Daytime Massage Package",
-      cn: "日间按摩配套",
+      en: "Daytime Entry",
+      cn: "日间普通入场",
       unitEn: "/ person",
       unitCn: "/ 人",
       single: 199,
@@ -72,8 +59,8 @@
       sst: 0.08
     },
     scrub: {
-      en: "Yangzhou Body Scrub Package",
-      cn: "扬州搓澡配套",
+      en: "Body Scrub Add-On",
+      cn: "古法搓背加项",
       unitEn: "/ person",
       unitCn: "/ 人",
       weekday: 199,
@@ -85,8 +72,8 @@
       sst: 0.08
     },
     "allday-sm": {
-      en: "All-Day Scrub & Massage Package",
-      cn: "沐净舒养套餐",
+      en: "Body Care Add-Ons",
+      cn: "身体护理加项",
       unitEn: "/ person",
       unitCn: "/ 人",
       single: 379,
@@ -97,8 +84,8 @@
       sst: 0.08
     },
     "daytime-duo": {
-      en: "Daytime Duo Package",
-      cn: "日间双人套餐",
+      en: "Two-Guest Booking",
+      cn: "双人普通预约",
       unitEn: "/ 2 people",
       unitCn: "/ 2 人",
       single: 379,
@@ -163,7 +150,7 @@
   };
 
   function locale() {
-    return location.pathname.indexOf("/cn") === 0 ? "cn" : "en";
+    return "cn";
   }
 
   function text(en, cn) {
@@ -176,7 +163,9 @@
 
   function readCart() {
     try {
-      return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+      return JSON.parse(localStorage.getItem(CART_KEY) || "[]").filter(function (item) {
+        return item && products[item.code];
+      });
     } catch {
       return [];
     }
@@ -217,43 +206,7 @@
   }
 
   function initSubnav() {
-    var navs = Array.from(document.querySelectorAll(".subnav"));
-    if (!navs.length) return;
-
-    navs.forEach(function (nav) {
-      var links = Array.from(nav.querySelectorAll('a.pill[href^="#"]'));
-      if (!links.length) return;
-
-      var sections = links
-        .map(function (link) {
-          return {
-            link: link,
-            section: document.getElementById(link.getAttribute("href").slice(1))
-          };
-        })
-        .filter(function (item) {
-          return item.section;
-        });
-
-      nav.addEventListener("click", function (event) {
-        var link = event.target.closest('a.pill[href^="#"]');
-        if (!link || !nav.contains(link)) return;
-        setActiveSubnavLink(nav, link);
-      });
-
-      function refreshActive() {
-        var anchor = nav.getBoundingClientRect().bottom + 36;
-        var current = sections[0];
-        sections.forEach(function (item) {
-          if (item.section.getBoundingClientRect().top <= anchor) current = item;
-        });
-        if (current) setActiveSubnavLink(nav, current.link);
-      }
-
-      refreshActive();
-      window.addEventListener("scroll", refreshActive, { passive: true });
-      window.addEventListener("resize", refreshActive);
-    });
+    return;
   }
 
   function writeCart(items) {
@@ -523,7 +476,7 @@
     );
     el.querySelector("[data-cart-confirm-stay]").textContent = tr(lang, "Continue Browsing", "继续浏览");
     var link = el.querySelector("[data-cart-confirm-link]");
-    link.href = lang === "cn" ? "/cn/cart/" : "/cart/";
+    link.href = "/cart/";
     link.textContent = tr(lang, "Go to Cart", "去购物车");
     document.body.classList.add("cart-confirm-open");
     el.classList.add("on");
@@ -630,50 +583,44 @@
 
   function bookingNotes(code, lang) {
     var notes = {
-      b1f1: [
-        tr(lang, "Both adults enter together — same day, same time; the pass can't be split into two visits", "两位要同一天同一时间一起进场，不能拆开用"),
-        tr(lang, "Pick a date and the price updates automatically; public holidays use the weekend rate", "选日期价格自动跟着跳，公共假期算周末价"),
-        tr(lang, "Add same-day treatments under RM499 — 20% off (auto-applied); RM499+ treatments aren't discounted, each covers free entry for one", "同一订单加购同日按摩，RM499 以下全部 8 折（自动折扣）；RM499 及以上项目不折——单项即免 1 位门票"),
-        tr(lang, "Bringing kids? Each child just needs a Kids Ticket — they don't take an adult spot", "带小孩？小孩买儿童票就行，不占大人名额")
-      ],
       solo: [
-        tr(lang, "The free massage is an online-booking bonus — walk-ins don't get it", "线上预订才送按摩；到店现买没有这个赠送"),
-        tr(lang, "We register the bonus on your order automatically, nothing to note down", "下单时系统自动帮你登记赠送，不用自己写备注"),
-        tr(lang, "Choose on arrival: 30-min foot & leg, or 30-min Chinese partial", "到店选：足疗腿部 30 分钟，或中式局部 30 分钟"),
-        tr(lang, "Add same-day treatments under RM499 — 20% off (auto-applied); RM499+ treatments aren't discounted, each covers free entry for one", "同一订单加购同日按摩，RM499 以下全部 8 折（自动折扣）；RM499 及以上项目不折——单项即免 1 位门票")
+        tr(lang, "Regular 12-hour entry. Massage and treatments are separate add-ons.", "普通 12 小时入场。按摩与护理项目另行加购。"),
+        tr(lang, "Choose your arrival date and approximate check-in time.", "选择到店日期和大概入场时间。"),
+        tr(lang, "All items are charged at the regular listed price.", "所有项目按普通价目计算。"),
+        tr(lang, "All items are charged at the regular listed price.", "所有项目按普通价目计算。")
       ],
       daytime: [
-        tr(lang, "Booking time = entry time; staying past 5pm needs a top-up ticket", "预约时间=入场时间；5PM 后继续待要补门票")
+        tr(lang, "Booking time is your approximate arrival time.", "预约时间是大概到店时间。")
       ],
       scrub: [
-        tr(lang, "12-hour entry already included — no separate ticket needed", "已含 12 小时门票，不用另外买票")
+        tr(lang, "This item is handled as a separate add-on.", "此项目按加项处理。")
       ],
       "allday-sm": [
-        tr(lang, "One ticket includes 12-hour spa access, buffet, a 30-minute Yangzhou scrub and a 60-minute massage", "一张票已含 12 小时汤泉、自助餐、30 分钟扬州搓澡与 60 分钟按摩"),
-        tr(lang, "Choose tuina or foot therapy for the 60-minute massage on arrival", "60 分钟按摩可选推拿或足疗，到店确认")
+        tr(lang, "Body-care add-ons are charged separately.", "身体护理加项另行收费。"),
+        tr(lang, "Entry tickets are charged separately where needed.", "如需入场票，另行收费。")
       ],
       "daytime-duo": [
-        tr(lang, "One package covers two guests: daytime entry for both plus one 60-minute treatment each", "一份套餐含两人：双人日间门票 + 每人一项 60 分钟护理"),
-        tr(lang, "Book daily from 9:00 to 17:00; the time selected is your entry time", "每日 9:00–17:00 可订；预约时间即入场时间")
+        tr(lang, "For two guests, choose the same date and time.", "两位客人请选择同一天同一时间。"),
+        tr(lang, "The time selected is your approximate arrival time.", "选择的时间是大概到店时间。")
       ],
       kids: [
         tr(lang, "Kids Ticket: age 12 & under, must be accompanied by an adult", "儿童票：12 岁及以下，须有大人陪同入场"),
-        tr(lang, "Age 2 & under enter free — just register at the front desk", "2 岁及以下不用买票，到前台登记就免费")
+        tr(lang, "Children aged 2 and under can be registered at the front desk.", "2 岁及以下可到前台登记。")
       ],
       "outcall-classic": [
         tr(lang, "Fixed two-hour session; choose a start time from 9:00 am to 10:00 pm daily", "固定 2 小时；每日 09:00–22:00 可选开始时段"),
-        tr(lang, "After payment, our team confirms the address and arrival time on WhatsApp", "付款后客服通过 WhatsApp 确认地址与到达时间"),
-        tr(lang, "RM100 travel fee is paid in cash on arrival; for bookings within 3 hours, WhatsApp us directly", "车费 RM100 到府现场现金另付；3 小时内加急请直接 WhatsApp")
+        tr(lang, "Our team will follow up on the address and arrival time.", "客服会跟进地址与到达时间。"),
+        tr(lang, "RM100 travel fee applies; for urgent bookings within 3 hours, contact us directly.", "车费 RM100 另计；3 小时内加急请直接联系客服。")
       ],
       "outcall-anytime": [
         tr(lang, "Fixed two-hour session at RM798 flat; session length is not selected at checkout", "固定 2 小时、一口价 RM798，不在结账页自选时长"),
-        tr(lang, "After payment, our team confirms the address and arrival time on WhatsApp", "付款后客服通过 WhatsApp 确认地址与到达时间"),
-        tr(lang, "RM100 travel fee is paid in cash on arrival; for a longer session or bookings within 3 hours, WhatsApp us directly", "车费 RM100 到府现场现金另付；更长时段或 3 小时内加急请直接 WhatsApp")
+        tr(lang, "Our team will follow up on the address and arrival time.", "客服会跟进地址与到达时间。"),
+        tr(lang, "RM100 travel fee applies; for a longer session or urgent bookings within 3 hours, contact us directly.", "车费 RM100 另计；更长时段或 3 小时内加急请直接联系客服。")
       ],
       "outcall-fourhands": [
         tr(lang, "Fixed two-hour session with two therapists working on one guest", "固定 2 小时，两位技师同时为一位客人服务"),
-        tr(lang, "Choose a start time from 9:00 am to 10:00 pm daily; after payment, our team confirms the address and arrival time on WhatsApp", "每日 09:00–22:00 可选开始时段；付款后客服通过 WhatsApp 确认地址与到达时间"),
-        tr(lang, "RM100 travel fee is paid in cash on arrival; for bookings within 3 hours, WhatsApp us directly", "车费 RM100 到府现场现金另付；3 小时内加急请直接 WhatsApp")
+        tr(lang, "Choose a start time from 9:00 am to 10:00 pm daily; our team will follow up on details.", "每日 09:00–22:00 可选开始时段；客服会跟进细节。"),
+        tr(lang, "RM100 travel fee applies; for urgent bookings within 3 hours, contact us directly.", "车费 RM100 另计；3 小时内加急请直接联系客服。")
       ]
     };
 
@@ -810,7 +757,6 @@
           money(line.total)
       );
     });
-    lines.push(lang === "cn" ? "付款: 护理完成后付款" : "Payment: pay after treatment");
     return lines.join("\n");
   }
 
@@ -825,11 +771,11 @@
         '<div class="cart-empty"><h3>' +
         (lang === "cn" ? "购物车是空的" : "Your cart is empty") +
         "</h3><p>" +
-        (lang === "cn" ? "先选择一个配套和预约时间。" : "Pick a package and reservation time first.") +
+        (lang === "cn" ? "先选择普通入场和预约时间。" : "Pick an entry ticket and reservation time first.") +
         '</p><a class="btn" href="' +
-        (lang === "cn" ? "/cn/packages/" : "/packages/") +
+        "/packages/" +
         '">' +
-        (lang === "cn" ? "看配套" : "View Packages") +
+        (lang === "cn" ? "看价目" : "View Prices") +
         "</a></div>";
       return;
     }
@@ -889,7 +835,7 @@
       "</b></div><div class=\"grand\"><span>Total</span><b>" +
       money(sum.total) +
       "</b></div></div><p class=\"cart-pay-note\">" +
-      (lang === "cn" ? "无需线上付款。护理完成后到店付款。" : "No online payment. Pay after treatment at 金悦汇 Indulgence.") +
+      (lang === "cn" ? "提交后客服会尽快跟进。" : "Our team will follow up soon after submission.") +
       '</p><button class="btn wide" type="submit">' +
       (lang === "cn" ? "提交预约" : "Submit Reservation") +
       '</button><div class="reserve-status" data-reserve-status></div></form></div>';

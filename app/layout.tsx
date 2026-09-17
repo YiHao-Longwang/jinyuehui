@@ -5,11 +5,21 @@ import { localBusinessJsonLd, pageMetadata, siteUrl } from "./seo";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   ...pageMetadata({
-    title: "金悦汇 Indulgence | 吉隆坡SPA · KL Spa & Massage",
+    title: "金悦汇 Indulgence | 吉隆坡下水 · 吉隆坡按摩娱乐",
     description:
-      "金悦汇 Indulgence at Viva Home Mall Kuala Lumpur: 24-hour spa, hot spring, KL massage, 吉隆坡下水, 吉隆坡莞式按摩服务, beauty, TCM wellness and home massage booking.",
+      "金悦汇 Indulgence at Viva Home Mall Kuala Lumpur: 24-hour spa, hot spring, 吉隆坡下水, 吉隆坡按摩, 吉隆坡娱乐, 吉隆坡莞式按摩服务, beauty, TCM wellness and home massage booking.",
     path: "/",
-    keywords: ["金悦汇 SPA", "吉隆坡按摩推荐", "吉隆坡下水", "吉隆坡莞式按摩服务", "Kuala Lumpur spa", "Viva Home Mall massage"],
+    keywords: [
+      "金悦汇 吉隆坡下水",
+      "金悦汇 吉隆坡按摩",
+      "金悦汇 吉隆坡娱乐",
+      "金悦汇 SPA",
+      "吉隆坡按摩推荐",
+      "吉隆坡下水",
+      "吉隆坡莞式按摩服务",
+      "Kuala Lumpur spa",
+      "Viva Home Mall massage",
+    ],
   }),
   applicationName: "jinyuehui",
   icons: {
@@ -29,15 +39,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-Hans">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap"
+        />
+      </head>
       <body>
         {children}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
-        <script src="/contact-clicks.js?v=20260824-contact-clicks" defer />
-        <script src="/booking-cart.js?v=20260809-cart-rehydrate" defer />
+        <script src="/motion.js?v=20260914-subnav-stable" defer />
+        <script src="/contact-clicks.js?v=20260908-wechat" defer />
+        <script src="/booking-cart.js?v=20260914-cn-root" defer />
+        <script src="/wechat-copy.js?v=20260903-wechat" defer />
+        <script src="/tech-promo.js?v=20260914-hidden" defer />
       </body>
     </html>
   );

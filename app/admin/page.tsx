@@ -58,11 +58,11 @@ export default function AdminPage() {
         <section className="admin-click-stats" aria-label="Contact click analytics">
           <div className="admin-click-head">
             <div>
-              <span className="admin-kicker">Contact clicks</span>
-              <h2>WhatsApp & Telegram</h2>
+              <span className="admin-kicker">Contact unique IPs</span>
+              <h2>Unique IPs by site and area</h2>
             </div>
             <button className="btn line" type="button" data-admin-refresh-clicks>
-              Refresh clicks
+              Refresh unique IPs
             </button>
             <a className="btn line" href="/admin/clicks">
               View all history
@@ -77,7 +77,7 @@ export default function AdminPage() {
           <div className="admin-empty">Login to load reservations.</div>
         </div>
       </section>
-      <script src="/admin-reservations.js?v=20260825-socket-auth" defer />
+      <script src="/admin-reservations.js?v=20260908-wechat" defer />
     </main>
   );
 }

@@ -2,8 +2,8 @@ import { FloatingWhatsApp, Footer, Header, SectionHead, telegramHref, whatsappCa
 import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
-  title: "Reservation Cart | 金悦汇 Indulgence",
-  description: "Review your 金悦汇 Indulgence reservation cart.",
+  title: "预约购物车 | 金悦汇 Indulgence",
+  description: "确认 金悦汇 Indulgence预约购物车。",
   path: "/cart/",
   noIndex: true,
 });
@@ -15,13 +15,13 @@ export default function CartPage() {
       <main>
         <section id="cart">
           <SectionHead
-            eyebrow="Reservation Cart"
-            title="Review Your Reservation"
-            sub="No online payment. Submit your reservation and pay after the treatment at 金悦汇 Indulgence."
+            eyebrow="预约购物车"
+            title="确认你的预约"
+            sub="检查已选择的项目，提交后客服会尽快跟进。"
           />
           <div className="container">
-            <div className="cart-shell" data-cart-page data-locale="en">
-              <div className="cart-loading">Loading your cart...</div>
+            <div className="cart-shell" data-cart-page data-locale="cn">
+              <div className="cart-loading">正在读取购物车...</div>
             </div>
           </div>
         </section>

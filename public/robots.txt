@@ -2,7 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /cart
-Disallow: /cn/cart
 Disallow: /api/
 
 Sitemap: https://jinyuehui.klyihao.com/sitemap.xml

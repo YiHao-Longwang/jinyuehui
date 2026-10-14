@@ -5,7 +5,7 @@ import { pageMetadata, siteUrl } from "../../seo";
 const fallbackSeo = {
   title: "金悦汇 Indulgence | 吉隆坡SPA按摩娱乐",
   description:
-    "金悦汇 Indulgence中文页面：吉隆坡SPA、吉隆坡按摩、吉隆坡娱乐、24 小时汤泉、价目、设施、美容、中医与联系资料。",
+    "金悦汇 Indulgence中文页面：吉隆坡SPA、吉隆坡按摩、吉隆坡娱乐、24 小时汤泉、价目、设施、中医与联系资料。",
   path: "/",
   keywords: ["吉隆坡SPA", "吉隆坡按摩", "吉隆坡娱乐", "金悦汇", "klspa", "klmassage", "klentertainment"],
 };

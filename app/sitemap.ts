@@ -1,3 +1,4 @@
+import { technicianSelectionEnabled } from "./site-features";
 import type { MetadataRoute } from "next";
 import { siteUrl } from "./seo";
 
@@ -7,7 +8,6 @@ const routes = [
   "/packages",
   "/facilities",
   "/home-massage",
-  "/beauty",
   "/tcm",
   "/wenquan",
   "/faq",
@@ -17,7 +17,7 @@ const routes = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map((route) => ({
+  return routes.filter((route) => technicianSelectionEnabled || route !== "/jishi-tiaoxuan").map((route) => ({
     url: `${siteUrl}${route}/`,
     lastModified: new Date(),
     changeFrequency: route.includes("packages") ? "weekly" : "monthly",

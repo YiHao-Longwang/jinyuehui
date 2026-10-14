@@ -1,3 +1,4 @@
+import { technicianSelectionEnabled } from "./site-features";
 import type { Metadata } from "next";
 import "./globals.css";
 import { localBusinessJsonLd, pageMetadata, siteUrl } from "./seo";
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   ...pageMetadata({
     title: "金悦汇 Indulgence | 吉隆坡下水 · 吉隆坡按摩娱乐",
     description:
-      "金悦汇 Indulgence at Viva Home Mall Kuala Lumpur: 24-hour spa, hot spring, 吉隆坡下水, 吉隆坡按摩, 吉隆坡娱乐, 吉隆坡莞式按摩服务, beauty, TCM wellness and home massage booking.",
+      "金悦汇 Indulgence at Viva Home Mall Kuala Lumpur: 24-hour spa, hot spring, 吉隆坡下水, 吉隆坡按摩, 吉隆坡娱乐, 吉隆坡莞式按摩服务, TCM wellness and home massage booking.",
     path: "/",
     keywords: [
       "金悦汇 吉隆坡下水",
@@ -55,10 +56,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
         <script src="/motion.js?v=20260914-subnav-stable" defer />
-        <script src="/contact-clicks.js?v=20260908-wechat" defer />
-        <script src="/booking-cart.js?v=20260914-cn-root" defer />
+        <script src="/contact-clicks.js?v=20260922-chat-only" defer />
         <script src="/wechat-copy.js?v=20260903-wechat" defer />
-        <script src="/tech-promo.js?v=20260914-hidden" defer />
+        {technicianSelectionEnabled && <script src="/tech-promo.js?v=20261002-community" defer />}
       </body>
     </html>
   );

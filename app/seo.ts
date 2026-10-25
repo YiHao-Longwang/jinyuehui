@@ -30,7 +30,7 @@ export const seoKeywords = [
   "24 hour spa KL",
   "onsen KL",
   "massage KL",
-  "Viva Home Mall spa",
+  "Vivahome Shopping Mall spa",
   "Kuala Lumpur spa",
   "KL onsen spa",
   "massage Kuala Lumpur",
@@ -94,7 +94,7 @@ export function pageMetadata({
   };
 }
 
-/** The Google Business Profile this site belongs to at Viva Home Mall. */
+/** The Google Business Profile this site belongs to at Vivahome Shopping Mall. */
 export const googleBusinessProfileUrl = "https://share.google/GtIGQaWmCl8XaL0A1";
 
 /**
@@ -131,12 +131,10 @@ export const localBusinessJsonLd = {
   paymentAccepted: ["Cash", "Credit Card", "Debit Card"],
   currenciesAccepted: "MYR",
   description:
-    "金悦汇 Indulgence is a 24-hour spa, massage, hot-spring and wellness destination in Kuala Lumpur at Viva Home Mall, relevant for 金悦汇、吉隆坡下水、吉隆坡按摩 and 吉隆坡娱乐 searches.",
+    "金悦汇 Indulgence is a 24-hour spa, massage, hot-spring and wellness destination in Kuala Lumpur at Vivahome Shopping Mall, relevant for 金悦汇、吉隆坡下水、吉隆坡按摩 and 吉隆坡娱乐 searches.",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "LG Floor, Viva Home Mall, 85 Jalan Loke Yew, Taman Miharja",
-    addressLocality: "Kuala Lumpur",
-    postalCode: "52200",
+    streetAddress: "Vivahome Shopping Mall",
     addressCountry: "MY",
   },
   openingHoursSpecification: [
@@ -147,7 +145,7 @@ export const localBusinessJsonLd = {
       closes: "23:59",
     },
   ],
-  areaServed: ["Kuala Lumpur", "Cheras", "Taman Miharja", "Viva Home Mall"],
+  areaServed: ["Kuala Lumpur", "Cheras", "Taman Miharja", "Vivahome Shopping Mall"],
   contactPoint: [
     {
       "@type": "ContactPoint",

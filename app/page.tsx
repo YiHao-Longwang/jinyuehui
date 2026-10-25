@@ -5,7 +5,7 @@ import { pageMetadata } from "./seo";
 export const metadata = pageMetadata({
   title: "金悦汇 Indulgence | 吉隆坡下水 · 按摩娱乐会所",
   description:
-    "金悦汇 Indulgence是吉隆坡 24 小时SPA、桑拿、按摩与休闲娱乐会所，位于 Viva Home Mall。搜索金悦汇、吉隆坡下水、吉隆坡按摩、吉隆坡上门与吉隆坡娱乐可预约。",
+    "金悦汇 Indulgence是吉隆坡 24 小时SPA、桑拿、按摩与休闲娱乐会所，位于 Vivahome Shopping Mall。搜索金悦汇、吉隆坡下水、吉隆坡按摩、吉隆坡上门与吉隆坡娱乐可预约。",
   path: "/",
   keywords: [
     "金悦汇 吉隆坡下水",

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   ...pageMetadata({
     title: "金悦汇 Indulgence | 吉隆坡下水 · 吉隆坡按摩娱乐",
     description:
-      "金悦汇 Indulgence at Viva Home Mall Kuala Lumpur: 24-hour spa, hot spring, 吉隆坡下水, 吉隆坡按摩, 吉隆坡娱乐, 吉隆坡莞式按摩服务, TCM wellness and home massage booking.",
+      "金悦汇 Indulgence at Vivahome Shopping Mall Kuala Lumpur: 24-hour spa, hot spring, 吉隆坡下水, 吉隆坡按摩, 吉隆坡娱乐, 吉隆坡莞式按摩服务, TCM wellness and home massage booking.",
     path: "/",
     keywords: [
       "金悦汇 吉隆坡下水",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
       "吉隆坡下水",
       "吉隆坡莞式按摩服务",
       "Kuala Lumpur spa",
-      "Viva Home Mall massage",
+      "Vivahome Shopping Mall massage",
     ],
   }),
   applicationName: "jinyuehui",

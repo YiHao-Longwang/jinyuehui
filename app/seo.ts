@@ -30,7 +30,7 @@ export const seoKeywords = [
   "24 hour spa KL",
   "onsen KL",
   "massage KL",
-  "Vivahome Shopping Mall spa",
+  "Menara Pgrm spa",
   "Kuala Lumpur spa",
   "KL onsen spa",
   "massage Kuala Lumpur",
@@ -94,8 +94,9 @@ export function pageMetadata({
   };
 }
 
-/** The Google Business Profile this site belongs to at Vivahome Shopping Mall. */
+/** The Google Business Profile this site belongs to at Menara Pgrm. */
 export const googleBusinessProfileUrl = "https://share.google/GtIGQaWmCl8XaL0A1";
+export const googleMapsDirectionsUrl = "https://www.google.com/maps/search/?api=1&query=Level%2022%2C%20Menara%20Pgrm%2C%208%2C%20Jalan%20Pudu%20Ulu%2C%20Taman%20Pertama%2C%2056100%20Kuala%20Lumpur%2C%20Wilayah%20Persekutuan%20Kuala%20Lumpur";
 
 /**
  * Profiles that represent this same business. `sameAs` is how Google ties the
@@ -125,16 +126,16 @@ export const localBusinessJsonLd = {
   url: siteUrl,
   image: `${siteUrl}/assets/hero-onsen-warm.jpg`,
   sameAs: sameAsProfiles,
-  hasMap: googleBusinessProfileUrl,
+  hasMap: googleMapsDirectionsUrl,
   telephone: "+60 14-315 5632",
   priceRange: "RM58-RM1699",
   paymentAccepted: ["Cash", "Credit Card", "Debit Card"],
   currenciesAccepted: "MYR",
   description:
-    "金悦汇 Indulgence is a 24-hour spa, massage, hot-spring and wellness destination in Kuala Lumpur at Vivahome Shopping Mall, relevant for 金悦汇、吉隆坡下水、吉隆坡按摩 and 吉隆坡娱乐 searches.",
+    "金悦汇 Indulgence is a 24-hour spa, massage, hot-spring and wellness destination in Kuala Lumpur at Menara Pgrm, relevant for 金悦汇、吉隆坡下水、吉隆坡按摩 and 吉隆坡娱乐 searches.",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Vivahome Shopping Mall",
+    streetAddress: "Level 22, Menara Pgrm, 8, Jalan Pudu Ulu, Taman Pertama, 56100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
     addressCountry: "MY",
   },
   openingHoursSpecification: [
@@ -145,7 +146,7 @@ export const localBusinessJsonLd = {
       closes: "23:59",
     },
   ],
-  areaServed: ["Kuala Lumpur", "Cheras", "Taman Miharja", "Vivahome Shopping Mall"],
+  areaServed: ["Kuala Lumpur", "Taman Pertama", "Pudu Ulu", "Menara Pgrm"],
   contactPoint: [
     {
       "@type": "ContactPoint",

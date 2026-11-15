@@ -67,6 +67,11 @@ const navLabels: Record<string, string> = {
   "Home Service": "At home", Contact: "Visit us",
 };
 
+const headerExternalItems = [
+  { key: "Smoke Site", label: "香烟网站", href: "http://206.189.152.139:8080/" },
+  { key: "Jinyuehui Selection", label: "金悦汇选妃", href: "http://206.189.152.139:5200/" },
+];
+
 export const footerPolicies = [
   ["Terms & Conditions", "/terms-conditions/"],
   ["Privacy Policy", "/privacy-policy/"],
@@ -223,9 +228,10 @@ export function ContactButtons({
 
 export function Header({ active = "Home", locale = "cn" }: { active?: string; locale?: Locale }) {
   const isCn = locale === "cn";
-  const items = isCn
+  const primaryItems = isCn
     ? cnNavItems.map(([key, label, href]) => ({ key, label, href }))
     : navItems.map(([label, href]) => ({ key: label, label: navLabels[label] ?? label, href }));
+  const items = [...primaryItems, ...headerExternalItems];
 
   return (
     <header className="topbar" lang={isCn ? "zh-Hans" : "en"}>
@@ -236,7 +242,7 @@ export function Header({ active = "Home", locale = "cn" }: { active?: string; lo
         </a>
         <nav className="nav" aria-label="Primary navigation">
           {items.filter(({ key }) => !["Home", "FAQ", "技师挑选"].includes(key)).map(({ key, label, href }) => (
-            <a className={key === active ? "on" : undefined} aria-current={key === active ? "page" : undefined} href={href} key={key}>
+            <a className={key === active ? "on" : undefined} aria-current={key === active ? "page" : undefined} href={href} key={key} target={href.startsWith("http://") ? "_blank" : undefined} rel={href.startsWith("http://") ? "noopener" : undefined}>
               {label}
             </a>
           ))}
@@ -272,7 +278,7 @@ export function Header({ active = "Home", locale = "cn" }: { active?: string; lo
                     {label}
                   </button>
                 ) : (
-                  <a href={href} key={key}>
+                  <a href={href} key={key} target={href.startsWith("http://") ? "_blank" : undefined} rel={href.startsWith("http://") ? "noopener" : undefined}>
                     {label}
                   </a>
                 )
